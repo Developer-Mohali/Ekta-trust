@@ -1,0 +1,51 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Outer.master.vb" Inherits="EktaTrust.Outer" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <html lang="en">
+<head runat="server">
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Home | Ekta Trust</title>
+   
+    <!-- core CSS -->
+<link href="../Css/css/bootstrap.min.css" rel="stylesheet">
+<link href="../Css/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="../Css/css/main.css" rel="stylesheet">
+<link href="../Css/css/responsive.css" rel="stylesheet">
+<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+       <link rel="icon" href="../ektafavicon.png" type="im" sizes="16x16"></link>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    
+    <div>
+        <body class="homepage">
+<header id="header"><!--/.top-bar-->
+  
+  <div class="container">
+     <div class="row text-center "> 
+     <a href="../index.html"><img src="images/logo.jpg" alt="logo"></a>    
+         
+ </div>
+  </div>
+</header>
+<!--/header-->
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+            <script src="../Js/js/bootstrap.min.js"></script> 
+            
+    </div>
+
+</body>
+</html>

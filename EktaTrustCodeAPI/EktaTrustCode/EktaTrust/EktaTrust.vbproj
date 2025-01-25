@@ -1,0 +1,1836 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{E2512F59-3592-4A54-BDDF-1FA7914B79FB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>EktaTrust</RootNamespace>
+    <AssemblyName>EktaTrust</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MyType>Custom</MyType>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>EktaTrust.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>EktaTrust.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\packages\AjaxControlToolkit.16.1.0.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\MySQL\Connector.NET 6.9\Assemblies\v2.0\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AddNewUser.aspx" />
+    <Content Include="AddNotification.aspx" />
+    <Content Include="Anual ReportDetail.aspx" />
+    <Content Include="AtrocitiesReporting.aspx" />
+    <Content Include="AtrocityReportingDetails.aspx" />
+    <Content Include="Audio.html" />
+    <Content Include="bin\AjaxControlToolkit.dll" />
+    <Content Include="bin\EktaTrust.dll" />
+    <Content Include="bin\EktaTrust.pdb" />
+    <Content Include="bin\EktaTrust.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="bin\mysql.data.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Newtonsoft.Json.pdb" />
+    <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="Books.aspx" />
+    <Content Include="Books1.aspx" />
+    <Content Include="bootstrap\css\bootstrap-datepicker3.min.css" />
+    <Content Include="bootstrap\css\bootstrap-responsive.css" />
+    <Content Include="bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="bootstrap\css\bootstrap.css" />
+    <Content Include="bootstrap\css\bootstrap.min.css" />
+    <Content Include="bootstrap\css\daterangepicker.css" />
+    <Content Include="bootstrap\ico\apple-touch-icon-114-precomposed.png" />
+    <Content Include="bootstrap\ico\apple-touch-icon-144-precomposed.png" />
+    <Content Include="bootstrap\ico\apple-touch-icon-57-precomposed.png" />
+    <Content Include="bootstrap\ico\apple-touch-icon-72-precomposed.png" />
+    <Content Include="bootstrap\ico\favicon.png" />
+    <Content Include="bootstrap\img\examples\browser-icon-chrome.png" />
+    <Content Include="bootstrap\img\examples\browser-icon-firefox.png" />
+    <Content Include="bootstrap\img\examples\browser-icon-safari.png" />
+    <Content Include="bootstrap\img\examples\slide-01.jpg" />
+    <Content Include="bootstrap\img\examples\slide-02.jpg" />
+    <Content Include="bootstrap\img\examples\slide-03.jpg" />
+    <Content Include="bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="bootstrap\js\bootstrap-datepicker.min.js" />
+    <Content Include="bootstrap\js\bootstrap.js" />
+    <Content Include="bootstrap\js\bootstrap.min.js" />
+    <Content Include="bootstrap\js\daterangepicker.js" />
+    <Content Include="bootstrap\js\holder\holder.js" />
+    <Content Include="bootstrap\js\html5shiv.js" />
+    <Content Include="bootstrap\js\jquery.js" />
+    <Content Include="bootstrap\js\moment.js" />
+    <Content Include="CareerCounselling.aspx" />
+    <Content Include="CareerCounsellingDetails.aspx" />
+    <Content Include="CareerGuidance.aspx" />
+    <Content Include="ChangePassword.aspx" />
+    <Content Include="Contact.aspx" />
+    <Content Include="ContactDetails.aspx" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Contributors.aspx" />
+    <Content Include="Cooking.aspx" />
+    <Content Include="CssGallery\additional-methods.js" />
+    <Content Include="CssGallery\jquery.min.js" />
+    <Content Include="CssGallery\jquery.validate.js" />
+    <Content Include="Css\bootstrap-3.1.1.min.css" />
+    <Content Include="Css\bootstrap-multiselect.css" />
+    <Content Include="Css\css\bootstrap-select.css" />
+    <Content Include="Css\css\bootstrap-select.min.css" />
+    <Content Include="Css\css\Gallery.css" />
+    <Content Include="Css\MediaQuery.css" />
+    <Content Include="Css\PaymentCSS\css\demo.css" />
+    <Content Include="Css\PaymentCSS\css\styles.css" />
+    <Content Include="Css\PaymentCSS\images\amex.jpg" />
+    <Content Include="Css\PaymentCSS\images\mastercard.jpg" />
+    <Content Include="Css\PaymentCSS\images\visa.jpg" />
+    <Content Include="Css\PaymentCSS\js\jquery.payform.min.js" />
+    <Content Include="Css\PaymentCSS\js\script.js" />
+    <Content Include="Demo.html" />
+    <Content Include="DonationDetails.aspx" />
+    <Content Include="EktaSapath.aspx" />
+    <Content Include="EventmailRegistration.aspx" />
+    <Content Include="Gallery_2018.aspx" />
+    <Content Include="Gallery_2018\Image-1.jpeg" />
+    <Content Include="Gallery_2018\Image-10.jpg" />
+    <Content Include="Gallery_2018\Image-11.jpg" />
+    <Content Include="Gallery_2018\Image-12.jpg" />
+    <Content Include="Gallery_2018\Image-13.jpg" />
+    <Content Include="Gallery_2018\Image-14.jpg" />
+    <Content Include="Gallery_2018\Image-15.jpg" />
+    <Content Include="Gallery_2018\Image-16.jpg" />
+    <Content Include="Gallery_2018\Image-17.jpg" />
+    <Content Include="Gallery_2018\Image-18.jpg" />
+    <Content Include="Gallery_2018\Image-19.jpg" />
+    <Content Include="Gallery_2018\Image-2.jpeg" />
+    <Content Include="Gallery_2018\Image-20.jpg" />
+    <Content Include="Gallery_2018\Image-21.jpg" />
+    <Content Include="Gallery_2018\Image-22.jpg" />
+    <Content Include="Gallery_2018\Image-23.jpg" />
+    <Content Include="Gallery_2018\Image-24.jpg" />
+    <Content Include="Gallery_2018\Image-25.jpg" />
+    <Content Include="Gallery_2018\Image-26.jpg" />
+    <Content Include="Gallery_2018\Image-27.jpg" />
+    <Content Include="Gallery_2018\Image-28.jpg" />
+    <Content Include="Gallery_2018\Image-29.jpg" />
+    <Content Include="Gallery_2018\Image-3.jpeg" />
+    <Content Include="Gallery_2018\Image-30.jpg" />
+    <Content Include="Gallery_2018\Image-31.jpg" />
+    <Content Include="Gallery_2018\Image-32.jpg" />
+    <Content Include="Gallery_2018\Image-33.jpg" />
+    <Content Include="Gallery_2018\Image-34.png" />
+    <Content Include="Gallery_2018\Image-35.jpg" />
+    <Content Include="Gallery_2018\Image-36.jpg" />
+    <Content Include="Gallery_2018\Image-37.jpg" />
+    <Content Include="Gallery_2018\Image-38.jpg" />
+    <Content Include="Gallery_2018\Image-39.jpg" />
+    <Content Include="Gallery_2018\Image-4.jpeg" />
+    <Content Include="Gallery_2018\Image-40.jpg" />
+    <Content Include="Gallery_2018\Image-41.jpg" />
+    <Content Include="Gallery_2018\Image-42.jpg" />
+    <Content Include="Gallery_2018\Image-43.jpg" />
+    <Content Include="Gallery_2018\Image-44.jpg" />
+    <Content Include="Gallery_2018\Image-45.jpg" />
+    <Content Include="Gallery_2018\Image-46.jpg" />
+    <Content Include="Gallery_2018\Image-47.jpg" />
+    <Content Include="Gallery_2018\Image-48.jpg" />
+    <Content Include="Gallery_2018\Image-49.jpg" />
+    <Content Include="Gallery_2018\Image-5.jpeg" />
+    <Content Include="Gallery_2018\Image-50.jpg" />
+    <Content Include="Gallery_2018\Image-51.jpg" />
+    <Content Include="Gallery_2018\Image-52.jpg" />
+    <Content Include="Gallery_2018\Image-53.jpg" />
+    <Content Include="Gallery_2018\Image-54.jpg" />
+    <Content Include="Gallery_2018\Image-55.jpg" />
+    <Content Include="Gallery_2018\Image-56.jpg" />
+    <Content Include="Gallery_2018\Image-57.jpg" />
+    <Content Include="Gallery_2018\Image-58.jpg" />
+    <Content Include="Gallery_2018\Image-59.jpg" />
+    <Content Include="Gallery_2018\Image-6.jpeg" />
+    <Content Include="Gallery_2018\Image-60.jpg" />
+    <Content Include="Gallery_2018\Image-7.jpeg" />
+    <Content Include="Gallery_2018\Image-8.jpg" />
+    <Content Include="Gallery_2018\Image-9.jpg" />
+    <Content Include="Gallery_2018\Video_1.mp4" />
+    <Content Include="Gallery_2018\Video_2.mp4" />
+    <Content Include="Gallery_UPSC2018.aspx" />
+    <Content Include="Images\activities_btn1.png" />
+    <Content Include="Images\calendar.png" />
+    <Content Include="Images\donate1.png" />
+    <Content Include="Images\DonateUs.gif" />
+    <Content Include="Images\Dr.Ambedkar.jpg" />
+    <Content Include="Images\dr._bhim_rao_ambedkar-hindi.jpg" />
+    <Content Include="Images\images %281%29.jpg" />
+    <Content Include="Images\images\calendar.png" />
+    <Content Include="Images\Kansi.jpg" />
+    <Content Include="Images\Literature1.jpg" />
+    <Content Include="Images\loader.gif" />
+    <Content Include="Images\Riddles.jpg" />
+    <Content Include="Images\slider\new_img_7.jpg" />
+    <Content Include="Images\slider\new_img_8.jpg" />
+    <Content Include="kk\js\bootstrap.min.js" />
+    <Content Include="MIPGallery\Upsc_18_1.png" />
+    <Content Include="MIPGallery\Upsc_18_10.jpeg" />
+    <Content Include="MIPGallery\Upsc_18_11.jpeg" />
+    <Content Include="MIPGallery\Upsc_18_12.jpeg" />
+    <Content Include="MIPGallery\Upsc_18_13.jpeg" />
+    <Content Include="MIPGallery\Upsc_18_14.jpeg" />
+    <Content Include="MIPGallery\Upsc_18_15.jpeg" />
+    <Content Include="MIPGallery\Upsc_18_16.jpeg" />
+    <Content Include="MIPGallery\Upsc_18_17.jpeg" />
+    <Content Include="MIPGallery\Upsc_18_2.jpeg" />
+    <Content Include="MIPGallery\Upsc_18_3.png" />
+    <Content Include="MIPGallery\Upsc_18_4.jpeg" />
+    <Content Include="MIPGallery\Upsc_18_5.png" />
+    <Content Include="MIPGallery\Upsc_18_6.jpeg" />
+    <Content Include="MIPGallery\Upsc_18_7.jpeg" />
+    <Content Include="MIPGallery\Upsc_18_8.jpeg" />
+    <Content Include="MIPGallery\Upsc_18_9.jpeg" />
+    <Content Include="Miscellaneous.aspx" />
+    <Content Include="MiscellaneousGallery\Image-1.jpeg" />
+    <Content Include="MiscellaneousGallery\Image-2.jpeg" />
+    <Content Include="MiscellaneousGallery\Image-3.jpeg" />
+    <Content Include="MiscellaneousGallery\Image-4.jpeg" />
+    <Content Include="MiscellaneousGallery\Image-5.jpeg" />
+    <Content Include="MiscellaneousGallery\Image-6.jpeg" />
+    <Content Include="PaymentProcess.aspx" />
+    <Content Include="PaymentRequest.aspx" />
+    <Content Include="PaymentResponse.aspx" />
+    <Content Include="RunForEquality2018\Ekta Banner.jpeg" />
+    <Content Include="ektafavicon.png" />
+    <Content Include="EktaTrustImage\123.jpg" />
+    <Content Include="EktaTrustImage\EktaTrust-ImageMapPath.jpeg" />
+    <Content Include="EktaTrustImage\Image-39.png" />
+    <Content Include="EktaTrustImage\RASsqcm.jpg" />
+    <Content Include="EktaTrustImage\RPSCimage.jpg" />
+    <Content Include="EventPrize.aspx" />
+    <Content Include="EventRegistrationDetails.aspx" />
+    <Content Include="EventRegistsrationClosed.aspx" />
+    <Content Include="favicon %282%29.ico" />
+    <Content Include="FlowPlayer\flowplayer-3.2.12.min.js" />
+    <Content Include="FlowPlayer\flowplayer-3.2.16.swf" />
+    <Content Include="FlowPlayer\flowplayer.controls-3.2.15.swf" />
+    <Content Include="FlowPlayer\flowplayer.pseudostreaming-3.2.12.swf" />
+    <Content Include="ForgetUserPassword.aspx" />
+    <Content Include="Gallerys.aspx" />
+    <Content Include="Gallery_2017.aspx" />
+    <Content Include="Gallery_2017\2018-01-08_1825.png" />
+    <Content Include="Gallery_2017\Image-49.png" />
+    <Content Include="Gallery_2017\Image-50.png" />
+    <Content Include="Gallery_2017\Image-1.png" />
+    <Content Include="Gallery_2017\Image-10.png" />
+    <Content Include="Gallery_2017\Image-11.png" />
+    <Content Include="Gallery_2017\Image-12.png" />
+    <Content Include="Gallery_2017\Image-13.png" />
+    <Content Include="Gallery_2017\Image-14.png" />
+    <Content Include="Gallery_2017\Image-15.png" />
+    <Content Include="Gallery_2017\Image-16.png" />
+    <Content Include="Gallery_2017\Image-17.png" />
+    <Content Include="Gallery_2017\Image-18.png" />
+    <Content Include="Gallery_2017\Image-19.png" />
+    <Content Include="Gallery_2017\Image-2.png" />
+    <Content Include="Gallery_2017\Image-20.png" />
+    <Content Include="Gallery_2017\Image-21.png" />
+    <Content Include="Gallery_2017\Image-22.png" />
+    <Content Include="Gallery_2017\Image-23.png" />
+    <Content Include="Gallery_2017\Image-24.png" />
+    <Content Include="Gallery_2017\Image-25.png" />
+    <Content Include="Gallery_2017\Image-26.png" />
+    <Content Include="Gallery_2017\Image-27.png" />
+    <Content Include="Gallery_2017\Image-28.png" />
+    <Content Include="Gallery_2017\Image-29.png" />
+    <Content Include="Gallery_2017\Image-3.png" />
+    <Content Include="Gallery_2017\Image-30.png" />
+    <Content Include="Gallery_2017\Image-31.png" />
+    <Content Include="Gallery_2017\Image-32.png" />
+    <Content Include="Gallery_2017\Image-33.png" />
+    <Content Include="Gallery_2017\Image-34.png" />
+    <Content Include="Gallery_2017\Image-35.png" />
+    <Content Include="Gallery_2017\Image-36.png" />
+    <Content Include="Gallery_2017\Image-37.png" />
+    <Content Include="Gallery_2017\Image-38.png" />
+    <Content Include="Gallery_2017\Image-39.png" />
+    <Content Include="Gallery_2017\Image-4.png" />
+    <Content Include="Gallery_2017\Image-40.png" />
+    <Content Include="Gallery_2017\Image-41.png" />
+    <Content Include="Gallery_2017\Image-42.png" />
+    <Content Include="Gallery_2017\Image-43.png" />
+    <Content Include="Gallery_2017\Image-44.png" />
+    <Content Include="Gallery_2017\Image-45.png" />
+    <Content Include="Gallery_2017\Image-46.png" />
+    <Content Include="Gallery_2017\Image-47.png" />
+    <Content Include="Gallery_2017\Image-48.png" />
+    <Content Include="Gallery_2017\Image-5.png" />
+    <Content Include="Gallery_2017\Image-6.png" />
+    <Content Include="Gallery_2017\Image-7.png" />
+    <Content Include="Gallery_2017\Image-8.png" />
+    <Content Include="Gallery_2017\Image-9.png" />
+    <Content Include="Images\arvind.jpg" />
+    <Content Include="Images\arvind.png" />
+    <Content Include="Images\bh1.jpg" />
+    <Content Include="Images\bhim 2.jpg" />
+    <Content Include="Images\bhim3.jpg" />
+    <Content Include="Images\download.png" />
+    <Content Include="Images\jyotibaPhule.jpg" />
+    <Content Include="Images\movil.png" />
+    <Content Include="Images\priview.png" />
+    <Content Include="Images\runForEqualityPlan.png" />
+    <Content Include="Images\SavitaBheem.jpg" />
+    <Content Include="Images\tranigplan.png" />
+    <Content Include="Images\ViewDetails.png" />
+    <Content Include="Joining.aspx" />
+    <Content Include="Js\bootstrap-2.3.2.min.js" />
+    <Content Include="Js\bootstrap-multiselect.js" />
+    <Content Include="Js\bootstrap-select.js" />
+    <Content Include="Js\bootstrap-select.min.js" />
+    <Content Include="Js\endlessRiver.js" />
+    <Content Include="kk\css\bootstrap.min.css" />
+    <Content Include="kk\css\font-awesome.css" />
+    <Content Include="kk\css\font-awesome.min.css" />
+    <Content Include="kk\css\main.css" />
+    <Content Include="kk\css\responsive.css" />
+    <Content Include="kk\images\address.png" />
+    <Content Include="kk\images\bag.png" />
+    <Content Include="kk\images\bottels.png" />
+    <Content Include="kk\images\caret-arrow.png" />
+    <Content Include="kk\images\cup.png" />
+    <Content Include="kk\images\date.png" />
+    <Content Include="kk\images\delivery-bag.png" />
+    <Content Include="kk\images\glof-ball.png" />
+    <Content Include="kk\images\glyphicons.png" />
+    <Content Include="kk\images\hats.png" />
+    <Content Include="kk\images\header-bg.jpg" />
+    <Content Include="kk\images\jacket.png" />
+    <Content Include="kk\images\left-arrow.png" />
+    <Content Include="kk\images\login-btn.png" />
+    <Content Include="kk\images\logo.jpg" />
+    <Content Include="kk\images\logo.png" />
+    <Content Include="kk\images\mic.png" />
+    <Content Include="kk\images\next.png" />
+    <Content Include="kk\images\order-btn.png" />
+    <Content Include="kk\images\pause.png" />
+    <Content Include="kk\images\play-btn.png" />
+    <Content Include="kk\images\prev.png" />
+    <Content Include="kk\images\right-arrow.png" />
+    <Content Include="kk\images\search-btn.png" />
+    <Content Include="kk\images\shirt.png" />
+    <Content Include="kk\images\shirts-jackets.png" />
+    <Content Include="kk\images\show-btn.png" />
+    <Content Include="kk\index-123.html" />
+    <Content Include="kk\js\jquery-1.12.0.min.js" />
+    <Content Include="RunForEquality2018\Img1.png" />
+    <Content Include="RunForEquality2018\img10.png" />
+    <Content Include="RunForEquality2018\img11.png" />
+    <Content Include="RunForEquality2018\img12.png" />
+    <Content Include="RunForEquality2018\img13.png" />
+    <Content Include="RunForEquality2018\img14.png" />
+    <Content Include="RunForEquality2018\img15.png" />
+    <Content Include="RunForEquality2018\img16.png" />
+    <Content Include="RunForEquality2018\img17.png" />
+    <Content Include="RunForEquality2018\img18.png" />
+    <Content Include="RunForEquality2018\img19.png" />
+    <Content Include="RunForEquality2018\img2.png" />
+    <Content Include="RunForEquality2018\img20.png" />
+    <Content Include="RunForEquality2018\img21.png" />
+    <Content Include="RunForEquality2018\img22.png" />
+    <Content Include="RunForEquality2018\img23.png" />
+    <Content Include="RunForEquality2018\img24.png" />
+    <Content Include="RunForEquality2018\img3.png" />
+    <Content Include="RunForEquality2018\img4.png" />
+    <Content Include="RunForEquality2018\img5.png" />
+    <Content Include="RunForEquality2018\img6.png" />
+    <Content Include="RunForEquality2018\img7.png" />
+    <Content Include="RunForEquality2018\img8.png" />
+    <Content Include="RunForEquality2018\img9.png" />
+    <Content Include="RunForEquality2018\MarrigePic.jpg" />
+    <Content Include="MataRamabaiEktaVolleyBallCup2017Gallery\1.jpeg" />
+    <Content Include="MataRamabaiEktaVolleyBallCup2017Gallery\10.jpeg" />
+    <Content Include="MataRamabaiEktaVolleyBallCup2017Gallery\11.jpeg" />
+    <Content Include="MataRamabaiEktaVolleyBallCup2017Gallery\2.jpeg" />
+    <Content Include="MataRamabaiEktaVolleyBallCup2017Gallery\3.jpeg" />
+    <Content Include="MataRamabaiEktaVolleyBallCup2017Gallery\4.jpeg" />
+    <Content Include="MataRamabaiEktaVolleyBallCup2017Gallery\5.jpeg" />
+    <Content Include="MataRamabaiEktaVolleyBallCup2017Gallery\6.jpeg" />
+    <Content Include="MataRamabaiEktaVolleyBallCup2017Gallery\7.jpeg" />
+    <Content Include="MataRamabaiEktaVolleyBallCup2017Gallery\8.jpeg" />
+    <Content Include="MataRamabaiEktaVolleyBallCup2017Gallery\9.jpeg" />
+    <Content Include="MataRamabaiEktaVolleyBallCup2017Gallery\Video-1.mp4" />
+    <Content Include="MataRamabaiEktaVolleyBallCup2017Gallery\Video-2.mp4" />
+    <Content Include="Matrimonial.aspx" />
+    <Content Include="MatrimonialDetails.aspx" />
+    <Content Include="MatrimonialInformation.aspx" />
+    <Content Include="MatrimonialLogin.aspx" />
+    <Content Include="MatrimonialRegistration.aspx" />
+    <Content Include="MIPGallery\WhatsApp Image1.jpg" />
+    <Content Include="MIPGallery\whatsapp1.png" />
+    <Content Include="MIPGallery\whatsapp10.png" />
+    <Content Include="MIPGallery\whatsapp11.png" />
+    <Content Include="MIPGallery\whatsapp12.png" />
+    <Content Include="MIPGallery\whatsapp13.png" />
+    <Content Include="MIPGallery\whatsapp14.png" />
+    <Content Include="MIPGallery\whatsapp15.png" />
+    <Content Include="MIPGallery\whatsapp2.png" />
+    <Content Include="MIPGallery\whatsapp3.png" />
+    <Content Include="MIPGallery\whatsapp4.png" />
+    <Content Include="MIPGallery\whatsapp5.png" />
+    <Content Include="MIPGallery\whatsapp6.png" />
+    <Content Include="MIPGallery\whatsapp7.png" />
+    <Content Include="MIPGallery\whatsapp8.png" />
+    <Content Include="MIPGallery\whatsapp9.png" />
+    <Content Include="MIPRegisterGallery.aspx" />
+    <Content Include="MyDatabase#1.sdf" />
+    <Content Include="NewEventRegistration.aspx" />
+    <Content Include="obj\Debug\EktaTrust.dll" />
+    <Content Include="obj\Debug\EktaTrust.pdb" />
+    <Content Include="obj\Debug\EktaTrust.vbproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\EktaTrust.xml" />
+    <Content Include="obj\Debug\TempPE\My Project.Resources.Designer.vb.dll" />
+    <Content Include="Profile.aspx" />
+    <Content Include="ProfilePhotos\Desert.jpg" />
+    <Content Include="ProfilePhotos\Jellyfish.jpg" />
+    <Content Include="RunForEquality2018.aspx" />
+    <Content Include="RunForEquality2018\1.png" />
+    <Content Include="RunForEquality2018\2.png" />
+    <Content Include="RunForEquality2018\3.png" />
+    <Content Include="RunForEquality2018\4.png" />
+    <Content Include="RunForEquality2018\5.png" />
+    <Content Include="RunForEquality2018\6.png" />
+    <Content Include="RunForEquality2018\7.png" />
+    <Content Include="RunForEquality2018\8.png" />
+    <Content Include="RunForEqualityGallery.aspx" />
+    <Content Include="RunForEqualityGallery\1.jpeg" />
+    <Content Include="RunForEqualityGallery\10.jpeg" />
+    <Content Include="RunForEqualityGallery\11.jpeg" />
+    <Content Include="RunForEqualityGallery\12.jpeg" />
+    <Content Include="RunForEqualityGallery\14.jpg" />
+    <Content Include="RunForEqualityGallery\15.jpg" />
+    <Content Include="RunForEqualityGallery\16.jpg" />
+    <Content Include="RunForEqualityGallery\17.jpg" />
+    <Content Include="RunForEqualityGallery\18.png" />
+    <Content Include="RunForEqualityGallery\19.png" />
+    <Content Include="RunForEqualityGallery\2.jpeg" />
+    <Content Include="RunForEqualityGallery\20.png" />
+    <Content Include="RunForEqualityGallery\21.png" />
+    <Content Include="RunForEqualityGallery\22.png" />
+    <Content Include="RunForEqualityGallery\23.png" />
+    <Content Include="RunForEqualityGallery\24.png" />
+    <Content Include="RunForEqualityGallery\25.png" />
+    <Content Include="RunForEqualityGallery\26.png" />
+    <Content Include="RunForEqualityGallery\27.png" />
+    <Content Include="RunForEqualityGallery\28.png" />
+    <Content Include="RunForEqualityGallery\29.png" />
+    <Content Include="RunForEqualityGallery\3.mp4" />
+    <Content Include="RunForEqualityGallery\30.png" />
+    <Content Include="RunForEqualityGallery\31.png" />
+    <Content Include="RunForEqualityGallery\32.png" />
+    <Content Include="RunForEqualityGallery\33.png" />
+    <Content Include="RunForEqualityGallery\4.mp4" />
+    <Content Include="RunForEqualityGallery\5.jpeg" />
+    <Content Include="RunForEqualityGallery\6.jpeg" />
+    <Content Include="RunForEqualityGallery\7.jpeg" />
+    <Content Include="RunForEqualityGallery\8.jpeg" />
+    <Content Include="RunForEqualityGallery\9.jpeg" />
+    <Content Include="RunForEqualityGallery\PlayImage.jpg" />
+    <Content Include="RunForEqualityGallery\RunForEqualityFMAds.mpeg" />
+    <Content Include="Css\calendar-blue.css" />
+    <Content Include="ScriptLibrary\calendar-en.min.js" />
+    <Content Include="APK\EktaNavnirmanTrust.apk" />
+    <None Include="ScriptLibrary\jquery-1.4.1-vsdoc.js" />
+    <Content Include="ScriptLibrary\jquery-1.4.1.js" />
+    <Content Include="ScriptLibrary\jquery-1.4.1.min.js" />
+    <Content Include="ScriptLibrary\jquery.dynDateTime.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="test.html" />
+    <Content Include="TestChat.html" />
+    <Content Include="Testing.aspx" />
+    <Content Include="TestingForm.aspx" />
+    <Content Include="UnaGallery.aspx" />
+    <Content Include="Css\animate.min.css" />
+    <Content Include="Css\bootstrap.min.css" />
+    <Content Include="Css\font-awesome.css" />
+    <Content Include="Css\font-awesome.min.css" />
+    <Content Include="Css\main.css" />
+    <Content Include="Css\prettyPhoto.css" />
+    <Content Include="Css\responsive.css" />
+    <Content Include="Dairying.aspx" />
+    <Content Include="DangawasVictims.aspx" />
+    <Content Include="DangawasVictimsDetail.aspx" />
+    <Content Include="DashBoard.aspx" />
+    <Content Include="DemoCheckBox.html" />
+    <Content Include="Donation.aspx" />
+    <Content Include="Driving.aspx" />
+    <Content Include="Education.aspx" />
+    <Content Include="EktaTrustImage\Image-1.png" />
+    <Content Include="EktaTrustImage\Image-10.png" />
+    <Content Include="EktaTrustImage\Image-11.png" />
+    <Content Include="EktaTrustImage\Image-13.png" />
+    <Content Include="EktaTrustImage\Image-14.png" />
+    <Content Include="EktaTrustImage\Image-15.png" />
+    <Content Include="EktaTrustImage\Image-2.png" />
+    <Content Include="EktaTrustImage\Image-3.png" />
+    <Content Include="EktaTrustImage\Image-4.png" />
+    <Content Include="EktaTrustImage\Image-5.png" />
+    <Content Include="EktaTrustImage\Image-6.png" />
+    <Content Include="EktaTrustImage\Image-7.png" />
+    <Content Include="EktaTrustImage\Image-9.png" />
+    <Content Include="EktaTrustImage\MIP Advertisement.jpg" />
+    <Content Include="Enroll.aspx" />
+    <Content Include="errorpage.html" />
+    <Content Include="Error.jpg" />
+    <Content Include="EvenMoreNewsDetail.aspx" />
+    <Content Include="EventDetails.aspx" />
+    <Content Include="Images\accordion1.png" />
+    <Content Include="Images\activitiers2.jpg" />
+    <Content Include="Images\activities_btn.png" />
+    <Content Include="Images\ambd.png" />
+    <Content Include="Images\ambdbook.jpg" />
+    <Content Include="Images\ambedkar-125.png" />
+    <Content Include="Images\anual_report.png" />
+    <Content Include="Images\arrow_icon.png" />
+    <Content Include="Images\atrocities.jpg" />
+    <Content Include="Images\atrocities_img2.png" />
+    <Content Include="Images\Career-Counselling.jpg" />
+    <Content Include="Images\cooking_img.jpg" />
+    <Content Include="Images\dairying_img.jpg" />
+    <Content Include="Images\Dangawas Victims %282%29.jpg" />
+    <Content Include="Images\Dangawas Victims.jpg" />
+    <Content Include="Images\donate_hover.png" />
+    <Content Include="Images\donation.jpg" />
+    <Content Include="Images\download_img.png" />
+    <Content Include="Images\driving_img.jpg" />
+    <Content Include="Images\edit.gif" />
+    <Content Include="Images\education.jpg" />
+    <Content Include="Images\education_img.jpg" />
+    <Content Include="Images\education_img.png" />
+    <Content Include="Images\Ekta Logo.png" />
+    <Content Include="Images\elist.png" />
+    <Content Include="Images\english-img.png" />
+    <Content Include="Images\enroll.png" />
+    <Content Include="Images\Error.jpeg" />
+    <Content Include="Images\events_img.jpg" />
+    <Content Include="Images\even_more_news.png" />
+    <Content Include="Images\f1.png" />
+    <Content Include="Images\f2.png" />
+    <Content Include="Images\f3.png" />
+    <Content Include="Images\f4.png" />
+    <Content Include="Images\f5.png" />
+    <Content Include="Images\f6.png" />
+    <Content Include="Images\f7.png" />
+    <Content Include="Images\f8.png" />
+    <Content Include="Images\frame-border.jpg" />
+    <Content Include="Images\frame.png" />
+    <Content Include="Images\girl.jpg" />
+    <Content Include="Images\girl_img.jpg" />
+    <Content Include="Images\guidance_img3.png" />
+    <Content Include="Images\history_img.jpg" />
+    <Content Include="Images\Image-1.png" />
+    <Content Include="Images\Image-2.png" />
+    <Content Include="Images\Image-3.png" />
+    <Content Include="Images\Image-4.jpg" />
+    <Content Include="Images\Image-5.png" />
+    <Content Include="Images\Image-Run.png" />
+    <Content Include="Images\images\avatar.png" />
+    <Content Include="Images\images\logo.jpg" />
+    <Content Include="Images\images\logo.png" />
+    <Content Include="Images\images\logo_png.png" />
+    <Content Include="Images\image_bg.png" />
+    <Content Include="Images\img_1.png" />
+    <Content Include="Images\img_2.png" />
+    <Content Include="Images\img_3 %281%29.png" />
+    <Content Include="Images\inar_img.jpg" />
+    <Content Include="Images\insurance.jpg" />
+    <Content Include="Images\insurance_img.jpg" />
+    <Content Include="Images\intro_img.jpg" />
+    <Content Include="Images\joinus2.jpg" />
+    <Content Include="Images\join_img.jpg" />
+    <Content Include="Images\Literature.jpg" />
+    <Content Include="Images\loan.jpg" />
+    <Content Include="Images\loan_img.jpg" />
+    <Content Include="Images\logo-small.jpg" />
+    <Content Include="Images\logo.jpg" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\logo2.png" />
+    <Content Include="Images\map.jpg" />
+    <Content Include="Images\meeting.jpg" />
+    <Content Include="Images\Meeting.png" />
+    <Content Include="Images\minimal-97-128.png" />
+    <Content Include="Images\moke-image.png" />
+    <Content Include="Images\mokeimage.png" />
+    <Content Include="Images\moto_img.jpg" />
+    <Content Include="Images\motto_img.png" />
+    <Content Include="Images\news1.jpg" />
+    <Content Include="Images\news2.jpg" />
+    <Content Include="Images\news3.jpg" />
+    <Content Include="Images\news_img.jpg" />
+    <Content Include="Images\new_career_oportunities.png" />
+    <Content Include="Images\objectives_img.jpg" />
+    <Content Include="Images\offer_img.png" />
+    <Content Include="Images\online_apply_img.png" />
+    <Content Include="Images\online_img.png" />
+    <Content Include="Images\Picture4.jpg" />
+    <Content Include="Images\premable_img.jpg" />
+    <Content Include="Images\Reportage.jpg" />
+    <Content Include="Images\ribon_one.png" />
+    <Content Include="Images\ribon_two.png" />
+    <Content Include="Images\safe.png" />
+    <Content Include="Images\search_icon.png" />
+    <Content Include="Images\send_img.png" />
+    <Content Include="Images\slider\img_1.jpg" />
+    <Content Include="Images\slider\img_2.jpg" />
+    <Content Include="Images\slider\img_3.jpg" />
+    <Content Include="Images\slider\img_4.jpg" />
+    <Content Include="Images\slider\new_img_1.jpg" />
+    <Content Include="Images\slider\new_img_2.jpg" />
+    <Content Include="Images\slider\new_img_3.jpg" />
+    <Content Include="Images\slider\new_img_4.jpg" />
+    <Content Include="Images\slider\new_img_5.jpg" />
+    <Content Include="Images\slider\new_img_6.jpg" />
+    <Content Include="Images\slider_one.jpg" />
+    <Content Include="Images\suggestion_img.png" />
+    <Content Include="Images\tailoring_img.jpg" />
+    <Content Include="Images\tailoring_img.png" />
+    <Content Include="Images\training.jpg" />
+    <Content Include="Images\trustee_img.jpg" />
+    <Content Include="Images\UI_Icons-09-128.png" />
+    <Content Include="Images\vacancy_img.png" />
+    <Content Include="Images\victim.jpg" />
+    <Content Include="Images\view_img.png" />
+    <Content Include="Images\vision_img.jpg" />
+    <Content Include="Images\vision_img.png" />
+    <Content Include="Images\yogatrining_img.jpg" />
+    <Content Include="Images\zigzag_red.png" />
+    <Content Include="LogDetails.aspx" />
+    <Content Include="DandawasGallery.aspx" />
+    <Content Include="NewsGallery.aspx" />
+    <Content Include="Payments.aspx" />
+    <Content Include="EventRegistration.aspx" />
+    <Content Include="Events.aspx" />
+    <Content Include="Css\fonts\fontawesome-webfont.svg" />
+    <Content Include="Css\fonts\font\fontawesome-webfont.svg" />
+    <Content Include="Css\fonts\font\glyphicons-halflings-regular.svg" />
+    <Content Include="Css\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Faculties.aspx" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="ForgotPassword.aspx" />
+    <Content Include="CssGallery\figure.css" />
+    <Content Include="CssGallery\lib\jquery.mousewheel.pack.js" />
+    <Content Include="CssGallery\resource\close.png" />
+    <Content Include="CssGallery\resource\lightbox_loading.gif" />
+    <Content Include="CssGallery\resource\lightbox_sprite.png" />
+    <Content Include="CssGallery\resource\loading.gif" />
+    <Content Include="CssGallery\resource\next.png" />
+    <Content Include="CssGallery\resource\opacity.png" />
+    <Content Include="CssGallery\resource\prev.png" />
+    <Content Include="CssGallery\resource\transparent.png" />
+    <Content Include="CssGallery\src\jquery.littlelightbox.css" />
+    <Content Include="CssGallery\src\jquery.littlelightbox.js" />
+    <Content Include="CssGallery\style.css" />
+    <Content Include="GenerateCaptcha.aspx" />
+    <Content Include="Girl Schemes.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="HelpingNews.aspx" />
+    <Content Include="History.aspx" />
+    <Content Include="Css\css\bootstrap.min.css" />
+    <Content Include="Css\css\font-awesome.css" />
+    <Content Include="Css\css\font-awesome.min.css" />
+    <Content Include="Css\css\main.css" />
+    <Content Include="Css\css\responsive.css" />
+    <Content Include="Js\js\bootstrap.min.js" />
+    <Content Include="Js\js\jquery-1.11.3.min.js" />
+    <Content Include="Insurance.aspx" />
+    <Content Include="JoinUs.aspx" />
+    <Content Include="Js\js\jquery.easing.min.js" />
+    <Content Include="Literature.aspx" />
+    <Content Include="Loans.aspx" />
+    <Content Include="Home.aspx" />
+    <Content Include="Js\bootstrap.min.js" />
+    <Content Include="Js\html5shiv.js" />
+    <Content Include="Js\jquery-1.11.3.min.js" />
+    <Content Include="Js\jquery.bootstrap.newsbox.min.js" />
+    <Content Include="Js\jquery.glide.min.js" />
+    <Content Include="Js\jquery.isotope.min.js" />
+    <Content Include="Js\jquery.js" />
+    <Content Include="Js\jquery.prettyPhoto.js" />
+    <Content Include="Js\jssor.slider.mini.js" />
+    <Content Include="Js\main.js" />
+    <Content Include="Js\marquee.js" />
+    <Content Include="Js\respond.min.js" />
+    <Content Include="Js\wow.min.js" />
+    <Content Include="Introduction.aspx" />
+    <Content Include="LogIn.aspx" />
+    <Content Include="MIPFacultyRegistration.aspx" />
+    <Content Include="MIPFacultyRegistrationDetails.aspx" />
+    <Content Include="MIPRegistration.aspx" />
+    <Content Include="MIPRegistrationDetails.aspx" />
+    <Content Include="MIPTeam.aspx" />
+    <Content Include="ModificationEmailAndSms.aspx" />
+    <Content Include="Motto.aspx" />
+    <Content Include="New Career OportunitiesDetail.aspx" />
+    <Content Include="News.aspx" />
+    <Content Include="Objectives.aspx" />
+    <Content Include="PaymetConfirmation.aspx" />
+    <Content Include="Premable.aspx" />
+    <Content Include="Registration-Onhold.aspx" />
+    <Content Include="Registration.aspx" />
+    <Content Include="ScheduleMeeting.aspx" />
+    <Content Include="ScriptLibrary\jquery-latest.pack.js" />
+    <Content Include="SendNotificationMIP.aspx" />
+    <Content Include="SignUp.aspx" />
+    <Content Include="SubscribeEmailIdRecords.aspx" />
+    <Content Include="SUGGESTIONTRUSTACTIVITIES.aspx" />
+    <Content Include="Tailoring.aspx" />
+    <Content Include="TemplateListing.aspx" />
+    <Content Include="TermsAndCondition.aspx" />
+    <Content Include="test.jpg" />
+    <Content Include="TestValidation.html" />
+    <Content Include="Training.aspx" />
+    <Content Include="TrainingActivity.aspx" />
+    <Content Include="Trust Activities.aspx" />
+    <Content Include="Trustee.aspx" />
+    <Content Include="UnaGallery\Image-1.png" />
+    <Content Include="UnaGallery\Image-2.png" />
+    <Content Include="UnaGallery\Image-3.png" />
+    <Content Include="UnaGallery\Image-4.png" />
+    <Content Include="UnaGallery\Image-5.png" />
+    <Content Include="UnaGallery\Image-6.png" />
+    <Content Include="UpscMipGallery.aspx" />
+    <Content Include="UserChangePassword.aspx" />
+    <Content Include="UserDetails.aspx" />
+    <Content Include="UserPassword.aspx" />
+    <Content Include="videoplay.aspx" />
+    <Content Include="ViewProfileUser.aspx" />
+    <Content Include="Vision.aspx" />
+    <Content Include="VolleyBall.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="WorkDone.aspx" />
+    <Content Include="Yoga_Training.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddNewUser.aspx.designer.vb">
+      <DependentUpon>AddNewUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddNewUser.aspx.vb">
+      <DependentUpon>AddNewUser.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="AddNotification.aspx.designer.vb">
+      <DependentUpon>AddNotification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddNotification.aspx.vb">
+      <DependentUpon>AddNotification.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Anual ReportDetail.aspx.designer.vb">
+      <DependentUpon>Anual ReportDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Anual ReportDetail.aspx.vb">
+      <DependentUpon>Anual ReportDetail.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.vb" />
+    <Compile Include="App_Start\FilterConfig.vb" />
+    <Compile Include="App_Start\RouteConfig.vb" />
+    <Compile Include="AtrocitiesReporting.aspx.designer.vb">
+      <DependentUpon>AtrocitiesReporting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AtrocitiesReporting.aspx.vb">
+      <DependentUpon>AtrocitiesReporting.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="AtrocityReportingDetails.aspx.designer.vb">
+      <DependentUpon>AtrocityReportingDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AtrocityReportingDetails.aspx.vb">
+      <DependentUpon>AtrocityReportingDetails.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Books.aspx.designer.vb">
+      <DependentUpon>Books.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Books.aspx.vb">
+      <DependentUpon>Books.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Books1.aspx.designer.vb">
+      <DependentUpon>Books1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Books1.aspx.vb">
+      <DependentUpon>Books1.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="CareerCounselling.aspx.designer.vb">
+      <DependentUpon>CareerCounselling.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CareerCounselling.aspx.vb">
+      <DependentUpon>CareerCounselling.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="CareerCounsellingDetails.aspx.designer.vb">
+      <DependentUpon>CareerCounsellingDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CareerCounsellingDetails.aspx.vb">
+      <DependentUpon>CareerCounsellingDetails.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="CareerGuidance.aspx.designer.vb">
+      <DependentUpon>CareerGuidance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CareerGuidance.aspx.vb">
+      <DependentUpon>CareerGuidance.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ChangePassword.aspx.designer.vb">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ChangePassword.aspx.vb">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Class\DefaultController.vb" />
+    <Compile Include="Class\MobClasses.vb" />
+    <Compile Include="Class\ParticipantRepository.vb" />
+    <Compile Include="Contact.aspx.designer.vb">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contact.aspx.vb">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ContactDetails.aspx.designer.vb">
+      <DependentUpon>ContactDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContactDetails.aspx.vb">
+      <DependentUpon>ContactDetails.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Contributors.aspx.designer.vb">
+      <DependentUpon>Contributors.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contributors.aspx.vb">
+      <DependentUpon>Contributors.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Cooking.aspx.designer.vb">
+      <DependentUpon>Cooking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cooking.aspx.vb">
+      <DependentUpon>Cooking.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="DonationDetails.aspx.designer.vb">
+      <DependentUpon>DonationDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DonationDetails.aspx.vb">
+      <DependentUpon>DonationDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EktaSapath.aspx.designer.vb">
+      <DependentUpon>EktaSapath.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EktaSapath.aspx.vb">
+      <DependentUpon>EktaSapath.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EventmailRegistration.aspx.designer.vb">
+      <DependentUpon>EventmailRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventmailRegistration.aspx.vb">
+      <DependentUpon>EventmailRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EventPrize.aspx.designer.vb">
+      <DependentUpon>EventPrize.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventPrize.aspx.vb">
+      <DependentUpon>EventPrize.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EventRegistrationDetails.aspx.designer.vb">
+      <DependentUpon>EventRegistrationDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventRegistrationDetails.aspx.vb">
+      <DependentUpon>EventRegistrationDetails.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EventRegistsrationClosed.aspx.designer.vb">
+      <DependentUpon>EventRegistsrationClosed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventRegistsrationClosed.aspx.vb">
+      <DependentUpon>EventRegistsrationClosed.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ForgetUserPassword.aspx.designer.vb">
+      <DependentUpon>ForgetUserPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForgetUserPassword.aspx.vb">
+      <DependentUpon>ForgetUserPassword.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Gallerys.aspx.designer.vb">
+      <DependentUpon>Gallerys.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gallerys.aspx.vb">
+      <DependentUpon>Gallerys.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gallery_2017.aspx.designer.vb">
+      <DependentUpon>Gallery_2017.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gallery_2017.aspx.vb">
+      <DependentUpon>Gallery_2017.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Gallery_2018.aspx.designer.vb">
+      <DependentUpon>Gallery_2018.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gallery_2018.aspx.vb">
+      <DependentUpon>Gallery_2018.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Gallery_UPSC2018.aspx.designer.vb">
+      <DependentUpon>Gallery_UPSC2018.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gallery_UPSC2018.aspx.vb">
+      <DependentUpon>Gallery_UPSC2018.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Joining.aspx.designer.vb">
+      <DependentUpon>Joining.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Joining.aspx.vb">
+      <DependentUpon>Joining.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\ProfileMaster.Master.designer.vb">
+      <DependentUpon>ProfileMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\ProfileMaster.Master.vb">
+      <DependentUpon>ProfileMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Matrimonial.aspx.designer.vb">
+      <DependentUpon>Matrimonial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Matrimonial.aspx.vb">
+      <DependentUpon>Matrimonial.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MatrimonialDetails.aspx.designer.vb">
+      <DependentUpon>MatrimonialDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MatrimonialDetails.aspx.vb">
+      <DependentUpon>MatrimonialDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MatrimonialInformation.aspx.designer.vb">
+      <DependentUpon>MatrimonialInformation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MatrimonialInformation.aspx.vb">
+      <DependentUpon>MatrimonialInformation.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MatrimonialLogin.aspx.designer.vb">
+      <DependentUpon>MatrimonialLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MatrimonialLogin.aspx.vb">
+      <DependentUpon>MatrimonialLogin.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MatrimonialRegistration.aspx.designer.vb">
+      <DependentUpon>MatrimonialRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MatrimonialRegistration.aspx.vb">
+      <DependentUpon>MatrimonialRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MIPRegisterGallery.aspx.designer.vb">
+      <DependentUpon>MIPRegisterGallery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MIPRegisterGallery.aspx.vb">
+      <DependentUpon>MIPRegisterGallery.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Miscellaneous.aspx.designer.vb">
+      <DependentUpon>Miscellaneous.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Miscellaneous.aspx.vb">
+      <DependentUpon>Miscellaneous.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MobController.vb" />
+    <Compile Include="NewEventRegistration.aspx.designer.vb">
+      <DependentUpon>NewEventRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewEventRegistration.aspx.vb">
+      <DependentUpon>NewEventRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PaymentProcess.aspx.designer.vb">
+      <DependentUpon>PaymentProcess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentProcess.aspx.vb">
+      <DependentUpon>PaymentProcess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaymentRequest.aspx.designer.vb">
+      <DependentUpon>PaymentRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentRequest.aspx.vb">
+      <DependentUpon>PaymentRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaymentResponse.aspx.designer.vb">
+      <DependentUpon>PaymentResponse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentResponse.aspx.vb">
+      <DependentUpon>PaymentResponse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile.aspx.designer.vb">
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile.aspx.vb">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="RunForEquality2018.aspx.designer.vb">
+      <DependentUpon>RunForEquality2018.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RunForEquality2018.aspx.vb">
+      <DependentUpon>RunForEquality2018.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="RunForEqualityGallery.aspx.designer.vb">
+      <DependentUpon>RunForEqualityGallery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RunForEqualityGallery.aspx.vb">
+      <DependentUpon>RunForEqualityGallery.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Testing.aspx.designer.vb">
+      <DependentUpon>Testing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Testing.aspx.vb">
+      <DependentUpon>Testing.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="TestingForm.aspx.designer.vb">
+      <DependentUpon>TestingForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestingForm.aspx.vb">
+      <DependentUpon>TestingForm.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="UnaGallery.aspx.designer.vb">
+      <DependentUpon>UnaGallery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UnaGallery.aspx.vb">
+      <DependentUpon>UnaGallery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dairying.aspx.designer.vb">
+      <DependentUpon>Dairying.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dairying.aspx.vb">
+      <DependentUpon>Dairying.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="DangawasVictims.aspx.designer.vb">
+      <DependentUpon>DangawasVictims.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DangawasVictims.aspx.vb">
+      <DependentUpon>DangawasVictims.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="DangawasVictimsDetail.aspx.designer.vb">
+      <DependentUpon>DangawasVictimsDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DangawasVictimsDetail.aspx.vb">
+      <DependentUpon>DangawasVictimsDetail.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="DashBoard.aspx.designer.vb">
+      <DependentUpon>DashBoard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DashBoard.aspx.vb">
+      <DependentUpon>DashBoard.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Donation.aspx.designer.vb">
+      <DependentUpon>Donation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Donation.aspx.vb">
+      <DependentUpon>Donation.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Driving.aspx.designer.vb">
+      <DependentUpon>Driving.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Driving.aspx.vb">
+      <DependentUpon>Driving.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Education.aspx.designer.vb">
+      <DependentUpon>Education.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Education.aspx.vb">
+      <DependentUpon>Education.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Enroll.aspx.designer.vb">
+      <DependentUpon>Enroll.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Enroll.aspx.vb">
+      <DependentUpon>Enroll.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EvenMoreNewsDetail.aspx.designer.vb">
+      <DependentUpon>EvenMoreNewsDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EvenMoreNewsDetail.aspx.vb">
+      <DependentUpon>EvenMoreNewsDetail.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EventDetails.aspx.designer.vb">
+      <DependentUpon>EventDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventDetails.aspx.vb">
+      <DependentUpon>EventDetails.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LogDetails.aspx.designer.vb">
+      <DependentUpon>LogDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LogDetails.aspx.vb">
+      <DependentUpon>LogDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DandawasGallery.aspx.designer.vb">
+      <DependentUpon>DandawasGallery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DandawasGallery.aspx.vb">
+      <DependentUpon>DandawasGallery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewsGallery.aspx.designer.vb">
+      <DependentUpon>NewsGallery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewsGallery.aspx.vb">
+      <DependentUpon>NewsGallery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payments.aspx.designer.vb">
+      <DependentUpon>Payments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Payments.aspx.vb">
+      <DependentUpon>Payments.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EventRegistration.aspx.designer.vb">
+      <DependentUpon>EventRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EventRegistration.aspx.vb">
+      <DependentUpon>EventRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Events.aspx.designer.vb">
+      <DependentUpon>Events.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Events.aspx.vb">
+      <DependentUpon>Events.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Faculties.aspx.designer.vb">
+      <DependentUpon>Faculties.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Faculties.aspx.vb">
+      <DependentUpon>Faculties.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.designer.vb">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.vb">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="GenerateCaptcha.aspx.designer.vb">
+      <DependentUpon>GenerateCaptcha.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GenerateCaptcha.aspx.vb">
+      <DependentUpon>GenerateCaptcha.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Girl Schemes.aspx.designer.vb">
+      <DependentUpon>Girl Schemes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Girl Schemes.aspx.vb">
+      <DependentUpon>Girl Schemes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.vb">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HelpingNews.aspx.designer.vb">
+      <DependentUpon>HelpingNews.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HelpingNews.aspx.vb">
+      <DependentUpon>HelpingNews.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="History.aspx.designer.vb">
+      <DependentUpon>History.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="History.aspx.vb">
+      <DependentUpon>History.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Home.aspx.designer.vb">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Home.aspx.vb">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="imgCaptcha.vb" />
+    <Compile Include="Insurance.aspx.designer.vb">
+      <DependentUpon>Insurance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Insurance.aspx.vb">
+      <DependentUpon>Insurance.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="JoinUs.aspx.designer.vb">
+      <DependentUpon>JoinUs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="JoinUs.aspx.vb">
+      <DependentUpon>JoinUs.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Literature.aspx.designer.vb">
+      <DependentUpon>Literature.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Literature.aspx.vb">
+      <DependentUpon>Literature.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Loans.aspx.designer.vb">
+      <DependentUpon>Loans.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Loans.aspx.vb">
+      <DependentUpon>Loans.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LogIn.aspx.designer.vb">
+      <DependentUpon>LogIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LogIn.aspx.vb">
+      <DependentUpon>LogIn.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\Inner.Master.designer.vb">
+      <DependentUpon>Inner.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\Inner.Master.vb">
+      <DependentUpon>Inner.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\Admin.Master.designer.vb">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\Admin.Master.vb">
+      <DependentUpon>Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Introduction.aspx.designer.vb">
+      <DependentUpon>Introduction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Introduction.aspx.vb">
+      <DependentUpon>Introduction.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MIPFacultyRegistration.aspx.designer.vb">
+      <DependentUpon>MIPFacultyRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MIPFacultyRegistration.aspx.vb">
+      <DependentUpon>MIPFacultyRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MIPFacultyRegistrationDetails.aspx.designer.vb">
+      <DependentUpon>MIPFacultyRegistrationDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MIPFacultyRegistrationDetails.aspx.vb">
+      <DependentUpon>MIPFacultyRegistrationDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MIPRegistration.aspx.designer.vb">
+      <DependentUpon>MIPRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MIPRegistration.aspx.vb">
+      <DependentUpon>MIPRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MIPRegistrationDetails.aspx.designer.vb">
+      <DependentUpon>MIPRegistrationDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MIPRegistrationDetails.aspx.vb">
+      <DependentUpon>MIPRegistrationDetails.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MIPTeam.aspx.designer.vb">
+      <DependentUpon>MIPTeam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MIPTeam.aspx.vb">
+      <DependentUpon>MIPTeam.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ModificationEmailAndSms.aspx.designer.vb">
+      <DependentUpon>ModificationEmailAndSms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificationEmailAndSms.aspx.vb">
+      <DependentUpon>ModificationEmailAndSms.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Motto.aspx.designer.vb">
+      <DependentUpon>Motto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Motto.aspx.vb">
+      <DependentUpon>Motto.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\MyExtensions\MyWebExtension.vb">
+      <VBMyExtensionTemplateID>Microsoft.VisualBasic.Web.MyExtension</VBMyExtensionTemplateID>
+      <VBMyExtensionTemplateVersion>1.0.0.0</VBMyExtensionTemplateVersion>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="New Career OportunitiesDetail.aspx.designer.vb">
+      <DependentUpon>New Career OportunitiesDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="New Career OportunitiesDetail.aspx.vb">
+      <DependentUpon>New Career OportunitiesDetail.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="News.aspx.designer.vb">
+      <DependentUpon>News.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="News.aspx.vb">
+      <DependentUpon>News.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Objectives.aspx.designer.vb">
+      <DependentUpon>Objectives.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Objectives.aspx.vb">
+      <DependentUpon>Objectives.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage\Outer.Master.designer.vb">
+      <DependentUpon>Outer.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage\Outer.Master.vb">
+      <DependentUpon>Outer.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaymetConfirmation.aspx.designer.vb">
+      <DependentUpon>PaymetConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaymetConfirmation.aspx.vb">
+      <DependentUpon>PaymetConfirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Premable.aspx.designer.vb">
+      <DependentUpon>Premable.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Premable.aspx.vb">
+      <DependentUpon>Premable.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Registration-Onhold.aspx.designer.vb">
+      <DependentUpon>Registration-Onhold.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Registration-Onhold.aspx.vb">
+      <DependentUpon>Registration-Onhold.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registration.aspx.designer.vb">
+      <DependentUpon>Registration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Registration.aspx.vb">
+      <DependentUpon>Registration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ScheduleMeeting.aspx.designer.vb">
+      <DependentUpon>ScheduleMeeting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ScheduleMeeting.aspx.vb">
+      <DependentUpon>ScheduleMeeting.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="SendEmail.vb" />
+    <Compile Include="SendNotificationMIP.aspx.designer.vb">
+      <DependentUpon>SendNotificationMIP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SendNotificationMIP.aspx.vb">
+      <DependentUpon>SendNotificationMIP.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="SignUp.aspx.designer.vb">
+      <DependentUpon>SignUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SignUp.aspx.vb">
+      <DependentUpon>SignUp.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="SubscribeEmailIdRecords.aspx.designer.vb">
+      <DependentUpon>SubscribeEmailIdRecords.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SubscribeEmailIdRecords.aspx.vb">
+      <DependentUpon>SubscribeEmailIdRecords.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="SUGGESTIONTRUSTACTIVITIES.aspx.designer.vb">
+      <DependentUpon>SUGGESTIONTRUSTACTIVITIES.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SUGGESTIONTRUSTACTIVITIES.aspx.vb">
+      <DependentUpon>SUGGESTIONTRUSTACTIVITIES.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Tailoring.aspx.designer.vb">
+      <DependentUpon>Tailoring.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tailoring.aspx.vb">
+      <DependentUpon>Tailoring.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="TemplateListing.aspx.designer.vb">
+      <DependentUpon>TemplateListing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateListing.aspx.vb">
+      <DependentUpon>TemplateListing.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="TermsAndCondition.aspx.designer.vb">
+      <DependentUpon>TermsAndCondition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TermsAndCondition.aspx.vb">
+      <DependentUpon>TermsAndCondition.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ToolkitScriptManager.vb" />
+    <Compile Include="Training.aspx.designer.vb">
+      <DependentUpon>Training.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Training.aspx.vb">
+      <DependentUpon>Training.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="TrainingActivity.aspx.designer.vb">
+      <DependentUpon>TrainingActivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainingActivity.aspx.vb">
+      <DependentUpon>TrainingActivity.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Trust Activities.aspx.designer.vb">
+      <DependentUpon>Trust Activities.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Trust Activities.aspx.vb">
+      <DependentUpon>Trust Activities.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Trustee.aspx.designer.vb">
+      <DependentUpon>Trustee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Trustee.aspx.vb">
+      <DependentUpon>Trustee.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="UpscMipGallery.aspx.designer.vb">
+      <DependentUpon>UpscMipGallery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpscMipGallery.aspx.vb">
+      <DependentUpon>UpscMipGallery.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="UserChangePassword.aspx.designer.vb">
+      <DependentUpon>UserChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserChangePassword.aspx.vb">
+      <DependentUpon>UserChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="UserDetails.aspx.designer.vb">
+      <DependentUpon>UserDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserDetails.aspx.vb">
+      <DependentUpon>UserDetails.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="UserPassword.aspx.designer.vb">
+      <DependentUpon>UserPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserPassword.aspx.vb">
+      <DependentUpon>UserPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="videoplay.aspx.designer.vb">
+      <DependentUpon>videoplay.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="videoplay.aspx.vb">
+      <DependentUpon>videoplay.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ViewProfileUser.aspx.designer.vb">
+      <DependentUpon>ViewProfileUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProfileUser.aspx.vb">
+      <DependentUpon>ViewProfileUser.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Vision.aspx.designer.vb">
+      <DependentUpon>Vision.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vision.aspx.vb">
+      <DependentUpon>Vision.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="VolleyBall.aspx.designer.vb">
+      <DependentUpon>VolleyBall.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VolleyBall.aspx.vb">
+      <DependentUpon>VolleyBall.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebApiConfig.vb" />
+    <Compile Include="WorkDone.aspx.designer.vb">
+      <DependentUpon>WorkDone.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkDone.aspx.vb">
+      <DependentUpon>WorkDone.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Yoga_Training.aspx.designer.vb">
+      <DependentUpon>Yoga_Training.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Yoga_Training.aspx.vb">
+      <DependentUpon>Yoga_Training.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="obj\Debug\EktaTrust.Resources.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MasterPage\Admin.Master" />
+    <Content Include="Css\fonts\fontawesome-webfont.eot" />
+    <Content Include="Css\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Css\fonts\fontawesome-webfont.woff" />
+    <Content Include="Css\fonts\FontAwesome.otf" />
+    <Content Include="Css\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Css\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Css\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="MasterPage\Inner.Master" />
+    <Content Include="Css\fonts\font\fontawesome-webfont.eot" />
+    <Content Include="Css\fonts\font\fontawesome-webfont.ttf" />
+    <Content Include="Css\fonts\font\fontawesome-webfont.woff" />
+    <Content Include="Css\fonts\font\FontAwesome.otf" />
+    <Content Include="Css\fonts\font\glyphicons-halflings-regular.eot" />
+    <Content Include="Css\fonts\font\glyphicons-halflings-regular.ttf" />
+    <Content Include="Css\fonts\font\glyphicons-halflings-regular.woff" />
+    <Content Include="doc\ENT-PREAMBLE.docx" />
+    <Content Include="doc\Preamble-Hindi.docx" />
+    <Content Include="doc\~%24T-PREAMBLE.docx" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="doc\Objective Doc.docx" />
+    <Content Include="doc\Loans Related Govt Schemes.docx" />
+    <Content Include="doc\Selected-Works-of-Dr-B-R-Ambedkar.pdf" />
+    <Content Include="Images\images\Thumbs.db" />
+    <Content Include="Images\slider\Thumbs.db" />
+    <Content Include="Images\Thumbs.db" />
+    <Content Include="fonts\font\fontawesome-webfont.eot" />
+    <Content Include="fonts\font\fontawesome-webfont.svg" />
+    <Content Include="fonts\font\fontawesome-webfont.ttf" />
+    <Content Include="fonts\font\fontawesome-webfont.woff" />
+    <Content Include="fonts\font\FontAwesome.otf" />
+    <Content Include="fonts\font\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\font\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\font\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\font\glyphicons-halflings-regular.woff" />
+    <Content Include="bin\EktaTrust.dll.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="bin\vsD1EA.tmp" />
+    <Content Include="kk\fonts\fontawesome-webfont.eot" />
+    <Content Include="kk\fonts\fontawesome-webfont.svg" />
+    <Content Include="kk\fonts\fontawesome-webfont.ttf" />
+    <Content Include="kk\fonts\fontawesome-webfont.woff" />
+    <Content Include="kk\fonts\FontAwesome.otf" />
+    <Content Include="kk\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="kk\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="kk\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="kk\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="kk\fonts\opensans-bold-webfont.eot" />
+    <Content Include="kk\fonts\opensans-bold-webfont.svg" />
+    <Content Include="kk\fonts\opensans-bold-webfont.ttf" />
+    <Content Include="kk\fonts\opensans-bold-webfont.woff" />
+    <Content Include="kk\fonts\opensans-bold-webfont.woff2" />
+    <Content Include="kk\fonts\opensans-extrabold-webfont.eot" />
+    <Content Include="kk\fonts\opensans-extrabold-webfont.svg" />
+    <Content Include="kk\fonts\opensans-extrabold-webfont.ttf" />
+    <Content Include="kk\fonts\opensans-extrabold-webfont.woff" />
+    <Content Include="kk\fonts\opensans-extrabold-webfont.woff2" />
+    <Content Include="kk\images\Thumbs.db" />
+    <Content Include="MasterPage\ProfileMaster.Master" />
+    <Content Include="doc\8-week-beginners-guide_0.pdf" />
+    <Content Include="doc\Baba Saheb - Album.pdf" />
+    <Content Include="doc\ज्योतिबा फुले जीवनी.pdf" />
+    <Content Include="Gallery_2017\Thumbs.db" />
+    <Content Include="doc\Riddles in Hinduism by BR Ambedkar.pdf" />
+    <Content Include="Kanshi Ram book\The Chamcha Age.pdf" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="MasterPage\Outer.Master" />
+    <Content Include="packages.config" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\EktaTrust.vbproj.GenerateResource.Cache" />
+    <Content Include="obj\Debug\EktaTrust.vbprojResolveAssemblyReference.cache" />
+    <Content Include="obj\doc\ENT-PREAMBLE.docx" />
+    <Content Include="obj\doc\Loans Related Govt Schemes.docx" />
+    <Content Include="obj\doc\Objective Doc.docx" />
+    <Content Include="obj\doc\Preamble-Hindi.docx" />
+    <Content Include="obj\doc\Selected-Works-of-Dr-B-R-Ambedkar.pdf" />
+    <Content Include="obj\doc\~%24T-PREAMBLE.docx" />
+    <Content Include="Thumbs.db" />
+    <Content Include="Views\Shared\Error.vbhtml" />
+    <Content Include="Views\_ViewStart.vbhtml" />
+    <Content Include="Views\Shared\_Layout.vbhtml" />
+    <Content Include="Views\web.config" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="AtrocitiesReporting\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Files\" />
+    <Folder Include="Models\" />
+    <Folder Include="Profile\" />
+    <Folder Include="UploadFile\EventRecords\" />
+    <Folder Include="Views\Default\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49795/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,32 @@
+consume nopcommerce api
+https://github.com/SevenSpikes/api-plugin-for-nopcommerce
+admin@loyalbonus.com
+loyalbonus@123
+ Adam@gmail.com
+adam$123
+4B5C7A040D78F903BD373705A364744F8D76D028
+get api categories/product list local tesing.
+http://localhost:15536/swagger/ui/index#!/
+http://lbbeta.azurewebsites.net/
+///show product in home page.
+http://www.nopcommerce.com/boards/t/39924/manage-product-on-home-page-and-new-product-better.aspx
+
+/// paystack api mvc
+http://techcerberus.blogspot.in/2017/01/implementing-paystack-in-aspnet-mvc.html
+
+database
+loyalbonuslive.database.windows.net
+LBlive319
+Eig@%io!tqbc#$iohcbasd
+
+
+http://localhost:50493/Order-Complete?cod=2ea57491-315b-4095-b36c-f91130da8f24
+http://localhost:50493/Order-Complete?cod=d3412904-e8ba-4858-a6b2-44d52904654a
+
+COMPLETED
+
+DataConnectionString: Data Source=APEX-14\SQLEXPRESS;Initial Catalog=lbonusecom;Integrated Security=True
+
+
+http://appstudio99.blogspot.in/2017/01/how-to-use-paystack-payment-gateway-in.html
+https://developers.paystack.co/reference#charging-returning-customers

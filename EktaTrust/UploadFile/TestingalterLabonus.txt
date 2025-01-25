@@ -1,0 +1,8 @@
+ALTER TABLE Vendor
+ADD  PhoneNumber nvarchar(MAX),
+     Address1 nvarchar(MAX),
+     Address2 nvarchar(MAX),
+	 Country int,
+	 State int,
+	 City nvarchar(MAX),
+	 PhoneExtension 

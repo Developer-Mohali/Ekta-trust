@@ -1,0 +1,151 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Inner.Master.vb" Inherits="EktaTrust.Inner" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Home | Ekta Trust</title>
+   
+   <link rel="icon" href="../ektafavicon.png" type="im" sizes="16x16" />
+   <script src="../Js/jquery-1.11.3.min.js"></script> 
+  
+     <!-- core CSS -->
+   <link href="../Css/css/bootstrap.min.css" rel="stylesheet" />   
+    <link href="../Css/DAtetimePicker/bootstrap-datetimepicker.css" rel="stylesheet" />
+  <link href="../Css/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="../Css/css/main.css" rel="stylesheet" />
+    <link href="../Css/css/responsive.css" rel="stylesheet" />
+
+  <script>$(function () {
+    $('.navbar-toggle-sidebar').click(function () {
+        $('.navbar-nav').toggleClass('slide-in');
+        $('.side-body').toggleClass('body-slide-in');
+        $('#search').removeClass('in').addClass('collapse').slideUp(200);
+    });
+
+    $('#search-trigger').click(function () {
+        $('.navbar-nav').removeClass('slide-in');
+        $('.side-body').removeClass('body-slide-in');
+        $('.search-input').focus();
+    });
+});
+ 
+    <%--$(function() {
+     //   var name = '<%=Session("RoleId") %>'
+        alert("Call function");
+        alert(name);
+         if (name == 2) {
+             $('#LogDetailes').hide();
+         }
+         else {
+             alert("else call");
+             alert($("#hiddenvalue").val())
+             $('#LogDetailes').show();
+         }
+    });--%>
+
+      <%--$(document).ready(function () {
+          <%--var name = '<%=Session("RoleId") %>'-
+          var name = $("#hiddenvalue").val();
+          alert("call");
+          alert(name);
+          // $("#LogDetailes").hide();
+      })--%>
+      
+  </script>
+    
+    <style>
+       
+        .btnLogOut {
+            cursor: pointer;
+            -webkit-appearance: button;
+            border: none;
+            background-color: #fff;
+            color: #999;
+            margin-left: 10%;
+        }
+        .imgDiv{
+            height:70%;
+            width:50%;
+        }
+        /*button, html input[type="button"], input[type="reset"], input[type="submit"] {
+    cursor: pointer;
+    -webkit-appearance: button;
+    border: none;
+    background-color: #fff;
+    color:#999;
+    margin-left:10%;
+}*/
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+         <body>
+             <form id="form1" runat="server">
+                   <asp:ScriptManager ID="ScriptManager1" runat="server">
+</asp:ScriptManager>
+    <div>
+       
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid"> 
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle navbar-toggle-sidebar collapsed"> MENU </button>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <a class="navbar-brand" href="../Home"> <img src="../Images/images/logo_png.png"" alt="" class="imgDiv" /></a> </div>
+        
+    <!-- Collect the nav links, forms, and other content for toggling -->
+      
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown "><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Account <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+            <li class="dropdown-header">SETTINGS</li>
+            <%--<li class=""><a href="#">Other Link</a></li>
+            <li class=""><a href="#">Other Link</a></li>
+            <li class=""><a href="#">Other Link</a></li>--%>
+            <li class="divider"></li>
+            <%--<li><a href="#" id="ButtonLogout" runat="server" onclick="ButtonLogout_Click">Logout</a></li>--%>
+         <li>
+             <asp:Button runat="server" CssClass="btnLogOut" OnClick="ButtonLogout_Click" Text="Logout" />
+         </li>
+                 </ul>
+            
+          </li>
+      </ul>
+      
+          <div class="nav navbar-nav navbar-right">
+        <span style="color: gray; line-height: 3.428571; font-weight: bold">    
+     <asp:Label ID="lb1" runat="server"  Text="Label"></asp:Label>
+                
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False"
+    BackColor="#CC3300" ForeColor="Black" ShowHeader="False" HorizontalAlign="Right" >
+    <Columns>
+   
+    </Columns>
+    </asp:GridView>
+    </div>
+      </div>
+    <!-- /.navbar-collapse --> 
+  </div>
+    <!-- /.container-fluid --> 
+  </nav>
+<body>
+    
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+        <footer class="pull-left footer" style="margin-top: 100px;">
+    <p class="col-md-12">
+  <hr class="divider">
+    Dedicated for a Better Tomorrow </footer>
+
+    </div>
+    </form>
+</body>
+</html>

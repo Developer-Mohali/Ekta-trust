@@ -1,0 +1,73 @@
+﻿     
+ .lightbox
+{
+}
+
+
+
+.navbar-inverse .navbar-nav > li > a {
+    padding: 4px 9px;
+    margin: 0;
+    font-size: 14px;
+    border-radius: 3px;
+    color: #fff;
+    line-height: 24px;
+    display: inline-block;
+}
+
+.gallery {
+    margin-left: 22px;
+    padding-top: 1px;
+    font-size: 27px;
+    padding-bottom: 9px;
+}
+
+hr {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+/* This style use For gallery list*/
+#accordionGallery .panel {
+    margin-bottom: 0px !important;
+}
+
+#accordionGallery a {
+    text-decoration: none !important;
+    background-color: lavender;
+}
+
+    #accordionGallery a.list-group-item.active {
+        border: none;
+        font-weight: bold;
+        color: #b5580a;
+    }
+
+#accordionGallery #collapseThree1 {
+    border: 1px solid lightgray;
+}
+
+    #accordionGallery a.accordion-toggle i {
+        line-height: 36px !important;
+    }
+
+#accordionGallery .panel-heading.active {
+    z-index: 2;
+    color: white;
+    /*background-color: #b5580a;*/
+}
+
+#accordionGallery .panel-title {
+    color: black !important;
+}
+
+#accordionGallery .panel-heading {
+    background-color: #c9c9c9 !important;
+    color: black !important;
+}
+
+#accordionGallery .list-group-item:first-child {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+

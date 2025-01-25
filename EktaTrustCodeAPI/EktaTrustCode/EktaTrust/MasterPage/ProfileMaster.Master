@@ -1,0 +1,275 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="ProfileMaster.master.vb" Inherits="EktaTrust.ProfileMaster" %>
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Home | Ekta Trust</title>
+
+    <!-- core CSS -->
+    <script src="../Js/js/jquery-1.11.3.min.js"></script>
+    <%--<link href="../bootstrap/css/bootstrap-datepicker3.min.css" rel="stylesheet" />--%>
+    <link href="../Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Css/font-awesome.css" rel="stylesheet" />
+    <link href="../Css/animate.min.css" rel="stylesheet" />
+    <link href="../Css/main.css" rel="stylesheet" />
+    <link href="../Css/responsive.css" rel="stylesheet" />
+    <link href="../Css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="icon" href="../ektafavicon.png" type="im" sizes="16x16"></link>
+    <%--[if lt IE 9]>
+    <script src="../Js/html5shiv.js"></script>
+    <script src="../Js/respond.min.js"></script>
+    <![endif]--%>
+
+
+   <style>
+
+body section {
+            padding: 20px 0;
+        }
+
+    .row {
+        margin-right: 0;
+        margin-left: -15px;
+    }
+       .lable1 {
+       color:white !important;
+       margin-left:10%;
+       font-size:12px;
+       font-family:Arial;
+       }
+      
+</style>
+
+    <!--- End event registration-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var name = '<%=Session("ID") %>'
+            if (name == null) {
+                window.location.href = "/MatrimonialLogin.aspx";
+            }
+            else {
+                $("#hiddenUserId").val(name);
+            }
+        });
+
+        </script>
+
+
+
+
+
+    <%--</div>  --%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+ <body class="homepage">
+<form id="msform" runat="server">
+    <input type="hidden" id="hiddenUserId" />
+    <asp:HiddenField ID="HiddenFieldUserId" runat="server" />
+    <%--<div>--%>
+       <%-- <body class="homepage">--%>
+            <header id="header">
+                <div class="top-bar">
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div style="float: left;" class="col-sm-10">
+                              <div class="top-number ">
+                                    <p class="text-info "><a href="mailto:ektanavnirmantrust@gmail.com "><i class="fa fa-envelope"></i>ektanavnirmantrust@gmail.com </a>
+                                       <label class="lable1"><b>Tax Benefits:</b> Registered u/s 12A of the Income Tax Act, 1961. Donations exempted u/s 80G of the Income Tax Act 1961. </label>
+                       
+                                    </p>
+                                   
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div>
+                            <div class="social col-sm-3 pull-right">
+                                <ul class="social-share ">
+
+                                    <li><a href="https://www.facebook.com/runforequality14april/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://twitter.com/TrustEkta" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/.container-->
+   <%-- </div>--%>
+    <!--/.top-bar-->
+
+    <div class="container" style="width: 100%;">
+        <div class="row col-lg-2 col-xs-12 text-center"><a href="../Home">
+            <img src="../Images/logo2.png" alt="logo" style="padding-top: 7px;"></a> </div>
+        <div class="col-lg-2 col-xs-12 pull-right text-center nopadding-right " style="margin: 5px 0px 0px 0px">
+
+            <img class="" width="100" height="100" src="../Images/ambd.png" />
+        </div>
+        <div class="col-lg-8 col-xs-12" style="color: #50255b; font-size: 25px; text-align: center;font-weight: bold; font-family: Verdana; margin: 20px 0px 5px 0px">
+            <strong>Ekta Navnirman Trust</strong>
+            <p style="font-size: 10px; font-family: Arial; color: #f57400; margin: -5px 0px 0px 160px;" class="p">Helping People, changing lives.</p>
+        </div>
+
+
+
+    </div>
+    </header>
+    <!--/header-->
+
+    <nav class="navbar navbar-inverse">
+        <div class="container nopadding">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                <a href="#" class=" navbar-brand2 margin visible-xs hidden-lg hidden-sm hidden-md">Navigation</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-left">
+                <ul class="nav navbar-nav">
+                    
+                    <%--<li>
+                        <asp:LinkButton ID="LinkButton1" OnClick="LinkButton1_Click" runat="server">Home</asp:LinkButton>
+                    </li>--%>
+
+                    <li class="active">
+                        <a href="../Profile.aspx">Profile</a>
+                    </li>
+                    
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+
+                            <li><a href="../UserPassword">Change Password</a></li>
+                            <li><a href="#" onclick="requestDeleteAccount();">Delete Account</a></li>
+                            <li><asp:LinkButton ID="btnLogout" OnClick="btnLogout_Click" runat="server">Logout</asp:LinkButton></li>
+                        </ul>
+                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--/.container-->
+    </nav>
+    <!--/nav-->
+    <asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:contentplaceholder>
+
+    <section>
+        <div class=" wow fadeInDown text-center">
+            <div class="container"></div>
+            <%--<tr>
+                <td>
+                    <b>Visitors:</b>
+                </td>
+                <td>
+                    <asp:label id="lblCount" runat="server" forecolor="Red" />
+                </td>
+            </tr>--%>
+        </div>
+    </section>
+    <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">Dedicated for a Better Tomorrow <div style="padding-top:12px"></div> </div>
+                <div class="col-sm-9" >
+                    <ul class="pull-right">
+                        <%--<li><a href="../Home">Home</a></li>
+                        
+                        <li><a href="../TermsAndCondition.aspx" target="_blank">Terms and Conditions</a></li>--%>
+                    </ul>
+                </div>
+               <div class="col-sm-12 rezinfo"> 
+                   <div class="col-sm-6 rezinfo"><span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=Tx5CaysYwyffrq8bzM0EFkoTXgfJAgBGMcc62iZT5BYncW3t0uStsuFiZsvW"></script></span></div>
+                    <div class="col-sm-6 rezinfo" style ="text-align :right "><small>Website Developed & Maintained By: - </small><a href="http://www.kasproit.com/" style="color: red; font-weight: bold;" target="_blank">Kaspro Solutions Pvt Ltd</a><br /><label style="font-size:11px;">Last Updated on: 29/12/2017 4:00 PM</label></div>
+               </div>
+
+                
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="../Js/bootstrap.min.js"></script>
+    <script src="../Js/jquery.prettyPhoto.js"></script>
+    <script src="../Js/jquery.isotope.min.js"></script>
+    <script src="../Js/main.js"></script>
+    <script src="../Js/wow.min.js"></script>
+    <script type="text/javascript" src="../Js/marquee.js"></script>
+    <script type="text/javascript" src="../Js/jssor.slider.mini.js"></script>
+    <script type="text/javascript" src="../Js/jquery.glide.min.js"></script>
+
+    <!-- Script to Activate the Carousel -->
+
+    <%--<script>
+      //session end 
+      var sessionTimeoutWarning = Session.Timeout -1;
+
+      var sTimeout = parseInt(sessionTimeoutWarning),  60  1000;
+      setTimeout('SessionEnd()', sTimeout);
+
+      function SessionEnd() {
+          window.location = "/login/LogOff";
+      }
+      if (!$('#HiddenRoleName').val() > 0) {
+
+          SessionEnd();
+      }
+</script>--%>
+
+    <script>
+
+        $('.carousel').carousel({
+            interval: 5000 //changes the speed
+        })
+    </script>
+    <script type="text/javascript">
+
+        function requestDeleteAccount() {
+            var data = {
+                "id": $("#hiddenUserId").val(),
+            };
+            $.ajax({
+                url: "/Profile.aspx/DeleteAccount",
+                data: JSON.stringify(data),
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+
+                success: function (msg) {
+                    alert(msg.d);
+                    window.location.href = "/Profile.aspx";
+                },
+                error: function () {
+                    alert("Please try again later!");
+                }
+            });
+        }
+
+        </script>
+
+       <%-- $(function () {
+            $('.slider').glide({
+                autoplay: 1000,
+                hoverpause: true, // set to false for nonstop rotate
+                arrowRightText: '&rarr;',
+                arrowLeftText: '&larr;'
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#myUl").endlessRiver();
+        });
+    </script>--%>
+
+</form>
+</body>
+</html>
+
