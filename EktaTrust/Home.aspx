@@ -978,9 +978,6 @@ cursor: pointer;
               
           });
       </script>  
-
-     
-});
    
      
  
