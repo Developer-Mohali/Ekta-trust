@@ -68,6 +68,7 @@
   .panel {
     padding: 20px !important;
 }
+
     </style>
 
 </asp:Content>
@@ -78,31 +79,45 @@
             <img src="Images/Donate_1.png" class="img-responsive img-rounded  wow fadeInDown" alt="" style="width: 1150px;"/>
             <h2 class="wow fadeInDown">Donate US</h2>
             <section>
-                <div class="row  wow fadeInDown">
+                <%--<div class="row  wow fadeInDown">--%>                    
+                <div class="wow fadeInDown">                    
                     <div class="col-lg-4">
-                    <div class="">
+                        <div class="row">
+                           <div class="panel content-us">
+                                <h4>
+                                    Cash Donation is not accepted in Ekta Navnirman Trust
+                                </h4>
+                            </div>
+                        </div>
+                    <div class="row">
                         <div class="panel content-us">
                             <h3>For Donation</h3>
+                            <table class="trustee-table divPanelChair ">
+                                <tr>
+                                    <td style="font-weight: bold;">A/C NO:</td>  
+                                    <td style="padding: 0px 0px 0px 5px;">35834326038</td> 
+                                </tr>
+                                    <tr>
+                                    <td style="font-weight: bold;">IFSC:</td>  
+                                    <td style="padding: 0px 0px 0px 5px;">SBIN0004227</td> 
+                                </tr>
+                                    <tr>
 
-                                <table class="trustee-table divPanelChair ">
-                            <tr>
-                                <td style="font-weight: bold;">A/C NO:</td>  
-                                <td style="padding: 0px 0px 0px 5px;">35834326038</td> 
-                            </tr>
+                                    <td style="font-weight: bold;">Account Name:</td>  
+                                    <td style="padding: 0px 0px 0px 5px;">Ekta Navnirman Trust</td> 
+                                </tr>
                                 <tr>
-                                <td style="font-weight: bold;">IFSC:</td>  
-                                <td style="padding: 0px 0px 0px 5px;">SBIN0004227</td> 
-                            </tr>
+                                    <td style="font-weight: bold;">Branch:</td>  
+                                    <td style="padding: 0px 0px 0px 5px;">SBI Chandpole Bazar,Jaipur</td> 
+                                </tr>
                                 <tr>
-
-                                <td style="font-weight: bold;">Account Name:</td>  
-                                <td style="padding: 0px 0px 0px 5px;">Ekta Navnirman Trust</td> 
-                            </tr>
-                                <tr>
-                                <td style="font-weight: bold;">Branch:</td>  
-                                <td style="padding: 0px 0px 0px 5px;">SBI Chandpole Bazar,Jaipur</td> 
-                            </tr>
-                        </table>
+                                    <td style="font-weight: bold;">UPI ID:</td>  
+                                    <td style="padding: 0px 0px 0px 5px;">ektanavnirmantrust@sbi</td> 
+                                </tr>
+                            </table>
+                            <p class="pt-2">
+                               <strong>Please send email after donation for our record purpose and 80G</strong>
+                            </p>
                         </div>
                      </div>
                     </div>

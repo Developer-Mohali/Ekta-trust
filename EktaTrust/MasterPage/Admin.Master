@@ -226,7 +226,7 @@ body section {
     </header>
     <!--/header-->
 
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse" style="position:sticky;top:0px;z-index:99">
         <div class="container nopadding">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
@@ -292,7 +292,7 @@ body section {
                         </ul>
                     </li>
 
-                     <li class="dropdown">
+                     <%--<li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">MIP <i class="fa fa-angle-down"></i></a>
                         <ul class="dropdown-menu">
                           
@@ -316,7 +316,7 @@ body section {
                                 </ul>
                             </li>
                         </ul>
-                    </li>
+                    </li>--%>
 
 
                     
@@ -349,7 +349,7 @@ body section {
 
 
 
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Training Activites <i class="fa fa-angle-down"></i></a>
+                    <%--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Training Activites <i class="fa fa-angle-down"></i></a>
                         <%--<ul class="dropdown-menu">
 
                             <li><a href="../Tailoring">Tailoring </a></li>
@@ -362,7 +362,7 @@ body section {
                             
                             
                         </ul>--%>
-                        <ul class="dropdown-menu">  
+                         <%--<ul class="dropdown-menu">  
                             <li><a href="../Training">Tailoring </a></li>
                             <li><a href="../Training">Driving </a></li>
                             <li><a href="../Training">Cooking </a></li>
@@ -371,10 +371,10 @@ body section {
                             <li><a href="../Training">Education </a></li>
                         </ul>
 
-                    </li>                   
+                    </li>  --%>                 
            
 
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Schemes <i class="fa fa-angle-down"></i></a>
+                    <%--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Schemes <i class="fa fa-angle-down"></i></a>
                         <ul class="dropdown-menu">
 
                             <li><a href="../Education.aspx">Education</a></li>
@@ -382,7 +382,58 @@ body section {
                             <li><a href="../Loans.aspx">Loans</a></li>
                             <li><a href="/IntercasteMarriageScheme.aspx">Intercaste Marriage Scheme</a></li>
                         </ul>
+                    </li>--%>
+                    
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Programs <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                             <li class="dropdown dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Training Activites</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="../Training">Tailoring </a></li>
+                                    <li><a href="../Training">Driving </a></li>
+                                    <li><a href="../Training">Cooking </a></li>
+                                    <li><a href="../Training">Yoga Training</a></li>
+                                    <li><a href="../Training">Dairying</a></li>
+                                    <li><a href="../Training">Education </a></li>                              
+                                </ul>
+                            </li>
+                             <li class="dropdown dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Schemes</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="../Education.aspx">Education</a></li>
+                                    <li><a href="../Insurance.aspx">Insurance</a></li>
+                                    <li><a href="../Loans.aspx">Loans</a></li>
+                                    <li><a href="/IntercasteMarriageScheme.aspx">Intercaste Marriage Scheme</a></li>                               
+                                </ul>
+                            </li>
+                            <li class="dropdown dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mock Interview Program</a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown dropdown-submenu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">RPSC MIP </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/MIPTeam.aspx?ExamType=RPSC">MIP Advertisement </a></li>
+                 
+                                            <li ><a href="/MIPRegistration.aspx?ExamType=RPSC"+>Aspirant Registration </a></li>
+                                            <li><a href="/MIPFacultyRegistration.aspx?ExamType=RPSC">Faculties Registration</a></li>
+                                            <li><a href="../MIP">RPSC Gallery</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropdown-submenu">
+                                        <a href="#" class="dropdown-toggle" id="" data-toggle="dropdown">UPSC MIP </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/MIPTeam.aspx?ExamType=UPSC">MIP Advertisement </a></li>
+                                            <li><a href="/MIPRegistration.aspx?ExamType=UPSC">Aspirant Registration </a></li>
+                                            <li><a href="/MIPFacultyRegistration.aspx?ExamType=UPSC">Faculties Registration</a></li>
+                                            <li><a href="../MIPUPSC">UPSC Gallery</a></li>
+                                        </ul>
+                                    </li>                             
+                                </ul>
+                            </li>
+
+                        </ul>
                     </li>
+        
                    <%-- <li><a href="../News">News/Press</a></li>--%>
                     <li><a href="../Literature">Literature</a></li>
                     <li><a href="../RunForEquality2023">Gallery</a></li>
@@ -451,7 +502,11 @@ body section {
                     </ul>
                 </div>
                <div class="col-sm-12 rezinfo"> 
-                   <div class="col-sm-6 rezinfo"><span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=Tx5CaysYwyffrq8bzM0EFkoTXgfJAgBGMcc62iZT5BYncW3t0uStsuFiZsvW"></script></span></div>
+                   <div class="col-sm-6 rezinfo">
+                       <span id="siteseal">
+                            <script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=Tx5CaysYwyffrq8bzM0EFkoTXgfJAgBGMcc62iZT5BYncW3t0uStsuFiZsvW"></script>
+                        </span>
+                   </div>
                     <div class="col-sm-6 rezinfo" style ="text-align :right ">
                         <small>Website Developed & Maintained By: - </small>
                         <a href="http://www.kasproit.com/" style="color: red; font-weight: bold;" target="_blank">Kaspro Solutions Pvt Ltd</a>
