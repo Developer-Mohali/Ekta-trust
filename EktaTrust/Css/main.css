@@ -675,8 +675,8 @@ input.search-form:hover {
 	margin-bottom: 0;
 }
 #footer {
-	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-top: 13px;
+	padding-bottom: 0px;
 	color: #fff;
 	background: #2e2e2e;
 }

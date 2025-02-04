@@ -326,7 +326,7 @@ body section {
                         <ul class="dropdown-menu">
 
                             <li><a href="../MatrimonialInformation.aspx">Matrimonial Registration</a></li>
-                             <li class="dropdown dropdown-submenu">
+                             <%--<li class="dropdown dropdown-submenu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Library Project</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Educate <i class="fa fa-angle-down"></i></a>
@@ -341,7 +341,7 @@ body section {
                                      </ul>
                                     </li>                                     
                                 </ul>
-                            </li>
+                            </li>--%>
                             <li><a href="../MatrimonialLogin">Login</a></li>                            
                             <%--<li><a href="../Profile.aspx">profile</a></li>--%>
                         </ul>
@@ -488,7 +488,7 @@ body section {
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">Dedicated for a Better Tomorrow <div style="padding-top:12px"></div> </div>
-                <div class="col-sm-9" style="text-align:right" >
+                <div class="col-sm-3" style="text-align:right" >
                     <ul>
                         <%--<li><a href="../Home">Home</a></li>
                         <li><a href="../Introduction">About Us</a></li>
@@ -501,13 +501,13 @@ body section {
                         <li><a href="../TermsAndCondition.aspx" target="_blank">Terms and Conditions</a></li>
                     </ul>
                 </div>
-               <div class="col-sm-12 rezinfo"> 
-                   <div class="col-sm-6 rezinfo">
+               <div class="col-sm-6 rezinfo"> 
+                   <div class="rezinfo">
                        <span id="siteseal">
                             <script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=Tx5CaysYwyffrq8bzM0EFkoTXgfJAgBGMcc62iZT5BYncW3t0uStsuFiZsvW"></script>
                         </span>
                    </div>
-                    <div class="col-sm-6 rezinfo" style ="text-align :right ">
+                    <div class="col-sm-12 rezinfo" style ="text-align :right ">
                         <small>Website Developed & Maintained By: - </small>
                         <a href="http://www.kasproit.com/" style="color: red; font-weight: bold;" target="_blank">Kaspro Solutions Pvt Ltd</a>
                         <br />

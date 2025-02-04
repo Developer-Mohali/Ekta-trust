@@ -10,11 +10,12 @@
              <center><h2>Run For Equality Information</h2></center>
        
             
-            <div class="col-sm-12" style="margin-left: 22%;">
+            <%--<div class="col-sm-12" style="margin-left: 22%;">--%>
+            <div class="container">
                
 
               
-                <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey; width: auto; margin-top:10px">
+                <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey; margin-top:10px">
                    
 
                   
