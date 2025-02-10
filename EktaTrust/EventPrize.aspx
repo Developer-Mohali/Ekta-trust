@@ -17,7 +17,7 @@
                <h2 style="margin-left: 31px;"></h2>
                  </div>
              <div class="col-sm-6">
-             <center><h2>Run For Equality 2023</h2></center></div>
+             <center><h2>Run For Equality 2025</h2></center></div>
         </div>
        
         <div class="col-sm-12">
@@ -32,7 +32,7 @@
                   
                     <tr>
                         <td colspan="2" >
-                            <h6>5th Run for Equality-2023 Details</h6>
+                            <h6>5th Run for Equality-2025 Details</h6>
                         </td>
                     </tr>
                      <tr style="box-shadow: 0px 1px 10px 2px lightgrey;" >
@@ -46,7 +46,7 @@
                      </tr>                     
                     <tr>
                         <td> <%--<video src="RunForEqualityGallery/RunForEqualityFMAds.mpeg" height="0" width="0" id="FMaudio" autoplay="autoplay"></video>--%><br />
-                            <b>Event Date-</b> 14.04.2023<br />
+                            <b>Event Date-</b> 14.04.2025<br />
                           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Place-</b>  Jaipur<br /><br />
                             <%--Tentative Route - JLN Marg<br /><br />--%>
                             <b>Routes-</b><br />
@@ -55,7 +55,7 @@
                             <b>21.09KM-</b> Gandhi Circle-Jhalana Road-Forest View Apartment Traffic light- Jagatpura Pulia- Mahal Road- Turn from AkshayPatra Chaurha - back to Gandhi Circle .<br /><br />
                             <%--Reporting Time<br /><br />
                              14.04.2023<br />--%>
-                            <b>Reporting Time-</b>14.04.2023<br /><br />
+                            <b>Reporting Time-</b>14.04.2025<br /><br />
                          <b>Time-</b>&nbsp;&nbsp;21.09KM &nbsp;- 4:00AM <br />
                       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10KM&nbsp;&nbsp;- 5:15AM<br />
                            <%-- Run for Equality Schedule will be published shortly --%>
@@ -79,7 +79,7 @@
                 <tr>
                         <td colspan="2" >
                             <%--<h6>Bib-Expo: Run For Equality 2023</h6>--%>
-                           <b> BIB EXPO Date </b> - 13.04.2023 <br /><br />
+                           <b> BIB EXPO Date </b> - 13.04.2025 <br /><br />
                          <%-- <b>  Bib EXPO Tentative Time </b>- 11AM to 7PM  <br />
                            <b> Bib EXPO Tentative Place </b>- Ambedkar Memorial Welfare Society, Jhalana Doongri, Jaipur <br /><br />--%>
 
@@ -111,7 +111,8 @@
 
           <div class="col-sm-6">
             
-                     <img src="Images/ekta-combine.jpg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"  />
+                     <img src="Images/ekta-combine-2025.jpg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"  />
+                     <%--<img src="Images/ekta-combine.jpg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"  />--%>
               
                       <img src="Images/Marathon_2023.jpeg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;margin-right:11px"  />
                 
@@ -138,7 +139,7 @@
                     <center>
                          <input type="checkbox" id="cbTermsAndCondition"  style="margin-left: 17px;" checked/><input type="button" id="btnTermsAndConditions" value="I Accept All Terms and Conditions" class="float-left" style="background-color:transparent;border:none;color:blue;text-decoration: underline; "  Text="I Accept Terms and Conditions" />
                
-                      <button onclick="termsAndCondition()" style="font-size:larger; margin-top: 0px;font-size:larger;" id="EventRegistration" class="btn btn-success" ><%--Register Me--%>Registration Closed</button>
+                      <button onclick="termsAndCondition()" style="font-size:larger; margin-top: 0px;font-size:larger;" id="EventRegistration" class="btn btn-success" >Register Me<%--Registration Closed--%></button>
                   
                     </center>
               
@@ -214,16 +215,15 @@
 </script> 
 <script>
     function termsAndCondition() {
-        debugger;
         var isChecked = $("#cbTermsAndCondition").is(":checked");
         if (isChecked)
         {
      
 
-            //var win = window.open('https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784', '_blank');
-            //win.focus();
-            var win = window.open('../RegistrationClosed', '_blank');
+            var win = window.open('https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784', '_blank');
             win.focus();
+            //var win = window.open('../RegistrationClosed', '_blank');
+            //win.focus();
         }
         else {
             alert('Please Check Terms And Conditions!');
