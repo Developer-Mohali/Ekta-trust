@@ -210,7 +210,7 @@ body section {
 
     <div class="container" style="width: 100%;">
         <div class="row col-lg-2 col-xs-12 text-center"><a href="../Home">
-            <img src="../Images/logo2.png" alt="logo" style="padding-top: 7px;"></a> </div>
+            <img src="../Images/logo2.png" alt="logo" ></a> </div><%--style="padding-top: 7px;"--%>
         <div class="col-lg-2 col-xs-12 pull-right text-center nopadding-right " style="margin: 5px 0px 0px 0px">
 
             <img class="" width="100" height="100" src="../Images/ambd.png" />
@@ -257,9 +257,10 @@ body section {
                     </li>
 
                     <%-- Added this new Run for Equality menu on 17-04-23 by dev --%>
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Run for Equality<i class="fa fa-angle-down"></i></a>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Run for Equality <i class="fa fa-angle-down"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="../Information.aspx">Information</a></li>
+                            <li><a href="../EventPrize">Run Registration</a></li>
                             <%--<li><a href="../EventPrize">Online Registration</a></li>--%>
                             <li><a href="../RunCertificate">Timing & Certificate</a></li>
                             <li><a href="../RunRoute.aspx">Run Route</a></li>

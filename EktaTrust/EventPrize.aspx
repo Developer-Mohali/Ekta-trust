@@ -32,7 +32,8 @@
                   
                     <tr>
                         <td colspan="2" >
-                            <h6>5th Run for Equality-2025 Details</h6>
+                            <strong class="text-dark">6th Run for Equality-2025 Details</strong>
+                            <%--<h6>6th Run for Equality-2025 Details</h6>--%>
                         </td>
                     </tr>
                      <tr style="box-shadow: 0px 1px 10px 2px lightgrey;" >
