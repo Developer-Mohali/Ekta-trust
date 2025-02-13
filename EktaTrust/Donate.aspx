@@ -69,6 +69,22 @@
     padding: 20px !important;
 }
 
+
+        .button-link {
+            display: block;
+            align-items: center;
+            width: 100%;
+            text-decoration: none;
+/*            color: #f18c40;*/
+/*            font-weight: bold;
+            font-size: 18px;*/
+        }
+
+        .button-link .arrows {
+            display: inline-block;
+            margin-left: 2px;
+            font-size: 18px;
+        }
     </style>
 
 </asp:Content>
@@ -115,6 +131,13 @@
                                     <td style="padding: 0px 0px 0px 5px;">ektanavnirmantrust@sbi</td> 
                                 </tr>
                             </table>
+                            <p class="pt-2">
+                                <a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784" target="_blank" class="button-link btn btn-warning" style="background:#ef590a;">
+                                    Donate Online
+                                     <span class="arrows">»</span>
+                                    <span class="arrows">»</span>
+                                </a>
+                            </p>
                             <p class="pt-2">
                                <strong>Please send email after donation for our record purpose and 80G</strong>
                             </p>

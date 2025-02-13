@@ -14,7 +14,7 @@
    <div class="about-us">
   <div class="container" runat="server" id="DivUPSC">  
     <%--<h2 class="wow fadeInDown"><img src="EktaTrustImage/MIP-2019.jfif" alt="Error"  class="img-responsive thumbnail small"/></h2>--%>
-    <h2 class="wow fadeInDown"><img src="EktaTrustImage/MIP-2019_latest.jpeg" alt="Error"  class="img-responsive thumbnail small" style="width: 100%"/></h2>
+    <h2 class="wow fadeInDown"><img src="EktaTrustImage/MIP-2025.jpg" alt="Error"  class="img-responsive thumbnail small" style="width: 100%"/></h2>
     <%--<h2 class="wow fadeInDown"><img src="EktaTrustImage/QR_latest.jpeg" alt="Error"  class="img-responsive thumbnail small"/></h2>--%>
      </div>
        <div class="container" runat="server" id="DivRPSC">

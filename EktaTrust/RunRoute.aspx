@@ -7,7 +7,7 @@
     <div class="container">
         <div class="clsBackImage wow fadeInDown animated animated" style="visibility: visible; animation-name: fadeInDown;">
         <div class="col-sm-12">
-            <h2 class="wow fadeInDown">Run Route Map (14th April,2025 Gandhi Circle,JLN Marg,Jaipur)</h2>
+            <h2 class="wow fadeInDown">Run Route Map (14th April,2025 Albert Hall, JLN Marg)</h2>
             <hr class="row marginImage" style="border: 1px dotted orange;" />
         </div>
         <div class="col-sm-3">

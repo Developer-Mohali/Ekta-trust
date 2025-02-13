@@ -387,26 +387,6 @@ body section {
                     
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Programs <i class="fa fa-angle-down"></i></a>
                         <ul class="dropdown-menu">
-                             <li class="dropdown dropdown-submenu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Training Activites</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="../Training">Tailoring </a></li>
-                                    <li><a href="../Training">Driving </a></li>
-                                    <li><a href="../Training">Cooking </a></li>
-                                    <li><a href="../Training">Yoga Training</a></li>
-                                    <li><a href="../Training">Dairying</a></li>
-                                    <li><a href="../Training">Education </a></li>                              
-                                </ul>
-                            </li>
-                             <li class="dropdown dropdown-submenu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Schemes</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="../Education.aspx">Education</a></li>
-                                    <li><a href="../Insurance.aspx">Insurance</a></li>
-                                    <li><a href="../Loans.aspx">Loans</a></li>
-                                    <li><a href="/IntercasteMarriageScheme.aspx">Intercaste Marriage Scheme</a></li>                               
-                                </ul>
-                            </li>
                             <li class="dropdown dropdown-submenu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mock Interview Program</a>
                                 <ul class="dropdown-menu">
@@ -431,7 +411,26 @@ body section {
                                     </li>                             
                                 </ul>
                             </li>
-
+                             <li class="dropdown dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Training Activites</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="../Training">Tailoring </a></li>
+                                    <li><a href="../Training">Driving </a></li>
+                                    <li><a href="../Training">Cooking </a></li>
+                                    <li><a href="../Training">Yoga Training</a></li>
+                                    <li><a href="../Training">Dairying</a></li>
+                                    <li><a href="../Training">Education </a></li>                              
+                                </ul>
+                            </li>
+                             <li class="dropdown dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Schemes</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="../Education.aspx">Education</a></li>
+                                    <li><a href="../Insurance.aspx">Insurance</a></li>
+                                    <li><a href="../Loans.aspx">Loans</a></li>
+                                    <li><a href="/IntercasteMarriageScheme.aspx">Intercaste Marriage Scheme</a></li>                               
+                                </ul>
+                            </li>
                         </ul>
                     </li>
         
@@ -520,7 +519,7 @@ body section {
         </div>
             </div>
     </footer>
-    <script src="../kk/js/bootstrap.min.js"></script>
+    <%--<script src="../kk/js/bootstrap.min.js"></script>--%>
     <script src="../Js/jquery.prettyPhoto.js"></script>
     <script src="../Js/jquery.isotope.min.js"></script>
     <script src="../Js/main.js"></script>
@@ -554,6 +553,38 @@ body section {
                 hoverpause: true, // set to false for nonstop rotate
                 arrowRightText: '&rarr;',
                 arrowLeftText: '&larr;'
+            });
+        });
+    </script>
+
+    <script>
+        // Ensure dropdowns work on hover in desktop and click on mobile
+        $(document).ready(function () {
+            // Open dropdowns on click for mobile
+            $('.dropdown-submenu > a').on("click", function (e) {
+                // Check if the screen width is less than 768px
+                if (window.innerWidth < 768) {
+                    const $parent = $(this).parent(); // Get the clicked item's parent
+                    const $dropdownMenu = $parent.find("> .dropdown-menu");
+
+                    // Close all sibling menus (and their submenus)
+                    $parent.siblings(".dropdown, .dropdown-submenu").each(function () {
+                        $(this).find(".dropdown-menu").slideUp(); // Close dropdown
+                        $(this).removeClass("open"); // Remove open class
+                    });
+
+                    var $submenu = $(this).next('ul');
+                    $submenu.toggle();
+                    e.stopPropagation();
+                    e.preventDefault();
+                }
+            });
+
+            // Close navbar when clicking outside in mobile view
+            $(document).on("click", function (e) {
+                if (!$(e.target).closest('.navbar').length) {
+                    $(".navbar-collapse").collapse('hide');
+                }
             });
         });
     </script>

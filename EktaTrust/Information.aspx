@@ -21,7 +21,8 @@
                   
                     <tr>
                         <td colspan="2" >
-                            <h6>5th Run for Equality-2023 Details</h6>
+                            <%--<h6>5th Run for Equality-2023 Details</h6>--%>
+                            <h4>6th Run for Equality-2025 Details</h4>
                         </td>
                     </tr>
                      <tr style="box-shadow: 0px 1px 10px 2px lightgrey;" >
@@ -35,16 +36,18 @@
                      </tr>                     
                     <tr>
                         <td> <%--<video src="RunForEqualityGallery/RunForEqualityFMAds.mpeg" height="0" width="0" id="FMaudio" autoplay="autoplay"></video>--%><br />
-                            <b>Event Date-</b> 14.04.2023<br />
-                          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Place-</b>  Jaipur<br /><br />
+                            <b>Event Date-</b> 14.04.2025<br />
+                          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Place-</b>  Albert Hall, JLN Marg<br /><br />
                             <%--Tentative Route - JLN Marg<br /><br />--%>
-                            <b>Routes-</b><br />
-                            <b>5KM-</b> Gandhi Circle -Jhalana Road- back to Gandhi Circle.<br /><br />
-                            <b>10KM-</b> Gandhi Circle-Jhalana Road-Turn from Forest View Apartment Traffic light before Jagatpura Pulia- back to Gandhi Circle. <br /><br />
-                            <b>21.09KM-</b> Gandhi Circle-Jhalana Road-Forest View Apartment Traffic light- Jagatpura Pulia- Mahal Road- Turn from AkshayPatra Chaurha - back to Gandhi Circle .<br /><br />
+                           <div class="hidden">
+                                <b>Routes-</b><br />
+                                <b>5KM-</b> Gandhi Circle -Jhalana Road- back to Gandhi Circle.<br /><br />
+                                <b>10KM-</b> Gandhi Circle-Jhalana Road-Turn from Forest View Apartment Traffic light before Jagatpura Pulia- back to Gandhi Circle. <br /><br />
+                                <b>21.09KM-</b> Gandhi Circle-Jhalana Road-Forest View Apartment Traffic light- Jagatpura Pulia- Mahal Road- Turn from AkshayPatra Chaurha - back to Gandhi Circle .<br /><br />
+                           </div>
                             <%--Reporting Time<br /><br />
                              14.04.2023<br />--%>
-                            <b>Reporting Time-</b>14.04.2023<br /><br />
+                            <b>Reporting Time-</b>14.04.2025<br /><br />
                          <b>Time-</b>&nbsp;&nbsp;21.09KM &nbsp;- 4:00AM <br />
                       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10KM&nbsp;&nbsp;- 5:15AM<br />
                            <%-- Run for Equality Schedule will be published shortly --%>
@@ -65,10 +68,10 @@
                             &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs 1000 in all categories(5k, 10k, 21.09k) <br />
                     </td>
                     </tr>
-                <tr>
+                <tr class="hidden">
                         <td colspan="2" >
                             <%--<h6>Bib-Expo: Run For Equality 2023</h6>--%>
-                           <b> BIB EXPO Date </b> - 13.04.2023 <br /><br />
+                           <b> BIB EXPO Date </b> - 13.04.2025 <br /><br />
                          <%-- <b>  Bib EXPO Tentative Time </b>- 11AM to 7PM  <br />
                            <b> Bib EXPO Tentative Place </b>- Ambedkar Memorial Welfare Society, Jhalana Doongri, Jaipur <br /><br />--%>
 

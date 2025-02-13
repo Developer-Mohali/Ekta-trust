@@ -26,13 +26,13 @@
                
 
               
-                <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey; width: auto; margin-top:10px">
+                <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey; width: 100%; margin-top:10px">
                    
 
                   
                     <tr>
                         <td colspan="2" >
-                            <strong class="text-dark">6th Run for Equality-2025 Details</strong>
+                            <h4>6th Run for Equality-2025 Details</h4>
                             <%--<h6>6th Run for Equality-2025 Details</h6>--%>
                         </td>
                     </tr>
@@ -48,12 +48,15 @@
                     <tr>
                         <td> <%--<video src="RunForEqualityGallery/RunForEqualityFMAds.mpeg" height="0" width="0" id="FMaudio" autoplay="autoplay"></video>--%><br />
                             <b>Event Date-</b> 14.04.2025<br />
-                          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Place-</b>  Jaipur<br /><br />
+                          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Place-</b>  Albert Hall, JLN Marg<br /><br />
                             <%--Tentative Route - JLN Marg<br /><br />--%>
-                            <b>Routes-</b><br />
-                            <b>5KM-</b> Gandhi Circle -Jhalana Road- back to Gandhi Circle.<br /><br />
-                            <b>10KM-</b> Gandhi Circle-Jhalana Road-Turn from Forest View Apartment Traffic light before Jagatpura Pulia- back to Gandhi Circle. <br /><br />
-                            <b>21.09KM-</b> Gandhi Circle-Jhalana Road-Forest View Apartment Traffic light- Jagatpura Pulia- Mahal Road- Turn from AkshayPatra Chaurha - back to Gandhi Circle .<br /><br />
+                            <div class="hidden">
+                                <b>Routes-</b><br />
+                                <b>5KM-</b> Gandhi Circle -Jhalana Road- back to Gandhi Circle.<br /><br />
+                                <b>10KM-</b> Gandhi Circle-Jhalana Road-Turn from Forest View Apartment Traffic light before Jagatpura Pulia- back to Gandhi Circle. <br /><br />
+                                <b>21.09KM-</b> Gandhi Circle-Jhalana Road-Forest View Apartment Traffic light- Jagatpura Pulia- Mahal Road- Turn from AkshayPatra Chaurha - back to Gandhi Circle .<br /><br />
+                            </div>
+                            
                             <%--Reporting Time<br /><br />
                              14.04.2023<br />--%>
                             <b>Reporting Time-</b>14.04.2025<br /><br />
@@ -77,7 +80,7 @@
                             &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs 1000 in all categories(5k, 10k, 21.09k) <br />
                     </td>
                     </tr>
-                <tr>
+                <tr class="hidden">
                         <td colspan="2" >
                             <%--<h6>Bib-Expo: Run For Equality 2023</h6>--%>
                            <b> BIB EXPO Date </b> - 13.04.2025 <br /><br />
@@ -112,10 +115,11 @@
 
           <div class="col-sm-6">
             
-                     <img src="Images/ekta-combine-2025.jpg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"  />
+                    <img src="Gallery_2025/Route Map clear - 05.02.2025.jpg"style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"/>
+                     <%--<img src="Images/ekta-combine-2025.jpg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"  />--%>
                      <%--<img src="Images/ekta-combine.jpg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"  />--%>
               
-                      <img src="Images/Marathon_2023.jpeg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;margin-right:11px"  />
+                      <%--<img src="Images/Marathon_2023.jpeg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;margin-right:11px"  />--%>
                 
 
                      
