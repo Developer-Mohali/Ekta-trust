@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Gallery_2018
+Partial Public Class RunForEquality2025
 
     '''<summary>
     '''GallerySideMenuControl control.

@@ -1,5 +1,6 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage/Admin.Master" CodeBehind="Library.aspx.vb" Inherits="EktaTrust.Library" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage/Admin.Master" CodeBehind="RunForEquality2025.aspx.vb" Inherits="EktaTrust.RunForEquality2025" %>
 <%@ Register Src="~/Controls/GallerySideMenuControl.ascx" TagPrefix="uc" TagName="GallerySideMenuControl" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -10,19 +11,15 @@
     <section class="page">
         <!-- Page Content -->
         <div class="container">
-
             <div class="jquery-script-ads" style="margin: 6px auto;">
-
                 <p class="gallery">
-                    Library
-                <hr class="row marginImage" style="border: 1px dotted orange;" />
+                    Run For Equality 2025
+            <hr class="row marginImage" style="border: 1px dotted orange;" />
                 </p>
-
             </div>
-            <!--Page Title-->
+
             <div class="row marginImage" style="margin-left: 15px">
             </div>
-            <!--first Rows Add-->
 
              <%-- gallery event menu --%>
             <uc:GallerySideMenuControl runat="server" id="GallerySideMenuControl" />
@@ -30,35 +27,70 @@
             <div class="col-md-9 col-sm-10 col-xs-12" style="padding-right: 0px; padding-left: 0px; top: 10px;">
 
                 <!--one row-->
-                <div class="row marginImage"style="margin-left: 15px">
-                   <div id="box" class="burst-side strawberry">
+                <div class="row marginImage" style="margin-left: 15px">
+                    <div id="box" class="burst-side strawberry">
                         <div class="caption"></div>
-                        
-                        <img class="thumbnail" id="dd" src="Gallery_2022/3.jpg" alt="#" />
+
+                        <img class="thumbnail" id="dd" src="Gallery_2025/Img1.jpeg" alt="#" />
                         <div>
-                            <a class="lightbox" href="Gallery_2022/3.jpg" data-littlelightbox-group="gallery">
+                            <a class="lightbox" href="Gallery_2025/Img1.jpeg" data-littlelightbox-group="gallery">
                                 <h1>View Image</h1>
-                                
+
                             </a>
                         </div>
                     </div>
-                </div>
-                    <div class="row" style="padding-left: 22px; padding-top:25px">
-                        <div class="col-sm-6">
-                            <video width="400" height="300" controls="" style="cursor: pointer">
-                                <source src="Gallery_2022/Video1.mp4" />" type="video/mp4">
-                            </video>
+                    <div id="box" class="burst-side strawberry">
+                        <div class="caption"></div>
+
+                        <img class="thumbnail" id="dd1" src="Gallery_2025/Img2.jpeg" alt=" " />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img2.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+                            </a>
                         </div>
-                         
-                        <div class="col-sm-6">
-                            <video width="400" height="300" controls="">
-                                <source src="Gallery_2022/Video2.mp4" type="video/mp4" style="cursor: pointer">
-                            </video>
+                    </div>
+                    <div id="box" class="burst-side strawberry">
+                        <div class="caption"></div>
+
+                        <img class="thumbnail" id="dd2" src="Gallery_2025/Img3.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img3.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+
+                            </a>
                         </div>
-                   </div>
+                    </div>
+                    <div id="box" class="burst-side strawberry">
+                        <div class="caption"></div>
+
+                        <img class="thumbnail" id="dd3" src="Gallery_2025/Route Map clear - 05.02.2025.jpg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Route Map clear - 05.02.2025.jpg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+
+                            </a>
+                        </div>
+                    </div>
+                    
+                    
+
+
                 </div>
+
+                <div class="row" style="padding-left: 22px; padding-top: 25px">
+                    <div class="col-sm-6">
+                        <video width="400" height="300" controls="" style="cursor: pointer">
+                            <source src="Gallery_2025/Video1.mp4" type="video/mp4" />
+                        </video>
+                    </div>
                 </div>
+            </div>
+
+        </div>
+
+
     </section>
+
 
     <script src="CssGallery/src/jquery.littlelightbox.js"></script>
     <script>
@@ -163,6 +195,8 @@
             padding-top: 9px;
         }
     </style>
+
     <link href="CssGallery/style.css" rel="stylesheet" />
     <link href="CssGallery/figure.css" rel="stylesheet" />
+
 </asp:Content>

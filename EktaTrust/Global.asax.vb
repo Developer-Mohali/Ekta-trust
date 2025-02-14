@@ -117,6 +117,7 @@ Public Class Global_asax
         routes.MapPageRoute("Covid-19", "Covid-19", "~/Covid19.aspx")
         routes.MapPageRoute("RPSC2020", "RPSC2020", "~/RPSC2020.aspx")
         routes.MapPageRoute("RunCertificate", "RunCertificate", "~/Certificate.aspx")
+        routes.MapPageRoute("RunForEquality2025", "RunForEquality2025", "~/RunForEquality2025.aspx")
 
     End Sub
     Sub Session_Start(ByVal sender As Object, ByVal e As EventArgs)
