@@ -1,6 +1,36 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="GallerySideMenuControl.ascx.vb" Inherits="EktaTrust.GallerySideMenuControl" %>
 
-
+<style>
+    .panel-title {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .submenu-title {
+        font-size: 15px;
+        font-weight: bold;
+        padding: 10px 15px;
+        background: #f8f9fa;
+        cursor: pointer;
+        border-top: 1px solid #ddd;
+    }
+    .submenu-title:hover {
+        background: #e9ecef;
+    }
+    .list-group-item {
+        padding: 10px 20px;
+        border: none;
+    }
+    .submenu-content {
+        /*padding-left: 15px;*/
+    }
+    .submenu-title i {
+        float: right;
+        transition: transform 0.3s ease;
+    }
+    .submenu-title[aria-expanded="true"] i {
+        transform: rotate(180deg);
+    }
+</style>
  <div class="col-md-3 col-sm-2 col-xs-12" style="padding-right: 0px; padding-left: 0px; top: 10px;">
      <a href="#" class="list-group-item">Gallery of Events</a>
 
@@ -35,22 +65,96 @@
                  <a href="../Gallery" class="list-group-item">Felicitation Programme 2016</a>
              </div>
          </div>
-
-
-
+        
          <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionGallery" href="#Mip" style="font-size: 16px; font-weight: bold;">
+                        <h3 class="panel-title">Mock Interview Programme <i class="fa fa-angle-right pull-right"></i></h3>
+                    </a>
+                </div>
+    
+                <!-- Main Collapse -->
+                <div id="Mip" class="panel-collapse collapse in" style="height: auto;">
+        
+                    <!-- UPSC Section -->
+                    <div class="submenu-title" data-toggle="collapse" data-target="#UPSCSubmenu" aria-expanded="false">
+                        UPSC <i class="fa fa-angle-down"></i>
+                    </div>
+                    <div id="UPSCSubmenu" class="submenu-content collapse">
+                        <a href="../UPSC2025" class="list-group-item">UPSC 2025</a>
+                        <a href="../UPSC2018" class="list-group-item">UPSC 2018</a>
+                        <a href="../MIPUPSC" class="list-group-item">UPSC 2017</a>
+                    </div>
+
+                    <!-- RPSC Section -->
+                    <div class="submenu-title" data-toggle="collapse" data-target="#RPSCSubmenu" aria-expanded="false">
+                        RPSC <i class="fa fa-angle-down"></i>
+                    </div>
+                    <div id="RPSCSubmenu" class="submenu-content collapse">
+                        <a href="../RPSC2025" class="list-group-item">RPSC 2025</a>
+                        <a href="../RPSC2020" class="list-group-item">RPSC 2020</a>
+                        <a href="../MIP" class="list-group-item">RPSC 2017</a>
+                    </div>
+
+                </div>
+            </div>
+
+
+         <%--<div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionGallery" href="#Mip" style="font-size: 14px;">
+                        <h3 class="panel-title">Mock Interview Programme <i class="fa fa-angle-right pull-right"></i></h3>
+                    </a>
+                </div>
+                <div id="Mip" class="panel-collapse collapse" style="height: auto;">
+        
+                    <!-- UPSC Submenu -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#Mip" href="#UPSCSubmenu" style="font-size: 14px;">
+                                <h4 class="panel-title">UPSC <i class="fa fa-angle-right pull-right"></i></h4>
+                            </a>
+                        </div>
+                        <div id="UPSCSubmenu" class="panel-collapse collapse">
+                            <a href="../UPSC2025" class="list-group-item">UPSC 2025</a>
+                            <a href="../UPSC2018" class="list-group-item">UPSC 2018</a>
+                            <a href="../MIPUPSC" class="list-group-item">UPSC 2017</a>
+                        </div>
+                    </div>
+
+                    <!-- RPSC Submenu -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#Mip" href="#RPSCSubmenu" style="font-size: 14px;">
+                                <h4 class="panel-title">RPSC <i class="fa fa-angle-right pull-right"></i></h4>
+                            </a>
+                        </div>
+                        <div id="RPSCSubmenu" class="panel-collapse collapse">
+                            <a href="../RPSC2025" class="list-group-item">RPSC 2025</a>
+                            <a href="../RPSC2020" class="list-group-item">RPSC 2020</a>
+                            <a href="../MIP" class="list-group-item">RPSC 2017</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>--%>
+
+
+         <%--<div class="panel panel-default">
              <div class="panel-heading">
                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionGallery" href="#Mip" style="font-size: 14px;">
                      <h3 class="panel-title">Mock Inteview Programme  <i class="fa fa-angle-right pull-right"></i></h3>
                  </a>
              </div>
              <div id="Mip" class="panel-collapse collapse" style="height: auto;">
+                 <a href="../UPSC2025" class="list-group-item">UPSC 2025</a>
                  <a href="../UPSC2018" class="list-group-item">UPSC April 2018</a>
                  <a href="../MIPUPSC" class="list-group-item">UPSC April 2017</a>
+                 <a href="../RPSC2025" class="list-group-item">RPSC 2025</a>
                  <a href="../MIP" class="list-group-item">RPSC Aug-Sep 2017</a>
                  <a href="../RPSC2020" class="list-group-item">RPSC 2020</a>
              </div>
-         </div>
+         </div>--%>
          <div class="panel panel-default">
              <div class="panel-heading">
                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionGallery" href="#CreativeCompetition" style="font-size: 14px;">
@@ -77,6 +181,23 @@
  </div>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get the current URL path
+        var currentURL = window.location.href;
+
+        // Check if the URL contains UPSC-related links and expand UPSC section
+        if (currentURL.includes("UPSC2025") || currentURL.includes("UPSC2018") || currentURL.includes("MIPUPSC")) {
+            document.getElementById("UPSCSubmenu").classList.add("in");
+            document.querySelector("[data-target='#UPSCSubmenu']").setAttribute("aria-expanded", "true");
+        }
+
+        // Check if the URL contains RPSC-related links and expand RPSC section
+        if (currentURL.includes("RPSC2025") || currentURL.includes("RPSC2020") || currentURL.includes("MIP")) {
+            document.getElementById("RPSCSubmenu").classList.add("in");
+            document.querySelector("[data-target='#RPSCSubmenu']").setAttribute("aria-expanded", "true");
+        }
+    });
+
     $(document).ready(function () {
         // Get the current URL of the page
         var currentUrl = window.location.pathname.toLowerCase(); // Convert to lowercase for consistency

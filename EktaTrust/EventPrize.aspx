@@ -78,6 +78,10 @@
 
                      <%--Registration after - 31.03.2023 Rs - 1000(Tshirt subject to availability)--%><b>On Spot registration in BIB EXPO</b><br />
                             &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs 1000 in all categories(5k, 10k, 21.09k) <br />
+
+                            <br /><b>Beginner's guide</b><br />
+                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                            <a href="Gallery_2025/SOP_for_RFE.pdf" target="_blank" style="background-color:transparent;border:none;color:blue;text-decoration: underline;">Suggestions are invited for Schedule of Practice for RFE</a> <br />
                     </td>
                     </tr>
                 <tr class="hidden">

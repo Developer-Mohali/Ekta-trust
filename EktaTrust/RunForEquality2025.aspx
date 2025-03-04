@@ -83,6 +83,18 @@
                             <source src="Gallery_2025/Video1.mp4" type="video/mp4" />
                         </video>
                     </div>
+                    <div class="col-sm-6">
+                        <video width="400" height="300" controls="" style="cursor: pointer">
+                            <source src="Gallery_2025/Video3.mp4" type="video/mp4" />
+                        </video>
+                    </div>
+                </div>
+                <div class="row" style="padding-left: 22px; padding-top: 25px">
+                    <div class="col-sm-6">
+                        <video width="400" height="300" controls="" style="cursor: pointer">
+                            <source src="Gallery_2025/Video2.mp4" type="video/mp4" />
+                        </video>
+                    </div>
                 </div>
             </div>
 
