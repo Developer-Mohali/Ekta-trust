@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage/Admin.Master" CodeBehind="UnaGallery.aspx.vb" Inherits="EktaTrust.NewsGallery" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage/Admin.Master" CodeBehind="UnaGallery.aspx.vb" Inherits="EktaTrust.UnaGallery" %>
 <%@ Register Src="~/Controls/GallerySideMenuControl.ascx" TagPrefix="uc" TagName="GallerySideMenuControl" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
