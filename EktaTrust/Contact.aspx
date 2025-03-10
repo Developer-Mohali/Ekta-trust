@@ -227,7 +227,7 @@
                                         </div>
                                         <%-- <span style="font-size:25px;color:#fff;font-weight:bold;">Jeenwal (Chairman)</span>--%>
                                         <div class="col-sm-4 panelImgMar">
-                                            <img style="width: 70px" src="Images/arvind.png" />
+                                            <img style="width: 70px" src="Images/arvind-latest.jpg" />
                                         </div>
                                     </div>
                                 </div>
