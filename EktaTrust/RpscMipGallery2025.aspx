@@ -128,6 +128,34 @@
                         </a>
                     </div>
                 </div>
+
+                  <div id="box" class="burst-side strawberry">
+                    <div class="caption"></div>
+                    <img class="thumbnail" id="dd" src="Gallery_2025/RPSC2025_Gallery/Img10.jpeg" alt="#" />
+                    <div>
+                        <a class="lightbox" href="Gallery_2025/RPSC2025_Gallery/Img10.jpeg" data-littlelightbox-group="gallery">
+                            <h1>View Image</h1>
+                        </a>
+                    </div>
+                </div>
+                  <div id="box" class="burst-side strawberry">
+                    <div class="caption"></div>
+                    <img class="thumbnail" id="dd" src="Gallery_2025/RPSC2025_Gallery/Img11.jpeg" alt="#" />
+                    <div>
+                        <a class="lightbox" href="Gallery_2025/RPSC2025_Gallery/Img11.jpeg" data-littlelightbox-group="gallery">
+                            <h1>View Image</h1>
+                        </a>
+                    </div>
+                </div>  
+                <div id="box" class="burst-side strawberry">
+                    <div class="caption"></div>
+                    <img class="thumbnail" id="dd" src="Gallery_2025/RPSC2025_Gallery/Img12.jpeg" alt="#" />
+                    <div>
+                        <a class="lightbox" href="Gallery_2025/RPSC2025_Gallery/Img12.jpeg" data-littlelightbox-group="gallery">
+                            <h1>View Image</h1>
+                        </a>
+                    </div>
+                </div>
                 
                 <%-- end main div --%>
             </div>

@@ -523,6 +523,7 @@
     <Content Include="PaymentRequest.aspx" />
     <Content Include="PaymentResponse.aspx" />
     <Content Include="RPSC2020.aspx" />
+    <Content Include="RpscMipGallery2025.aspx" />
     <Content Include="RunForEquality2018\collage.jpg" />
     <Content Include="RunForEquality2018\Ekta Banner.jpeg" />
     <Content Include="ektafavicon.png" />
@@ -1042,6 +1043,7 @@
     <Content Include="UnaGallery\Image-6.png" />
     <Content Include="RunForEquality2019.aspx" />
     <Content Include="UpscMipGallery.aspx" />
+    <Content Include="UpscMipGallery2025.aspx" />
     <Content Include="UserChangePassword.aspx" />
     <Content Include="UserDetails.aspx" />
     <Content Include="UserPassword.aspx" />
@@ -1525,6 +1527,13 @@
     </Compile>
     <Compile Include="RPSC2020.aspx.vb">
       <DependentUpon>RPSC2020.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RpscMipGallery2025.aspx.designer.vb">
+      <DependentUpon>RpscMipGallery2025.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RpscMipGallery2025.aspx.vb">
+      <DependentUpon>RpscMipGallery2025.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="RunForEquality2018.aspx.designer.vb">
@@ -2048,6 +2057,13 @@
     </Compile>
     <Compile Include="UpscMipGallery.aspx.vb">
       <DependentUpon>UpscMipGallery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpscMipGallery2025.aspx.designer.vb">
+      <DependentUpon>UpscMipGallery2025.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpscMipGallery2025.aspx.vb">
+      <DependentUpon>UpscMipGallery2025.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserChangePassword.aspx.designer.vb">

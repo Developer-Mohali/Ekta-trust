@@ -4788,6 +4788,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.RpscMipGallery2025._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.RunForEquality2018._GallerySideMenuControl">
 <summary>
 GallerySideMenuControl control.
@@ -8092,6 +8101,15 @@ To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
 <member name="F:EktaTrust.UpscMipGallery._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UpscMipGallery2025._GallerySideMenuControl">
 <summary>
 GallerySideMenuControl control.
 </summary>
