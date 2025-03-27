@@ -225,14 +225,40 @@
                           <div class="row" style="padding-left: 22px; padding-top:25px">
                               <div class="col-sm-6">
                                   <video width="400" height="300" controls="">
-                                      <source src="Gallery_2022/Video11.mp4" type="video/mp4" style="cursor: pointer">
+                                      <source src="Gallery_2022/Video11.mp4" type="video/mp4" style="cursor: pointer" />
                                   </video>
                               </div>
                                  <div class="col-sm-6">
                                        <video width="400" height="300" controls="">
-                                           <source src="Gallery_2022/Video12.mp4" type="video/mp4" style="cursor: pointer">
+                                           <source src="Gallery_2022/Video12.mp4" type="video/mp4" style="cursor: pointer" />
                                        </video>
                                    </div>
+                         </div>
+                <!-- End of Section 4 -->
+
+                <!-- Library 5 section (Library at Mania) -->
+                <h2 style="margin: 20px; font-size: 25px !important; border-bottom: 1px dotted orange; font-weight: bold;">Ekta Library at Virat Nagar</h2>
+                       <!-- Images-->
+      <%--            <div class="row marginImage"style="margin-left: 15px">             
+                         <div id="box" class="burst-side strawberry">
+                              <div class="caption"></div>     
+                              <img class="thumbnail" id="dd" src="Gallery_2022/63.jpeg" alt="#" />
+                              <div>
+                                  <a class="lightbox" href="Gallery_2022/63.jpeg" data-littlelightbox-group="gallery">
+                                      <h1>View Image</h1>
+     
+                                  </a>
+                              </div>
+                          </div>   
+                   </div>--%>
+
+                        <!-- Videos-->
+                          <div class="row" style="padding-left: 22px; padding-top:25px">
+                              <div class="col-sm-6">
+                                  <video width="400" height="300" controls="">
+                                      <source src="Gallery_2022/Video13.mp4" type="video/mp4" style="cursor: pointer" />
+                                  </video>
+                              </div>
                          </div>
                 <!-- End of Section 4 -->
 

@@ -785,6 +785,7 @@
     <Content Include="ScriptLibrary\jquery-1.4.1.js" />
     <Content Include="ScriptLibrary\jquery-1.4.1.min.js" />
     <Content Include="ScriptLibrary\jquery.dynDateTime.min.js" />
+    <Content Include="SOP.aspx" />
     <Content Include="test.html" />
     <Content Include="TestChat.html" />
     <Content Include="TestCookies.aspx" />
@@ -1577,6 +1578,13 @@
     <Compile Include="RunRoute.aspx.vb">
       <DependentUpon>RunRoute.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SOP.aspx.designer.vb">
+      <DependentUpon>SOP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SOP.aspx.vb">
+      <DependentUpon>SOP.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="TestCookies.aspx.designer.vb">
       <DependentUpon>TestCookies.aspx</DependentUpon>

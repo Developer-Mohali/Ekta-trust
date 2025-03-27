@@ -259,17 +259,20 @@ body section {
                     <%-- Added this new Run for Equality menu on 17-04-23 by dev --%>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Run for Equality <i class="fa fa-angle-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="../Information.aspx">Information</a></li>
+                            <li><a href="../Information.aspx">Run Information</a></li>
+                             <li><a href="../CelebritiesAppeal.aspx">Celebrities Appeal</a></li>
                             <li><a href="../EventPrize">Run Registration</a></li>
-                            <%--<li><a href="../EventPrize">Online Registration</a></li>--%>
-                            <li><a href="../RunCertificate">Timing & Certificate</a></li>
+                            <li><a href="../SOP.aspx">Run SOP</a></li>
                             <li><a href="../RunRoute.aspx">Run Route</a></li>
-                            <li><a href="../Winners.aspx">Winners</a></li>
-                            <li><a href="../CelebritiesAppeal.aspx">Celebrities Appeal</a></li>
                             <li><a href="../ThemeSong.aspx">Theme Song</a></li>
-                            <li><a href="../OurAssociates.aspx">Our Associates</a></li>
+                            <li><a href="../RunCertificate">Timing & Certificate</a></li>
+                            <li><a href="../Winners.aspx">Winners</a></li>
+                            <li><a href="../OurAssociates.aspx">Our Associates</a></li>                         
                             <li><a href="../RunForEquality2025">Photo Download</a></li>
                             <li><a href="../RunForEquality2025">Gallery</a></li>
+
+                            <%--<li><a href="../EventPrize">Online Registration</a></li>--%>
+
                         </ul>
                     </li>
 
@@ -278,7 +281,7 @@ body section {
                         <ul class="dropdown-menu">
                             <%--<li><a href="../Registration-Onhold">Events Registration</a></li>--%>
                             <li><a href="../EventPrize">Run Registration</a></li>
-                            <li><a href="../RunCertificate">Certificate Download</a></li>
+                           <%-- <li><a href="../RunCertificate">Certificate Download</a></li>--%>
                             <li><a href="../MatrimonialInformation.aspx">Matrimonial Registration</a></li>
                             <li><a href="../Enroll.aspx">Students Registration</a></li>
                             <li><a href="../CareerCounselling.aspx">Career Counselling</a> </li>
