@@ -102,6 +102,42 @@
                                </a>
                            </div>
                        </div> 
+                     <div id="box" class="burst-side strawberry">
+                        <div class="caption"></div>     
+                        <img class="thumbnail" id="dd" src="Gallery_2022/64.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2022/64.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>           
+                            </a>
+                        </div>
+                    </div>  
+                    <div id="box" class="burst-side strawberry">
+                        <div class="caption"></div>     
+                        <img class="thumbnail" id="dd" src="Gallery_2022/65.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2022/65.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>           
+                            </a>
+                        </div>
+                    </div>  
+                    <div id="box" class="burst-side strawberry">
+                        <div class="caption"></div>     
+                        <img class="thumbnail" id="dd" src="Gallery_2022/66.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2022/66.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>           
+                            </a>
+                        </div>
+                    </div>   
+                    <div id="box" class="burst-side strawberry">
+                        <div class="caption"></div>     
+                        <img class="thumbnail" id="dd" src="Gallery_2022/67.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2022/67.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>           
+                            </a>
+                        </div>
+                    </div> 
 
                 </div>
                     <div class="row" style="padding-left: 22px; padding-top:25px">
@@ -113,15 +149,20 @@
                          
                         <div class="col-sm-6">
                             <video width="400" height="300" controls="">
-                                <source src="Gallery_2022/Video2.mp4" type="video/mp4" style="cursor: pointer">
+                                <source src="Gallery_2022/Video2.mp4" type="video/mp4" style="cursor: pointer" />
                             </video>
                         </div>
 
                           <div class="col-sm-6">
                               <video width="400" height="300" controls="">
-                                  <source src="Gallery_2022/Video8.mp4" type="video/mp4" style="cursor: pointer">
+                                  <source src="Gallery_2022/Video8.mp4" type="video/mp4" style="cursor: pointer" />
                               </video>
                           </div>
+                        <div class="col-sm-6">
+                            <video width="400" height="300" controls="">
+                                <source src="Gallery_2022/Video14.mp4" type="video/mp4" style="cursor: pointer" />
+                            </video>
+                        </div>
                    </div>
 
                 <!-- Library 2 section -->
