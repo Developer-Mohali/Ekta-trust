@@ -5,14 +5,15 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-      <div class="clsBackImage wow fadeInDown animated">
+      <div class="clsBackImage wow fadeInDown animated about-us">
         
-             <center><h2>Run For Equality Information</h2></center>
-       
+            <%-- <center><h2>Run For Equality Information</h2></center>--%>
             
             <%--<div class="col-sm-12" style="margin-left: 22%;">--%>
             <div class="container">
-               
+                            <div style="margin: 6px auto;">
+                  <h2 class="wow fadeInDown">Run For Equality Information</h2>
+             </div>
 
               
                 <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey; margin-top:10px">

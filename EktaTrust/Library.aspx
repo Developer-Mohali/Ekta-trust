@@ -142,24 +142,24 @@
                 </div>
                     <div class="row" style="padding-left: 22px; padding-top:25px">
                         <div class="col-sm-6">
-                            <video width="400" height="300" controls="" style="cursor: pointer">
+                            <video class="desktop-video" controls="" style="cursor: pointer">
                                 <source src="Gallery_2022/Video1.mp4" />" type="video/mp4">
                             </video>
                         </div>
                          
                         <div class="col-sm-6">
-                            <video width="400" height="300" controls="">
+                            <video class="desktop-video" controls="">
                                 <source src="Gallery_2022/Video2.mp4" type="video/mp4" style="cursor: pointer" />
                             </video>
                         </div>
 
                           <div class="col-sm-6">
-                              <video width="400" height="300" controls="">
+                              <video class="desktop-video" controls="">
                                   <source src="Gallery_2022/Video8.mp4" type="video/mp4" style="cursor: pointer" />
                               </video>
                           </div>
                         <div class="col-sm-6">
-                            <video width="400" height="300" controls="">
+                            <video class="desktop-video" controls="">
                                 <source src="Gallery_2022/Video14.mp4" type="video/mp4" style="cursor: pointer" />
                             </video>
                         </div>
@@ -214,8 +214,8 @@
                   <!-- Videos-->
                           <div class="row" style="padding-left: 22px; padding-top:25px">
                               <div class="col-sm-6">
-                                  <video width="400" height="300" controls="">
-                                      <source src="Gallery_2022/Video9.mp4" type="video/mp4" style="cursor: pointer">
+                                  <video class="desktop-video" controls="">
+                                      <source src="Gallery_2022/Video9.mp4" type="video/mp4" style="cursor: pointer" />
                                   </video>
                               </div>
                          </div>
@@ -239,8 +239,8 @@
                         <!-- Videos-->
                           <div class="row" style="padding-left: 22px; padding-top:25px">
                               <div class="col-sm-6">
-                                  <video width="400" height="300" controls="">
-                                      <source src="Gallery_2022/Video10.mp4" type="video/mp4" style="cursor: pointer">
+                                  <video class="desktop-video" controls="">
+                                      <source src="Gallery_2022/Video10.mp4" type="video/mp4" style="cursor: pointer" />
                                   </video>
                               </div>
                          </div>
@@ -265,12 +265,12 @@
                         <!-- Videos-->
                           <div class="row" style="padding-left: 22px; padding-top:25px">
                               <div class="col-sm-6">
-                                  <video width="400" height="300" controls="">
+                                  <video class="desktop-video" controls="">
                                       <source src="Gallery_2022/Video11.mp4" type="video/mp4" style="cursor: pointer" />
                                   </video>
                               </div>
                                  <div class="col-sm-6">
-                                       <video width="400" height="300" controls="">
+                                       <video class="desktop-video" controls="">
                                            <source src="Gallery_2022/Video12.mp4" type="video/mp4" style="cursor: pointer" />
                                        </video>
                                    </div>
@@ -296,7 +296,7 @@
                         <!-- Videos-->
                           <div class="row" style="padding-left: 22px; padding-top:25px">
                               <div class="col-sm-6">
-                                  <video width="400" height="300" controls="">
+                                  <video class="desktop-video" controls="">
                                       <source src="Gallery_2022/Video13.mp4" type="video/mp4" style="cursor: pointer" />
                                   </video>
                               </div>

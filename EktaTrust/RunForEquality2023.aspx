@@ -164,8 +164,8 @@
                 </div>
 
                 <div class="row" style="padding-left: 22px; padding-top: 25px">
-                    <div Class="col-sm-6">
-                        <video width = "400" height="300" controls="" style="cursor: pointer">
+                    <div class="col-sm-6">
+                        <video class="desktop-video" controls="" style="cursor: pointer">
                             <source src = "Gallery_2023/16.mp4" type="video/mp4" />
                         </video>
                     </div>
@@ -174,7 +174,7 @@
                         <%--<video width="400" height="300" controls="">
                             <source src = "Gallery_2022/Video2.mp4" type="video/mp4" style="cursor: pointer" />
                         </video>--%>
-                       <iframe width="400" height="300"src="https://www.youtube.com/embed/Bt_-hYheUF8"></iframe>
+                       <iframe class="desktop-video" src="https://www.youtube.com/embed/Bt_-hYheUF8"></iframe>
                     </div>
                 </div>
             </div>

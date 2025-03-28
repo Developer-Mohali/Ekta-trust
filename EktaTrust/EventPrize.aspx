@@ -10,14 +10,16 @@
 
 
 
-    <div class="clsBackImage wow fadeInDown animated">
+    <div class="clsBackImage wow fadeInDown animated about-us">
         <div class="col-sm-12">
-            
-             <div class="col-sm-3">
+            <div style="margin: 6px auto; padding-left: 15px;padding-right: 15px;">
+              <h2 class="wow fadeInDown"><center>Run For Equality 2025</center></h2>
+            </div>
+             <%--<div class="col-sm-3">
                <h2 style="margin-left: 31px;"></h2>
-                 </div>
-             <div class="col-sm-6">
-             <center><h2>Run For Equality 2025</h2></center></div>
+                 </div>--%>
+          <%--   <div class="col-sm-6">
+             <center><h2>Run For Equality 2025</h2></center></div>--%>
         </div>
        
         <div class="col-sm-12">
@@ -210,7 +212,7 @@
         </div>
 
     </div>
-   
+
 
   <%--   <video src="RunForEqualityGallery/RunForEqualityFMAds.mpeg" height="0" width="0" id="FMaudio" autoplay="autoplay"></video>--%>
 
