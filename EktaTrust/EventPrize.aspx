@@ -25,9 +25,7 @@
         <div class="col-sm-12">
             
             <div class="col-sm-3">
-               
-
-              
+                             
                 <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey; width: 100%; margin-top:10px">
                    
 
@@ -115,6 +113,67 @@
             
                 </table>
                    
+                   <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey;">
+                          <tr>
+                               <td colspan="2" >
+                                   <h4>Prize money for winners</h4>
+                               </td>
+                           </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h6>21K (First Three Runners)</h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>First</td>
+                        <td>Rs. 11,000</td>
+                    </tr>
+                    <tr>
+                        <td>Second</td>
+                        <td>Rs. 5,100</td>
+                    </tr>
+                    <tr>
+                        <td>Third</td>
+                        <td>Rs. 3,100</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <h6>10K (First Three Runners)</h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>First</td>
+                        <td>Rs. 5,100</td>
+                    </tr>
+                    <tr>
+                        <td>Second</td>
+                        <td>Rs. 3,100</td>
+                    </tr>
+                    <tr>
+                        <td>Third</td>
+                        <td>Rs. 2,100</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <h6>5K (First Three Runners)</h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>First</td>
+                        <td>Rs. 3,100</td>
+                    </tr>
+                    <tr>
+                        <td>Second</td>
+                        <td>Rs. 2,100</td>
+                    </tr>
+                    <tr>
+                        <td>Third</td>
+                        <td>Rs. 1,100</td>
+                    </tr>
+
+                </table>
             </div>
             
 
