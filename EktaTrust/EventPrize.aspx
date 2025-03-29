@@ -50,7 +50,7 @@
                     <tr>
                         <td> <%--<video src="RunForEqualityGallery/RunForEqualityFMAds.mpeg" height="0" width="0" id="FMaudio" autoplay="autoplay"></video>--%><br />
                             <b>Event Date-</b> 14.04.2025<br />
-                          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Place-</b>  Albert Hall, JLN Marg<br /><br />
+                          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Place-</b>  Albert Hall, JLN Marg, Jaipur (Rajasthan)<br /><br />
                             <%--Tentative Route - JLN Marg<br /><br />--%>
                             <div class="hidden">
                                 <b>Routes-</b><br />
@@ -62,11 +62,11 @@
                             <%--Reporting Time<br /><br />
                              14.04.2023<br />--%>
                             <b>Reporting Time-</b>14.04.2025<br /><br />
-                         <b>Time-</b>&nbsp;&nbsp;21.09KM &nbsp;- 4:00AM <br />
-                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10KM&nbsp;&nbsp;- 5:15AM<br />
+                         <b>Time-</b>&nbsp;&nbsp;21.09KM &nbsp;- 4:30AM <br />
+                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10KM&nbsp;&nbsp;- 6:00AM<br />
                            <%-- Run for Equality Schedule will be published shortly --%>
-                       &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5KM&nbsp;&nbsp;-5:30AM  <br /><br />
-                            <b>Ceremony-</b> 6:30AM onwards<br />
+                       &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5KM&nbsp;&nbsp;- 6:30AM  <br /><br />
+                            <b>Ceremony-</b> 7:00AM onwards<br />
                      <%--Run Route - JLN Marg, Jaipur<br />--%><br />
 
                    <%-- Registration before - 31.03.2023 Rs-500--%>
