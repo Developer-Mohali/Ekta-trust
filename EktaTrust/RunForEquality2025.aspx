@@ -28,6 +28,15 @@
 
                 <!--one row-->
                 <div class="row marginImage" style="margin-left: 15px">
+                      <div id="box" class="burst-side strawberry">
+                        <div class="caption"></div>
+                        <img class="thumbnail" id="dd" src="Gallery_2025/Img16.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img16.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+                            </a>
+                        </div>
+                    </div>
                     <div id="box" class="burst-side strawberry">
                         <div class="caption"></div>
 
