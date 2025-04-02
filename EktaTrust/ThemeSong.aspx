@@ -12,8 +12,8 @@
         </div>
         <div class="row">
              <div class="col-sm-12">
-                 <video autoplay="autoplay" controls="" style="cursor: pointer; width:100%">
-                     <source src="Gallery_2025/RUN-FOR-EQUALITY-5th-theme-song2023.mp4" type="video/mp4" />
+                 <video autoplay="autoplay" loop="loop" controls="" style="cursor: pointer; width:100%">
+                     <source src="Gallery_2025/RUN-FOR-EQUALITY-5th-theme-song2023.mp4?v=1" type="video/mp4" />
                  </video>
              </div>  
         </div>

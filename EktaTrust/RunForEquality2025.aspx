@@ -36,6 +36,24 @@
                                 <h1>View Image</h1>
                             </a>
                         </div>
+                    </div> 
+                    <div id="box" class="burst-side strawberry">
+                        <div class="caption"></div>
+                        <img class="thumbnail" id="dd" src="Gallery_2025/Img17.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img17.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+                            </a>
+                        </div>
+                    </div> 
+                    <div id="box" class="burst-side strawberry">
+                        <div class="caption"></div>
+                        <img class="thumbnail" id="dd" src="Gallery_2025/Img18.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img18.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+                            </a>
+                        </div>
                     </div>
                     <div id="box" class="burst-side strawberry">
                         <div class="caption"></div>
@@ -58,7 +76,7 @@
                             </a>
                         </div>
                     </div>
-                    <div id="box" class="burst-side strawberry">
+               <%--     <div id="box" class="burst-side strawberry">
                         <div class="caption"></div>
 
                         <img class="thumbnail" id="dd2" src="Gallery_2025/Img3.jpeg" alt="#" />
@@ -68,7 +86,7 @@
 
                             </a>
                         </div>
-                    </div>
+                    </div>--%>
                     <div id="box" class="burst-side strawberry">
                         <div class="caption"></div>
 

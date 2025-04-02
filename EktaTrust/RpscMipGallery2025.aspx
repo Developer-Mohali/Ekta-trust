@@ -155,17 +155,58 @@
                             <h1>View Image</h1>
                         </a>
                     </div>
+                </div>      
+                <div id="box" class="burst-side strawberry">
+                    <div class="caption"></div>
+                    <img class="thumbnail" id="dd" src="Gallery_2025/RPSC2025_Gallery/Img13.jpeg" alt="#" />
+                    <div>
+                        <a class="lightbox" href="Gallery_2025/RPSC2025_Gallery/Img13.jpeg" data-littlelightbox-group="gallery">
+                            <h1>View Image</h1>
+                        </a>
+                    </div>
+                </div>     
+                <div id="box" class="burst-side strawberry">
+                    <div class="caption"></div>
+                    <img class="thumbnail" id="dd" src="Gallery_2025/RPSC2025_Gallery/Img14.jpeg" alt="#" />
+                    <div>
+                        <a class="lightbox" href="Gallery_2025/RPSC2025_Gallery/Img14.jpeg" data-littlelightbox-group="gallery">
+                            <h1>View Image</h1>
+                        </a>
+                    </div>
+                </div>      
+                <div id="box" class="burst-side strawberry">
+                    <div class="caption"></div>
+                    <img class="thumbnail" id="dd" src="Gallery_2025/RPSC2025_Gallery/Img15.jpeg" alt="#" />
+                    <div>
+                        <a class="lightbox" href="Gallery_2025/RPSC2025_Gallery/Img15.jpeg" data-littlelightbox-group="gallery">
+                            <h1>View Image</h1>
+                        </a>
+                    </div>
+                </div>     
+                <div id="box" class="burst-side strawberry">
+                    <div class="caption"></div>
+                    <img class="thumbnail" id="dd" src="Gallery_2025/RPSC2025_Gallery/Img16.jpeg" alt="#" />
+                    <div>
+                        <a class="lightbox" href="Gallery_2025/RPSC2025_Gallery/Img16.jpeg" data-littlelightbox-group="gallery">
+                            <h1>View Image</h1>
+                        </a>
+                    </div>
                 </div>
                 
                 <%-- end main div --%>
             </div>
-            <%--<div class="row" style="padding-left: 22px; padding-top: 25px">
+            <div class="row" style="padding-left: 22px; padding-top: 25px">
                 <div class="col-sm-6">
-                    <video width="400" height="300" controls="" style="cursor: pointer">
-                        <source src="Gallery_2025/Video2.mp4" type="video/mp4" />
+                    <video class="desktop-video" controls="" style="cursor: pointer">
+                        <source src="Gallery_2025/RPSC2025_Gallery/Video1.mp4" type="video/mp4" />
+                    </video>
+                </div> 
+                <div class="col-sm-6">
+                    <video class="desktop-video" controls="" style="cursor: pointer">
+                        <source src="Gallery_2025/RPSC2025_Gallery/Video2.mp4" type="video/mp4" />
                     </video>
                 </div>
-            </div>--%>
+            </div>
         </div>
 
     </div>
