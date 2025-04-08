@@ -243,237 +243,116 @@ body section {
                 <a href="#" class=" navbar-brand2 margin visible-xs hidden-lg hidden-sm hidden-md">Navigation</a>
             </div>
             <div class="collapse navbar-collapse navbar-left">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav menu" id="mainMenu">
+    <li class="menu-item active"><a href="../Home">Home</a></li>
 
-                    <li class="active"><a href="../Home">Home</a></li>
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">About Us <i class="fa fa-angle-down"></i></a>
-                        <ul class="dropdown-menu">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">About Us <i class="fa fa-angle-down"></i></a>
+        <ul class="dropdown-menu">
+            <li class="menu-item"><a href="../Vision">Vision</a></li>
+            <li class="menu-item"><a href="../Motto">Motto</a></li>
+            <li class="menu-item"><a href="../Premable">Preamble</a></li>
+            <li class="menu-item"><a href="../Objectives">Objectives</a></li>
+            <li class="menu-item"><a href="../EktaSapath.aspx">Ekta Shapath</a></li>
+            <li class="menu-item"><a href="../News">News/Press</a></li>
+            <li class="menu-item"><a href="../Gallery">Works Done</a></li>
+            <li class="menu-item"><a href="../JoinUs">Join Us</a></li>
+            <li class="menu-item"><a href="../Contact">Contact Us</a></li>
+        </ul>
+    </li>
 
-                            <%--<li><a href="../Introduction">Introduction</a></li>
-                            <li><a href="../History">History</a></li>
-                            <li><a href="../Contributors">Contributors</a></li>--%>
-                            <li><a href="../Vision">Vision</a></li>
-                            <li><a href="../Motto">Motto</a></li>
-                            <li><a href="../Premable">Preamble</a></li>
-                            <li><a href="../Objectives">Objectives</a></li>
-                             <li><a href="../EktaSapath.aspx">Ekta Shapath</a></li>
-                            <li><a href="../News">News/Press</a></li>
-                             <li><a href="../Gallery">Works Done</a></li>
-                             <li><a href="../JoinUs">Join Us</a></li>
-                            <li><a href="../Contact">Contact Us</a></li>
-                          <%--  <li><a href="../Donate">Donate Us</a></li>--%>
-                           
-                        </ul>
-                    </li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Run for Equality <i class="fa fa-angle-down"></i></a>
+        <ul class="dropdown-menu">
+            <li class="menu-item"><a href="../Information.aspx">Run Information</a></li>
+            <li class="menu-item"><a href="../CelebritiesAppeal.aspx">Celebrities Appeal</a></li>
+            <li class="menu-item"><a href="../EventPrize">Run Registration</a></li>
+            <li class="menu-item"><a href="../SOP.aspx">Run SOP</a></li>
+            <li class="menu-item"><a href="../RunRoute.aspx">Run Route</a></li>
+            <li class="menu-item"><a href="../ThemeSong.aspx">Theme Song</a></li>
+            <li class="menu-item"><a href="../RunCertificate">Timing & Certificate</a></li>
+            <li class="menu-item"><a href="../Winners.aspx">Winners</a></li>
+            <li class="menu-item"><a href="../OurAssociates.aspx">Our Associates</a></li>
+            <li class="menu-item"><a href="../RunForEquality2025">Photo Download</a></li>
+            <li class="menu-item"><a href="../RunForEquality2025">Gallery</a></li>
+        </ul>
+    </li>
 
-                    <%-- Added this new Run for Equality menu on 17-04-23 by dev --%>
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Run for Equality <i class="fa fa-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="../Information.aspx">Run Information</a></li>
-                             <li><a href="../CelebritiesAppeal.aspx">Celebrities Appeal</a></li>
-                            <li><a href="../EventPrize">Run Registration</a></li>
-                            <li><a href="../SOP.aspx">Run SOP</a></li>
-                            <li><a href="../RunRoute.aspx">Run Route</a></li>
-                            <li><a href="../ThemeSong.aspx">Theme Song</a></li>
-                            <li><a href="../RunCertificate">Timing & Certificate</a></li>
-                            <li><a href="../Winners.aspx">Winners</a></li>
-                            <li><a href="../OurAssociates.aspx">Our Associates</a></li>                         
-                            <li><a href="../RunForEquality2025">Photo Download</a></li>
-                            <li><a href="../RunForEquality2025">Gallery</a></li>
+    <li class="dropdown">
+        <a href="../Events" class="dropdown-toggle" data-toggle="dropdown">Registration <i class="fa fa-angle-down"></i></a>
+        <ul class="dropdown-menu">
+            <li class="menu-item"><a href="../EventPrize">Run Registration</a></li>
 
-                            <%--<li><a href="../EventPrize">Online Registration</a></li>--%>
-
-                        </ul>
-                    </li>
-
-                    <%-- Registration Menu --%>
-                    <li class="dropdown"><a href="../Events" class="dropdown-toggle" data-toggle="dropdown">Registration <i class="fa fa-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <%--<li><a href="../Registration-Onhold">Events Registration</a></li>--%>
-                            <li><a href="../EventPrize">Run Registration</a></li>
-                           <%-- <li><a href="../RunCertificate">Certificate Download</a></li>--%>
-                             <li class="dropdown dropdown-submenu">
-                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matrimonial</a>
-                                 <ul class="dropdown-menu">
-                                    <li><a href="../MatrimonialInformation.aspx">Matrimonial Registration</a></li>
-                                    <li><a href="../MatrimonialLogin">Matrimonial Login</a></li>  
-                                </ul>
-                             </li>
-                            <li><a href="../Enroll.aspx">Students Registration</a></li>
-                            <li><a href="../CareerCounselling.aspx">Career Counselling</a> </li>
-                            <li><a href="../AtrocitiesReporting.aspx">Atrocities Reporting</a></li>
-                            <li><a href="../MigrantsRegistration.aspx">Migrants Registration</a></li>
-                            <%-- <li><a href="../RegistrationClosed">Run Registration</a></li>--%>
-                            <%--<li><a href="../Education.aspx">Education</a></li>
-                            <li><a href="../Insurance.aspx">Insurance</a></li>
-                            <li><a href="../Loans.aspx">Loans</a></li>
-                            <li><a href="../Girl Schemes.aspx">Girls Related Schemes</a></li>--%>
-                            <%-- <li><a href="http://www.employmentnews.gov.in//">Employement News</a></li>--%>
-                        </ul>
-                    </li>
-
-                     <%--<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">MIP <i class="fa fa-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                          
-                            <li class="dropdown dropdown-submenu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">RPSC MIP </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/MIPTeam.aspx?ExamType=RPSC">MIP Advertisement </a></li>
-                                     
-                                    <li ><a href="/MIPRegistration.aspx?ExamType=RPSC"+>Aspirant Registration </a></li>
-                                    <li><a href="/MIPFacultyRegistration.aspx?ExamType=RPSC">Faculties Registration</a></li>
-                                    <li><a href="../MIP">RPSC Gallery</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown dropdown-submenu">
-                                <a href="#" class="dropdown-toggle" id="" data-toggle="dropdown">UPSC MIP </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/MIPTeam.aspx?ExamType=UPSC">MIP Advertisement </a></li>
-                                    <li><a href="/MIPRegistration.aspx?ExamType=UPSC">Aspirant Registration </a></li>
-                                    <li><a href="/MIPFacultyRegistration.aspx?ExamType=UPSC">Faculties Registration</a></li>
-                                    <li><a href="../MIPUPSC">UPSC Gallery</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>--%>
-
-
-                    
-                    <%-- <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Matrimonial <i class="fa fa-angle-down"></i></a>
-                        <ul class="dropdown-menu">--%> 
-
-                         <%--   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Library <i class="fa fa-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-
-                            <li><a href="../Library.aspx">Library</a></li>--%>
-                            <%--<li><a href="../MatrimonialInformation.aspx">Matrimonial Registration</a></li>--%>
-                             <%--<li class="dropdown dropdown-submenu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Library Project</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Educate <i class="fa fa-angle-down"></i></a>
-                                     <ul class="dropdown-menu">
-                                        <li><a href="../Dhodsar">Dhodsar </a></li>
-                                        <li><a href="../Manoharpur">Manoharpur </a></li>
-                                        <li><a href="../Alwar">Alwar</a></li>
-                                        <li><a href="../AmbedkarWSJ">Ambedkar Welfare Soceity Jaipur</a></li>
-                                        <li><a href="../ViratNagar">Virat Nagar </a></li>
-                                        <li><a href="../MachediManpura">Machedi Manpura</a></li>
-                                        <li><a href="../Nagour">Nagour</a></li>
-                                     </ul>
-                                    </li>                                     
-                                </ul>
-                            </li>--%>
-                       <%--     <li><a href="../MatrimonialLogin">Matrimonial Login</a></li>   --%>                         
-                            <%--<li><a href="../Profile.aspx">profile</a></li>--%>
-                     <%--   </ul>
-                    </li>--%>
-
-
-
-                    <%--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Training Activites <i class="fa fa-angle-down"></i></a>
-                        <%--<ul class="dropdown-menu">
-
-                            <li><a href="../Tailoring">Tailoring </a></li>
-
-                            <li><a href="../Driving">Driving </a></li>
-                            <li><a href="../Cooking">Cooking </a></li>
-                            <li><a href="../Yoga_Training">Yoga Training</a></li>
-                            <li><a href="../Dairying">Dairying</a></li>
-                            <li><a href="../Education">Education </a></li>
-                            
-                            
-                        </ul>--%>
-                         <%--<ul class="dropdown-menu">  
-                            <li><a href="../Training">Tailoring </a></li>
-                            <li><a href="../Training">Driving </a></li>
-                            <li><a href="../Training">Cooking </a></li>
-                            <li><a href="../Training">Yoga Training</a></li>
-                            <li><a href="../Training">Dairying</a></li>
-                            <li><a href="../Training">Education </a></li>
-                        </ul>
-
-                    </li>  --%>                 
-           
-
-                    <%--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Schemes <i class="fa fa-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-
-                            <li><a href="../Education.aspx">Education</a></li>
-                            <li><a href="../Insurance.aspx">Insurance</a></li>
-                            <li><a href="../Loans.aspx">Loans</a></li>
-                            <li><a href="/IntercasteMarriageScheme.aspx">Intercaste Marriage Scheme</a></li>
-                        </ul>
-                    </li>--%>
-                    
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Programs <i class="fa fa-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown dropdown-submenu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mock Interview Program</a>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown dropdown-submenu">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">RPSC MIP </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="/MIPTeam.aspx?ExamType=RPSC">MIP Advertisement </a></li>
-                 
-                                            <li ><a href="/MIPRegistration.aspx?ExamType=RPSC"+>Aspirant Registration </a></li>
-                                            <li><a href="/MIPFacultyRegistration.aspx?ExamType=RPSC">Faculties Registration</a></li>
-                                            <li><a href="../RPSC2025">RPSC Gallery</a></li>
-                                            <%--<li><a href="../MIP">RPSC Gallery</a></li>--%>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown dropdown-submenu">
-                                        <a href="#" class="dropdown-toggle" id="" data-toggle="dropdown">UPSC MIP </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="/MIPTeam.aspx?ExamType=UPSC">MIP Advertisement </a></li>
-                                            <li><a href="/MIPRegistration.aspx?ExamType=UPSC">Aspirant Registration </a></li>
-                                            <li><a href="/MIPFacultyRegistration.aspx?ExamType=UPSC">Faculties Registration</a></li>
-                                            <li><a href="../UPSC2025">UPSC Gallery</a></li>
-                                        </ul>
-                                    </li>                             
-                                </ul>
-                            </li>
-                             <li class="dropdown dropdown-submenu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Training Activites</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="../Training">Tailoring </a></li>
-                                    <li><a href="../Training">Driving </a></li>
-                                    <li><a href="../Training">Cooking </a></li>
-                                    <li><a href="../Training">Yoga Training</a></li>
-                                    <li><a href="../Training">Dairying</a></li>
-                                    <li><a href="../Training">Education </a></li>                              
-                                </ul>
-                            </li>
-                             <li class="dropdown dropdown-submenu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Schemes</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="../Education.aspx">Education</a></li>
-                                    <li><a href="../Insurance.aspx">Insurance</a></li>
-                                    <li><a href="../Loans.aspx">Loans</a></li>
-                                    <li><a href="/IntercasteMarriageScheme.aspx">Intercaste Marriage Scheme</a></li>                               
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-        
-                   <%-- <li><a href="../News">News/Press</a></li>--%>
-                    <li><a href="../Literature">Literature</a></li>
-                    <li><a href="../RunForEquality2025">Gallery</a></li>
-                    <li><a href="../Donate">Donate Us</a></li>
-                   <%-- <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Contact <i class="fa fa-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-
-                             <li><a href="../Contact">Contact Us</a></li>
-                            <li><a href="../JoinUs">Join Us</a></li>
-                        </ul>
-                    </li>--%>
-
-
-                   <%-- <li><a href="../Contact">Contact Us</a></li>
-                    <li><a href="../JoinUs">Join Us</a></li>--%>
-                   
-                    
+            <li class="dropdown dropdown-submenu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matrimonial</a>
+                <ul class="dropdown-menu">
+                    <li class="menu-item"><a href="../MatrimonialInformation.aspx">Matrimonial Registration</a></li>
+                    <li class="menu-item"><a href="../MatrimonialLogin">Matrimonial Login</a></li>
                 </ul>
+            </li>
+
+            <li class="menu-item"><a href="../Enroll.aspx">Students Registration</a></li>
+            <li class="menu-item"><a href="../CareerCounselling.aspx">Career Counselling</a></li>
+            <li class="menu-item"><a href="../AtrocitiesReporting.aspx">Atrocities Reporting</a></li>
+            <li class="menu-item"><a href="../MigrantsRegistration.aspx">Migrants Registration</a></li>
+        </ul>
+    </li>
+
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Programs <i class="fa fa-angle-down"></i></a>
+        <ul class="dropdown-menu">
+            <li class="dropdown dropdown-submenu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mock Interview Program</a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown dropdown-submenu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">RPSC MIP</a>
+                        <ul class="dropdown-menu">
+                            <li class="menu-item"><a href="/MIPTeam.aspx?ExamType=RPSC">MIP Advertisement</a></li>
+                            <li class="menu-item"><a href="/MIPRegistration.aspx?ExamType=RPSC">Aspirant Registration</a></li>
+                            <li class="menu-item"><a href="/MIPFacultyRegistration.aspx?ExamType=RPSC">Faculties Registration</a></li>
+                            <li class="menu-item"><a href="../RPSC2025">RPSC Gallery</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown dropdown-submenu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">UPSC MIP</a>
+                        <ul class="dropdown-menu">
+                            <li class="menu-item"><a href="/MIPTeam.aspx?ExamType=UPSC">MIP Advertisement</a></li>
+                            <li class="menu-item"><a href="/MIPRegistration.aspx?ExamType=UPSC">Aspirant Registration</a></li>
+                            <li class="menu-item"><a href="/MIPFacultyRegistration.aspx?ExamType=UPSC">Faculties Registration</a></li>
+                            <li class="menu-item"><a href="../UPSC2025">UPSC Gallery</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="dropdown dropdown-submenu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Training Activities</a>
+                <ul class="dropdown-menu">
+                    <li class="menu-item"><a href="../Training">Tailoring</a></li>
+                    <li class="menu-item"><a href="../Training">Driving</a></li>
+                    <li class="menu-item"><a href="../Training">Cooking</a></li>
+                    <li class="menu-item"><a href="../Training">Yoga Training</a></li>
+                    <li class="menu-item"><a href="../Training">Dairying</a></li>
+                    <li class="menu-item"><a href="../Training">Education</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown dropdown-submenu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Schemes</a>
+                <ul class="dropdown-menu">
+                    <li class="menu-item"><a href="../Education.aspx">Education</a></li>
+                    <li class="menu-item"><a href="../Insurance.aspx">Insurance</a></li>
+                    <li class="menu-item"><a href="../Loans.aspx">Loans</a></li>
+                    <li class="menu-item"><a href="/IntercasteMarriageScheme.aspx">Intercaste Marriage Scheme</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+
+    <li class="menu-item"><a href="../Literature">Literature</a></li>
+    <li class="menu-item"><a href="../RunForEquality2025">Gallery</a></li>
+    <li class="menu-item"><a href="../Donate">Donate Us</a></li>
+</ul>
             </div>
         </div>
         <!--/.container-->
@@ -610,10 +489,44 @@ body section {
                 }
             });
         });
+      
+
     </script>
     
-   
-   
+<script>
+    //$(document).ready(function () {
+    //    // Normalize current path
+    //    var currentPath = window.location.pathname.toLowerCase();
+    //    if (currentPath.endsWith("/")) currentPath = currentPath.slice(0, -1);
+
+    //    var bestMatch = null;
+    //    var bestMatchLength = 0;
+
+    //    $('#mainMenu a').each(function () {
+    //        var href = $(this).attr('href');
+    //        if (!href) return;
+
+    //        // Normalize href: remove ../ and to lowercase
+    //        var normalizedHref = href.toLowerCase().replace(/\.\.\//g, "");
+    //        if (normalizedHref.endsWith("/")) normalizedHref = normalizedHref.slice(0, -1);
+
+    //        // Check if normalizedHref exists in currentPath
+    //        if (currentPath.indexOf("/" + normalizedHref) !== -1 && normalizedHref.length > bestMatchLength) {
+    //            bestMatch = $(this);
+    //            bestMatchLength = normalizedHref.length;
+    //        }
+    //    });
+
+    //    // Apply only to the best match
+    //    if (bestMatch) {
+    //        $('#mainMenu li').removeClass('active'); // remove active from all
+    //        bestMatch.closest('li').addClass('active'); // add to closest li only
+    //    }
+    //});
+</script>
+
+
+
 <%--    <script type='text/javascript'>
         $(function () {
             $('.input-group.date').datepicker({
@@ -625,7 +538,7 @@ body section {
 
     </script>
     --%>
-  
+
 </form>
 </body>
 </html>
