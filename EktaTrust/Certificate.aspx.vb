@@ -12,17 +12,21 @@ Public Class Certificate
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         hdnMessageCertificate.Visible = False
+        'If Not IsPostBack Then
+        '    BindYearDropDown()
+        'End If
 
     End Sub
     Protected Sub SearchButton_Click(ByVal sender As Object, ByVal e As EventArgs)
-        Dim Bib_Num As Int32
+        ''Dim Bib_Num As Int32
         Dim constr, GetValue As String
 
-        Bib_Num = Convert.ToInt32(txtbibNo.Text)
+        ''Bib_Num = Convert.ToInt32(txtMobileNo.Text)
+        Dim selectedYear As String = DdlYear.SelectedValue
 
         constr = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         GetValue = "Select  bib_no, participate_name,  gender, Event_Name, Net_Time 
-                                       From tblRunRegistrationUser WHERE bib_no = " + txtbibNo.Text + " and year=2023 LIMIT 1 "
+                                       From tblRunRegistrationUser WHERE phone = " + txtMobileNo.Text + " and year= " + selectedYear
         Using con As New MySqlConnection(constr)
             Using result As New MySqlCommand(GetValue)
                 result.Connection = con
@@ -44,6 +48,31 @@ Public Class Certificate
                 End If
                 con.Close()
                 hdnMessageCertificate.Visible = True
+            End Using
+        End Using
+    End Sub
+
+    'function to get years from registration table..
+    Protected Sub BindYearDropDown()
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+        Dim GetYears As String = "SELECT DISTINCT year FROM tblRunRegistrationUser ORDER BY year DESC"
+
+        Using con As New MySqlConnection(constr)
+            Using cmd As New MySqlCommand(GetYears, con)
+                con.Open()
+
+                Dim reader As MySqlDataReader = cmd.ExecuteReader()
+
+                ' Clear existing items before binding
+                DdlYear.Items.Clear()
+
+                ' Add years from the database
+                While reader.Read()
+                    Dim year As Integer = reader.GetInt32("year")
+                    DdlYear.Items.Add(year.ToString())
+                End While
+
+                con.Close()
             End Using
         End Using
     End Sub
