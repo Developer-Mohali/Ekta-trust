@@ -180,11 +180,12 @@
                     <div class="form-group">
                         <label>Mobile no.</label>
                         <asp:TextBox ID="txtMobile" ClientIDMode="Static" name="txtMobile" runat="server" CssClass="form-control"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredtxtMobile" ControlToValidate="txtMobile"
+                            <span id="mobileError" style="color:red; display:none;"></span>
+                     <%--   <asp:RequiredFieldValidator ID="RequiredtxtMobile" ControlToValidate="txtMobile"
                             runat="server" ClientIDMode="Static" ErrorMessage="Please enter the mobile number." ValidationGroup="feedback" ForeColor="Red"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ClientIDMode="Static" ID="RegulartxtMobile"                             
                              ControlToValidate="txtMobile" runat="server" ValidationExpression="^([0-9]{10})$"
-                            ErrorMessage="Please enter valid mobile number." ValidationGroup="feedback"  ForeColor="Red" style="position: absolute; left: 20px;"></asp:RegularExpressionValidator>
+                            ErrorMessage="Please enter valid mobile number." ValidationGroup="feedback"  ForeColor="Red" style="position: absolute; left: 20px;"></asp:RegularExpressionValidator>--%>
                     </div>
                 </div>
 
@@ -255,6 +256,32 @@
             $('#ContentPlaceHolder1_getRec').remove();
             $('#ContentPlaceHolder1_hdnMessageCertificate').remove();
         }
+        function validateMobile() {
+            var input = document.getElementById('<%= txtMobileNo.ClientID %>').value.trim();
+                    var errorSpan = document.getElementById('mobileError');
+                    errorSpan.style.display = 'none';
+                    errorSpan.innerText = '';
+
+                    if (input === '') {
+                        errorSpan.innerText = 'Please enter the Mobile number';
+                        errorSpan.style.display = 'inline';
+                        return false;
+                    }
+
+                    if (!/^\d+$/.test(input)) {
+                        errorSpan.innerText = 'Please enter a valid phone number (digits only)';
+                        errorSpan.style.display = 'inline';
+                        return false;
+                    }
+
+                    if (input.length !== 10) {
+                        errorSpan.innerText = 'Phone number should be exactly 10 digits';
+                        errorSpan.style.display = 'inline';
+                        return false;
+                    }
+
+                    return true;
+                }
     </script>
 
 </asp:Content>
