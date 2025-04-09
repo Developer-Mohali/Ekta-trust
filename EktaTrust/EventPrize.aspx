@@ -10,29 +10,30 @@
 
 
 
-    <div class="clsBackImage wow fadeInDown animated">
+    <div class="clsBackImage wow fadeInDown animated about-us">
         <div class="col-sm-12">
-            
-             <div class="col-sm-3">
+            <div style="margin: 6px auto; padding-left: 15px;padding-right: 15px;">
+              <h2 class="wow fadeInDown"><center>Run For Equality 2025</center></h2>
+            </div>
+             <%--<div class="col-sm-3">
                <h2 style="margin-left: 31px;"></h2>
-                 </div>
-             <div class="col-sm-6">
-             <center><h2>Run For Equality 2023</h2></center></div>
+                 </div>--%>
+          <%--   <div class="col-sm-6">
+             <center><h2>Run For Equality 2025</h2></center></div>--%>
         </div>
        
         <div class="col-sm-12">
             
             <div class="col-sm-3">
-               
-
-              
-                <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey; width: auto; margin-top:10px">
+                             
+                <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey; width: 100%; margin-top:10px">
                    
 
                   
                     <tr>
                         <td colspan="2" >
-                            <h6>5th Run for Equality-2023 Details</h6>
+                            <h4>6th Run for Equality-2025 Details</h4>
+                            <%--<h6>6th Run for Equality-2025 Details</h6>--%>
                         </td>
                     </tr>
                      <tr style="box-shadow: 0px 1px 10px 2px lightgrey;" >
@@ -46,21 +47,24 @@
                      </tr>                     
                     <tr>
                         <td> <%--<video src="RunForEqualityGallery/RunForEqualityFMAds.mpeg" height="0" width="0" id="FMaudio" autoplay="autoplay"></video>--%><br />
-                            <b>Event Date-</b> 14.04.2023<br />
-                          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Place-</b>  Jaipur<br /><br />
+                            <b>Event Date-</b> 14.04.2025<br />
+                          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Place-</b>  Albert Hall, JLN Marg, Jaipur (Rajasthan)<br /><br />
                             <%--Tentative Route - JLN Marg<br /><br />--%>
-                            <b>Routes-</b><br />
-                            <b>5KM-</b> Gandhi Circle -Jhalana Road- back to Gandhi Circle.<br /><br />
-                            <b>10KM-</b> Gandhi Circle-Jhalana Road-Turn from Forest View Apartment Traffic light before Jagatpura Pulia- back to Gandhi Circle. <br /><br />
-                            <b>21.09KM-</b> Gandhi Circle-Jhalana Road-Forest View Apartment Traffic light- Jagatpura Pulia- Mahal Road- Turn from AkshayPatra Chaurha - back to Gandhi Circle .<br /><br />
+                            <div class="hidden">
+                                <b>Routes-</b><br />
+                                <b>5KM-</b> Gandhi Circle -Jhalana Road- back to Gandhi Circle.<br /><br />
+                                <b>10KM-</b> Gandhi Circle-Jhalana Road-Turn from Forest View Apartment Traffic light before Jagatpura Pulia- back to Gandhi Circle. <br /><br />
+                                <b>21.09KM-</b> Gandhi Circle-Jhalana Road-Forest View Apartment Traffic light- Jagatpura Pulia- Mahal Road- Turn from AkshayPatra Chaurha - back to Gandhi Circle .<br /><br />
+                            </div>
+                            
                             <%--Reporting Time<br /><br />
                              14.04.2023<br />--%>
-                            <b>Reporting Time-</b>14.04.2023<br /><br />
-                         <b>Time-</b>&nbsp;&nbsp;21.09KM &nbsp;- 4:00AM <br />
-                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10KM&nbsp;&nbsp;- 5:15AM<br />
+                            <b>Reporting Time-</b>14.04.2025<br /><br />
+                         <b>Time-</b>&nbsp;&nbsp;21.09KM &nbsp;- 4:30AM <br />
+                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10KM&nbsp;&nbsp;- 6:00AM<br />
                            <%-- Run for Equality Schedule will be published shortly --%>
-                       &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5KM&nbsp;&nbsp;-5:30AM  <br /><br />
-                            <b>Ceremony-</b> 6:30AM onwards<br />
+                       &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5KM&nbsp;&nbsp;- 6:30AM  <br /><br />
+                            <b>Ceremony-</b> 7:00AM onwards<br />
                      <%--Run Route - JLN Marg, Jaipur<br />--%><br />
 
                    <%-- Registration before - 31.03.2023 Rs-500--%>
@@ -74,12 +78,16 @@
 
                      <%--Registration after - 31.03.2023 Rs - 1000(Tshirt subject to availability)--%><b>On Spot registration in BIB EXPO</b><br />
                             &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs 1000 in all categories(5k, 10k, 21.09k) <br />
+
+                            <br /><b>Beginner's guide</b><br />
+                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                            <a href="Gallery_2025/SOP_for_RFE.pdf" target="_blank" style="background-color:transparent;border:none;color:blue;text-decoration: underline;">Suggestions are invited for Schedule of Practice for RFE</a> <br />
                     </td>
                     </tr>
-                <tr>
+                <tr class="hidden">
                         <td colspan="2" >
                             <%--<h6>Bib-Expo: Run For Equality 2023</h6>--%>
-                           <b> BIB EXPO Date </b> - 13.04.2023 <br /><br />
+                           <b> BIB EXPO Date </b> - 13.04.2025 <br /><br />
                          <%-- <b>  Bib EXPO Tentative Time </b>- 11AM to 7PM  <br />
                            <b> Bib EXPO Tentative Place </b>- Ambedkar Memorial Welfare Society, Jhalana Doongri, Jaipur <br /><br />--%>
 
@@ -105,15 +113,78 @@
             
                 </table>
                    
+                   <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey;">
+                          <tr>
+                               <td colspan="2" >
+                                   <h4>Prize money for winners</h4>
+                               </td>
+                           </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h6>21K (First Three Runners)</h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>First</td>
+                        <td>Rs. 11,000</td>
+                    </tr>
+                    <tr>
+                        <td>Second</td>
+                        <td>Rs. 5,100</td>
+                    </tr>
+                    <tr>
+                        <td>Third</td>
+                        <td>Rs. 3,100</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <h6>10K (First Three Runners)</h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>First</td>
+                        <td>Rs. 5,100</td>
+                    </tr>
+                    <tr>
+                        <td>Second</td>
+                        <td>Rs. 3,100</td>
+                    </tr>
+                    <tr>
+                        <td>Third</td>
+                        <td>Rs. 2,100</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <h6>5K (First Three Runners)</h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>First</td>
+                        <td>Rs. 3,100</td>
+                    </tr>
+                    <tr>
+                        <td>Second</td>
+                        <td>Rs. 2,100</td>
+                    </tr>
+                    <tr>
+                        <td>Third</td>
+                        <td>Rs. 1,100</td>
+                    </tr>
+
+                </table>
             </div>
             
 
 
           <div class="col-sm-6">
             
-                     <img src="Images/ekta-combine.jpg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"  />
+                    <img src="Gallery_2025/Route Map clear - 05.02.2025.jpg"style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"/>
+                     <%--<img src="Images/ekta-combine-2025.jpg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"  />--%>
+                     <%--<img src="Images/ekta-combine.jpg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"  />--%>
               
-                      <img src="Images/Marathon_2023.jpeg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;margin-right:11px"  />
+                      <%--<img src="Images/Marathon_2023.jpeg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;margin-right:11px"  />--%>
                 
 
                      
@@ -138,7 +209,7 @@
                     <center>
                          <input type="checkbox" id="cbTermsAndCondition"  style="margin-left: 17px;" checked/><input type="button" id="btnTermsAndConditions" value="I Accept All Terms and Conditions" class="float-left" style="background-color:transparent;border:none;color:blue;text-decoration: underline; "  Text="I Accept Terms and Conditions" />
                
-                      <button onclick="termsAndCondition()" style="font-size:larger; margin-top: 0px;font-size:larger;" id="EventRegistration" class="btn btn-success" ><%--Register Me--%>Registration Closed</button>
+                      <button onclick="termsAndCondition(event)" style="font-size:larger; margin-top: 0px;font-size:larger;" id="EventRegistration" class="btn btn-success" >Register Me<%--Registration Closed--%></button>
                   
                     </center>
               
@@ -200,7 +271,7 @@
         </div>
 
     </div>
-   
+
 
   <%--   <video src="RunForEqualityGallery/RunForEqualityFMAds.mpeg" height="0" width="0" id="FMaudio" autoplay="autoplay"></video>--%>
 
@@ -213,8 +284,12 @@
         });
 </script> 
 <script>
-    function termsAndCondition() {
-        debugger;
+    function isInstagramInAppBrowser() {
+        return navigator.userAgent.includes("Instagram");
+    }
+    function termsAndCondition(event) {
+        event.preventDefault(); // Prevent default behavior (if inside a form)
+        event.stopPropagation(); // Stop further event bubbling
         var isChecked = $("#cbTermsAndCondition").is(":checked");
         if (isChecked)
         {
@@ -222,13 +297,19 @@
 
             //var win = window.open('https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784', '_blank');
             //win.focus();
-            var win = window.open('../RegistrationClosed', '_blank');
-            win.focus();
+            //var win = window.open('../RegistrationClosed', '_blank');
+            //win.focus();
+            if (isInstagramInAppBrowser()) {
+                window.location.href = 'https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784';
+            } else {
+                var win = window.open('https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784', '_blank');
+                win.focus();
+            }
         }
         else {
             alert('Please Check Terms And Conditions!');
            
-             }
+        }
 }
 </script>
 

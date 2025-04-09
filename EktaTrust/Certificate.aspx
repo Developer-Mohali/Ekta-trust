@@ -33,7 +33,7 @@
         .modal {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
+           /* z-index: 1;*/ /* Sit on top */
             left: 0;
             top: 0;
             width: 100%; /* Full width */
@@ -49,8 +49,8 @@
             margin: 15% auto; /* 15% from the top and centered */
             padding: 20px;
             border: 1px solid #888;
-            width: 500px;
-            max-width: 600px;
+      /*      width: 500px;*/
+            max-width: 500px;
         }
 
         /* The Close Button */
@@ -74,10 +74,17 @@
                 border-bottom: 1px solid #dee2e6;
                 margin-bottom:20px;
             }
+             input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
     </style>
     <div class="container">
 
-        <h2 class="wow fadeInDown crtificate">Timings & Certificate of Run for Equality 2023</h2>
+        <h2 class="wow fadeInDown crtificate">Timings & Certificate of Run for Equality  <span id="lblYear">2025</span></h2>
         <button id="btnCertificateFeedback" type="button" class="CertificateFeedback">Feedback / Suggestions</button>
 
         <div class="row contact-wrap  wow fadeInDown">
@@ -85,20 +92,37 @@
             <span style="color: gray; font-weight: bold">
                 <asp:Label ID="lblErrorMsg" runat="server"></asp:Label></span>
 
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label>Enter Your BIB Number:</label>
-                    <asp:TextBox ID="txtbibNo" runat="server" name="txtbibNo" class="form-control"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="BIBnumberValidator" ControlToValidate="txtbibNo"
-                        runat="server" ErrorMessage="Please enter the BIB number" ValidationGroup="BIBnumber" ForeColor="Red"></asp:RequiredFieldValidator>
+            <div class="col-sm-6">
+                 <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Enter Select Year:</label>
+                            <asp:DropDownList ID="DdlYear" runat="server" class="form-control" ClientIDMode="Static" onchange="updateHeading();">
+                                 <asp:ListItem Text="2025" Value="2025" Selected="True"></asp:ListItem>
+                                 <asp:ListItem Text="2023" Value="2023"></asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="YearValidator" ControlToValidate="DdlYear"
+                                runat="server" ErrorMessage="Please select year" ValidationGroup="CertificateSearch" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </div>
+                     </div>
+                 <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Enter Your Mobile Number:</label>
+                            <asp:TextBox ID="txtMobileNo" runat="server" name="txtMobileNo" TextMode="Number" class="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredValidatorMobile" ControlToValidate="txtMobileNo"
+                                runat="server" ErrorMessage="Please enter the Mobile number" ValidationGroup="CertificateSearch" ForeColor="Red" Display="Dynamic" />
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Phone number should be 10 digit" 
+                            ControlToValidate="txtMobileNo" ValidationExpression="^\d{10}$" ValidationGroup="CertificateSearch" ForeColor="Red" Display="Dynamic" />
+                        </div>
+                     </div>
+                <div class="col-sm-12" style="justify-items: flex-start;padding: unset;">
+                 <div class="col-sm-3">
+                  <div class="form-group">
+                    <asp:Button ID="SearchButton" runat="server" class="btn btn-success form-control" Text="Search" ValidationGroup="CertificateSearch" OnClick="SearchButton_Click" />
                 </div>
-
-                <div class="form-group">
-                    <asp:Button ID="SearchButton" runat="server" class="btn btn-success form-control" Text="Search" ValidationGroup="BIBnumber" OnClick="SearchButton_Click" />
-                </div>
-
-
+                     </div>
             </div>
+            </div>
+
             
         </div>
         <!--/.row-->
@@ -162,7 +186,7 @@
                 <div class="col-12">
                     <div class="form-group">
                         <label>Mobile no.</label>
-                        <asp:TextBox ID="txtMobile" ClientIDMode="Static" name="txtMobile" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtMobile" ClientIDMode="Static" name="txtMobile" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredtxtMobile" ControlToValidate="txtMobile"
                             runat="server" ClientIDMode="Static" ErrorMessage="Please enter the mobile number." ValidationGroup="feedback" ForeColor="Red"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ClientIDMode="Static" ID="RegulartxtMobile"                             
@@ -230,6 +254,40 @@
                   modal.style.display = "none";
             }
         }
+
+        function updateHeading() {
+            var ddl = document.getElementById("DdlYear");
+            $('#lblYear').text(ddl.value);
+            $('#ContentPlaceHolder1_txtMobileNo').val('');
+            $('#ContentPlaceHolder1_getRec').remove();
+            $('#ContentPlaceHolder1_hdnMessageCertificate').remove();
+        }
+        function validateMobile() {
+            var input = document.getElementById('<%= txtMobileNo.ClientID %>').value.trim();
+                    var errorSpan = document.getElementById('mobileError');
+                    errorSpan.style.display = 'none';
+                    errorSpan.innerText = '';
+
+                    if (input === '') {
+                        errorSpan.innerText = 'Please enter the Mobile number';
+                        errorSpan.style.display = 'inline';
+                        return false;
+                    }
+
+                    if (!/^\d+$/.test(input)) {
+                        errorSpan.innerText = 'Please enter a valid phone number (digits only)';
+                        errorSpan.style.display = 'inline';
+                        return false;
+                    }
+
+                    if (input.length !== 10) {
+                        errorSpan.innerText = 'Phone number should be exactly 10 digits';
+                        errorSpan.style.display = 'inline';
+                        return false;
+                    }
+
+                    return true;
+                }
     </script>
 
 </asp:Content>

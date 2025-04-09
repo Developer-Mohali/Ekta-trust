@@ -125,6 +125,7 @@
     <Content Include="CelebritiesAppeal.aspx" />
     <Content Include="Certificate.aspx" />
     <Content Include="CertificationReport.aspx" />
+    <Content Include="Controls\GallerySideMenuControl.ascx" />
     <Content Include="Covid19.aspx" />
     <Content Include="AddNewUser.aspx" />
     <Content Include="AddNotification.aspx" />
@@ -414,6 +415,12 @@
     <Content Include="Gallery_2023\Poster%402023.jpeg" />
     <Content Include="Gallery_2023\Poster%402023_2.jpg" />
     <Content Include="Gallery_2023\Route Roadmap 2023.jpeg" />
+    <Content Include="EktaTrustImage\MIP-2025.jpg" />
+    <Content Include="Gallery_2025\Img1.jpeg" />
+    <Content Include="Gallery_2025\Img2.jpeg" />
+    <Content Include="Gallery_2025\Img3.jpeg" />
+    <Content Include="Gallery_2025\Route Map clear - 05.02.2025.jpg" />
+    <Content Include="Gallery_2025\Video1.mp4" />
     <Content Include="Gallery_UPSC2018.aspx" />
     <Content Include="Images\1.jfif" />
     <Content Include="Images\1.jpg" />
@@ -435,6 +442,7 @@
     <Content Include="Images\Donate_1.png" />
     <Content Include="Images\Dr.Ambedkar.jpg" />
     <Content Include="Images\dr._bhim_rao_ambedkar-hindi.jpg" />
+    <Content Include="Images\ekta-combine-2025.jpg" />
     <Content Include="Images\ekta-combine.jpg" />
     <Content Include="Images\images %281%29.jpg" />
     <Content Include="Images\images\calendar.png" />
@@ -515,6 +523,7 @@
     <Content Include="PaymentRequest.aspx" />
     <Content Include="PaymentResponse.aspx" />
     <Content Include="RPSC2020.aspx" />
+    <Content Include="RpscMipGallery2025.aspx" />
     <Content Include="RunForEquality2018\collage.jpg" />
     <Content Include="RunForEquality2018\Ekta Banner.jpeg" />
     <Content Include="ektafavicon.png" />
@@ -729,6 +738,7 @@
     <Content Include="RunForEquality2020.aspx" />
     <Content Include="RunForEquality2022.aspx" />
     <Content Include="RunForEquality2023.aspx" />
+    <Content Include="RunForEquality2025.aspx" />
     <Content Include="RunForEqualityGallery.aspx" />
     <Content Include="RunForEqualityGallery\1.jpeg" />
     <Content Include="RunForEqualityGallery\10.jpeg" />
@@ -775,6 +785,7 @@
     <Content Include="ScriptLibrary\jquery-1.4.1.js" />
     <Content Include="ScriptLibrary\jquery-1.4.1.min.js" />
     <Content Include="ScriptLibrary\jquery.dynDateTime.min.js" />
+    <Content Include="SOP.aspx" />
     <Content Include="test.html" />
     <Content Include="TestChat.html" />
     <Content Include="TestCookies.aspx" />
@@ -1033,6 +1044,7 @@
     <Content Include="UnaGallery\Image-6.png" />
     <Content Include="RunForEquality2019.aspx" />
     <Content Include="UpscMipGallery.aspx" />
+    <Content Include="UpscMipGallery2025.aspx" />
     <Content Include="UserChangePassword.aspx" />
     <Content Include="UserDetails.aspx" />
     <Content Include="UserPassword.aspx" />
@@ -1054,12 +1066,14 @@
     </Compile>
     <Compile Include="Alwar.aspx.vb">
       <DependentUpon>Alwar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AmbedkarWSJ.aspx.designer.vb">
       <DependentUpon>AmbedkarWSJ.aspx</DependentUpon>
     </Compile>
     <Compile Include="AmbedkarWSJ.aspx.vb">
       <DependentUpon>AmbedkarWSJ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CelebritiesAppeal.aspx.designer.vb">
       <DependentUpon>CelebritiesAppeal.aspx</DependentUpon>
@@ -1080,6 +1094,13 @@
     </Compile>
     <Compile Include="CertificationReport.aspx.vb">
       <DependentUpon>CertificationReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\GallerySideMenuControl.ascx.designer.vb">
+      <DependentUpon>GallerySideMenuControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GallerySideMenuControl.ascx.vb">
+      <DependentUpon>GallerySideMenuControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Covid19.aspx.designer.vb">
@@ -1199,6 +1220,7 @@
     </Compile>
     <Compile Include="Dhodsar.aspx.vb">
       <DependentUpon>Dhodsar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Donate.aspx.designer.vb">
       <DependentUpon>Donate.aspx</DependentUpon>
@@ -1366,6 +1388,7 @@
     </Compile>
     <Compile Include="MachediManpura.aspx.vb">
       <DependentUpon>MachediManpura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManageNews.aspx.designer.vb">
       <DependentUpon>ManageNews.aspx</DependentUpon>
@@ -1379,6 +1402,7 @@
     </Compile>
     <Compile Include="Manoharpur.aspx.vb">
       <DependentUpon>Manoharpur.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterPage\ProfileMaster.Master.designer.vb">
       <DependentUpon>ProfileMaster.Master</DependentUpon>
@@ -1455,6 +1479,7 @@
     </Compile>
     <Compile Include="Nagour.aspx.vb">
       <DependentUpon>Nagour.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="NewEventRegistration.aspx.designer.vb">
       <DependentUpon>NewEventRegistration.aspx</DependentUpon>
@@ -1505,6 +1530,13 @@
       <DependentUpon>RPSC2020.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="RpscMipGallery2025.aspx.designer.vb">
+      <DependentUpon>RpscMipGallery2025.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RpscMipGallery2025.aspx.vb">
+      <DependentUpon>RpscMipGallery2025.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="RunForEquality2018.aspx.designer.vb">
       <DependentUpon>RunForEquality2018.aspx</DependentUpon>
     </Compile>
@@ -1526,6 +1558,13 @@
       <DependentUpon>RunForEquality2022.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="RunForEquality2025.aspx.designer.vb">
+      <DependentUpon>RunForEquality2025.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RunForEquality2025.aspx.vb">
+      <DependentUpon>RunForEquality2025.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="RunForEqualityGallery.aspx.designer.vb">
       <DependentUpon>RunForEqualityGallery.aspx</DependentUpon>
     </Compile>
@@ -1539,6 +1578,13 @@
     <Compile Include="RunRoute.aspx.vb">
       <DependentUpon>RunRoute.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SOP.aspx.designer.vb">
+      <DependentUpon>SOP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SOP.aspx.vb">
+      <DependentUpon>SOP.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="TestCookies.aspx.designer.vb">
       <DependentUpon>TestCookies.aspx</DependentUpon>
@@ -2021,6 +2067,13 @@
       <DependentUpon>UpscMipGallery.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UpscMipGallery2025.aspx.designer.vb">
+      <DependentUpon>UpscMipGallery2025.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpscMipGallery2025.aspx.vb">
+      <DependentUpon>UpscMipGallery2025.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserChangePassword.aspx.designer.vb">
       <DependentUpon>UserChangePassword.aspx</DependentUpon>
     </Compile>
@@ -2061,6 +2114,7 @@
     </Compile>
     <Compile Include="ViratNagar.aspx.vb">
       <DependentUpon>ViratNagar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Vision.aspx.designer.vb">
       <DependentUpon>Vision.aspx</DependentUpon>
@@ -2241,7 +2295,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50321/</IISUrl>
+          <IISUrl>http://localhost:44321/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

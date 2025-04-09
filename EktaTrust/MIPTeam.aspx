@@ -14,7 +14,7 @@
    <div class="about-us">
   <div class="container" runat="server" id="DivUPSC">  
     <%--<h2 class="wow fadeInDown"><img src="EktaTrustImage/MIP-2019.jfif" alt="Error"  class="img-responsive thumbnail small"/></h2>--%>
-    <h2 class="wow fadeInDown"><img src="EktaTrustImage/MIP-2019_latest.jpeg" alt="Error"  class="img-responsive thumbnail small" style="width: 100%"/></h2>
+    <h2 class="wow fadeInDown"><img src="EktaTrustImage/MIP-2025.jpg" alt="Error"  class="img-responsive thumbnail small" style="width: 100%"/></h2>
     <%--<h2 class="wow fadeInDown"><img src="EktaTrustImage/QR_latest.jpeg" alt="Error"  class="img-responsive thumbnail small"/></h2>--%>
      </div>
        <div class="container" runat="server" id="DivRPSC">
@@ -47,6 +47,15 @@
                    <asp:TableHeaderCell>Website- www.ektatrust.org.in</asp:TableHeaderCell>
                </asp:TableRow>
            </asp:Table>
+          <div class="col-sm-12">
+              <div class="row">
+                   <div class="col-sm-6">
+                      <h2 class="wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+                          <img src="Gallery_2025/RPSC2025_Gallery/RPSC2025_MIP_Advertisement.jpeg" alt="RPSC2025_MIP_Advertisement.jpeg" class="img-responsive thumbnail small ImageSize">
+                      </h2>
+                  </div>
+              </div>
+          </div>
            <div class="col-sm-6">
                 <h2 class="wow fadeInDown"><img src="images/WhatsApp Image 2022-11-24 at 8.20.21 PM.jpeg" alt="Error" style="height:400px" height="400" class="img-responsive thumbnail small ImageSize"/></h2>
             </div>

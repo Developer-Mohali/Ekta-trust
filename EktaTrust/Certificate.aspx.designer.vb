@@ -23,22 +23,49 @@ Partial Public Class Certificate
     Protected WithEvents lblErrorMsg As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''txtbibNo control.
+    '''DdlYear control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtbibNo As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents DdlYear As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''BIBnumberValidator control.
+    '''YearValidator control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents BIBnumberValidator As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents YearValidator As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''txtMobileNo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtMobileNo As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''RequiredValidatorMobile control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredValidatorMobile As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''RegularExpressionValidator1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator1 As Global.System.Web.UI.WebControls.RegularExpressionValidator
 
     '''<summary>
     '''SearchButton control.

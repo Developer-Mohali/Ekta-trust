@@ -91,20 +91,23 @@ Public Class Home
     End Function
 
     Private Sub DisplayNews()
-        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
-        Dim con As New MySqlConnection(constr)
-        Dim cmd As New MySqlCommand("Select NewsDescription From  TblNewsDetails  WHERE IsDeleted=0 and IsActive=1", con)
-        con.Open()
-        Dim sda As MySqlDataAdapter = New MySqlDataAdapter
-        Dim dt As DataTable = New DataTable
-        sda.SelectCommand = cmd
-        sda.Fill(dt)
-        repmarq.DataSource = dt
+        Try
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Dim con As New MySqlConnection(constr)
+            Dim cmd As New MySqlCommand("Select NewsDescription From  TblNewsDetails  WHERE IsDeleted=0 and IsActive=1", con)
+            con.Open()
+            Dim sda As MySqlDataAdapter = New MySqlDataAdapter
+            Dim dt As DataTable = New DataTable
+            sda.SelectCommand = cmd
+            sda.Fill(dt)
+            repmarq.DataSource = dt
 
-        repmarq.DataBind()
+            repmarq.DataBind()
 
-        con.Close()
+            con.Close()
+        Catch e As Exception
 
+        End Try
     End Sub
 
     Protected Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click

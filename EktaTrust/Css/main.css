@@ -675,10 +675,11 @@ input.search-form:hover {
 	margin-bottom: 0;
 }
 #footer {
-	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-top: 17px;
+	padding-bottom: 0px;
 	color: #fff;
 	background: #2e2e2e;
+	min-height: 50px;
 }
 #footer a {
 	color: #fff;

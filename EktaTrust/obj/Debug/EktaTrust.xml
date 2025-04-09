@@ -279,6 +279,15 @@ To modify move field declaration from designer file to code-behind file.
  <param name="sender"></param>
  <param name="e"></param>
 </member>
+<member name="F:EktaTrust.Covid191._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.AddNewUser._Form1">
 <summary>
 Form1 control.
@@ -1638,6 +1647,24 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.EktaCreativeCompetitionGallery._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.EktaCreativeCompetitionGallery2023._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.EktaSapath._txtSignupEmail">
 <summary>
 txtSignupEmail control.
@@ -1794,6 +1821,60 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.ForgetUserPassword._lblSuccess">
 <summary>
 lblSuccess control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.Gallery._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.Gallery_2017._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.Gallery_2018._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.Gallery_2019._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.Gallery_2020._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.Gallery_UPSC2018._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -2019,6 +2100,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.LatestNewsDetails._gridViewNotification">
 <summary>
 gridViewNotification control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.Library._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -3171,6 +3261,24 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.MigrantsRegistrationDetails._btnCancel">
 <summary>
 btnCancel control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.NewsGallery._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.Miscellaneous._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -4671,6 +4779,69 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.RPSC2020._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RpscMipGallery2025._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RunForEquality2018._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RunForEquality20201._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RunForEquality2022._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RunForEquality2025._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RunForEqualityGallery._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.TestingForm._RequiredFieldValidator4">
 <summary>
 RequiredFieldValidator4 control.
@@ -4692,6 +4863,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.TestingForm._ButtonSubmitMessage">
 <summary>
 ButtonSubmitMessage control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UnaGallery._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -7911,6 +8091,33 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.RunForEquality2019._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UpscMipGallery._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UpscMipGallery2025._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.UserChangePassword._TextOldPassword">
 <summary>
 TextOldPassword control.
@@ -8661,6 +8868,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.Vision._RequiredFieldValidator1">
 <summary>
 RequiredFieldValidator1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.VolleyBall._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.
