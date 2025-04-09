@@ -74,6 +74,13 @@
                 border-bottom: 1px solid #dee2e6;
                 margin-bottom:20px;
             }
+             input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
     </style>
     <div class="container">
 
@@ -100,11 +107,11 @@
                  <div class="col-sm-6">
                         <div class="form-group">
                             <label>Enter Your Mobile Number:</label>
-                            <asp:TextBox ID="txtMobileNo" runat="server" name="txtMobileNo" class="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtMobileNo" runat="server" name="txtMobileNo" TextMode="Number" class="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredValidatorMobile" ControlToValidate="txtMobileNo"
                                 runat="server" ErrorMessage="Please enter the Mobile number" ValidationGroup="CertificateSearch" ForeColor="Red" Display="Dynamic" />
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Please enter valid Phone number" 
-                                ControlToValidate="txtMobileNo" ValidationExpression="^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$" ValidationGroup="CertificateSearch" ForeColor="Red" Display="Dynamic" />
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Phone number should be 10 digit" 
+                            ControlToValidate="txtMobileNo" ValidationExpression="^\d{10}$" ValidationGroup="CertificateSearch" ForeColor="Red" Display="Dynamic" />
                         </div>
                      </div>
                 <div class="col-sm-12" style="justify-items: flex-start;padding: unset;">
@@ -179,13 +186,12 @@
                 <div class="col-12">
                     <div class="form-group">
                         <label>Mobile no.</label>
-                        <asp:TextBox ID="txtMobile" ClientIDMode="Static" name="txtMobile" runat="server" CssClass="form-control"></asp:TextBox>
-                            <span id="mobileError" style="color:red; display:none;"></span>
-                     <%--   <asp:RequiredFieldValidator ID="RequiredtxtMobile" ControlToValidate="txtMobile"
+                        <asp:TextBox ID="txtMobile" ClientIDMode="Static" name="txtMobile" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredtxtMobile" ControlToValidate="txtMobile"
                             runat="server" ClientIDMode="Static" ErrorMessage="Please enter the mobile number." ValidationGroup="feedback" ForeColor="Red"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ClientIDMode="Static" ID="RegulartxtMobile"                             
                              ControlToValidate="txtMobile" runat="server" ValidationExpression="^([0-9]{10})$"
-                            ErrorMessage="Please enter valid mobile number." ValidationGroup="feedback"  ForeColor="Red" style="position: absolute; left: 20px;"></asp:RegularExpressionValidator>--%>
+                            ErrorMessage="Please enter valid mobile number." ValidationGroup="feedback"  ForeColor="Red" style="position: absolute; left: 20px;"></asp:RegularExpressionValidator>
                     </div>
                 </div>
 

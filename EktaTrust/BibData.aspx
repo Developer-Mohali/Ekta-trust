@@ -15,6 +15,13 @@
             font-weight: 600;
             text-transform: uppercase;
         }
+        input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button { 
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                margin: 0; 
+            }
     </style>
 
 <div class="container">
@@ -27,20 +34,17 @@
                  <div class="col-sm-6">
                         <div class="form-group">
                             <label>Enter Your Mobile Number:</label>
-                            <asp:TextBox ID="txtMobileNo" runat="server" name="txtMobileNo" class="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtMobileNo" runat="server" name="txtMobileNo" TextMode="Number" class="form-control"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredValidatorMobile" ControlToValidate="txtMobileNo"
                                 runat="server" ErrorMessage="Please enter the Mobile number" ValidationGroup="BibDataSearch" ForeColor="Red" Display="Dynamic" />
-                            <span id="mobileError" style="color:red; display:none;"></span>
-<%--                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Please enter valid Phone number" 
-                                ControlToValidate="txtMobileNo" ValidationExpression="^\d+$" ValidationGroup="BibDataSearch" ForeColor="Red" Display="Dynamic" />
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Phone number should be 10 digit" 
-                            ControlToValidate="txtMobileNo" ValidationExpression="^\d{10}$" ValidationGroup="BibDataSearch" EnableClientScript="True" ForeColor="Red" Display="Dynamic" ClientValidationFunction="validateIfOnlyDigits()" />--%>
+                            ControlToValidate="txtMobileNo" ValidationExpression="^\d{10}$" ValidationGroup="BibDataSearch" ForeColor="Red" Display="Dynamic" />
                         </div>
                      </div>
                 <div class="col-sm-12" style="justify-items: flex-start;padding: unset;">
                  <div class="col-sm-3">
                   <div class="form-group">
-                    <asp:Button ID="SearchButton" runat="server" class="btn btn-success form-control" Text="Search" ValidationGroup="BibDataSearch"  OnClientClick="return validateMobile();" OnClick="SearchButton_Click" />
+                    <asp:Button ID="SearchButton" runat="server" class="btn btn-success form-control" Text="Search" ValidationGroup="BibDataSearch"  OnClick="SearchButton_Click" />
                 </div>
                      </div>
             </div>

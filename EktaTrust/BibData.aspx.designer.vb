@@ -41,6 +41,15 @@ Partial Public Class BibData
     Protected WithEvents RequiredValidatorMobile As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
+    '''RegularExpressionValidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator2 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
     '''SearchButton control.
     '''</summary>
     '''<remarks>
