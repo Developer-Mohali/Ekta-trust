@@ -1076,10 +1076,14 @@
       <DependentUpon>AmbedkarWSJ.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-<Compile Include="BibData.aspx.designer.vb">
+    <Compile Include="BibData.aspx.designer.vb">
       <DependentUpon>BibData.aspx</DependentUpon>
-  <SubType>ASPXCodebehind</SubType>
-    </Compile>    <Compile Include="CelebritiesAppeal.aspx.designer.vb">
+    </Compile>
+    <Compile Include="BibData.aspx.vb">
+      <DependentUpon>BibData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CelebritiesAppeal.aspx.designer.vb">
       <DependentUpon>CelebritiesAppeal.aspx</DependentUpon>
     </Compile>
     <Compile Include="CelebritiesAppeal.aspx.vb">
