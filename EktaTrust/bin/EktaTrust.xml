@@ -53,6 +53,69 @@ EktaTrust
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
+<member name="F:EktaTrust.BibData._lblErrorMsg">
+<summary>
+lblErrorMsg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BibData._txtMobileNo">
+<summary>
+txtMobileNo control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BibData._RequiredValidatorMobile">
+<summary>
+RequiredValidatorMobile control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BibData._RegularExpressionValidator2">
+<summary>
+RegularExpressionValidator2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BibData._SearchButton">
+<summary>
+SearchButton control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BibData._hdnMsgBiBData">
+<summary>
+hdnMsgBiBData control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BibData._getRec">
+<summary>
+getRec control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.Certificate._lblErrorMsg">
 <summary>
 lblErrorMsg control.
@@ -62,18 +125,45 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:EktaTrust.Certificate._txtbibNo">
+<member name="F:EktaTrust.Certificate._DdlYear">
 <summary>
-txtbibNo control.
+DdlYear control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:EktaTrust.Certificate._BIBnumberValidator">
+<member name="F:EktaTrust.Certificate._YearValidator">
 <summary>
-BIBnumberValidator control.
+YearValidator control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.Certificate._txtMobileNo">
+<summary>
+txtMobileNo control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.Certificate._RequiredValidatorMobile">
+<summary>
+RequiredValidatorMobile control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.Certificate._RegularExpressionValidator1">
+<summary>
+RegularExpressionValidator1 control.
 </summary>
 <remarks>
 Auto-generated field.

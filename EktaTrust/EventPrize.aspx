@@ -33,7 +33,7 @@
                     <tr>
                         <td colspan="2" >
                             <h4>6th Run for Equality-2025 Details</h4>
-                            <%--<h6>6th Run for Equality-2025 Details</h6>--%>
+                           
                         </td>
                     </tr>
                      <tr style="box-shadow: 0px 1px 10px 2px lightgrey;" >
@@ -46,10 +46,10 @@
                         </td>
                      </tr>                     
                     <tr>
-                        <td> <%--<video src="RunForEqualityGallery/RunForEqualityFMAds.mpeg" height="0" width="0" id="FMaudio" autoplay="autoplay"></video>--%><br />
+                        <td> <br />
                             <b>Event Date-</b> 14.04.2025<br />
                           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Place-</b>  Albert Hall, JLN Marg, Jaipur (Rajasthan)<br /><br />
-                            <%--Tentative Route - JLN Marg<br /><br />--%>
+                           
                             <div class="hidden">
                                 <b>Routes-</b><br />
                                 <b>5KM-</b> Gandhi Circle -Jhalana Road- back to Gandhi Circle.<br /><br />
@@ -57,26 +57,20 @@
                                 <b>21.09KM-</b> Gandhi Circle-Jhalana Road-Forest View Apartment Traffic light- Jagatpura Pulia- Mahal Road- Turn from AkshayPatra Chaurha - back to Gandhi Circle .<br /><br />
                             </div>
                             
-                            <%--Reporting Time<br /><br />
-                             14.04.2023<br />--%>
+                          
                             <b>Reporting Time-</b>14.04.2025<br /><br />
                          <b>Time-</b>&nbsp;&nbsp;21.09KM &nbsp;- 4:30AM <br />
                       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10KM&nbsp;&nbsp;- 6:00AM<br />
-                           <%-- Run for Equality Schedule will be published shortly --%>
+              
                        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5KM&nbsp;&nbsp;- 6:30AM  <br /><br />
                             <b>Ceremony-</b> 7:00AM onwards<br />
-                     <%--Run Route - JLN Marg, Jaipur<br />--%><br />
+                     <br />
 
-                   <%-- Registration before - 31.03.2023 Rs-500--%>
+                  
 
                            <b>Registration Fee-</b> <br />
                              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Fix Rs 500 in all categories(5k, 10k, 21.09k)<br /><br />
-                      <%--&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2. 10k - Rs 700<br />
-                           <%-- Run for Equality Schedule will be published shortly 
-                       &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. 21.09k - Rs 1000 <br /><br />--%>
-
-
-                     <%--Registration after - 31.03.2023 Rs - 1000(Tshirt subject to availability)--%><b>On Spot registration in BIB EXPO</b><br />
+                           <b>On Spot registration in BIB EXPO</b><br />
                             &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs 1000 in all categories(5k, 10k, 21.09k) <br />
 
                             <br /><b>Beginner's guide</b><br />
@@ -84,22 +78,23 @@
                             <a href="Gallery_2025/SOP_for_RFE.pdf" target="_blank" style="background-color:transparent;border:none;color:blue;text-decoration: underline;">Suggestions are invited for Schedule of Practice for RFE</a> <br />
                     </td>
                     </tr>
-                <tr class="hidden">
+                <tr class="">
                         <td colspan="2" >
-                            <%--<h6>Bib-Expo: Run For Equality 2023</h6>--%>
-                           <b> BIB EXPO Date </b> - 13.04.2025 <br /><br />
-                         <%-- <b>  Bib EXPO Tentative Time </b>- 11AM to 7PM  <br />
-                           <b> Bib EXPO Tentative Place </b>- Ambedkar Memorial Welfare Society, Jhalana Doongri, Jaipur <br /><br />--%>
-
-                           <b>  BIB EXPO Time </b>- 10AM To 7PM  <br />
-                           <b> BIB EXPO Place </b>- Youth Hostel, Near Vidhan Sabha Jaipur <br />
-                           <b> BIB EXPO Location </b> - Available on google map : <a href="https://g.co/kgs/cV9LpK" target="_blank" style="text-decoration:underline; color:blue"> https://g.co/kgs/cV9LpK </a> <%-- Available on google map &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="https://g.co/kgs/7AiBo4" target="_blank"> https://g.co/kgs/7AiBo4</a> --%>
-                          
+                           
+                           <%--<b> BIB EXPO Date </b> - 13.04.2025 <br />
+                         
+                           <b>  BIB EXPO Time </b>- 09AM To 6PM  <br />
+                           <b> BIB EXPO Place </b>- Institute of Local self-Government, Tonk Road, Jaipur <br />--%>
+                           
+                          <b> BIB Expo will be held at the Institute of Local self-Government, Tonk Road, Jaipur </br> on 13th April from 9AM to 6PM.</b>
+                           <br />
+                            <b>  BIB Expo Location : </b> <a href="https://g.co/kgs/adLsfKf" target="_blank" style="text-decoration:underline; color:blue">https://g.co/kgs/adLsfKf </a>
                         </td>
                     </tr>
                     <tr>
                         <td>
                              <p>
+                              
         <%--Bib-Expo for run for equality will be organised on 13 April at Conference Hall,Rajasthan Swayat Shasan Mahavidyalaya, Tonk Road (Near Laxmi Mandir)Jaipur for collection of Tshirts, bib etc
        <br/>
                <br/>Time-10AM to 7PM. 
@@ -209,7 +204,7 @@
                     <center>
                          <input type="checkbox" id="cbTermsAndCondition"  style="margin-left: 17px;" checked/><input type="button" id="btnTermsAndConditions" value="I Accept All Terms and Conditions" class="float-left" style="background-color:transparent;border:none;color:blue;text-decoration: underline; "  Text="I Accept Terms and Conditions" />
                
-                      <button onclick="termsAndCondition(event)" style="font-size:larger; margin-top: 0px;font-size:larger;" id="EventRegistration" class="btn btn-success" >Register Me<%--Registration Closed--%></button>
+                      <button onclick="termsAndCondition(event)" style="font-size:larger; margin-top: 0px;font-size:larger;" id="EventRegistration" class="btn btn-success" ><%--Register Me--%>Registration Closed</button>
                   
                     </center>
               
@@ -295,16 +290,15 @@
         {
      
 
-            //var win = window.open('https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784', '_blank');
-            //win.focus();
-            //var win = window.open('../RegistrationClosed', '_blank');
-            //win.focus();
-            if (isInstagramInAppBrowser()) {
-                window.location.href = 'https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784';
-            } else {
-                var win = window.open('https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784', '_blank');
-                win.focus();
-            }
+            
+             var win = window.open('../RegistrationClosed', '_blank');
+              win.focus();
+            //if (isInstagramInAppBrowser()) {
+            //    window.location.href = 'https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784';
+            //} else {
+            //    var win = window.open('https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784', '_blank');
+            //    win.focus();
+            //}
         }
         else {
             alert('Please Check Terms And Conditions!');
