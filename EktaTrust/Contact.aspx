@@ -341,17 +341,17 @@
                                 <tbody>
 
                                     <tr>
-                                        <td class="text-danger">Mr. Movil Jeenwal (Trustee)</td>
+                                        <td class="text-danger">Mr. Movil Jeenwal <%--(Trustee)--%></td>
                                         <td><i class="glyphicon glyphicon-envelope"></i><a href="mailto:movil.jeenwal@gmail.com">movil.jeenwal@gmail.com</a></td>
                                         <%--<td><i class="glyphicon glyphicon-phone">966-003-7537</i></td>--%>
                                     </tr>
                                     <tr>
-                                        <td class="text-danger">Mr. Arvind Hingonia (Trustee)</td>
+                                        <td class="text-danger">Mr. Arvind Hingonia <%--(Trustee)--%></td>
                                         <td><i class="glyphicon glyphicon-envelope"></i><a href="mailto:arvindhingonia@gmail.com">arvindhingonia@gmail.com</a></td>
                                         <%--<td><i class="glyphicon glyphicon-phone">900-171-6311</i></td>--%>
                                     </tr>
                                     <tr>
-                                        <td class="text-danger">Ms. Yashoda Salvi(Trustee)</td>
+                                        <td class="text-danger">Ms. Yashoda Salvi<%--(Trustee)--%></td>
                                         <td><i class="glyphicon glyphicon-envelope"></i><a href="mailto:salvi.yashoda@gmail.com">salvi.yashoda@gmail.com</a></td>
                                         <%--<td><i class="glyphicon glyphicon-phone">900-171-6311</i></td>--%>
 

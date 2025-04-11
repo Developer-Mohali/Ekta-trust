@@ -1081,7 +1081,7 @@
     </Compile>
     <Compile Include="BibData.aspx.vb">
       <DependentUpon>BibData.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CelebritiesAppeal.aspx.designer.vb">
       <DependentUpon>CelebritiesAppeal.aspx</DependentUpon>
