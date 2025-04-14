@@ -34,8 +34,8 @@ Public Class LogIn
         'Dim RememberMe As String = If(chkRememberMe.Checked, "Y", "N")
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
-            Dim cmd As New MySqlCommand("select  EmailAddress,RoleId, Password from signup where EmailAddress =@EmailAddress and Password=@Password ", con)
-                cmd.Parameters.AddWithValue("@EmailAddress", textEmailAdd.Text)
+            Dim cmd As New MySqlCommand("select  EmailAddress, RoleId, UserId, Password from signup where EmailAddress =@EmailAddress and Password=@Password ", con)
+            cmd.Parameters.AddWithValue("@EmailAddress", textEmailAdd.Text)
                 cmd.Parameters.AddWithValue("@Password", TextPassword.Text)
             'cmd.Parameters.AddWithValue("@RememberMe", RememberMe)
             cmd.Connection = con
@@ -52,12 +52,14 @@ Public Class LogIn
                         'gridview has 2 columns only(name, type)
                     Session("EmailAddress") = rd(0).ToString()
                     Session("RoleId") = rd(1).ToString()
+                    Session("UserId") = rd(2).ToString()
                     Dim ss = Session("RoleId").ToString()
-                    End While
-                    Response.Redirect("DashBoard")
+                End While
+
+                Response.Redirect("DashBoard")
 
             ElseIf dt.Rows.Count = 0 Then
-                Dim cmds As New MySqlCommand("select EmailAddress,RoleId,Password from User where EmailAddress=@EmailAddress and Password=@Password ", con)
+                Dim cmds As New MySqlCommand("select EmailAddress, RoleId, ID, Password from User where EmailAddress=@EmailAddress and Password=@Password ", con)
                 cmds.Parameters.AddWithValue("@EmailAddress", textEmailAdd.Text)
                 cmds.Parameters.AddWithValue("@Password", TextPassword.Text)
                 'cmds.Parameters.AddWithValue("@RememberMe", RememberMe)
@@ -75,8 +77,16 @@ Public Class LogIn
                         'gridview has 2 columns only(name, type)
                         Session("EmailAddress") = rd(0).ToString()
                         Session("RoleId") = rd(1).ToString()
+                        Session("UserId") = rd(2).ToString()
 
                     End While
+                    If Session("RoleId") IsNot Nothing Then
+                        Dim roleId As Integer = Convert.ToInt32(Session("RoleId"))
+                        If roleId = 3 Then
+                            Response.Redirect("AdminUserBIBNO.aspx")
+                        End If
+
+                    End If
                     Response.Redirect("DashBoard")
 
                 Else

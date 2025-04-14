@@ -53,6 +53,33 @@ EktaTrust
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
+<member name="F:EktaTrust.AdminBIBData._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.AdminBIBData._BIBDataRunner">
+<summary>
+BIBDataRunner control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.AdminUserBIBNO._BIBDataRunner">
+<summary>
+BIBDataRunner control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.BibData._lblErrorMsg">
 <summary>
 lblErrorMsg control.
@@ -269,6 +296,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.CertificationReport._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.CertificationReport._MessageUpdated">
 <summary>
 MessageUpdated control.
@@ -368,6 +404,102 @@ To modify move field declaration from designer file to code-behind file.
  </summary>
  <param name="sender"></param>
  <param name="e"></param>
+</member>
+<member name="F:EktaTrust.AdminSideMenuControl._divShowHideMenu">
+<summary>
+divShowHideMenu control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._MessageUpdated">
+<summary>
+MessageUpdated control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._BIBDataFileUpload">
+<summary>
+BIBDataFileUpload control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._btnUpload">
+<summary>
+btnUpload control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._lblMessage">
+<summary>
+lblMessage control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._txtSearch">
+<summary>
+txtSearch control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._btnSearch">
+<summary>
+btnSearch control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._lblmsg">
+<summary>
+lblmsg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._gvEvent">
+<summary>
+gvEvent control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._lblRecords">
+<summary>
+lblRecords control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="M:EktaTrust.BIBDataRunner.BindGridView">
+ <summary>
+ Bind the BIB data data in the grid view
+ </summary>
+ 
 </member>
 <member name="F:EktaTrust.Covid191._GallerySideMenuControl">
 <summary>
@@ -765,6 +897,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.AtrocityReportingDetails._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.AtrocityReportingDetails._matrimonialPanel">
 <summary>
 matrimonialPanel control.
@@ -1038,6 +1179,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.Career_Counselling._RequiredFieldValidator1">
 <summary>
 RequiredFieldValidator1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.CareerCounsellingDetails._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1344,6 +1494,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.ChangePassword._lblErrorMsg">
 <summary>
 lblErrorMsg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.ContactDetails._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1818,6 +1977,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.FeedbackAndSuggestion._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.FeedbackAndSuggestion._MessageUpdated">
 <summary>
 MessageUpdated control.
@@ -1965,6 +2133,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.Gallery_UPSC2018._GallerySideMenuControl">
 <summary>
 GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.Joining._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -2352,6 +2529,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.ProfileMaster._ContentPlaceHolder1">
 <summary>
 ContentPlaceHolder1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.MatrimonialDetails._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -4968,6 +5154,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.DashBoard._divShowHideMenu">
+<summary>
+divShowHideMenu control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.Education._txtSignupEmail">
 <summary>
 txtSignupEmail control.
@@ -5223,6 +5418,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.Enroll._RequiredFieldValidator8">
 <summary>
 RequiredFieldValidator8 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.EventDetails._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -5538,6 +5742,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.EventDetails._btnAddNew">
 <summary>
 btnAddNew control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.LogDetails._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -6273,6 +6486,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.MIPFacultyRegistrationDetails._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.MIPFacultyRegistrationDetails._MessageUpdated">
 <summary>
 MessageUpdated control.
@@ -6669,6 +6891,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.MIPRegistrationDetails._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.MIPRegistrationDetails._MessageUpdated">
 <summary>
 MessageUpdated control.
@@ -6888,6 +7119,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.MIPTeam._Table1">
 <summary>
 Table1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.ModificationEmailAndSms._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -7200,6 +7440,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.SendNotificationMIP._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.SendNotificationMIP._Panel1">
 <summary>
 Panel1 control.
@@ -7434,6 +7683,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.SUGGESTIONTRUSTACTIVITIES._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.SUGGESTIONTRUSTACTIVITIES._ddlSearchBy">
 <summary>
 ddlSearchBy control.
@@ -7608,6 +7866,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.SUGGESTIONTRUSTACTIVITIES._btnCancel">
 <summary>
 btnCancel control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.TemplateListing._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -7842,6 +8109,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.Training._ButtonSubmitMessage">
 <summary>
 ButtonSubmitMessage control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.TrainingActivity._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -8247,6 +8523,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.UserChangePassword._lblErrorMsg">
 <summary>
 lblErrorMsg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UserDetails._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
 </summary>
 <remarks>
 Auto-generated field.

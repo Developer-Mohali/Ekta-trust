@@ -120,12 +120,16 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminBIBData.aspx" />
+    <Content Include="AdminUserBIBNO.aspx" />
     <Content Include="Alwar.aspx" />
     <Content Include="AmbedkarWSJ.aspx" />
     <Content Include="BibData.aspx" />
     <Content Include="CelebritiesAppeal.aspx" />
     <Content Include="Certificate.aspx" />
     <Content Include="CertificationReport.aspx" />
+    <Content Include="Controls\AdminSideMenuControl.ascx" />
+    <Content Include="Controls\BIBDataRunner.ascx" />
     <Content Include="Controls\GallerySideMenuControl.ascx" />
     <Content Include="Covid19.aspx" />
     <Content Include="AddNewUser.aspx" />
@@ -422,6 +426,7 @@
     <Content Include="Gallery_2025\Img3.jpeg" />
     <Content Include="Gallery_2025\Route Map clear - 05.02.2025.jpg" />
     <Content Include="Gallery_2025\Video1.mp4" />
+    <Content Include="Gallery_2025\Video18.mp4" />
     <Content Include="Gallery_UPSC2018.aspx" />
     <Content Include="Images\1.jfif" />
     <Content Include="Images\1.jpg" />
@@ -1062,6 +1067,20 @@
     <Content Include="Yoga_Training.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminBIBData.aspx.designer.vb">
+      <DependentUpon>AdminBIBData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminBIBData.aspx.vb">
+      <DependentUpon>AdminBIBData.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="AdminUserBIBNO.aspx.designer.vb">
+      <DependentUpon>AdminUserBIBNO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminUserBIBNO.aspx.vb">
+      <DependentUpon>AdminUserBIBNO.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Alwar.aspx.designer.vb">
       <DependentUpon>Alwar.aspx</DependentUpon>
     </Compile>
@@ -1102,6 +1121,20 @@
     </Compile>
     <Compile Include="CertificationReport.aspx.vb">
       <DependentUpon>CertificationReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\AdminSideMenuControl.ascx.designer.vb">
+      <DependentUpon>AdminSideMenuControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdminSideMenuControl.ascx.vb">
+      <DependentUpon>AdminSideMenuControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\BIBDataRunner.ascx.designer.vb">
+      <DependentUpon>BIBDataRunner.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BIBDataRunner.ascx.vb">
+      <DependentUpon>BIBDataRunner.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\GallerySideMenuControl.ascx.designer.vb">

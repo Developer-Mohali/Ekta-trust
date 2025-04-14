@@ -144,6 +144,7 @@
                                     <asp:BoundField HeaderText="Completion Time" DataField="Net_Time"></asp:BoundField>
                                     <asp:TemplateField HeaderText="" ItemStyle-Width="72">
                                         <ItemTemplate>
+                                            <asp:HiddenField ID="hfID" runat="server" Value='<%# Eval("ID") %>' />
                                             <asp:Button runat="server" Text="Download Certificate" class="btn btn-primary btn-lg" OnClick="DownloadButton_Click" />
                                         </ItemTemplate>
                                     </asp:TemplateField>

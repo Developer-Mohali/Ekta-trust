@@ -49,10 +49,10 @@
                             <%--Reporting Time<br /><br />
                              14.04.2023<br />--%>
                             <b>Reporting Time-</b>14.04.2025<br /><br />
-                         <b>Time-</b>&nbsp;&nbsp;21.09KM &nbsp;- 4:30AM <br />
-                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10KM&nbsp;&nbsp;- 6:00AM<br />
+                         <b>Time-</b>&nbsp;&nbsp;21.09 KM &nbsp;- 4:15 AM <br />
+                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10 KM&nbsp;&nbsp;- 5:15 AM<br />
                            <%-- Run for Equality Schedule will be published shortly --%>
-                       &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5KM&nbsp;&nbsp;- 6:30AM  <br /><br />
+                       &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5 KM&nbsp;&nbsp;- 5:45 AM  <br /><br />
                             <b>Ceremony-</b> 7:00AM onwards<br />
                      <%--Run Route - JLN Marg, Jaipur<br />--%><br />
 
