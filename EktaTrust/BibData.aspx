@@ -68,6 +68,12 @@
                                     <asp:BoundField HeaderText="Tshirt Size" DataField="tshirt_size"></asp:BoundField>
                                     <asp:BoundField HeaderText="Run Category" DataField="run_category"></asp:BoundField>
                                     <asp:BoundField HeaderText="BIB Number" DataField="bib_no"></asp:BoundField>
+
+                                    <asp:TemplateField HeaderText="BIB Expo Location">
+                                        <ItemTemplate>
+                                           <a href="https://g.co/kgs/adLsfKf" target="_blank" style="text-decoration:underline; color:blue">https://g.co/kgs/adLsfKf </a>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:BoundField HeaderText="Venue to Collect BIB" DataField="collect_bib"></asp:BoundField>
 
                                 </Columns>
