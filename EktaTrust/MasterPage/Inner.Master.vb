@@ -26,7 +26,17 @@ Public Class Inner
             Response.Redirect("/login")
             ' Session variable exists, so it is active visitor
         End If
+        Dim pageNameWithoutExt As String = System.IO.Path.GetFileNameWithoutExtension(Request.Url.AbsolutePath)
+        If Session("RoleId") IsNot Nothing Then
+            Dim roleId As Integer = Convert.ToInt32(Session("RoleId"))
+            If roleId = 3 Then
+                If pageNameWithoutExt <> "AdminUserBIBNO" Then
+                    Response.Redirect("/login")
+                End If
+            End If
+        End If
         If Not IsPostBack Then
+
             bindgrid()
         End If
     End Sub

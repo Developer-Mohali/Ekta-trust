@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage/Inner.Master" CodeBehind="DashBoard.aspx.vb" Inherits="EktaTrust.DashBoard" %>
 
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </asp:Content>
@@ -8,45 +10,30 @@
     <script type="text/javascript">
         $(document).ready(function () {
             HideLogdetails();
+           // $('.DivShowHideMenu').hide();
         });
        
        function HideLogdetails() {
            var name = '<%=Session("RoleId") %>';
-            if (name == 2) {
-                $('#LogDetails').hide();
-            }
-            else {
-                $('#LogDetails').show();
-            }
-        }
-</script>
+ 
+               $('.DivShowHideMenu').show();
+               if (name == 2) {
+                   $('#LogDetails').hide();
+               }
+               else {
+                   $('#LogDetails').show();
+               }
+           }
+
+    </script>
 
     <h2 class="admin-heading2">Dashboard</h2>
     <br/>
     <br/>
-    <div class="container text-center">
-        <div class="col-lg-12">
-            <a href="TrainingActivity" class="nb-btn-circle"><i class="fa fa-graduation-cap"></i>
-                <p>Training Activities</p>
-            </a>
-            <a href="Joining" class="nb-btn-circle"><i class="fa fa-handshake-o"></i>
-                <p>Joining</p>
-            </a>
-            <a href="DonationDetails.aspx" class="nb-btn-circle"><i class="fa fa-money"></i>
-                <p>Donation</p>
-            </a>
-            <a href="ContactDetails" class="nb-btn-circle"><i class="fa fa-address-book"></i>
-                <p>Contact Detail</p>
-            </a>
-            <a href="SUGGESTIONTRUSTACTIVITIES" class="nb-btn-circle"><i class="fa fa-cog"></i>
-                <p>Trust Activities</p>
-            </a>
-            <a href="ChangePassword" class="nb-btn-circle"><i class="fa fa-unlock-alt"></i>
-                <p>Change Password</p>
-            </a>
+    <div runat="server" class="DivShowHideMenu" id="divShowHideMenu" visible="false">
 
-        </div>
-    </div>
+ 
+    
     <div class="container text-center">
         <div class="col-lg-12">
             <a href="EventDetails.aspx" class="nb-btn-circle"><i class="fa fa-calendar"></i>
@@ -113,6 +100,12 @@
              <a href="MigrantsRegistrationDetails.aspx"  class="nb-btn-circle"><i class="fa fa-edit"></i>
                 <p>Migrants Registration Details</p>
             </a>
+             <a href="AdminBIBData.aspx"  class="nb-btn-circle"><i class="fa fa-edit"></i>
+                 <p>BIB Data</p>
+           </a>
         </div>
     </div>
+   </div>
+    
+    
 </asp:Content>

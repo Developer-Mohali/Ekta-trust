@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage/Admin.Master" CodeBehind="RunForEquality2025.aspx.vb" Inherits="EktaTrust.RunForEquality2025" %>
+
 <%@ Register Src="~/Controls/GallerySideMenuControl.ascx" TagPrefix="uc" TagName="GallerySideMenuControl" %>
 
 
@@ -21,14 +22,14 @@
             <div class="row marginImage" style="margin-left: 15px">
             </div>
 
-             <%-- gallery event menu --%>
-            <uc:GallerySideMenuControl runat="server" id="GallerySideMenuControl" />
+            <%-- gallery event menu --%>
+            <uc:GallerySideMenuControl runat="server" ID="GallerySideMenuControl" />
 
             <div class="col-md-9 col-sm-10 col-xs-12" style="padding-right: 0px; padding-left: 0px; top: 10px;">
 
                 <!--one row-->
                 <div class="row marginImage" style="margin-left: 15px">
-                      <div id="box" class="burst-side strawberry">
+                    <div id="box" class="burst-side strawberry">
                         <div class="caption"></div>
                         <img class="thumbnail" id="dd" src="Gallery_2025/Img16.jpeg" alt="#" />
                         <div>
@@ -36,7 +37,7 @@
                                 <h1>View Image</h1>
                             </a>
                         </div>
-                    </div> 
+                    </div>
                     <div id="box" class="burst-side strawberry">
                         <div class="caption"></div>
                         <img class="thumbnail" id="dd" src="Gallery_2025/Img17.jpeg" alt="#" />
@@ -45,7 +46,7 @@
                                 <h1>View Image</h1>
                             </a>
                         </div>
-                    </div> 
+                    </div>
                     <div id="box" class="burst-side strawberry">
                         <div class="caption"></div>
                         <img class="thumbnail" id="dd" src="Gallery_2025/Img18.jpeg" alt="#" />
@@ -76,7 +77,7 @@
                             </a>
                         </div>
                     </div>
-               <%--     <div id="box" class="burst-side strawberry">
+                    <%--     <div id="box" class="burst-side strawberry">
                         <div class="caption"></div>
 
                         <img class="thumbnail" id="dd2" src="Gallery_2025/Img3.jpeg" alt="#" />
@@ -99,95 +100,96 @@
                         </div>
                     </div>
                     <div id="box" class="burst-side strawberry">
-                          <div class="caption"></div>
-                          <img class="thumbnail" id="dd3" src="Gallery_2025/Img6.jpeg" alt="#" />
-                          <div>
-                              <a class="lightbox" href="Gallery_2025/Img6.jpeg" data-littlelightbox-group="gallery">
-                                  <h1>View Image</h1>
-                              </a>
-                          </div>
-                      </div>
-                      <div id="box" class="burst-side strawberry">
-                          <div class="caption"></div>
-                          <img class="thumbnail" id="dd3" src="Gallery_2025/Img7.jpeg" alt="#" />
-                          <div>
-                              <a class="lightbox" href="Gallery_2025/Img7.jpeg" data-littlelightbox-group="gallery">
-                                  <h1>View Image</h1>
-                              </a>
-                          </div>
-                      </div>
-                       <div id="box" class="burst-side strawberry">
-                          <div class="caption"></div>
-                          <img class="thumbnail" id="dd3" src="Gallery_2025/Img8.jpeg" alt="#" />
-                          <div>
-                              <a class="lightbox" href="Gallery_2025/Img8.jpeg" data-littlelightbox-group="gallery">
-                                  <h1>View Image</h1>
-                              </a>
-                          </div>
-                      </div>       
+                        <div class="caption"></div>
+                        <img class="thumbnail" id="dd3" src="Gallery_2025/Img6.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img6.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+                            </a>
+                        </div>
+                    </div>
                     <div id="box" class="burst-side strawberry">
-                          <div class="caption"></div>
-                          <img class="thumbnail" id="dd3" src="Gallery_2025/Img9.jpeg" alt="#" />
-                          <div>
-                              <a class="lightbox" href="Gallery_2025/Img9.jpeg" data-littlelightbox-group="gallery">
-                                  <h1>View Image</h1>
-                              </a>
-                          </div>
-                      </div>       <div id="box" class="burst-side strawberry">
-                          <div class="caption"></div>
-                          <img class="thumbnail" id="dd3" src="Gallery_2025/Img10.jpeg" alt="#" />
-                          <div>
-                              <a class="lightbox" href="Gallery_2025/Img10.jpeg" data-littlelightbox-group="gallery">
-                                  <h1>View Image</h1>
-                              </a>
-                          </div>
-                      </div>      
+                        <div class="caption"></div>
+                        <img class="thumbnail" id="dd3" src="Gallery_2025/Img7.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img7.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+                            </a>
+                        </div>
+                    </div>
                     <div id="box" class="burst-side strawberry">
-                          <div class="caption"></div>
-                          <img class="thumbnail" id="dd3" src="Gallery_2025/Img11.jpeg" alt="#" />
-                          <div>
-                              <a class="lightbox" href="Gallery_2025/Img11.jpeg" data-littlelightbox-group="gallery">
-                                  <h1>View Image</h1>
-                              </a>
-                          </div>
-                      </div>       
+                        <div class="caption"></div>
+                        <img class="thumbnail" id="dd3" src="Gallery_2025/Img8.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img8.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+                            </a>
+                        </div>
+                    </div>
                     <div id="box" class="burst-side strawberry">
-                          <div class="caption"></div>
-                          <img class="thumbnail" id="dd3" src="Gallery_2025/Img12.jpeg" alt="#" />
-                          <div>
-                              <a class="lightbox" href="Gallery_2025/Img12.jpeg" data-littlelightbox-group="gallery">
-                                  <h1>View Image</h1>
-                              </a>
-                          </div>
-                      </div>     
+                        <div class="caption"></div>
+                        <img class="thumbnail" id="dd3" src="Gallery_2025/Img9.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img9.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+                            </a>
+                        </div>
+                    </div>
                     <div id="box" class="burst-side strawberry">
-                          <div class="caption"></div>
-                          <img class="thumbnail" id="dd3" src="Gallery_2025/Img13.jpeg" alt="#" />
-                          <div>
-                              <a class="lightbox" href="Gallery_2025/Img13.jpeg" data-littlelightbox-group="gallery">
-                                  <h1>View Image</h1>
-                              </a>
-                          </div>
-                      </div>    
+                        <div class="caption"></div>
+                        <img class="thumbnail" id="dd3" src="Gallery_2025/Img10.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img10.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+                            </a>
+                        </div>
+                    </div>
                     <div id="box" class="burst-side strawberry">
-                          <div class="caption"></div>
-                          <img class="thumbnail" id="dd3" src="Gallery_2025/Img14.jpeg" alt="#" />
-                          <div>
-                              <a class="lightbox" href="Gallery_2025/Img14.jpeg" data-littlelightbox-group="gallery">
-                                  <h1>View Image</h1>
-                              </a>
-                          </div>
-                      </div>     
+                        <div class="caption"></div>
+                        <img class="thumbnail" id="dd3" src="Gallery_2025/Img11.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img11.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+                            </a>
+                        </div>
+                    </div>
                     <div id="box" class="burst-side strawberry">
-                          <div class="caption"></div>
-                          <img class="thumbnail" id="dd3" src="Gallery_2025/Img15.jpeg" alt="#" />
-                          <div>
-                              <a class="lightbox" href="Gallery_2025/Img15.jpeg" data-littlelightbox-group="gallery">
-                                  <h1>View Image</h1>
-                              </a>
-                          </div>
-                      </div>
-                    
+                        <div class="caption"></div>
+                        <img class="thumbnail" id="dd3" src="Gallery_2025/Img12.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img12.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="box" class="burst-side strawberry">
+                        <div class="caption"></div>
+                        <img class="thumbnail" id="dd3" src="Gallery_2025/Img13.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img13.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="box" class="burst-side strawberry">
+                        <div class="caption"></div>
+                        <img class="thumbnail" id="dd3" src="Gallery_2025/Img14.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img14.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="box" class="burst-side strawberry">
+                        <div class="caption"></div>
+                        <img class="thumbnail" id="dd3" src="Gallery_2025/Img15.jpeg" alt="#" />
+                        <div>
+                            <a class="lightbox" href="Gallery_2025/Img15.jpeg" data-littlelightbox-group="gallery">
+                                <h1>View Image</h1>
+                            </a>
+                        </div>
+                    </div>
+
 
 
                 </div>
@@ -210,24 +212,32 @@
                             <source src="Gallery_2025/Video2.mp4" type="video/mp4" />
                         </video>
                     </div>
-                      <div class="col-sm-6">
-                          <video class="desktop-video" controls="" style="cursor: pointer">
-                              <source src="Gallery_2025/Video4.mp4" type="video/mp4" />
-                          </video>
-                      </div>
+                    <div class="col-sm-6">
+                        <video class="desktop-video" controls="" style="cursor: pointer">
+                            <source src="Gallery_2025/Video4.mp4" type="video/mp4" />
+                        </video>
+                    </div>
                 </div>
-                 <div class="row" style="padding-left: 22px; padding-top: 25px">
-                     <div class="col-sm-6">
-                         <video class="desktop-video" controls="" style="cursor: pointer">
-                             <source src="Gallery_2025/Video5.mp4" type="video/mp4" />
-                         </video>
-                     </div>
-                       <div class="col-sm-6">
-                          <video class="desktop-video" controls="" style="cursor: pointer">
-                              <source src="Gallery_2025/Video6.mp4" type="video/mp4" />
-                          </video>
-                      </div>
-                 </div>
+                <div class="row" style="padding-left: 22px; padding-top: 25px">
+                    <div class="col-sm-6">
+                        <video class="desktop-video" controls="" style="cursor: pointer">
+                            <source src="Gallery_2025/Video5.mp4" type="video/mp4" />
+                        </video>
+                    </div>
+                    <div class="col-sm-6">
+                        <video class="desktop-video" controls="" style="cursor: pointer">
+                            <source src="Gallery_2025/Video6.mp4" type="video/mp4" />
+                        </video>
+                    </div>
+                </div>
+                <div class="row" style="padding-left: 22px; padding-top: 25px">
+                    <div class="col-sm-6">
+                        <video class="desktop-video" controls="" style="cursor: pointer">
+                            <source src="Gallery_2025/Video18.mp4" type="video/mp4" />
+                        </video>
+                    </div>
+                    
+                </div>
             </div>
 
         </div>

@@ -87,91 +87,93 @@ Public Class CertificationReport
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Protected Sub ImportFromExcel(sender As Object, e As EventArgs) Handles btnUpload.Click
-
         Try
-
-            If certificateFileUpload.PostedFile.ContentLength > 0 Then
-
+            If certificateFileUpload.HasFile Then
                 Dim folderPath As String = Server.MapPath("~/CertificateFiles/")
-                Dim fileName = Convert.ToString(Guid.NewGuid())
+                Dim uniqueFileName As String = Guid.NewGuid().ToString() & "_" & Path.GetFileName(certificateFileUpload.FileName)
+                Dim fullFilePath As String = Path.Combine(folderPath, uniqueFileName)
 
-                Dim fileNameNew As String = fileName + "_" + certificateFileUpload.FileName
+                ' Save uploaded file
+                certificateFileUpload.SaveAs(fullFilePath)
 
-                ' SAVE THE SELECTED FILE IN THE ROOT DIRECTORY.
-                'certificateFileUpload.SaveAs(folderPath & Path.GetFileName(certificateFileUpload.FileName))
-                certificateFileUpload.SaveAs(folderPath & fileNameNew)
+                Dim dt As New DataTable()
 
-                'Dim SR As StreamReader = New StreamReader(folderPath & Path.GetFileName(certificateFileUpload.FileName))
-                Dim SR As StreamReader = New StreamReader(folderPath & fileNameNew)
-                Dim i As Long = 0
-                Dim line As String = SR.ReadLine()
-                Dim strArray As String() = line.Split(",")
-                Dim dt As DataTable = New DataTable()
-                Dim row As DataRow
+                Using SR As New StreamReader(fullFilePath)
+                    ' Read column headers
+                    Dim headerLine As String = SR.ReadLine()
+                    If String.IsNullOrEmpty(headerLine) Then
+                        lblMessage.Text = "The uploaded file is empty."
+                        lblMessage.ForeColor = Color.Red
+                        Return
+                    End If
 
-                For Each s As String In strArray
-                    dt.Columns.Add(New DataColumn(s))
-                Next
+                    Dim headers As String() = headerLine.Split(","c)
+                    For Each header As String In headers
+                        dt.Columns.Add(New DataColumn(header.Trim()))
+                    Next
 
-                While Not SR.EndOfStream
-
-                    strArray = SplitCSV(SR.ReadLine)
-                        If strArray.Length Then
-                            row = dt.NewRow()
-                            row.ItemArray = strArray
-                            dt.Rows.Add(row)
+                    ' Read data rows
+                    While Not SR.EndOfStream
+                        Dim values As String() = SplitCSV(SR.ReadLine())
+                        If values.Length = dt.Columns.Count Then
+                            dt.Rows.Add(values)
                         End If
+                    End While
+                End Using
 
-                End While
-
-
-                Dim count As Int32
-                count = dt.Rows.Count
+                ' Insert into DB
                 If dt.Rows.Count > 0 Then
                     Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
                     Using con As New MySqlConnection(constr)
+                        con.Open()
                         For Each dtrow As DataRow In dt.Rows
-                            Using cmd As New MySqlCommand("Insert_RunRegistrationUser")
-                                Using sda As New MySqlDataAdapter()
-                                    cmd.CommandType = CommandType.StoredProcedure
-                                    cmd.Parameters.Add(New MySqlParameter("bib_no", Convert.ToInt32(dtrow.Item("bib_no"))))
-                                    cmd.Parameters.Add(New MySqlParameter("start_time", (dtrow.Item("Start time"))))
-                                    cmd.Parameters.Add(New MySqlParameter("gun_time", (dtrow.Item("Gun time"))))
-                                    cmd.Parameters.Add(New MySqlParameter("split1", (dtrow.Item("Split1"))))
-                                    cmd.Parameters.Add(New MySqlParameter("finish_time", (dtrow.Item("Finish time"))))
-                                    cmd.Parameters.Add(New MySqlParameter("gross_time", (dtrow.Item("Gross time"))))
-                                    cmd.Parameters.Add(New MySqlParameter("net_time", (dtrow.Item("Net Time"))))
-                                    cmd.Parameters.Add(New MySqlParameter("overall_speed", (dtrow.Item("Overall Speed (kmph)"))))
-                                    cmd.Parameters.Add(New MySqlParameter("overall_pace", (dtrow.Item("Overall Pace (min/km)"))))
-                                    cmd.Parameters.Add(New MySqlParameter("category_rank", (dtrow.Item("Category Rank"))))
-                                    cmd.Parameters.Add(New MySqlParameter("gender_rank", (dtrow.Item("Gender Rank"))))
-                                    cmd.Parameters.Add(New MySqlParameter("overall_rank", (dtrow.Item("Overall Rank"))))
-                                    cmd.Parameters.Add(New MySqlParameter("event_category", (dtrow.Item("Event Category"))))
-                                    cmd.Parameters.Add(New MySqlParameter("event_subCategory", (dtrow.Item("Event Sub-Category"))))
-                                    cmd.Parameters.Add(New MySqlParameter("event_name", (dtrow.Item("Event Name"))))
-                                    cmd.Parameters.Add(New MySqlParameter("participate_name", (dtrow.Item("Participant Name"))))
-                                    cmd.Parameters.Add(New MySqlParameter("gender", (dtrow.Item("gender"))))
-                                    cmd.Parameters.Add(New MySqlParameter("email", (dtrow.Item("email"))))
-                                    cmd.Parameters.Add(New MySqlParameter("phone", (dtrow.Item("Phone"))))
-                                    cmd.Parameters.Add(New MySqlParameter("yearData", "2023"))
-                                    cmd.Connection = con
-                                    con.Open()
-                                    cmd.ExecuteNonQuery()
-                                    con.Close()
-                                    con.Dispose()
-                                End Using
+                            Using cmd As New MySqlCommand("Insert_RunRegistrationUser", con)
+                                cmd.CommandType = CommandType.StoredProcedure
+
+                                cmd.Parameters.AddWithValue("bib_no", Convert.ToInt32(dtrow("bib_no")))
+                                cmd.Parameters.AddWithValue("start_time", dtrow("Start time"))
+                                cmd.Parameters.AddWithValue("gun_time", dtrow("Gun time"))
+                                cmd.Parameters.AddWithValue("split1", dtrow("Split1"))
+                                cmd.Parameters.AddWithValue("finish_time", dtrow("Finish time"))
+                                cmd.Parameters.AddWithValue("gross_time", dtrow("Gross time"))
+                                cmd.Parameters.AddWithValue("net_time", dtrow("Net Time"))
+                                cmd.Parameters.AddWithValue("overall_speed", dtrow("Overall Speed (kmph)"))
+                                cmd.Parameters.AddWithValue("overall_pace", dtrow("Overall Pace (min/km)"))
+                                cmd.Parameters.AddWithValue("category_rank", dtrow("Category Rank"))
+                                cmd.Parameters.AddWithValue("gender_rank", dtrow("Gender Rank"))
+                                cmd.Parameters.AddWithValue("overall_rank", dtrow("Overall Rank"))
+                                cmd.Parameters.AddWithValue("event_category", dtrow("Event Category"))
+                                cmd.Parameters.AddWithValue("event_subCategory", dtrow("Event Sub-Category"))
+                                cmd.Parameters.AddWithValue("event_name", dtrow("Event Name"))
+                                cmd.Parameters.AddWithValue("participate_name", dtrow("Participant Name"))
+                                cmd.Parameters.AddWithValue("gender", dtrow("gender"))
+                                cmd.Parameters.AddWithValue("email", dtrow("email"))
+                                cmd.Parameters.AddWithValue("phone", dtrow("Phone"))
+                                cmd.Parameters.AddWithValue("yearData", dtrow("dateyear"))
+
+                                cmd.ExecuteNonQuery()
                             End Using
                         Next
                     End Using
+
+                    lblMessage.Text = $"{dt.Rows.Count} records successfully imported."
+                    lblMessage.ForeColor = Color.Green
+                Else
+                    lblMessage.Text = "No data rows found in file."
+                    lblMessage.ForeColor = Color.Red
                 End If
             Else
-                lblMessage.Text = "Please select a file"
+                lblMessage.Text = "Please select a file."
                 lblMessage.ForeColor = Color.Red
             End If
+
         Catch ex As Exception
-
+            lblMessage.Text = "An error occurred while processing the file."
+            lblMessage.ForeColor = Color.Red
+            ' Log the exception (optional: using a logger or writing to a file/event log)
         End Try
-
+        Me.BindGridView()
     End Sub
 
     ''' <summary>

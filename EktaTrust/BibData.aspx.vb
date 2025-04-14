@@ -39,10 +39,12 @@ Public Class BibData
         resultTable.Columns.Add("collect_bib")
 
         Try
+            'Dim connStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;" &
+            '                    "Data Source=" & filePath & ";" &
+            '                    "Extended Properties='Excel 12.0 Xml;HDR=YES;IMEX=1';"
             Dim connStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;" &
-                                "Data Source=" & filePath & ";" &
-                                "Extended Properties='Excel 12.0 Xml;HDR=YES;IMEX=1';"
-
+                        "Data Source=" & filePath & ";" &
+                        "Extended Properties=""Excel 12.0;HDR=YES;IMEX=1"";"
             Using conn As New OleDbConnection(connStr)
                 conn.Open()
                 Dim schemaTable As DataTable = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, Nothing)

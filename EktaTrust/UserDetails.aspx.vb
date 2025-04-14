@@ -111,7 +111,7 @@ Public Class UserDetails
             Using con As New MySqlConnection(constr)
                 Dim roleId = Session("RoleId").ToString()
                 con.Open()
-                Dim cmd As New MySqlCommand("Select RoleName,RoleId from role where RoleId=2", con)
+                Dim cmd As New MySqlCommand("Select RoleName,RoleId from role where RoleId!=1", con)
                 Dim da As New MySqlDataAdapter(cmd)
                 Dim ds As New DataSet()
                 da.Fill(ds)
