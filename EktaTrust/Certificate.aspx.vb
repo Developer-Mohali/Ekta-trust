@@ -22,9 +22,9 @@ Public Class Certificate
         Dim selectedYear As String = DdlYear.SelectedValue
         Dim dateTable As New DataTable()
 
-        Dim query As String = "SELECT ID, bib_no, participate_name, gender, Event_Name, Net_Time, year 
-                           FROM tblRunRegistrationUser 
-                           WHERE phone = @phone AND year = @year"
+        Dim query As String = "SELECT DISTINCT ID, bib_no, participate_name, gender, Event_Name, Net_Time, year 
+                       FROM tblRunRegistrationUser 
+                       WHERE phone = @phone AND year = @year"
 
         Using con As New MySqlConnection(constr)
             Using cmd As New MySqlCommand(query, con)
@@ -415,6 +415,7 @@ Public Class Certificate
             ' Time Parsing
             If IsDBNull(row("Net_Time")) OrElse String.IsNullOrWhiteSpace(row("Net_Time").ToString()) Then
                 Hrs = "" : min = "" : sec = ""
+
             Else
                 Dim timeParts() As String = row.Item("Net_Time").ToString().Trim().Split(":"c)
                 If timeParts.Length >= 3 Then

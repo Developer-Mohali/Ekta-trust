@@ -1,6 +1,8 @@
 ﻿Imports System.Drawing
 Imports System.IO
 Imports MySql.Data.MySqlClient
+Imports ExcelDataReader
+Imports System.Text
 
 Public Class CertificationReport
     Inherits System.Web.UI.Page
@@ -86,10 +88,102 @@ Public Class CertificationReport
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
+    'Protected Sub ImportFromExcel123(sender As Object, e As EventArgs) Handles btnUpload.Click
+    '    Try
+    '        If certificateFileUpload.HasFile Then
+    '            Dim folderPath As String = Server.MapPath("~/CertificateFiles/")
+    '            Dim uniqueFileName As String = Guid.NewGuid().ToString() & "_" & Path.GetFileName(certificateFileUpload.FileName)
+    '            Dim fullFilePath As String = Path.Combine(folderPath, uniqueFileName)
+
+    '            ' Save uploaded file
+    '            certificateFileUpload.SaveAs(fullFilePath)
+
+    '            Dim dt As New DataTable()
+
+    '            Using SR As New StreamReader(fullFilePath)
+    '                ' Read column headers
+    '                Dim headerLine As String = SR.ReadLine()
+    '                If String.IsNullOrEmpty(headerLine) Then
+    '                    lblMessage.Text = "The uploaded file is empty."
+    '                    lblMessage.ForeColor = Color.Red
+    '                    Return
+    '                End If
+
+    '                Dim headers As String() = headerLine.Split(","c)
+    '                For Each header As String In headers
+    '                    dt.Columns.Add(New DataColumn(header.Trim()))
+    '                Next
+
+    '                ' Read data rows
+    '                While Not SR.EndOfStream
+    '                    Dim values As String() = SplitCSV(SR.ReadLine())
+    '                    If values.Length = dt.Columns.Count Then
+    '                        dt.Rows.Add(values)
+    '                    End If
+    '                End While
+    '            End Using
+
+    '            ' Insert into DB
+    '            If dt.Rows.Count > 0 Then
+    '                Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+    '                Using con As New MySqlConnection(constr)
+    '                    con.Open()
+    '                    For Each dtrow As DataRow In dt.Rows
+    '                        Using cmd As New MySqlCommand("Insert_RunRegistrationUser", con)
+    '                            cmd.CommandType = CommandType.StoredProcedure
+
+    '                            cmd.Parameters.AddWithValue("bib_no", Convert.ToInt32(dtrow("bib_no")))
+    '                            cmd.Parameters.AddWithValue("start_time", dtrow("Start time"))
+    '                            cmd.Parameters.AddWithValue("gun_time", dtrow("Gun time"))
+    '                            cmd.Parameters.AddWithValue("split1", dtrow("Split1"))
+    '                            cmd.Parameters.AddWithValue("finish_time", dtrow("Finish time"))
+    '                            cmd.Parameters.AddWithValue("gross_time", dtrow("Gross time"))
+    '                            cmd.Parameters.AddWithValue("net_time", dtrow("Net Time"))
+    '                            cmd.Parameters.AddWithValue("overall_speed", dtrow("Overall Speed (kmph)"))
+    '                            cmd.Parameters.AddWithValue("overall_pace", dtrow("Overall Pace (min/km)"))
+    '                            cmd.Parameters.AddWithValue("category_rank", dtrow("Category Rank"))
+    '                            cmd.Parameters.AddWithValue("gender_rank", dtrow("Gender Rank"))
+    '                            cmd.Parameters.AddWithValue("overall_rank", dtrow("Overall Rank"))
+    '                            cmd.Parameters.AddWithValue("event_category", dtrow("Event Category"))
+    '                            cmd.Parameters.AddWithValue("event_subCategory", dtrow("Event Sub-Category"))
+    '                            cmd.Parameters.AddWithValue("event_name", dtrow("Event Name"))
+    '                            cmd.Parameters.AddWithValue("participate_name", dtrow("Participant Name"))
+    '                            cmd.Parameters.AddWithValue("gender", dtrow("gender"))
+    '                            cmd.Parameters.AddWithValue("email", dtrow("email"))
+    '                            cmd.Parameters.AddWithValue("phone", dtrow("Phone"))
+    '                            cmd.Parameters.AddWithValue("yearData", dtrow("dateyear"))
+
+    '                            cmd.ExecuteNonQuery()
+    '                        End Using
+    '                    Next
+    '                End Using
+
+    '                lblMessage.Text = $"{dt.Rows.Count} records successfully imported."
+    '                lblMessage.ForeColor = Color.Green
+    '            Else
+    '                lblMessage.Text = "No data rows found in file."
+    '                lblMessage.ForeColor = Color.Red
+    '            End If
+    '        Else
+    '            lblMessage.Text = "Please select a file."
+    '            lblMessage.ForeColor = Color.Red
+    '        End If
+    '    Catch ex As Exception
+    '        lblMessage.Text = "An error occurred while processing the file."
+    '        lblMessage.ForeColor = Color.Red
+    '        ' Log the exception (optional: using a logger or writing to a file/event log)
+    '    End Try
+    '    Me.BindGridView()
+    'End Sub
     Protected Sub ImportFromExcel(sender As Object, e As EventArgs) Handles btnUpload.Click
         Try
             If certificateFileUpload.HasFile Then
                 Dim folderPath As String = Server.MapPath("~/CertificateFiles/")
+                If Not Directory.Exists(folderPath) Then
+                    Directory.CreateDirectory(folderPath)
+                End If
+
                 Dim uniqueFileName As String = Guid.NewGuid().ToString() & "_" & Path.GetFileName(certificateFileUpload.FileName)
                 Dim fullFilePath As String = Path.Combine(folderPath, uniqueFileName)
 
@@ -98,30 +192,21 @@ Public Class CertificationReport
 
                 Dim dt As New DataTable()
 
-                Using SR As New StreamReader(fullFilePath)
-                    ' Read column headers
-                    Dim headerLine As String = SR.ReadLine()
-                    If String.IsNullOrEmpty(headerLine) Then
-                        lblMessage.Text = "The uploaded file is empty."
-                        lblMessage.ForeColor = Color.Red
-                        Return
-                    End If
+                ' Register encoding provider (only needed once per AppDomain)
+                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance)
 
-                    Dim headers As String() = headerLine.Split(","c)
-                    For Each header As String In headers
-                        dt.Columns.Add(New DataColumn(header.Trim()))
-                    Next
-
-                    ' Read data rows
-                    While Not SR.EndOfStream
-                        Dim values As String() = SplitCSV(SR.ReadLine())
-                        If values.Length = dt.Columns.Count Then
-                            dt.Rows.Add(values)
-                        End If
-                    End While
+                ' Read Excel file
+                Using stream As FileStream = File.Open(fullFilePath, FileMode.Open, FileAccess.Read)
+                    Using reader As IExcelDataReader = ExcelReaderFactory.CreateReader(stream)
+                        Dim result As DataSet = reader.AsDataSet(New ExcelDataSetConfiguration With {
+                        .ConfigureDataTable = Function(__) New ExcelDataTableConfiguration With {
+                            .UseHeaderRow = True
+                        }
+                    })
+                        dt = result.Tables(0)
+                    End Using
                 End Using
 
-                ' Insert into DB
                 If dt.Rows.Count > 0 Then
                     Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
 
@@ -131,13 +216,22 @@ Public Class CertificationReport
                             Using cmd As New MySqlCommand("Insert_RunRegistrationUser", con)
                                 cmd.CommandType = CommandType.StoredProcedure
 
+                                '
+                                ' Convert to just time if datetime is present
+                                Dim startTime As String = CleanTime(dtrow("Start time").ToString())
+                                Dim gunTime As String = CleanTime(dtrow("Gun time").ToString())
+                                Dim split1 As String = CleanTime(dtrow("Split1").ToString())
+                                Dim finishTime As String = CleanTime(dtrow("Finish time").ToString())
+                                Dim grossTime As String = CleanTime(dtrow("Gross time").ToString())
+                                Dim netTime As String = CleanTime(dtrow("Net Time").ToString())
+
                                 cmd.Parameters.AddWithValue("bib_no", Convert.ToInt32(dtrow("bib_no")))
-                                cmd.Parameters.AddWithValue("start_time", dtrow("Start time"))
-                                cmd.Parameters.AddWithValue("gun_time", dtrow("Gun time"))
-                                cmd.Parameters.AddWithValue("split1", dtrow("Split1"))
-                                cmd.Parameters.AddWithValue("finish_time", dtrow("Finish time"))
-                                cmd.Parameters.AddWithValue("gross_time", dtrow("Gross time"))
-                                cmd.Parameters.AddWithValue("net_time", dtrow("Net Time"))
+                                cmd.Parameters.AddWithValue("start_time", startTime)
+                                cmd.Parameters.AddWithValue("gun_time", gunTime)
+                                cmd.Parameters.AddWithValue("split1", split1)
+                                cmd.Parameters.AddWithValue("finish_time", finishTime)
+                                cmd.Parameters.AddWithValue("gross_time", grossTime)
+                                cmd.Parameters.AddWithValue("net_time", netTime)
                                 cmd.Parameters.AddWithValue("overall_speed", dtrow("Overall Speed (kmph)"))
                                 cmd.Parameters.AddWithValue("overall_pace", dtrow("Overall Pace (min/km)"))
                                 cmd.Parameters.AddWithValue("category_rank", dtrow("Category Rank"))
@@ -160,21 +254,27 @@ Public Class CertificationReport
                     lblMessage.Text = $"{dt.Rows.Count} records successfully imported."
                     lblMessage.ForeColor = Color.Green
                 Else
-                    lblMessage.Text = "No data rows found in file."
+                    lblMessage.Text = "No data rows found in the file."
                     lblMessage.ForeColor = Color.Red
                 End If
             Else
                 lblMessage.Text = "Please select a file."
                 lblMessage.ForeColor = Color.Red
             End If
-
         Catch ex As Exception
             lblMessage.Text = "An error occurred while processing the file."
             lblMessage.ForeColor = Color.Red
-            ' Log the exception (optional: using a logger or writing to a file/event log)
+            ' Optional: log ex.Message or ex.ToString()
         End Try
+
         Me.BindGridView()
     End Sub
+    Private Function CleanTime(value As String) As String
+        If DateTime.TryParse(value, Nothing) Then
+            Return DateTime.Parse(value).ToString("HH:mm:ss")
+        End If
+        Return value ' If not a valid datetime, just return it as-is
+    End Function
 
     ''' <summary>
     ''' Delete the Certification data from the grid view
