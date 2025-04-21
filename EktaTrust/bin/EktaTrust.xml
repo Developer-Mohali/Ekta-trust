@@ -391,13 +391,6 @@ To modify move field declaration from designer file to code-behind file.
  Bind the Certification data in the grid view
  </summary>
 </member>
-<member name="M:EktaTrust.CertificationReport.ImportFromExcel(System.Object,System.EventArgs)">
- <summary>
- Import data from CSV file and save in the DB
- </summary>
- <param name="sender"></param>
- <param name="e"></param>
-</member>
 <member name="M:EktaTrust.CertificationReport.gvMIP_RowDeleting(System.Object,System.Web.UI.WebControls.GridViewDeleteEventArgs)">
  <summary>
  Delete the Certification data from the grid view

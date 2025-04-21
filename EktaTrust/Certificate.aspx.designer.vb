@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class Certificate
-
+    
     '''<summary>
     '''lblErrorMsg control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblErrorMsg As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''DdlYear control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DdlYear As Global.System.Web.UI.WebControls.DropDownList
-
+    
     '''<summary>
     '''YearValidator control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents YearValidator As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+    
     '''<summary>
     '''txtMobileNo control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtMobileNo As Global.System.Web.UI.WebControls.TextBox
-
+    
     '''<summary>
     '''RequiredValidatorMobile control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredValidatorMobile As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+    
     '''<summary>
     '''RegularExpressionValidator1 control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RegularExpressionValidator1 As Global.System.Web.UI.WebControls.RegularExpressionValidator
-
+    
     '''<summary>
     '''SearchButton control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SearchButton As Global.System.Web.UI.WebControls.Button
-
+    
     '''<summary>
     '''hdnMessageCertificate control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hdnMessageCertificate As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
+    
     '''<summary>
     '''getRec control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents getRec As Global.System.Web.UI.WebControls.GridView
-
+    
     '''<summary>
     '''txtName control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtName As Global.System.Web.UI.WebControls.TextBox
-
+    
     '''<summary>
     '''RequiredtxtName control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredtxtName As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+    
     '''<summary>
     '''txtMobile control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtMobile As Global.System.Web.UI.WebControls.TextBox
-
+    
     '''<summary>
     '''RequiredtxtMobile control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredtxtMobile As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+    
     '''<summary>
     '''RegulartxtMobile control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RegulartxtMobile As Global.System.Web.UI.WebControls.RegularExpressionValidator
-
+    
     '''<summary>
     '''txtComment control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtComment As Global.System.Web.UI.WebControls.TextBox
-
+    
     '''<summary>
     '''RequiredtxtComment control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class Certificate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredtxtComment As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+    
     '''<summary>
     '''btnSubmit control.
     '''</summary>
