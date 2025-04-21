@@ -188,7 +188,7 @@ Public Class UserDetails
                             If dt.Rows.Count > 0 Then
                                 MessageUpdated.Text = "<b>Already exists.</b>"
                             Else
-                                Using cmd As New MySqlCommand("Insert into User(Name,EmailAddress,Address,MobileNumber,Password,CreatedDate,RoleId)values(@Name,@EmailAddress,@Address,@MobileNumber,@Password,@CreatedDate,@RoleId)")
+                                Using cmd As New MySqlCommand("Insert into User(Name,EmailAddress,Address,MobileNumber,Password,CreatedDate,RoleId,BIBUserLimit)values(@Name,@EmailAddress,@Address,@MobileNumber,@Password,@CreatedDate,@RoleId,@BIBUserLimit)")
                                     Using sda As New MySqlDataAdapter()
 
                                         cmd.Parameters.AddWithValue("@Name", txtName.Text.Trim())
@@ -198,6 +198,7 @@ Public Class UserDetails
                                         cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim())
                                         cmd.Parameters.AddWithValue("@RoleId", drpRole.SelectedValue.Trim())
                                         cmd.Parameters.AddWithValue("@CreatedDate", DateAndTime.Now)
+                                        cmd.Parameters.AddWithValue("@BIBUserLimit", txtBibUserLimit.Text.Trim())
                                         cmd.Connection = con
                                         cmd.ExecuteNonQuery()
                                         Dim subject = "Register New User"
@@ -222,14 +223,15 @@ Public Class UserDetails
         Else
             Try
                 Using con As New MySqlConnection(constr)
-                    Using cmd As New MySqlCommand("UPDATE User SET  Name=@Name,EmailAddress=@EmailAddress,Address=@Address,MobileNumber=@MobileNumber,RoleId=@RoleId WHERE Id = @Id", con)
+                    Using cmd As New MySqlCommand("UPDATE User SET  Name=@Name,EmailAddress=@EmailAddress,Address=@Address,MobileNumber=@MobileNumber,RoleId=@RoleId,BIBUserLimit=@BIBUserLimit WHERE Id = @Id", con)
                         cmd.Parameters.AddWithValue("@Id", Convert.ToInt32(id.Text))
                         cmd.Parameters.AddWithValue("@Name", txtName.Text)
                         cmd.Parameters.AddWithValue("@EmailAddress", txtEmail.Text)
                         cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
                         cmd.Parameters.AddWithValue("@MobileNumber", txtMobile.Text)
                         cmd.Parameters.AddWithValue("@RoleId", drpRole.SelectedValue)
-                       
+                        cmd.Parameters.AddWithValue("@BIBUserLimit", txtBibUserLimit.Text.Trim())
+
                         cmd.Connection = con
                         con.Open()
                         cmd.ExecuteNonQuery()

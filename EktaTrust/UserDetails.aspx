@@ -73,6 +73,13 @@ z-index: 10000;
         #id {
             display:none;
         }
+            input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0; 
+    }
 </style>
 
     <div class="container-fluid main-container">
@@ -179,6 +186,10 @@ z-index: 10000;
      <div class="form-group">
 <label>Mobile Number: </label>
 <asp:TextBox ID="txtMobile" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
+</div>
+<div class="form-group">
+<label>BIB Add User Limit: </label>
+<asp:TextBox ID="txtBibUserLimit" cols="40" Rows="6" runat="server" TextMode="Number" class="form-control" style="width:95%"/>
 </div>
      <div class="form-group">
 <label>Address: </label>

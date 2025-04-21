@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports System.IO
+Imports Microsoft.VisualBasic.ApplicationServices
 Imports MySql.Data.MySqlClient
 
 Public Class BIBDataRunner
@@ -73,8 +74,8 @@ Public Class BIBDataRunner
     End Sub
 
 
-    Protected Sub gvMIP_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)
-        Dim Id As Integer = Convert.ToInt32(gvEvent.DataKeys(e.RowIndex).Values(0))
+    Protected Sub RowDeleting(Id As Integer)
+        ''Dim Id As Integer = Convert.ToInt32(gvEvent.DataKeys(e.RowIndex).Values(0))
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
             Using cmd As New MySqlCommand("delete from bibdata WHERE ID = @Id", con)
@@ -82,7 +83,7 @@ Public Class BIBDataRunner
                 cmd.Connection = con
                 con.Open()
                 cmd.ExecuteNonQuery()
-                MessageUpdated.Text = "<b>Delete successfull.</b>"
+                MessageUpdated.Text = "<b>Delete successfully</b>"
                 con.Close()
                 con.Dispose()
             End Using
@@ -115,6 +116,13 @@ Public Class BIBDataRunner
         Try
 
             If BIBDataFileUpload.PostedFile.ContentLength > 0 Then
+                Dim fileExt As String = Path.GetExtension(BIBDataFileUpload.FileName).ToLower()
+
+                If fileExt <> ".csv" Then
+                    MessageUpdated.Text = "Only .csv file are allowed."
+                    MessageUpdated.ForeColor = Color.Red
+                    Return
+                End If
 
                 Dim folderPath As String = Server.MapPath("~/Files/BibData/")
                 Dim fileName = Convert.ToString(Guid.NewGuid())
@@ -158,6 +166,19 @@ Public Class BIBDataRunner
                 Dim currentYear As Integer = DateTime.Now.Year
                 Dim count As Int32
                 count = dt.Rows.Count
+
+                'if user is not superAdmin, check limit permission to add more bib data...
+                If roleId = 3 Then
+                    ' get user assigned limit
+                    Dim userInfo As Dictionary(Of String, String) = GetUserDetails(userId)
+                    Dim bibUserCount As Integer = GetBIBCountByUserId(userId)
+                    Dim userAddCount = (Convert.ToInt32(userInfo("BIBUserLimit")) - bibUserCount)
+                    If userAddCount < count Then
+                        MessageUpdated.Text = "<b style='color: red;'>Please contact to Administrator, Limit Exceed: " + userAddCount.ToString() + "</b>"
+                        Return
+                    End If
+                End If
+
                 If dt.Rows.Count > 0 Then
                     Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
                     Using con As New MySqlConnection(constr)
@@ -217,5 +238,231 @@ Public Class BIBDataRunner
         End If
 
         Return list.ToArray()
+    End Function
+
+    Protected Sub AddBIB_Click(sender As Object, e As EventArgs)
+        lblError.Visible = False
+        txtCategory.Visible = True
+        txtName.Visible = True
+        ddlGender.Visible = True
+        txtBloodGroup.Visible = True
+        txtTshirtSize.Visible = True
+        txtMobile.Visible = True
+        txtRunCategory.Visible = True
+        txtBibNumber.Visible = True
+        txtYear.Visible = True
+        Reset()
+        Me.ModalPopupExtender1.Show()
+    End Sub
+
+    Protected Sub gvMIP_RowAction(sender As Object, e As GridViewCommandEventArgs)
+        ' Get the selected row's ID
+        Dim id As Integer = Convert.ToInt32(gvEvent.DataKeys(e.CommandArgument).Value)
+
+        ' called delete function..
+        If e.CommandName = "DeleteRow" Then
+            RowDeleting(id)
+            Return
+        Else
+            ' Store it in a hidden field for saving after editing
+            hfEditID.Value = id.ToString()
+
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand("SELECT * FROM bibdata WHERE ID = @Id", con)
+                    cmd.Parameters.AddWithValue("@Id", id)
+                    con.Open()
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        If reader.Read() Then
+                            txtBankRef.Text = reader("BankReferenceNo").ToString()
+                            txtCategory.Text = reader("CategoryName").ToString()
+                            txtName.Text = reader("RunnerName").ToString()
+                            ddlGender.SelectedValue = reader("Gender").ToString()
+                            txtBloodGroup.Text = reader("BloodGroup").ToString()
+                            txtTshirtSize.Text = reader("TShirtSize").ToString()
+                            txtMobile.Text = reader("MobileNumber").ToString()
+                            txtRunCategory.SelectedValue = reader("RunCatagory").ToString()
+                            txtBibNumber.Text = reader("BIBNo").ToString()
+                            txtYear.Text = reader("Year").ToString()
+                            txtEmail.Text = reader("EmailID").ToString()
+                        End If
+                    End Using
+                End Using
+            End Using
+
+            ' Show the modal popup
+            ModalPopupExtender1.Show()
+        End If
+    End Sub
+
+
+    Protected Sub btnSave_Click(sender As Object, e As EventArgs)
+        Dim bankReference As String = txtBankRef.Text
+        Dim category As String = txtCategory.Text
+        Dim name As String = txtName.Text
+        Dim gender As String = ddlGender.SelectedValue
+        Dim email As String = txtEmail.Text
+        Dim bloodGroup As String = txtBloodGroup.Text
+        Dim tshirtSize As String = txtTshirtSize.Text
+        Dim mobile As String = txtMobile.Text
+        Dim runCategory As String = txtRunCategory.Text
+        Dim bibNumber As String = txtBibNumber.Text
+        Dim year As String = txtYear.Text
+        Dim idToUpdate As Integer = 0
+        Integer.TryParse(hfEditID.Value, idToUpdate)
+
+        If idToUpdate > 0 Then
+            UpdateBibData()
+        Else
+            Dim IsPermitted As Boolean = HavingBIBLimit()
+            If (IsPermitted = False) Then
+                MessageUpdated.Text = "<b style='color: red;'>Adding Limit Exceed, Please contact Administrator</b>"
+                Return
+            End If
+            Dim roleId As Integer = 0
+            Dim userId As Integer = 0
+            If Session("RoleId") IsNot Nothing Then
+                roleId = Convert.ToInt32(Session("RoleId"))
+            End If
+            If Session("UserId") IsNot Nothing Then
+                userId = Convert.ToInt32(Session("UserId"))
+            End If
+
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Try
+                Using con As New MySqlConnection(constr)
+                    Using cmd As New MySqlCommand("InsertBIBData")
+                        Using sda As New MySqlDataAdapter()
+                            cmd.CommandType = CommandType.StoredProcedure
+                            cmd.Parameters.Add(New MySqlParameter("p_BankReferenceNo", bankReference))
+                            cmd.Parameters.Add(New MySqlParameter("p_BIBNo", bibNumber))
+                            cmd.Parameters.Add(New MySqlParameter("p_MobileNumber", mobile))
+                            cmd.Parameters.Add(New MySqlParameter("p_RunnerName", name))
+                            cmd.Parameters.Add(New MySqlParameter("p_RunCatagory", runCategory))
+                            cmd.Parameters.Add(New MySqlParameter("p_TShirtSize", tshirtSize))
+                            cmd.Parameters.Add(New MySqlParameter("p_Gender", gender))
+                            cmd.Parameters.Add(New MySqlParameter("p_BloodGroup", bloodGroup))
+                            cmd.Parameters.Add(New MySqlParameter("p_EmailID", email))
+                            cmd.Parameters.Add(New MySqlParameter("p_RoleID", (roleId)))
+                            cmd.Parameters.Add(New MySqlParameter("p_CategoryName", category))
+                            cmd.Parameters.Add(New MySqlParameter("p_Year", (year)))
+                            cmd.Parameters.Add(New MySqlParameter("p_UserId", (userId)))
+                            cmd.Connection = con
+                            con.Open()
+                            cmd.ExecuteNonQuery()
+                            con.Close()
+                            con.Dispose()
+                        End Using
+                    End Using
+                End Using
+            Catch ex As Exception
+                lblError.Text = ex.ToString()
+                lblError.Visible = True
+            End Try
+            MessageUpdated.Text = "<b>Added Successfully</b>"
+            BindGridView()
+        End If
+    End Sub
+
+    Protected Sub UpdateBibData()
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+        Using con As New MySqlConnection(constr)
+            Dim query As String
+
+            query = "UPDATE bibdata SET BankReferenceNo=@bankRef, CategoryName=@cat, RunnerName=@name, gender=@gender, BloodGroup=@blood, TShirtSize=@size, MobileNumber=@mobile, RunCatagory=@run, BIBNo=@bib, Year=@year, EmailID=@email WHERE ID=@id"
+
+            Using cmd As New MySqlCommand(query, con)
+                cmd.Parameters.AddWithValue("@bankRef", txtBankRef.Text.Trim())
+                cmd.Parameters.AddWithValue("@cat", txtCategory.Text.Trim())
+                cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
+                cmd.Parameters.AddWithValue("@gender", ddlGender.SelectedValue)
+                cmd.Parameters.AddWithValue("@blood", txtBloodGroup.Text.Trim())
+                cmd.Parameters.AddWithValue("@size", txtTshirtSize.Text.Trim())
+                cmd.Parameters.AddWithValue("@mobile", txtMobile.Text.Trim())
+                cmd.Parameters.AddWithValue("@run", txtRunCategory.Text.Trim())
+                cmd.Parameters.AddWithValue("@bib", txtBibNumber.Text.Trim())
+                cmd.Parameters.AddWithValue("@year", txtYear.Text.Trim())
+                cmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim())
+                cmd.Parameters.AddWithValue("@id", hfEditID.Value.Trim())
+
+                con.Open()
+                cmd.ExecuteNonQuery()
+            End Using
+        End Using
+
+        ' Clear form and refresh
+        hfEditID.Value = ""
+        MessageUpdated.Text = "<b>Updated Successfully</b>"
+        BindGridView()
+    End Sub
+
+    Public Function HavingBIBLimit() As Boolean
+        Dim count As Integer = 0
+        Dim userId As Integer = 0
+        Dim roleId As Integer = 0
+
+        If Session("RoleId") IsNot Nothing Then
+            roleId = Convert.ToInt32(Session("RoleId"))
+        End If
+        If Session("UserId") IsNot Nothing Then
+            userId = Convert.ToInt32(Session("UserId"))
+        End If
+
+        ' check login is superAdmin,if yes grant true permission to add bib data..
+        If roleId = 1 Then
+            Return True
+        Else
+            Dim userInfo As Dictionary(Of String, String) = GetUserDetails(userId)
+            If userInfo.Count > 0 Then
+                count = GetBIBCountByUserId(userId)
+                ' return true if limit not exceed to assigned limit..
+                If Convert.ToInt32(userInfo("BIBUserLimit")) < count Then
+                    Return True
+                End If
+            End If
+        End If
+
+        Return False
+    End Function
+
+    Public Function GetBIBCountByUserId(userId As Integer) As Integer
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+        Using con As New MySqlConnection(constr)
+            Using cmd As New MySqlCommand("SELECT COUNT(*) FROM bibdata WHERE UserId = @userId and RoleID = @roleId", con)
+                cmd.Parameters.AddWithValue("@userId", userId)
+                cmd.Parameters.AddWithValue("@roleId", 3)
+                con.Open()
+                Return Convert.ToInt32(cmd.ExecuteScalar())
+            End Using
+        End Using
+    End Function
+
+    Public Function GetUserDetails(userId As Integer) As Dictionary(Of String, String)
+        Dim userDetails As New Dictionary(Of String, String)()
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+        Try
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand("select id,Name,EmailAddress,Address,MobileNumber,role.roleName,User.BIBUserLimit from User INNER JOIN role on User.RoleId=role.RoleId WHERE id = @id", con)
+                    cmd.Parameters.AddWithValue("@id", userId.ToString())
+                    con.Open()
+
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        If reader.Read() Then
+                            'userDetails("ID") = reader("id").ToString()
+                            'userDetails("Name") = reader("Name").ToString()
+                            'userDetails("EmailAddress") = reader("EmailAddress").ToString()
+                            'userDetails("RoleName") = reader("roleName").ToString()
+                            userDetails("BIBUserLimit") = reader("BIBUserLimit").ToString()
+
+                        End If
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            Console.Write(ex.ToString())
+        End Try
+        Return userDetails
     End Function
 End Class
