@@ -40,15 +40,6 @@
                     </div>
                        <div id="box" class="burst-side strawberry">
                         <div class="caption"></div>
-                        <img class="thumbnail" id="dd" src="Gallery_2025/Img19.jpeg" alt="#" />
-                        <div>
-                            <a class="lightbox" href="Gallery_2025/Img19.jpeg" data-littlelightbox-group="gallery">
-                                <h1>View Image</h1>
-                            </a>
-                        </div>
-                    </div>
-                       <div id="box" class="burst-side strawberry">
-                        <div class="caption"></div>
                         <img class="thumbnail" id="dd" src="Gallery_2025/Img20.jpeg" alt="#" />
                         <div>
                             <a class="lightbox" href="Gallery_2025/Img20.jpeg" data-littlelightbox-group="gallery">
@@ -128,7 +119,7 @@
                             </a>
                         </div>
                     </div>
-                    ----
+         
                     <div id="box" class="burst-side strawberry">
                         <div class="caption"></div>
                         <img class="thumbnail" id="dd" src="Gallery_2025/Img16.jpeg" alt="#" />
