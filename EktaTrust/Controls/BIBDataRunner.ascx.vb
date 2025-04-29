@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports System.IO
+Imports System.Net
 Imports Microsoft.VisualBasic.ApplicationServices
 Imports MySql.Data.MySqlClient
 
@@ -465,4 +466,17 @@ Public Class BIBDataRunner
         End Try
         Return userDetails
     End Function
+
+    Protected Sub DownloadFile()
+        Using client As New WebClient()
+            Dim folderPath As String = Server.MapPath("~/Files/BibData/BIBInsertSample.csv")
+            Dim destinationPath As String = "C:\Downloads\BIBInsertSample.csv"
+            Try
+                client.DownloadFile(folderPath, destinationPath)
+                Console.WriteLine("File downloaded successfully to: " & destinationPath)
+            Catch ex As Exception
+                Console.WriteLine("Error downloading file: " & ex.Message)
+            End Try
+        End Using
+    End Sub
 End Class

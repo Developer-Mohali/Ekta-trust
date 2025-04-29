@@ -55,6 +55,7 @@ function TotalRecord() {
                 
             <asp:Label ID="lblMessage" ForeColor="Green" runat="server" />
             
+              <asp:Button ID="btnDownload" Text="Download Sample" runat="server" OnClick="DownloadFile" />
         </td>         
                   </tr>
 
