@@ -208,6 +208,7 @@
     <Content Include="ContactDetails.aspx" />
     <Content Include="Contributors.aspx" />
     <Content Include="Cooking.aspx" />
+    <Content Include="CreativeCompetitionGallery2023\1-2025.jpeg" />
     <Content Include="CreativeCompetitionGallery2023\1.jpeg" />
     <Content Include="CreativeCompetitionGallery2023\2.jpeg" />
     <Content Include="CreativeCompetitionGallery2023\3.jpeg" />
@@ -236,8 +237,10 @@
     <Content Include="Donate.aspx" />
     <Content Include="DonationDetails.aspx" />
     <Content Include="EktaCreativeCompetition.aspx" />
+    <Content Include="EktaCreativeCompetition2025.aspx" />
     <Content Include="EktaCreativeCompetitionGallery.aspx" />
     <Content Include="EktaCreativeCompetitionGallery2023.aspx" />
+    <Content Include="EktaCreativeCompetitionGallery2025.aspx" />
     <Content Include="EktaSapath.aspx" />
     <Content Include="EktaTrustImage\MIP Advertisement1.jpg" />
     <Content Include="EktaTrustImage\MIP-2019.jfif" />
@@ -551,6 +554,7 @@
     <Content Include="PaymentProcess.aspx" />
     <Content Include="PaymentRequest.aspx" />
     <Content Include="PaymentResponse.aspx" />
+    <Content Include="RegistrationCreativeCompetition.aspx" />
     <Content Include="RPSC2020.aspx" />
     <Content Include="RpscMipGallery2025.aspx" />
     <Content Include="RunForEquality2018\collage.jpg" />
@@ -810,6 +814,15 @@
     <Content Include="doc\Objective Doc1.docx" />
     <Content Include="doc\EktaCertificatedesign.pdf" />
     <Content Include="doc\ekta-certificate.pdf" />
+    <Content Include="doc\BookReviewCompetition2025.pdf" />
+    <Content Include="doc\CanvassPaintingCompetition2025.pdf" />
+    <Content Include="doc\DrawingSketchCompetitionChildren2025.pdf" />
+    <Content Include="doc\EktaNavNirmanTrustReelCompetition.pdf" />
+    <Content Include="doc\EktaSpeechcompetition.pdf" />
+    <Content Include="doc\EssayCompetitionforAdults2025.pdf" />
+    <Content Include="doc\EssayCompetitionforChildren2025.pdf" />
+    <Content Include="doc\SongsCompetition2025.pdf" />
+    <Content Include="doc\फेंसीड्रेसकॉम्पिटीशन2025एकतानवनिर्माणट्रस्ट.pdf" />
     <None Include="ScriptLibrary\jquery-1.4.1-vsdoc.js" />
     <Content Include="ScriptLibrary\jquery-1.4.1.js" />
     <Content Include="ScriptLibrary\jquery-1.4.1.min.js" />
@@ -1307,6 +1320,13 @@
       <DependentUpon>EktaCreativeCompetition.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="EktaCreativeCompetition2025.aspx.designer.vb">
+      <DependentUpon>EktaCreativeCompetition2025.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EktaCreativeCompetition2025.aspx.vb">
+      <DependentUpon>EktaCreativeCompetition2025.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="EktaCreativeCompetitionGallery.aspx.designer.vb">
       <DependentUpon>EktaCreativeCompetitionGallery.aspx</DependentUpon>
     </Compile>
@@ -1320,6 +1340,13 @@
     <Compile Include="EktaCreativeCompetitionGallery2023.aspx.vb">
       <DependentUpon>EktaCreativeCompetitionGallery2023.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EktaCreativeCompetitionGallery2025.aspx.designer.vb">
+      <DependentUpon>EktaCreativeCompetitionGallery2025.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EktaCreativeCompetitionGallery2025.aspx.vb">
+      <DependentUpon>EktaCreativeCompetitionGallery2025.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="EktaSapath.aspx.designer.vb">
       <DependentUpon>EktaSapath.aspx</DependentUpon>
@@ -1585,6 +1612,13 @@
     </Compile>
     <Compile Include="Profile.aspx.vb">
       <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistrationCreativeCompetition.aspx.designer.vb">
+      <DependentUpon>RegistrationCreativeCompetition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrationCreativeCompetition.aspx.vb">
+      <DependentUpon>RegistrationCreativeCompetition.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="RPSC2020.aspx.designer.vb">

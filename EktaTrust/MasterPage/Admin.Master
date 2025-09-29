@@ -279,10 +279,10 @@ body section {
         </ul>
     </li>
 
-    <li class="dropdown">
+   <%-- <li class="dropdown">
         <a href="../Events" class="dropdown-toggle" data-toggle="dropdown">Registration <i class="fa fa-angle-down"></i></a>
         <ul class="dropdown-menu">
-            <li class="menu-item"><a href="../EventPrize">Run Registration</a></li>
+           <li class="menu-item"><a href="../EventPrize">Run Registration</a></li>
 
             <li class="dropdown dropdown-submenu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matrimonial</a>
@@ -297,7 +297,9 @@ body section {
             <li class="menu-item"><a href="../AtrocitiesReporting.aspx">Atrocities Reporting</a></li>
             <li class="menu-item"><a href="../MigrantsRegistration.aspx">Migrants Registration</a></li>
         </ul>
-    </li>
+    </li>--%>
+
+    <li class="menu-item"><a href="../EktaCreativeCompetition2025.aspx">Creative Competition</a></li>
 
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Programs <i class="fa fa-angle-down"></i></a>
@@ -347,6 +349,22 @@ body section {
                     <li class="menu-item"><a href="/IntercasteMarriageScheme.aspx">Intercaste Marriage Scheme</a></li>
                 </ul>
             </li>
+
+             <%--<li class="menu-item"><a href="../EventPrize">Run Registration</a></li>--%>
+
+             <li class="dropdown dropdown-submenu">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matrimonial</a>
+                 <ul class="dropdown-menu">
+                     <li class="menu-item"><a href="../MatrimonialInformation.aspx">Matrimonial Registration</a></li>
+                     <li class="menu-item"><a href="../MatrimonialLogin">Matrimonial Login</a></li>
+                 </ul>
+             </li>
+
+             <li class="menu-item"><a href="../Enroll.aspx">Students Registration</a></li>
+             <li class="menu-item"><a href="../CareerCounselling.aspx">Career Counselling</a></li>
+             <li class="menu-item"><a href="../AtrocitiesReporting.aspx">Atrocities Reporting</a></li>
+             <li class="menu-item"><a href="../MigrantsRegistration.aspx">Migrants Registration</a></li>
+
         </ul>
     </li>
 

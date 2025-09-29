@@ -164,6 +164,7 @@
              <div id="CreativeCompetition" class="panel-collapse collapse" style="height: auto;">
                  <a href="../EktaCreativeCompetitionGallery.aspx" class="list-group-item">Ekta Creative Competition 2022</a>
                  <a href="../EktaCreativeCompetitionGallery2023.aspx" class="list-group-item">Ekta Creative Competition 2023</a>
+                 <a href="../EktaCreativeCompetitionGallery2025.aspx" class="list-group-item">Ekta Creative Competition 2025</a>
              </div>
          </div>
 

@@ -410,8 +410,8 @@ cursor: pointer;
                                        <img src="Gallery_2023/1.jpeg" class="img-fluid" alt="" style="height: 150px;"/></a>
                                 </div>
                                 <div class="media-body">
-                                    <a href="../EktaCreativeCompetition.aspx"> <h3 class="media-heading">Ekta Creative Competition</h3></a>
-                                    <a href="../EktaCreativeCompetition.aspx" target="_self" class="btn btn-default">Click Here </a>
+                                    <a href="../EktaCreativeCompetition2025.aspx"> <h3 class="media-heading">Ekta Creative Competition</h3></a>
+                                    <a href="../EktaCreativeCompetition2025.aspx" target="_self" class="btn btn-default">Click Here </a>
                                 </div>
                             </div>
                         </div>
