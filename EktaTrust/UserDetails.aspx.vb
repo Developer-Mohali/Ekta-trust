@@ -40,11 +40,9 @@ Public Class UserDetails
                             'cmd.Parameters.AddWithValue("@Name", txtSearch.Text.Trim())
                             Dim ds As New DataSet()
                             sda.Fill(ds)
-                            If ds.Tables(0).Rows.Count > 0 Then
-                                lblRecords.Text = ds.Tables(0).Rows.Count
-                                gvUser.DataSource = ds
-                                gvUser.DataBind()
-                            End If
+                            lblRecords.Text = ds.Tables(0).Rows.Count
+                            gvUser.DataSource = ds
+                            gvUser.DataBind()
                             con.Close()
                             con.Dispose()
                         End Using
@@ -60,7 +58,6 @@ Public Class UserDetails
                             lblRecords.Text = ds.Tables(0).Rows.Count
                             gvUser.DataSource = ds
                             gvUser.DataBind()
-                            gvUser.EmptyDataText = "No records found."
                             con.Close()
                             con.Dispose()
                         End Using
@@ -109,15 +106,24 @@ Public Class UserDetails
             Using con As New MySqlConnection(constr)
                 Dim roleId = Session("RoleId").ToString()
                 con.Open()
-                Dim cmd As New MySqlCommand("Select RoleName,RoleId from role where RoleId!=1", con)
+                Dim cmd As New MySqlCommand("Select RoleName,RoleId from role where RoleId <> 1", con)
                 Dim da As New MySqlDataAdapter(cmd)
                 Dim ds As New DataSet()
                 da.Fill(ds)
+                con.Close()
+
                 drpRole.DataSource = ds
                 drpRole.DataTextField = "RoleName"
                 drpRole.DataValueField = "RoleId"
                 drpRole.DataBind()
-                con.Close()
+
+                'Select "BIB User" by text
+                Dim item = drpRole.Items.FindByText("BIB User")
+                If item IsNot Nothing Then
+                    drpRole.ClearSelection()
+                    item.Selected = True
+                End If
+
             End Using
         Catch ex As Exception
 
@@ -174,11 +180,10 @@ Public Class UserDetails
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs)
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         If id.Text = "" Then
-
             Try
                 Using con As New MySqlConnection(constr)
                     Dim body As String
-                    Using result As New MySqlCommand("Select EmailAddress From User WHERE LOWER(EmailAddress) = LOWER(@Email)")
+                    Using result As New MySqlCommand("Select EmailAddress From User WHERE LOWER(EmailAddress) = LOWER(@EmailAddress)")
                         Using sda1 As New MySqlDataAdapter(result)
                             result.Parameters.AddWithValue("@EmailAddress", txtEmail.Text.Trim())
                             result.Connection = con
@@ -186,7 +191,7 @@ Public Class UserDetails
                             Dim dt As New DataTable()
                             sda1.Fill(dt)
                             If dt.Rows.Count > 0 Then
-                                MessageUpdated.Text = "<b style='color:red;>Email already exists.</b>"
+                                MessageUpdated.Text = "<b style='color:red;'>Email already exists.</b>"
                             Else
                                 Using cmd As New MySqlCommand("Insert into User(Name,EmailAddress,Address,MobileNumber,Password,CreatedDate,RoleId,BIBUserLimit)values(@Name,@EmailAddress,@Address,@MobileNumber,@Password,@CreatedDate,@RoleId,@BIBUserLimit)")
                                     Using sda As New MySqlDataAdapter()
@@ -198,7 +203,7 @@ Public Class UserDetails
                                         cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim())
                                         cmd.Parameters.AddWithValue("@RoleId", drpRole.SelectedValue.Trim())
                                         cmd.Parameters.AddWithValue("@CreatedDate", DateAndTime.Now)
-                                        cmd.Parameters.AddWithValue("@BIBUserLimit", txtBibUserLimit.Text.Trim())
+                                        cmd.Parameters.AddWithValue("@BIBUserLimit", If(String.IsNullOrWhiteSpace(txtBibUserLimit.Text), DBNull.Value, txtBibUserLimit.Text.Trim()))
                                         cmd.Connection = con
                                         cmd.ExecuteNonQuery()
                                         Dim subject = "Register New User"
@@ -206,13 +211,16 @@ Public Class UserDetails
                                         SendEmail.sendMailUser(txtEmail.Text, subject, body)
                                         Reset()
                                         MessageUpdated.Text = "<b>Submit Successfull.</b>"
-                                        gvUser.EditIndex = -1
-                                        BindGridView()
                                         con.Close()
                                         con.Dispose()
+                                        'gvUser.EditIndex = -1
+                                        'BindGridView()
+
                                     End Using
                                 End Using
                             End If
+                            con.Close()
+                            con.Dispose()
                         End Using
                     End Using
                 End Using
@@ -233,8 +241,6 @@ Public Class UserDetails
                     End If
 
                 End If
-
-
                 Using con As New MySqlConnection(constr)
                     Using cmd As New MySqlCommand("UPDATE User SET  Name=@Name,EmailAddress=@EmailAddress,Address=@Address,MobileNumber=@MobileNumber,RoleId=@RoleId,BIBUserLimit=@BIBUserLimit,Password=@Password WHERE Id = @Id", con)
                         cmd.Parameters.AddWithValue("@Id", Convert.ToInt32(id.Text))
@@ -245,15 +251,15 @@ Public Class UserDetails
                         cmd.Parameters.AddWithValue("@RoleId", drpRole.SelectedValue)
                         cmd.Parameters.AddWithValue("@BIBUserLimit", If(String.IsNullOrWhiteSpace(txtBibUserLimit.Text), DBNull.Value, txtBibUserLimit.Text.Trim()))
                         cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim())
-
                         cmd.Connection = con
                         con.Open()
                         cmd.ExecuteNonQuery()
-                        gvUser.EditIndex = -1
-                        BindGridView()
-                        MessageUpdated.Text = "<b>Updated successfull.</b>"
                         con.Close()
                         con.Dispose()
+                        ' gvUser.EditIndex = -1
+                        'BindGridView()
+                        MessageUpdated.Text = "<b>Updated successfull.</b>"
+
                     End Using
                 End Using
             Catch ex As Exception
@@ -275,6 +281,8 @@ Public Class UserDetails
 
                 con.Open()
                 Return Convert.ToInt32(cmd.ExecuteScalar()) > 0
+                con.Close()
+                con.Dispose()
             End Using
         End Using
     End Function
@@ -308,6 +316,7 @@ Public Class UserDetails
         txtName.Text = String.Empty
         txtPassword.Text = String.Empty
         txtConfirmPass.Text = String.Empty
+        txtSearch.Text = String.Empty
         id.Text = String.Empty
     End Function
 End Class

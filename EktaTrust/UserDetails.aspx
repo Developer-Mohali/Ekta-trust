@@ -80,6 +80,13 @@ z-index: 10000;
         appearance: none;
         margin: 0; 
     }
+
+.gv-center-header th {
+    text-align: center !important;
+    vertical-align: middle;
+}
+
+ 
 </style>
 
     <div class="container-fluid main-container">
@@ -95,42 +102,50 @@ z-index: 10000;
 
 <br />
 
-        <h2 class="admin-heading">User Details</h2>
+ <h2 class="admin-heading">User Details</h2>
            
-    <div class="table-responsive">
-       <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green"></asp:Label>
-        <table class="table table-bordered table-hover table-striped">
+<div class="table-responsive">
+    <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green"></asp:Label>
+    <table class="table table-bordered table-hover table-striped">
            
         <tbody>
            
-    <tr><td>Search By:
-        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True"
-            >
-        <asp:ListItem Text="All"></asp:ListItem>
-        <asp:ListItem Text="Name"></asp:ListItem>
-        <asp:ListItem Text="Email Address"></asp:ListItem>       
-        
-                 
-        </asp:DropDownList> 
-    </td><td>       
-        Search
-            <asp:TextBox ID="txtSearch" Text="" runat="server"></asp:TextBox>
-        </td><td>
-            <asp:Button ID="Button1" runat="server" Text="Search" OnClick="Button1_Click"/>
-             <asp:Label ID="Label2" runat="server" Font-Bold="True" ForeColor="Red" Text=""></asp:Label>
-            
-        </td>
-        <td>
-             <asp:Button ID="Button2" runat="server" Text="Add New User" OnClick="Button2_Click" UseSubmitBehavior="False"/>
-        </td>
+   <tr>
+       <td style="border-right:none;">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; width:100%;">
+
+        <!-- Left: Search -->
+        <div style="flex:1 1 auto; min-width:250px;">
+            Search
+            <asp:TextBox ID="txtSearch" runat="server" style="width:200px;"></asp:TextBox>
+            <asp:Button ID="Button1" runat="server" Text="Search" OnClick="Button1_Click" />
+        </div>
+
+        <!-- Right: Add -->
+        <div style="margin-top:5px;">
+            <asp:Button ID="Button2" runat="server" Text="Add New User"
+                OnClick="Button2_Click" UseSubmitBehavior="False" />
+        </div>
+
+    </div>
+</td>
+
+
     </tr>
+
+
     
 
  <br/>
           
-            <asp:GridView ID="gvUser" runat="server" OnRowDeleting="gvUser_RowDeleting" class="table table-bordered table-hover table-striped" AutoGenerateColumns="false" DataKeyNames="id"  PageSize="25" 
-   EmptyDataText="No records has been added." OnRowDataBound="gvUser_RowDataBound" Style="font-weight: normal;" >
-<Columns> 
+<asp:GridView ID="gvUser" runat="server" OnRowDeleting="gvUser_RowDeleting" class="table table-bordered table-hover table-striped gv-center-header" AutoGenerateColumns="false" DataKeyNames="id"  PageSize="25" 
+   ShowHeaderWhenEmpty="true" EmptyDataText="No records found." OnRowDataBound="gvUser_RowDataBound" Style="font-weight: normal;" >
+    <EmptyDataTemplate>
+    <div style="text-align:center; font-weight:bold;">
+        No records found.
+    </div>
+    </EmptyDataTemplate>
+<Columns>
     
    <asp:BoundField HeaderText="Name" DataField="Name" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
     <asp:BoundField HeaderText="Email Address" DataField="EmailAddress" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
