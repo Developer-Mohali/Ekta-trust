@@ -105,6 +105,14 @@
            </a>
         </div>
     </div>
+
+     <div class="container text-center">
+        <div class="col-lg-12">          
+           <a href="CreativeCompetitionRegistered.aspx" class="nb-btn-circle"><i class="fa fa-trophy"></i>
+                <p>Creative Competition</p>
+            </a>
+        </div>
+    </div>
    </div>
     
     

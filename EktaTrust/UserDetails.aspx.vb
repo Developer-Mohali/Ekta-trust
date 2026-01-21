@@ -57,12 +57,10 @@ Public Class UserDetails
                             con.Open()
                             Dim ds As New DataSet()
                             sda.Fill(ds)
-                            'cmd.Parameters.AddWithValue("@Name", txtSearch.Text.Trim())
-                            If ds.Tables(0).Rows.Count > 0 Then
-                                lblRecords.Text = ds.Tables(0).Rows.Count
-                                gvUser.DataSource = ds
-                                gvUser.DataBind()
-                            End If
+                            lblRecords.Text = ds.Tables(0).Rows.Count
+                            gvUser.DataSource = ds
+                            gvUser.DataBind()
+                            gvUser.EmptyDataText = "No records found."
                             con.Close()
                             con.Dispose()
                         End Using
@@ -147,15 +145,17 @@ Public Class UserDetails
                 Using sdr As MySqlDataReader = cmd.ExecuteReader()
                     While (sdr.Read())
                         Dim roleId = Session("RoleId").ToString()
+                        btnUpdate.Text = "Update"
                         lblId.Visible = True
-                            txtName.Text = sdr("Name").ToString()
-                            txtEmail.Text = sdr("EmailAddress").ToString()
-                            txtMobile.Text = sdr("MobileNumber").ToString()
-                            txtAddress.Text = sdr("Address").ToString()
-                        txtPassword.Visible = False
-                        txtConfirmPass.Visible = False
-                        lblPassword.Visible = False
-                        lblConfirmPass.Visible = False
+                        txtName.Text = sdr("Name").ToString()
+                        txtEmail.Text = sdr("EmailAddress").ToString()
+                        hdnOriginalEmail.Value = sdr("EmailAddress").ToString()
+                        txtMobile.Text = sdr("MobileNumber").ToString()
+                        txtAddress.Text = sdr("Address").ToString()
+                        txtPassword.Attributes("value") = sdr("Password").ToString()
+                        txtConfirmPass.Attributes("value") = sdr("Password").ToString()
+
+                        drpRole.SelectedValue = sdr("RoleId").ToString()
 
                     End While
                 End Using
@@ -178,7 +178,7 @@ Public Class UserDetails
             Try
                 Using con As New MySqlConnection(constr)
                     Dim body As String
-                    Using result As New MySqlCommand("Select EmailAddress From User WHERE EmailAddress =@EmailAddress")
+                    Using result As New MySqlCommand("Select EmailAddress From User WHERE LOWER(EmailAddress) = LOWER(@Email)")
                         Using sda1 As New MySqlDataAdapter(result)
                             result.Parameters.AddWithValue("@EmailAddress", txtEmail.Text.Trim())
                             result.Connection = con
@@ -186,7 +186,7 @@ Public Class UserDetails
                             Dim dt As New DataTable()
                             sda1.Fill(dt)
                             If dt.Rows.Count > 0 Then
-                                MessageUpdated.Text = "<b>Already exists.</b>"
+                                MessageUpdated.Text = "<b style='color:red;>Email already exists.</b>"
                             Else
                                 Using cmd As New MySqlCommand("Insert into User(Name,EmailAddress,Address,MobileNumber,Password,CreatedDate,RoleId,BIBUserLimit)values(@Name,@EmailAddress,@Address,@MobileNumber,@Password,@CreatedDate,@RoleId,@BIBUserLimit)")
                                     Using sda As New MySqlDataAdapter()
@@ -222,15 +222,29 @@ Public Class UserDetails
             End Try
         Else
             Try
+                If Not String.Equals(txtEmail.Text.Trim(),
+                     hdnOriginalEmail.Value.Trim(),
+                     StringComparison.OrdinalIgnoreCase) Then
+
+                    ' Email changed → check duplicate
+                    If IsEmailDuplicate(txtEmail.Text) Then
+                        MessageUpdated.Text = "<b style='color:red;'>Email already exists.</b>"
+                        Exit Sub
+                    End If
+
+                End If
+
+
                 Using con As New MySqlConnection(constr)
-                    Using cmd As New MySqlCommand("UPDATE User SET  Name=@Name,EmailAddress=@EmailAddress,Address=@Address,MobileNumber=@MobileNumber,RoleId=@RoleId,BIBUserLimit=@BIBUserLimit WHERE Id = @Id", con)
+                    Using cmd As New MySqlCommand("UPDATE User SET  Name=@Name,EmailAddress=@EmailAddress,Address=@Address,MobileNumber=@MobileNumber,RoleId=@RoleId,BIBUserLimit=@BIBUserLimit,Password=@Password WHERE Id = @Id", con)
                         cmd.Parameters.AddWithValue("@Id", Convert.ToInt32(id.Text))
                         cmd.Parameters.AddWithValue("@Name", txtName.Text)
                         cmd.Parameters.AddWithValue("@EmailAddress", txtEmail.Text)
                         cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
                         cmd.Parameters.AddWithValue("@MobileNumber", txtMobile.Text)
                         cmd.Parameters.AddWithValue("@RoleId", drpRole.SelectedValue)
-                        cmd.Parameters.AddWithValue("@BIBUserLimit", txtBibUserLimit.Text.Trim())
+                        cmd.Parameters.AddWithValue("@BIBUserLimit", If(String.IsNullOrWhiteSpace(txtBibUserLimit.Text), DBNull.Value, txtBibUserLimit.Text.Trim()))
+                        cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim())
 
                         cmd.Connection = con
                         con.Open()
@@ -246,10 +260,25 @@ Public Class UserDetails
 
             End Try
         End If
-        
+
         gvUser.EditIndex = -1
         BindGridView()
     End Sub
+
+    Private Function IsEmailDuplicate(email As String) As Boolean
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+        Using con As New MySqlConnection(constr)
+            Using cmd As New MySqlCommand("SELECT COUNT(*) FROM User WHERE LOWER(EmailAddress) = LOWER(@Email)", con)
+
+                cmd.Parameters.AddWithValue("@Email", email.Trim())
+
+                con.Open()
+                Return Convert.ToInt32(cmd.ExecuteScalar()) > 0
+            End Using
+        End Using
+    End Function
+
 
     Protected Sub gvUser_RowDataBound(sender As Object, e As GridViewRowEventArgs)
         If e.Row.RowType = DataControlRowType.DataRow Then
@@ -271,12 +300,14 @@ Public Class UserDetails
     End Sub
 
     Public Function Reset()
-        txtAddress.Text = ""
-        txtEmail.Text = ""
-        txtMobile.Text = ""
-        txtName.Text = ""
-        txtPassword.Text = ""
-        txtConfirmPass.Text = ""
-        id.Text = ""
+        hdnOriginalEmail.Value = String.Empty
+        btnUpdate.Text = "Add"
+        txtAddress.Text = String.Empty
+        txtEmail.Text = String.Empty
+        txtMobile.Text = String.Empty
+        txtName.Text = String.Empty
+        txtPassword.Text = String.Empty
+        txtConfirmPass.Text = String.Empty
+        id.Text = String.Empty
     End Function
 End Class

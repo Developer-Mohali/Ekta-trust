@@ -215,6 +215,7 @@
     <Content Include="CreativeCompetitionGallery2023\4.jpeg" />
     <Content Include="CreativeCompetitionGallery2023\5.jpeg" />
     <Content Include="CreativeCompetitionGallery2023\6.jpeg" />
+    <Content Include="CreativeCompetitionRegistered.aspx" />
     <Content Include="CssGallery\additional-methods.js" />
     <Content Include="CssGallery\jquery.min.js" />
     <Content Include="CssGallery\jquery.validate.js" />
@@ -823,6 +824,7 @@
     <Content Include="doc\EssayCompetitionforChildren2025.pdf" />
     <Content Include="doc\SongsCompetition2025.pdf" />
     <Content Include="doc\फेंसीड्रेसकॉम्पिटीशन2025एकतानवनिर्माणट्रस्ट.pdf" />
+    <Content Include="doc\Result-EKTA-CREATIVE-COMPETITION-2025.pdf" />
     <None Include="ScriptLibrary\jquery-1.4.1-vsdoc.js" />
     <Content Include="ScriptLibrary\jquery-1.4.1.js" />
     <Content Include="ScriptLibrary\jquery-1.4.1.min.js" />
@@ -1085,6 +1087,8 @@
     <Content Include="UnaGallery\Image-5.png" />
     <Content Include="UnaGallery\Image-6.png" />
     <Content Include="RunForEquality2019.aspx" />
+    <Content Include="UpdateUserCreativeCompetition.aspx" />
+    <Content Include="UploadCreativeCompetition.aspx" />
     <Content Include="UpscMipGallery.aspx" />
     <Content Include="UpscMipGallery2025.aspx" />
     <Content Include="UserChangePassword.aspx" />
@@ -1290,6 +1294,13 @@
     </Compile>
     <Compile Include="Cooking.aspx.vb">
       <DependentUpon>Cooking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreativeCompetitionRegistered.aspx.designer.vb">
+      <DependentUpon>CreativeCompetitionRegistered.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreativeCompetitionRegistered.aspx.vb">
+      <DependentUpon>CreativeCompetitionRegistered.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Dhodsar.aspx.designer.vb">
@@ -2156,6 +2167,20 @@
     </Compile>
     <Compile Include="RunForEquality2019.aspx.vb">
       <DependentUpon>RunForEquality2019.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateUserCreativeCompetition.aspx.designer.vb">
+      <DependentUpon>UpdateUserCreativeCompetition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateUserCreativeCompetition.aspx.vb">
+      <DependentUpon>UpdateUserCreativeCompetition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UploadCreativeCompetition.aspx.designer.vb">
+      <DependentUpon>UploadCreativeCompetition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadCreativeCompetition.aspx.vb">
+      <DependentUpon>UploadCreativeCompetition.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UpscMipGallery.aspx.designer.vb">

@@ -416,6 +416,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.BIBDataRunner._btnAddBIB">
+<summary>
+btnAddBIB control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.BIBDataRunner._BIBDataFileUpload">
 <summary>
 BIBDataFileUpload control.
@@ -437,6 +446,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.BIBDataRunner._lblMessage">
 <summary>
 lblMessage control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._btnDownload">
+<summary>
+btnDownload control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -473,6 +491,222 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.BIBDataRunner._gvEvent">
 <summary>
 gvEvent control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._btnShowPopup">
+<summary>
+btnShowPopup control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._ModalPopupExtender1">
+<summary>
+ModalPopupExtender1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._pnlpopup">
+<summary>
+pnlpopup control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._lblError">
+<summary>
+lblError control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._hfEditID">
+<summary>
+hfEditID control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._txtBankRef">
+<summary>
+txtBankRef control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._txtBibNumber">
+<summary>
+txtBibNumber control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._txtCategory">
+<summary>
+txtCategory control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._txtName">
+<summary>
+txtName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._RequiredFieldValidator3">
+<summary>
+RequiredFieldValidator3 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._ddlGender">
+<summary>
+ddlGender control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._rfvGender">
+<summary>
+rfvGender control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._txtEmail">
+<summary>
+txtEmail control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._txtBloodGroup">
+<summary>
+txtBloodGroup control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._txtTshirtSize">
+<summary>
+txtTshirtSize control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._txtMobile">
+<summary>
+txtMobile control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._RequiredValidatorMobile">
+<summary>
+RequiredValidatorMobile control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._RegularExpressionValidator2">
+<summary>
+RegularExpressionValidator2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._txtRunCategory">
+<summary>
+txtRunCategory control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._RequiredFieldValidator1">
+<summary>
+RequiredFieldValidator1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._txtYear">
+<summary>
+txtYear control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._RequiredFieldValidator4">
+<summary>
+RequiredFieldValidator4 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._btnAdd">
+<summary>
+btnAdd control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._btnCancel">
+<summary>
+btnCancel control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1655,6 +1889,87 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.CreativeCompetitionRegistered._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.CreativeCompetitionRegistered._MessageUpdated">
+<summary>
+MessageUpdated control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.CreativeCompetitionRegistered._txtSearch">
+<summary>
+txtSearch control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.CreativeCompetitionRegistered._drpContest">
+<summary>
+drpContest control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.CreativeCompetitionRegistered._btnSearch">
+<summary>
+btnSearch control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.CreativeCompetitionRegistered._lblmsg">
+<summary>
+lblmsg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.CreativeCompetitionRegistered._btnAdd">
+<summary>
+btnAdd control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.CreativeCompetitionRegistered._gvEvent">
+<summary>
+gvEvent control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.CreativeCompetitionRegistered._lblRecords">
+<summary>
+lblRecords control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.DonationDetails._MessageUpdated">
 <summary>
 MessageUpdated control.
@@ -1889,6 +2204,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.EktaCreativeCompetition._ScriptManager1">
+<summary>
+ScriptManager1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.EktaCreativeCompetitionGallery._GallerySideMenuControl">
 <summary>
 GallerySideMenuControl control.
@@ -1899,6 +2223,15 @@ To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
 <member name="F:EktaTrust.EktaCreativeCompetitionGallery2023._GallerySideMenuControl">
+<summary>
+GallerySideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.EktaCreativeCompetitionGallery2025._GallerySideMenuControl">
 <summary>
 GallerySideMenuControl control.
 </summary>
@@ -5042,6 +5375,150 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.Profile._Button1">
 <summary>
 Button1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._lblErrorMsg">
+<summary>
+lblErrorMsg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._lblErrorMsgMobile">
+<summary>
+lblErrorMsgMobile control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._RequiredFieldValidator1">
+<summary>
+RequiredFieldValidator1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._RegularExpressionValidator1">
+<summary>
+RegularExpressionValidator1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._textName">
+<summary>
+textName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._textEmail">
+<summary>
+textEmail control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._RequiredFieldValidator2">
+<summary>
+RequiredFieldValidator2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._RegExp1">
+<summary>
+RegExp1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._textMobile">
+<summary>
+textMobile control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._RequiredFieldValidator3">
+<summary>
+RequiredFieldValidator3 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._drpContest">
+<summary>
+drpContest control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._TextAddress">
+<summary>
+TextAddress control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._FileUpload">
+<summary>
+FileUpload control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._chbCondition">
+<summary>
+chbCondition control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._lblConditionMessage">
+<summary>
+lblConditionMessage control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.RegistrationCreativeCompetition._ButtonSubmitMessage">
+<summary>
+ButtonSubmitMessage control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -8459,6 +8936,177 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.UpdateUserCreativeCompetition._AdminSideMenuControl">
+<summary>
+AdminSideMenuControl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UpdateUserCreativeCompetition._lblErrorMsg">
+<summary>
+lblErrorMsg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UpdateUserCreativeCompetition._lblErrorMsgMobile">
+<summary>
+lblErrorMsgMobile control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UpdateUserCreativeCompetition._textName">
+<summary>
+textName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UpdateUserCreativeCompetition._textEmail">
+<summary>
+textEmail control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UpdateUserCreativeCompetition._textMobile">
+<summary>
+textMobile control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UpdateUserCreativeCompetition._drpContest">
+<summary>
+drpContest control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UpdateUserCreativeCompetition._TextAddress">
+<summary>
+TextAddress control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UpdateUserCreativeCompetition._FileUpload">
+<summary>
+FileUpload control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UpdateUserCreativeCompetition._litExistingFiles">
+<summary>
+litExistingFiles control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UpdateUserCreativeCompetition._lblFileError">
+<summary>
+lblFileError control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UpdateUserCreativeCompetition._ButtonSubmitMessage">
+<summary>
+ButtonSubmitMessage control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UploadCreativeCompetition._lblSuccess">
+<summary>
+lblSuccess control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UploadCreativeCompetition._lblError">
+<summary>
+lblError control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UploadCreativeCompetition._hdnIDClient">
+<summary>
+hdnIDClient control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UploadCreativeCompetition._hdnMobileClient">
+<summary>
+hdnMobileClient control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UploadCreativeCompetition._FileUpload">
+<summary>
+FileUpload control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UploadCreativeCompetition._lblMessage">
+<summary>
+lblMessage control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UploadCreativeCompetition._btnSubmit">
+<summary>
+btnSubmit control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.UpscMipGallery._GallerySideMenuControl">
 <summary>
 GallerySideMenuControl control.
@@ -8684,6 +9332,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.UserDetails._txtBibUserLimit">
+<summary>
+txtBibUserLimit control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.UserDetails._txtAddress">
 <summary>
 txtAddress control.
@@ -8750,6 +9407,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.UserDetails._btnCancel">
 <summary>
 btnCancel control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.UserDetails._hdnOriginalEmail">
+<summary>
+hdnOriginalEmail control.
 </summary>
 <remarks>
 Auto-generated field.

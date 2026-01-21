@@ -29,6 +29,7 @@
            <li><a href="DonationDetails.aspx">Donation Details</a></li>
            <li><a href="CertificationReport.aspx">Certification</a></li>
            <li><a href="FeedbackAndSuggestion.aspx">Feedback And Suggestion</a></li>
+           <li><a href="CreativeCompetitionRegistered.aspx">Creative Competition</a></li>
          </ul>
            
      </div>

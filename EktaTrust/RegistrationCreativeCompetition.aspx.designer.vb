@@ -122,6 +122,15 @@ Partial Public Class RegistrationCreativeCompetition
     Protected WithEvents TextAddress As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''FileUpload control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FileUpload As Global.System.Web.UI.WebControls.FileUpload
+
+    '''<summary>
     '''chbCondition control.
     '''</summary>
     '''<remarks>

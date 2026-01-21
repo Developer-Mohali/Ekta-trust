@@ -34,7 +34,7 @@
             }
         }
 </script>
-        <style type="text/css">
+ <style type="text/css">
 .modalBackground
 {
 background-color: Gray;
@@ -112,8 +112,9 @@ z-index: 10000;
         
                  
         </asp:DropDownList> 
-    </td><td> Search
-            <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
+    </td><td>       
+        Search
+            <asp:TextBox ID="txtSearch" Text="" runat="server"></asp:TextBox>
         </td><td>
             <asp:Button ID="Button1" runat="server" Text="Search" OnClick="Button1_Click"/>
              <asp:Label ID="Label2" runat="server" Font-Bold="True" ForeColor="Red" Text=""></asp:Label>
@@ -167,7 +168,7 @@ z-index: 10000;
  </div>    
  <div class="modal-body" >
      <from id="form1">
-<div class="form-group">
+<div class="form-group" style="display:none">
 <asp:Label ID="lblId" runat="server" Text="ID:"></asp:Label>
    <asp:Label ID="id" runat="server"/>
 </div>
@@ -193,7 +194,7 @@ z-index: 10000;
 </div>
      <div class="form-group">
 <label>Address: </label>
-<asp:TextBox ID="txtAddress" cols="40" Rows="4" runat="server" TextMode="MultiLine" class="form-control" style="width:95%"/>
+<asp:TextBox ID="txtAddress" cols="40" Rows="1" runat="server" TextMode="MultiLine" class="form-control" style="width:95%"/>
 </div>
   <div class="form-group">
  <asp:Label ID="lblPassword" runat="server" Text="Password:"/>
@@ -208,7 +209,7 @@ z-index: 10000;
 </div>
 
 <div class="form-group">
-<asp:Button ID="btnUpdate" CommandName="Update" runat="server" class="btn btn-primary btn-lg"  Text="Update" OnClick="btnUpdate_Click"/>
+<asp:Button ID="btnUpdate" CommandName="Update" runat="server" class="btn btn-primary btn-lg"  Text="Add" OnClick="btnUpdate_Click"/>
 <asp:Button ID="btnCancel" runat="server"  class="btn btn-primary btn-lg" Text="Cancel"  />
 </div>
 </from>
@@ -222,14 +223,27 @@ z-index: 10000;
   </div>
 </div>
 </div>
-
+<asp:HiddenField ID="hdnOriginalEmail" runat="server" />
 <style>
  label.error {             
             color: red;   
             display:inline-flex;                 
         }
 </style>
-     <script type ="text/javascript" >                
+
+    <% If Not IsPostBack Then %>
+<script type="text/javascript">
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            document.getElementById('<%= txtSearch.ClientID %>').value = '';
+        }, 300);
+    });
+</script>
+<% End If %>
+
+
+
+     <script type ="text/javascript" >
          $(document).ready(function () {  
              $("#form1").validate({  
                  rules: {  
@@ -298,5 +312,5 @@ z-index: 10000;
              }
              
          }
-    </script>  
+     </script>  
 </asp:Content>
