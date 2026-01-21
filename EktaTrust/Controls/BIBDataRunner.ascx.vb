@@ -455,7 +455,7 @@ Public Class BIBDataRunner
                             'userDetails("Name") = reader("Name").ToString()
                             'userDetails("EmailAddress") = reader("EmailAddress").ToString()
                             'userDetails("RoleName") = reader("roleName").ToString()
-                            userDetails("BIBUserLimit") = reader("BIBUserLimit").ToString()
+                            userDetails("BIBUserLimit") = If(String.IsNullOrEmpty(Convert.ToString(reader("BIBUserLimit"))), "0", Convert.ToString(reader("BIBUserLimit")))
 
                         End If
                     End Using
@@ -468,15 +468,24 @@ Public Class BIBDataRunner
     End Function
 
     Protected Sub DownloadFile()
-        Using client As New WebClient()
-            Dim folderPath As String = Server.MapPath("~/Files/BibData/BIBInsertSample.csv")
-            Dim destinationPath As String = "C:\Downloads\BIBInsertSample.csv"
-            Try
-                client.DownloadFile(folderPath, destinationPath)
-                Console.WriteLine("File downloaded successfully to: " & destinationPath)
-            Catch ex As Exception
-                Console.WriteLine("Error downloading file: " & ex.Message)
-            End Try
-        End Using
+        Dim folderPath As String = Server.MapPath("~/Files/BibData/BIBInsertSample.csv")
+        Dim fileName As String = "BIBInsertSample.csv"
+
+        If File.Exists(folderPath) Then
+            ' Set response headers for file download
+            Response.Clear()
+            Response.ContentType = "text/csv"
+            Response.AddHeader("Content-Disposition", "attachment; filename=" & fileName)
+
+            ' Write file to response stream
+            Response.WriteFile(folderPath)
+
+            ' End the response
+            Response.Flush()
+            Response.End()
+        Else
+            ' Handle file not found
+            Response.Write("File not found")
+        End If
     End Sub
 End Class
