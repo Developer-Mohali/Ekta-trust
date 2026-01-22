@@ -23,13 +23,13 @@ Partial Public Class BIBDataRunner
     Protected WithEvents MessageUpdated As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''btnAddBIB control.
+    '''AddCount control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddBIB As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents AddCount As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''BIBDataFileUpload control.
@@ -50,15 +50,6 @@ Partial Public Class BIBDataRunner
     Protected WithEvents btnUpload As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''lblMessage control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblMessage As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''btnDownload control.
     '''</summary>
     '''<remarks>
@@ -66,6 +57,15 @@ Partial Public Class BIBDataRunner
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnDownload As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnAddBIB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAddBIB As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''txtSearch control.
@@ -165,6 +165,15 @@ Partial Public Class BIBDataRunner
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtBibNumber As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''RequiredBiBNo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredBiBNo As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''txtCategory control.
@@ -290,7 +299,7 @@ Partial Public Class BIBDataRunner
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtYear As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtYear As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''RequiredFieldValidator4 control.

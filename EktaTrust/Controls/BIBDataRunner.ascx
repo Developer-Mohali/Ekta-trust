@@ -41,8 +41,9 @@ function TotalRecord() {
         <h2 class="admin-heading">BIB Data</h2>
            
     <div class="table-responsive">
-       <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green" ClientIDMode="Static"></asp:Label>
-                     <asp:Button ID="btnAddBIB" runat="server" Text="Add New" OnClick="AddBIB_Click" UseSubmitBehavior="False" style=" float: right; margin-top: 10px;" />
+       <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green"></asp:Label>
+       <asp:Label ID="AddCount" runat="server" Text="" ClientIDMode="Static"></asp:Label>
+
         <table class="table table-bordered table-hover table-striped">
            
         <tbody>
@@ -51,18 +52,19 @@ function TotalRecord() {
         <td> Upload CSV file
            <asp:FileUpload ID="BIBDataFileUpload" style="display:inline-block;margin-left: 12px;" runat="server" />
         </td><td>
-           <asp:Button ID="btnUpload" Text="Upload" runat="server" OnClick="ImportFromExcel" />
-                
-            <asp:Label ID="lblMessage" ForeColor="Green" runat="server" />
-            
-              <asp:Button ID="btnDownload" Text="Download Sample" runat="server" OnClick="DownloadFile" />
+           <asp:Button ID="btnUpload" Text="Upload" runat="server" OnClientClick="$('#loader').show();" OnClick="ImportFromExcel" />
+                            
+              <asp:Button ID="btnDownload" Text="Download Sample CSV File" runat="server" OnClick="DownloadFile" />
+              <asp:Button ID="btnAddBIB" runat="server" Text="Add New" OnClick="AddBIB_Click" UseSubmitBehavior="False" style="float: right;" />
         </td>         
                   </tr>
 
             <br />
     <tr>
         <td> Search by Bib No
+            <asp:Panel runat="server" DefaultButton="btnSearch" style="display: inline;">
             <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
+                </asp:Panel>
         </td><td>
             <asp:Button ID="btnSearch" runat="server" Text="Search" 
                 />
@@ -123,20 +125,21 @@ function TotalRecord() {
         <asp:Textbox ID="txtBankRef" runat="server" class="form-control" Width="95%" />
     </div>
      <div class="form-group">
-        <label>BIB Number: </label>
+        <label>BIB Number: <span style="color:red">*</span></label>
         <asp:Textbox ID="txtBibNumber" runat="server" class="form-control" Width="95%" />
+         <asp:RequiredFieldValidator ID="RequiredBiBNo" ControlToValidate="txtBibNumber" runat="server" ErrorMessage="BIB No. is Required" ValidationGroup="BibDataSave" ForeColor="Red" Display="Dynamic" />
         </div>
     <div class="form-group">
     <label>Category: </label>
-        <asp:Textbox ID="txtCategory" runat="server" class="form-control" Width="95%" />
+        <asp:Textbox ID="txtCategory" runat="server" class="form-control" Width="95%" Text="Registration For RUN FOR EQUALITY" />
     </div>
     <div class="form-group">
-    <label>Name:  </label>
+    <label>Runner Name:  <span style="color:red">*</span></label>
     <asp:TextBox ID="txtName" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
      <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ControlToValidate="txtName" runat="server" ErrorMessage="Name is Required" ValidationGroup="BibDataSave" ForeColor="Red" Display="Dynamic" />
     </div>
     <div class="form-group">
-           <label>Gender: </label>
+           <label>Gender:  <span style="color:red">*</span></label>
            <asp:DropDownList ID="ddlGender" runat="server" class="form-control" Width="95%">
                 <asp:ListItem Text="Select Gender" Value="" />
                 <asp:ListItem Text="Male" Value="Male" />
@@ -157,7 +160,7 @@ function TotalRecord() {
         <label>T-Shirt size: </label>
         <asp:DropDownList ID="txtTshirtSize" runat="server" class="form-control" Width="95%">
            <asp:ListItem Text="Select T-Shirt Size" Value="" />
-           <asp:ListItem Text="XS" Value="XS" />
+          <%-- <asp:ListItem Text="XS" Value="XS" />--%>
            <asp:ListItem Text="S" Value="S" />
            <asp:ListItem Text="M" Value="M" />
            <asp:ListItem Text="L" Value="L" />
@@ -166,7 +169,7 @@ function TotalRecord() {
        </asp:DropDownList>
     </div>
      <div class="form-group">
-        <label>Mobile: </label>
+        <label>Mobile:  <span style="color:red">*</span></label>
         <asp:TextBox ID="txtMobile" cols="40" Rows="6" runat="server" TextMode="Number" class="form-control" style="width:95%"/>
                 <asp:RequiredFieldValidator ID="RequiredValidatorMobile" ControlToValidate="txtMobile"
         runat="server" ErrorMessage="Please enter the Mobile number" ValidationGroup="BibDataSave" ForeColor="Red" Display="Dynamic" />
@@ -174,7 +177,7 @@ function TotalRecord() {
     ControlToValidate="txtMobile" ValidationExpression="^\d{10}$" ValidationGroup="BibDataSave" ForeColor="Red" Display="Dynamic" />
     </div>
      <div class="form-group">
-        <label>Run Category: </label>
+        <label>Run Category:  <span style="color:red">*</span></label>
          <asp:DropDownList ID="txtRunCategory" runat="server" class="form-control" Width="95%">
              <asp:ListItem Text="Select Run Category" Value="" />
              <asp:ListItem Text="21.09KM" Value="21.09KM" />
@@ -184,14 +187,21 @@ function TotalRecord() {
          <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtRunCategory" InitialValue="" ErrorMessage="Run Category is Required" ForeColor="Red" Display="Dynamic" ValidationGroup="BibDataSave" />
     </div>
     <div class="form-group">
-        <label>Year: </label>
-        <asp:TextBox ID="txtYear" cols="40" Rows="6" runat="server" TextMode="Number" class="form-control" style="width:95%"/>
+        <label>Year:  <span style="color:red">*</span></label>
+        <asp:DropDownList ID="txtYear" runat="server" class="form-control" Width="95%">
+            <asp:ListItem Text="2025" Value="2025" />
+            <asp:ListItem Text="2026" Value="2026" />
+            <asp:ListItem Text="2027" Value="2027" />
+            <asp:ListItem Text="2028" Value="2028" />
+            <asp:ListItem Text="2029" Value="2029" />
+            <asp:ListItem Text="2030" Value="2030" />
+        </asp:DropDownList>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtYear" InitialValue="" ErrorMessage="Year is Required" ForeColor="Red" Display="Dynamic" ValidationGroup="BibDataSave" />
     </div>
 
     <div class="form-group">
-    <asp:Button ID="btnAdd" CommandName="Save" runat="server"  ValidationGroup="BibDataSave" class="btn btn-primary btn-lg"  Text="Save" OnClick="btnSave_Click"/>
-    <asp:Button ID="btnCancel" runat="server"  class="btn btn-primary btn-lg" Text="Cancel"  />
+    <asp:Button ID="btnAdd" CommandName="Save" runat="server" ValidationGroup="BibDataSave" class="btn btn-primary btn-lg"  Text="Save" OnClick="btnSave_Click"/>
+    <asp:Button ID="btnCancel" runat="server"  class="btn btn-primary btn-lg" Text="Cancel" />
     </div>
 </from>
  </div>       
@@ -209,13 +219,29 @@ function TotalRecord() {
 </div>
 
 <script type="text/javascript">
-    window.onload = function () {
-        var msg = document.getElementById("MessageUpdated");
-        if (msg && msg.innerText.trim() !== "") {
+    
+    $(document).ready(function () {
+        var msg = $('#<%= MessageUpdated.ClientID %>');
+        if (msg && msg.text().trim() !== "") {
             setTimeout(function () {
-                msg.style.display = "none";
-                msg.innerText = "";
-            }, 5000); // 5000ms = 5 seconds
+                msg.fadeOut();     // hides with animation
+                msg.text('');      // clears the message content
+            }, 5000); // 5000ms = 5 seconsds
         }
-    };
+    });
+
+    // clear form values...
+    $('#ContentPlaceHolder1_BIBDataRunner_btnCancel').click(function () {
+        $('#ContentPlaceHolder1_BIBDataRunner_txtBankRef').val('');
+        $('#ContentPlaceHolder1_BIBDataRunner_txtBibNumber').val('');
+        $('#ContentPlaceHolder1_BIBDataRunner_txtCategory').val('');
+        $('#ContentPlaceHolder1_BIBDataRunner_txtName').val('');
+        $('#ContentPlaceHolder1_BIBDataRunner_ddlGender').val('');
+        $('#ContentPlaceHolder1_BIBDataRunner_txtEmail').val('');
+        $('#ContentPlaceHolder1_BIBDataRunner_txtBloodGroup').val('');
+        $('#ContentPlaceHolder1_BIBDataRunner_txtTshirtSize').val('');
+        $('#ContentPlaceHolder1_BIBDataRunner_txtMobile').val('');
+        $('#ContentPlaceHolder1_BIBDataRunner_txtRunCategory').val('');
+        $('#ContentPlaceHolder1_BIBDataRunner_txtYear').val('');
+    });
 </script>

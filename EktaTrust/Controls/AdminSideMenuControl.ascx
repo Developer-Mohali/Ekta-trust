@@ -30,6 +30,7 @@
            <li><a href="CertificationReport.aspx">Certification</a></li>
            <li><a href="FeedbackAndSuggestion.aspx">Feedback And Suggestion</a></li>
            <li><a href="CreativeCompetitionRegistered.aspx">Creative Competition</a></li>
+           <li><a href="AdminBIBData.aspx">BIB Data</a></li>
          </ul>
            
      </div>

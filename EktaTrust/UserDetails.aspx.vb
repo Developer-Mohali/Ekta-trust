@@ -160,7 +160,7 @@ Public Class UserDetails
                         txtAddress.Text = sdr("Address").ToString()
                         txtPassword.Attributes("value") = sdr("Password").ToString()
                         txtConfirmPass.Attributes("value") = sdr("Password").ToString()
-
+                        txtBibUserLimit.Text = sdr("BIBUserLimit").ToString()
                         drpRole.SelectedValue = sdr("RoleId").ToString()
 
                     End While
@@ -314,9 +314,19 @@ Public Class UserDetails
         txtEmail.Text = String.Empty
         txtMobile.Text = String.Empty
         txtName.Text = String.Empty
-        txtPassword.Text = String.Empty
+
+        ' For password fields, you need to change the TextMode temporarily
+        txtConfirmPass.TextMode = TextBoxMode.SingleLine
         txtConfirmPass.Text = String.Empty
+        txtConfirmPass.TextMode = TextBoxMode.Password
+        txtPassword.TextMode = TextBoxMode.SingleLine
+        txtPassword.Text = String.Empty
+        txtPassword.TextMode = TextBoxMode.Password
+
         txtSearch.Text = String.Empty
         id.Text = String.Empty
+        txtBibUserLimit.Text = ""
+        drpRole.ClearSelection()
     End Function
+
 End Class

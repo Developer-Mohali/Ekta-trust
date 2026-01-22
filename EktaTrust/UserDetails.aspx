@@ -181,8 +181,8 @@ z-index: 10000;
 <td colspan="2" style=" height:10%; color:White; font-weight:bold;  font-size:larger" align="center "></td>
 <h4>User Event Details</h4>
  </div>    
- <div class="modal-body" >
-     <from id="form1">
+ <div class="modal-body"  style="max-height: 80vh; overflow-y: auto;">
+     <form id="form1">
 <div class="form-group" style="display:none">
 <asp:Label ID="lblId" runat="server" Text="ID:"></asp:Label>
    <asp:Label ID="id" runat="server"/>
@@ -192,15 +192,15 @@ z-index: 10000;
     <asp:DropDownList ID="drpRole" runat="server" class="form-control" Width="95%"></asp:DropDownList>
 </div>
 <div class="form-group">
-<label>Name:  </label>
+<label>Name:  <span style='color:red'>*</span> </label>
 <asp:TextBox ID="txtName" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
 </div>
      <div class="form-group">
-<label>Email Address: </label>
+<label>Email Address:  <span style='color:red'>*</span></label>
 <asp:TextBox ID="txtEmail" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
 </div>
      <div class="form-group">
-<label>Mobile Number: </label>
+<label>Mobile Number:  <span style='color:red'>*</span></label>
 <asp:TextBox ID="txtMobile" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
 </div>
 <div class="form-group">
@@ -212,22 +212,22 @@ z-index: 10000;
 <asp:TextBox ID="txtAddress" cols="40" Rows="1" runat="server" TextMode="MultiLine" class="form-control" style="width:95%"/>
 </div>
   <div class="form-group">
- <asp:Label ID="lblPassword" runat="server" Text="Password:"/>
+ <asp:Label ID="lblPassword" runat="server" Text="Password: <span style='color:red'>*</span>"/>
 <asp:TextBox ID="txtPassword" cols="40" Rows="6" runat="server" TextMode="Password" class="form-control" style="width:95%"/>
 </div>
        <div class="form-group">
            
- <asp:Label ID="lblConfirmPass" runat="server" Text="Confirm Password:"/>
+ <asp:Label ID="lblConfirmPass" runat="server" Text="Confirm Password:  <span style='color:red'>*</span>"/>
         
           <asp:CompareValidator ID="CompareValidator"  runat="server" ControlToValidate="txtConfirmPass" ControlToCompare="txtPassword" ErrorMessage="Password does not match!" ForeColor="Red"/>
 <asp:TextBox ID="txtConfirmPass" cols="40" Rows="6" runat="server" TextMode="Password" class="form-control" style="width:95%"/>
 </div>
 
 <div class="form-group">
-<asp:Button ID="btnUpdate" CommandName="Update" runat="server" class="btn btn-primary btn-lg"  Text="Add" OnClick="btnUpdate_Click"/>
+<asp:Button ID="btnUpdate" CommandName="Update" runat="server" class="btn btn-primary btn-lg" OnClientClick="return validateAndSubmit();" Text="Add" OnClick="btnUpdate_Click"/>
 <asp:Button ID="btnCancel" runat="server"  class="btn btn-primary btn-lg" Text="Cancel"  />
 </div>
-</from>
+</form>
  </div>       
 </div>
        
@@ -259,7 +259,7 @@ z-index: 10000;
 
 
      <script type ="text/javascript" >
-         $(document).ready(function () {  
+         $(document).ready(function () {
              $("#form1").validate({  
                  rules: {  
                       
@@ -273,7 +273,9 @@ z-index: 10000;
                      }, 
                     
                       <%=txtMobile.UniqueID%>:{  
-                          required:true  
+                          required: true,
+                          minlength: 10,
+                          maxlength: 10
 
                       },
                        <%=txtPassword.UniqueID%>:{  
@@ -298,7 +300,9 @@ z-index: 10000;
                     }, 
                     
                      <%=txtMobile.UniqueID%>:{  
-                         required:"Mobile number is required." 
+                         required: "Mobile number is required.",
+                         minlength: "Mobile number must be 10 digits.",
+                         maxlength: "Mobile number must be 10 digits."
 
                       },
                      <%=txtPassword.UniqueID%>:{  
@@ -312,6 +316,16 @@ z-index: 10000;
                  
             });  
          });   
+         function validateAndSubmit() {
+             var jqueryValid = $("#form1").valid ? $("#form1").valid() : true;
+             var aspnetValid = (typeof (Page_ClientValidate) === 'function') ? Page_ClientValidate() : true;
+
+             if (jqueryValid && aspnetValid) {
+                 $('#loader').show();
+                 return true;
+             }
+             return false;
+         }
          function GetKeyCode(evt)
          {
              var pass= $("#<%=txtPassword.ClientID%>").val();
@@ -327,5 +341,14 @@ z-index: 10000;
              }
              
          }
+         $(document).ready(function () {
+             var msg = $('#<%= MessageUpdated.ClientID %>');
+                      if (msg && msg.text().trim() !== "") {
+                          setTimeout(function () {
+                              msg.fadeOut();     // hides with animation
+                              msg.text('');      // clears the message content
+                          }, 5000); // 5000ms = 5 seconsds
+                      }
+                  });
      </script>  
 </asp:Content>
