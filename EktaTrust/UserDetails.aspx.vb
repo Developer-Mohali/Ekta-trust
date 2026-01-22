@@ -235,7 +235,7 @@ Public Class UserDetails
                      StringComparison.OrdinalIgnoreCase) Then
 
                     ' Email changed → check duplicate
-                    If IsEmailDuplicate(txtEmail.Text) Then
+                    If IsEmailDuplicate(txtEmail.Text, id.Text) Then
                         MessageUpdated.Text = "<b style='color:red;'>Email already exists.</b>"
                         Exit Sub
                     End If
@@ -271,13 +271,14 @@ Public Class UserDetails
         BindGridView()
     End Sub
 
-    Private Function IsEmailDuplicate(email As String) As Boolean
+    Private Function IsEmailDuplicate(email As String, id As String) As Boolean
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
 
         Using con As New MySqlConnection(constr)
-            Using cmd As New MySqlCommand("SELECT COUNT(*) FROM User WHERE LOWER(EmailAddress) = LOWER(@Email)", con)
+            Using cmd As New MySqlCommand("SELECT COUNT(ID) FROM User WHERE LOWER(EmailAddress) = LOWER(@Email) AND ID != @Id", con)
 
                 cmd.Parameters.AddWithValue("@Email", email.Trim())
+                cmd.Parameters.AddWithValue("@Id", id.Trim())
 
                 con.Open()
                 Return Convert.ToInt32(cmd.ExecuteScalar()) > 0
@@ -328,5 +329,4 @@ Public Class UserDetails
         txtBibUserLimit.Text = ""
         drpRole.ClearSelection()
     End Function
-
 End Class
