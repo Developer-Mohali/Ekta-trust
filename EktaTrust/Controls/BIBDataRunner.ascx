@@ -61,10 +61,19 @@ function TotalRecord() {
 
             <br />
     <tr>
-        <td> Search by Bib No
-            <asp:Panel runat="server" DefaultButton="btnSearch" style="display: inline;">
-            <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
-                </asp:Panel>
+        <td>
+            <div class="col-md-12" style="padding-left: 0px;">
+                <div class="col-md-6" style="padding-left: 0px;">
+                     Search by Bib No:
+                 <asp:Panel runat="server" DefaultButton="btnSearch" style="display: inline;">
+                    <asp:TextBox ID="txtSearch" style="display: inline; width:50%" class="form-control" runat="server"></asp:TextBox>
+                   </asp:Panel>
+                </div>
+                <div class="col-md-6" runat="server" id="divCreatedByView">
+                    Created By:
+                <asp:DropDownList ID="ddlBiBCreatedUsers" runat="server" class="form-control" AutoPostBack="true" style="display: inline; width:50%" OnSelectedIndexChanged="ddlBiBCreatedUsers_SelectedIndexChanged"></asp:DropDownList>
+             </div>
+            </div>
         </td><td>
             <asp:Button ID="btnSearch" runat="server" Text="Search" 
                 />
@@ -198,9 +207,21 @@ function TotalRecord() {
         </asp:DropDownList>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtYear" InitialValue="" ErrorMessage="Year is Required" ForeColor="Red" Display="Dynamic" ValidationGroup="BibDataSave" />
     </div>
+    <div class="form-group">
+        <label>Emergency Contact Name:</label>
+         <asp:TextBox ID="txtEmgName" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
+    </div>
+    <div class="form-group">
+      <label>Emergency Contact Number:</label>
+       <asp:TextBox ID="txtEmgMobile" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
+  </div>
+  <div class="form-group">
+     <label>Date Of Birth:</label>
+      <asp:TextBox ID="txtDOB" cols="40" Rows="6" runat="server" TextMode="Date" class="form-control" style="width:95%"/>
+ </div>
 
     <div class="form-group">
-    <asp:Button ID="btnAdd" CommandName="Save" runat="server" ValidationGroup="BibDataSave" class="btn btn-primary btn-lg"  Text="Save" OnClick="btnSave_Click"/>
+    <asp:Button ID="btnAdd" CommandName="Save" runat="server" ValidationGroup="BibDataSave" class="btn btn-primary btn-lg" OnClientClick="return validateAndSubmit();"  Text="Save" OnClick="btnSave_Click"/>
     <asp:Button ID="btnCancel" runat="server"  class="btn btn-primary btn-lg" Text="Cancel" />
     </div>
 </from>
@@ -230,6 +251,16 @@ function TotalRecord() {
         }
     });
 
+    function validateAndSubmit() {
+        var aspnetValid = (typeof (Page_ClientValidate) === 'function') ? Page_ClientValidate() : true;
+
+        if (aspnetValid) {
+            $('#loader').show();
+            return true;
+        }
+        return false;
+    }
+
     // clear form values...
     $('#ContentPlaceHolder1_BIBDataRunner_btnCancel').click(function () {
         $('#ContentPlaceHolder1_BIBDataRunner_txtBankRef').val('');
@@ -243,5 +274,8 @@ function TotalRecord() {
         $('#ContentPlaceHolder1_BIBDataRunner_txtMobile').val('');
         $('#ContentPlaceHolder1_BIBDataRunner_txtRunCategory').val('');
         $('#ContentPlaceHolder1_BIBDataRunner_txtYear').val('');
+        $('#ContentPlaceHolder1_BIBDataRunner_txtEmgName').val('');
+        $('#ContentPlaceHolder1_BIBDataRunner_txtEmgMobile').val('');
+        $('#ContentPlaceHolder1_BIBDataRunner_txtDOB').val('');
     });
 </script>
