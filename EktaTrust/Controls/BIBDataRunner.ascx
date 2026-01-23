@@ -55,6 +55,8 @@ function TotalRecord() {
            <asp:Button ID="btnUpload" Text="Upload" runat="server" OnClientClick="$('#loader').show();" OnClick="ImportFromExcel" />
                             
               <asp:Button ID="btnDownload" Text="Download Sample CSV File" runat="server" OnClick="DownloadFile" />
+            <asp:Button ID="btnExport" runat="server" Text="Export to Excel" OnClientClick="$('#loader').show(); setTimeout($('#loader').hide(), 2000);" OnClick="btnExport_Click" />
+
               <asp:Button ID="btnAddBIB" runat="server" Text="Add New" OnClick="AddBIB_Click" UseSubmitBehavior="False" style="float: right;" />
         </td>         
                   </tr>

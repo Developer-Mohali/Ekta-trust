@@ -15,6 +15,22 @@ Public Class BIBDataRunner
     Public Const MSG_AddLimitExceed As String = "<b style='color: red;'>Adding Limit Exceed, Please contact to Administrator.</b>"
     Public Const MSG_AddSuccess As String = "<b>Added Successfully</b>"
     Public Const MSG_UpdateSuccess As String = "<b>Update Successfully</b>"
+    Dim expectedHeaders As String() = {
+    "Category Name",
+    "Bank Reference No",
+    "BIB No",
+    "Mobile Number",
+    "Runner Name",
+    "Run Catagory",
+    "T-Shirt Size",
+    "Gender",
+    "Blood Group",
+    "Email ID",
+    "Venue to Collect BIB",
+    "Emergency Contact Name",
+    "Emergency Contact Number",
+    "Runner DOB"
+}
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'If con.State = ConnectionState.Closed Then
@@ -74,6 +90,7 @@ Public Class BIBDataRunner
                     End If
                 Else
                     divCreatedByView.Visible = False
+                    btnExport.Visible = False
                     ' Non-admin: Filter by userId
                     Dim userInfo As Dictionary(Of String, String) = GetUserDetails(userId)
                     Dim bibUserCount As Integer = GetBIBCountByUserId(userId)
@@ -175,6 +192,31 @@ Public Class BIBDataRunner
                 Dim SR As StreamReader = New StreamReader(folderPath & fileNameNew)
                 Dim i As Long = 0
                 Dim line As String = SR.ReadLine()
+
+                'HEADER VALIDATION: Validate the CSV file header, if it's not correct header show error...
+                If String.IsNullOrWhiteSpace(line) Then
+                    MessageUpdated.Text = "<b style='color:red;'>CSV file header is missing.</b>"
+                    Return
+                End If
+
+                Dim csvHeaders As String() = line.Split(","c).Select(Function(h) h.Trim()).ToArray()
+
+                ' HEADER COUNT CHECK
+                If csvHeaders.Length <> expectedHeaders.Length Then
+                    MessageUpdated.Text = "<b style='color:red;'>CSV header column count mismatch.</b>"
+                    Return
+                End If
+
+                ' HEADER NAME CHECK
+                For num As Integer = 0 To expectedHeaders.Length - 1
+                    If Not csvHeaders(num).Equals(expectedHeaders(num), StringComparison.OrdinalIgnoreCase) Then
+                        MessageUpdated.Text = $"<b style='color:red;'>Invalid CSV header at position {num + 1}. " &
+                         $"Expected: '{expectedHeaders(num)}', Found: '{csvHeaders(num)}'</b>"
+                        Return
+                    End If
+                Next
+                'END OF HEADER VALIDATION
+
                 Dim strArray As String() = line.Split(",")
                 Dim dt As DataTable = New DataTable()
                 Dim row As DataRow
@@ -684,4 +726,80 @@ Public Class BIBDataRunner
     Protected Sub ddlBiBCreatedUsers_SelectedIndexChanged(sender As Object, e As EventArgs)
         BindGridView()
     End Sub
+
+#Region "Export to Excel"
+    Private Function GetExportData() As DataTable
+        Dim dt As New DataTable()
+        Try
+            Dim selectedUser As String = ddlBiBCreatedUsers.SelectedValue
+
+            Using con As New MySqlConnection(connStr)
+                Dim query As String = ""
+                Dim cmd As New MySqlCommand()
+                cmd.Connection = con
+
+                'Get the BIB data if created By is selected or not.
+                If (String.IsNullOrEmpty(selectedUser)) Then
+                    query = "SELECT DISTINCT bd.BIBNo, bd.RunnerName, bd.RunCatagory, bd.TShirtSize, bd.Gender, bd.RunnerDOB, bd.MobileNumber, bd.EmergencyContactName, bd.EmergencyContactNumber,
+                            bd.BankReferenceNo, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy FROM bibdata bd 
+                            left join user u  on bd.UserId = u.ID
+                            left join signup s on s.UserId = bd.UserId
+                            ORDER BY bd.ID DESC"
+                Else
+                    query = "SELECT DISTINCT bd.BIBNo, bd.RunnerName, bd.RunCatagory, bd.TShirtSize, bd.Gender, bd.RunnerDOB, bd.MobileNumber, bd.EmergencyContactName, bd.EmergencyContactNumber,
+                            bd.BankReferenceNo, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy FROM bibdata bd 
+                            left join user u  on bd.UserId = u.ID
+                            left join signup s on s.UserId = bd.UserId
+                            WHERE UserId = @UserId ORDER BY bd.ID DESC"
+                    cmd.Parameters.AddWithValue("@UserId", selectedUser)
+                End If
+
+                cmd.CommandText = query
+                Using sda As New MySqlDataAdapter(cmd)
+                    con.Open()
+                    sda.Fill(dt)
+                    con.Close()
+                End Using
+            End Using
+        Catch ex As Exception
+            Throw
+        End Try
+        Return dt
+    End Function
+
+    Protected Sub btnExport_Click(sender As Object, e As EventArgs)
+        Try
+            'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "ShowLoader", "$('#loader').show()", True)
+            Dim dt As DataTable = GetExportData()
+
+            Response.Clear()
+            Response.Buffer = True
+            Response.AddHeader("Content-Disposition", "attachment;filename=BibReport.xls")
+            Response.ContentType = "application/vnd.ms-excel"
+
+            Dim sb As New StringBuilder()
+
+            ' Header
+            For Each col As DataColumn In dt.Columns
+                sb.Append(col.ColumnName & vbTab)
+            Next
+            sb.AppendLine()
+
+            ' Rows
+            For Each row As DataRow In dt.Rows
+                For Each col As DataColumn In dt.Columns
+                    sb.Append(row(col).ToString().Replace(vbTab, "") & vbTab)
+                Next
+                sb.AppendLine()
+            Next
+
+            Response.Write(sb.ToString())
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "HideLoader", "$('#loader').hide();", True)
+            Response.End()
+        Catch
+        Finally
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "HideLoader", "$('#loader').hide();", True)
+        End Try
+    End Sub
+#End Region
 End Class
