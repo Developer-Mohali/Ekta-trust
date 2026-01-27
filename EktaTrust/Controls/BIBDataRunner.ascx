@@ -95,7 +95,7 @@ function TotalRecord() {
     <asp:BoundField HeaderText="Gender" DataField="Gender" ItemStyle-HorizontalAlign="Left"></asp:BoundField>   
     <asp:BoundField HeaderText="Blood Group" DataField="BloodGroup" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
     <asp:BoundField HeaderText="T-shirt Size" DataField="TShirtSize" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
-    <asp:BoundField HeaderText="Mobile Number" DataField="MobileNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+    <asp:BoundField HeaderText="Contact Number" DataField="MobileNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
     <asp:BoundField HeaderText="Run Category" DataField="RunCatagory" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
     <asp:BoundField HeaderText="BIB Number" DataField="BIBNo" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
     <asp:BoundField HeaderText="Year" DataField="Year" ItemStyle-HorizontalAlign="Left"></asp:BoundField>

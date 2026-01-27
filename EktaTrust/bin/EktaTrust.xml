@@ -416,9 +416,9 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:EktaTrust.BIBDataRunner._btnAddBIB">
+<member name="F:EktaTrust.BIBDataRunner._AddCount">
 <summary>
-btnAddBIB control.
+AddCount control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -443,15 +443,6 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:EktaTrust.BIBDataRunner._lblMessage">
-<summary>
-lblMessage control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
 <member name="F:EktaTrust.BIBDataRunner._btnDownload">
 <summary>
 btnDownload control.
@@ -461,9 +452,45 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:EktaTrust.BIBDataRunner._btnExport">
+<summary>
+btnExport control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._btnAddBIB">
+<summary>
+btnAddBIB control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:EktaTrust.BIBDataRunner._txtSearch">
 <summary>
 txtSearch control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._divCreatedByView">
+<summary>
+divCreatedByView control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._ddlBiBCreatedUsers">
+<summary>
+ddlBiBCreatedUsers control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -554,6 +581,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.BIBDataRunner._txtBibNumber">
 <summary>
 txtBibNumber control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._RequiredBiBNo">
+<summary>
+RequiredBiBNo control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -689,6 +725,33 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:EktaTrust.BIBDataRunner._RequiredFieldValidator4">
 <summary>
 RequiredFieldValidator4 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._txtEmgName">
+<summary>
+txtEmgName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._txtEmgMobile">
+<summary>
+txtEmgMobile control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:EktaTrust.BIBDataRunner._txtDOB">
+<summary>
+txtDOB control.
 </summary>
 <remarks>
 Auto-generated field.

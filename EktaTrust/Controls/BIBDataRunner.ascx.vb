@@ -17,16 +17,15 @@ Public Class BIBDataRunner
     Public Const MSG_UpdateSuccess As String = "<b>Update Successfully</b>"
     Dim expectedHeaders As String() = {
     "Category Name",
-    "Bank Reference No",
+    "Payment Reference",
     "BIB No",
-    "Mobile Number",
+    "Contact Number",
     "Runner Name",
-    "Run Catagory",
+    "Run Category",
     "T-Shirt Size",
     "Gender",
     "Blood Group",
     "Email ID",
-    "Venue to Collect BIB",
     "Emergency Contact Name",
     "Emergency Contact Number",
     "Runner DOB"
@@ -264,23 +263,22 @@ Public Class BIBDataRunner
                     End If
 
                     If totalRows > limitToAdd Then
-                        MessageUpdated.Text = $"{limitToAdd} records only inserted as you don't have more limit to add. Please contact to Administrator <br/>"
+                        MessageUpdated.Text = $"{limitToAdd} record only inserted as you don't have more limit to add. Please contact to Administrator <br/>"
                     End If
                 End If
 
                 If dt.Rows.Count > 0 Then
-                    Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
-                    Using con As New MySqlConnection(constr)
+                    Using con As New MySqlConnection(connStr)
                         For Each dtrow As DataRow In dt.Rows
                             proceedRecords = proceedRecords + 1
                             Using cmd As New MySqlCommand("InsertBIBData")
                                 Using sda As New MySqlDataAdapter()
                                     cmd.CommandType = CommandType.StoredProcedure
-                                    cmd.Parameters.Add(New MySqlParameter("p_BankReferenceNo", dtrow.Item("Bank Reference No")))
+                                    cmd.Parameters.Add(New MySqlParameter("p_BankReferenceNo", dtrow.Item("Payment Reference")))
                                     cmd.Parameters.Add(New MySqlParameter("p_BIBNo", dtrow.Item("BIB No")))
-                                    cmd.Parameters.Add(New MySqlParameter("p_MobileNumber", dtrow.Item("Mobile Number")))
+                                    cmd.Parameters.Add(New MySqlParameter("p_MobileNumber", dtrow.Item("Contact Number")))
                                     cmd.Parameters.Add(New MySqlParameter("p_RunnerName", dtrow.Item("Runner Name")))
-                                    cmd.Parameters.Add(New MySqlParameter("p_RunCatagory", dtrow.Item("Run Catagory")))
+                                    cmd.Parameters.Add(New MySqlParameter("p_RunCatagory", dtrow.Item("Run Category")))
                                     cmd.Parameters.Add(New MySqlParameter("p_TShirtSize", dtrow.Item("T-Shirt Size")))
                                     cmd.Parameters.Add(New MySqlParameter("p_Gender", dtrow.Item("Gender")))
                                     cmd.Parameters.Add(New MySqlParameter("p_BloodGroup", dtrow.Item("Blood Group")))
@@ -306,14 +304,14 @@ Public Class BIBDataRunner
                                     con.Close()
                                 End Using
                             End Using
-                            If roleId = 3 Then
-                                If rowAffected > 0 Then
+                            'If roleId = 3 Then
+                            If rowAffected > 0 Then
                                     insertedRecords = insertedRecords + 1
                                 End If
-                                If insertedRecords >= limitToAdd Then
-                                    Exit For 'break loop
-                                End If
+                            If roleId = 3 AndAlso insertedRecords >= limitToAdd Then
+                                Exit For 'break loop
                             End If
+                            'End If
                         Next
                     End Using
                 End If
@@ -734,23 +732,19 @@ Public Class BIBDataRunner
             Dim selectedUser As String = ddlBiBCreatedUsers.SelectedValue
 
             Using con As New MySqlConnection(connStr)
-                Dim query As String = ""
+                Dim query As String = "SELECT DISTINCT bd.BIBNo, bd.RunnerName, bd.RunCatagory as `Run Category`, bd.TShirtSize, bd.Gender, bd.RunnerDOB, 
+                                        bd.MobileNumber as `Contact Number`, bd.EmergencyContactName, bd.EmergencyContactNumber,
+                                        bd.BankReferenceNo as `Payment Reference`, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy FROM bibdata bd 
+                                        left join user u  on bd.UserId = u.ID
+                                        left join signup s on s.UserId = bd.UserId"
                 Dim cmd As New MySqlCommand()
                 cmd.Connection = con
 
                 'Get the BIB data if created By is selected or not.
                 If (String.IsNullOrEmpty(selectedUser)) Then
-                    query = "SELECT DISTINCT bd.BIBNo, bd.RunnerName, bd.RunCatagory, bd.TShirtSize, bd.Gender, bd.RunnerDOB, bd.MobileNumber, bd.EmergencyContactName, bd.EmergencyContactNumber,
-                            bd.BankReferenceNo, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy FROM bibdata bd 
-                            left join user u  on bd.UserId = u.ID
-                            left join signup s on s.UserId = bd.UserId
-                            ORDER BY bd.ID DESC"
+                    query += " ORDER BY bd.ID DESC"
                 Else
-                    query = "SELECT DISTINCT bd.BIBNo, bd.RunnerName, bd.RunCatagory, bd.TShirtSize, bd.Gender, bd.RunnerDOB, bd.MobileNumber, bd.EmergencyContactName, bd.EmergencyContactNumber,
-                            bd.BankReferenceNo, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy FROM bibdata bd 
-                            left join user u  on bd.UserId = u.ID
-                            left join signup s on s.UserId = bd.UserId
-                            WHERE UserId = @UserId ORDER BY bd.ID DESC"
+                    query += " WHERE bd.UserId = @UserId ORDER BY bd.ID DESC"
                     cmd.Parameters.AddWithValue("@UserId", selectedUser)
                 End If
 
@@ -797,6 +791,7 @@ Public Class BIBDataRunner
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "HideLoader", "$('#loader').hide();", True)
             Response.End()
         Catch
+            MessageUpdated.Text = "Got error while exporting excel"
         Finally
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "HideLoader", "$('#loader').hide();", True)
         End Try
