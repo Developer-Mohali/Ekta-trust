@@ -203,15 +203,6 @@ Partial Public Class BIBDataRunner
     Protected WithEvents RequiredBiBNo As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''txtCategory control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtCategory As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
     '''txtName control.
     '''</summary>
     '''<remarks>

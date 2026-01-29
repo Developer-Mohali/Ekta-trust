@@ -118,6 +118,9 @@ function TotalRecord() {
     <div class = "modal-dialog">
     <div class = "modal-content">
       <div class = "modal-header">
+          <button type="button" class="close" aria-label="Close" onclick="closeBibPopup();" />
+        <span aria-hidden="true">&times;</span>
+    </button>
 <div width="100%"  width:100%; border-collapse: inherit; height:100%" cellpadding="0" cellspacing="0" Style="border-bottom: 1px solid #e5e5e5;">
 <tr style="background-color:#D55500">
 <td colspan="2" style=" height:10%; color:White; font-weight:bold;  font-size:larger" align="center "></td>
@@ -140,10 +143,10 @@ function TotalRecord() {
         <asp:Textbox ID="txtBibNumber" runat="server" class="form-control" Width="95%" />
          <asp:RequiredFieldValidator ID="RequiredBiBNo" ControlToValidate="txtBibNumber" runat="server" ErrorMessage="BIB No. is Required" ValidationGroup="BibDataSave" ForeColor="Red" Display="Dynamic" />
         </div>
-    <div class="form-group">
+<%--    <div class="form-group">
     <label>Category: </label>
         <asp:Textbox ID="txtCategory" runat="server" class="form-control" Width="95%" Text="Registration For RUN FOR EQUALITY" />
-    </div>
+    </div>--%>
     <div class="form-group">
     <label>Runner Name:  <span style="color:red">*</span></label>
     <asp:TextBox ID="txtName" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
@@ -287,4 +290,7 @@ function TotalRecord() {
         $('#ContentPlaceHolder1_BIBDataRunner_txtEmgMobile').val('');
         $('#ContentPlaceHolder1_BIBDataRunner_txtDOB').val('');
     });
+    function closeBibPopup() {
+        $('#ContentPlaceHolder1_BIBDataRunner_btnCancel').click();
+    }
 </script>

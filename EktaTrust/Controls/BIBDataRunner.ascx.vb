@@ -17,7 +17,6 @@ Public Class BIBDataRunner
     Public Const MSG_AddSuccess As String = "<b>Added Successfully</b>"
     Public Const MSG_UpdateSuccess As String = "<b>Update Successfully</b>"
     Dim expectedHeaders As String() = {
-    "Category Name",
     "Payment Reference",
     "BIB No",
     "Contact Number",
@@ -37,7 +36,7 @@ Public Class BIBDataRunner
         '    con.Open()
         'End If
         MessageUpdated.Text = ""
-        txtCategory.Text = "Registration For RUN FOR EQUALITY"
+        'txtCategory.Text = "Registration For RUN FOR EQUALITY"
         If Not IsPostBack Then
 
             gvEvent.AllowPaging = True
@@ -285,7 +284,8 @@ Public Class BIBDataRunner
                                     cmd.Parameters.Add(New MySqlParameter("p_BloodGroup", dtrow.Item("Blood Group")))
                                     cmd.Parameters.Add(New MySqlParameter("p_EmailID", dtrow.Item("Email ID")))
                                     cmd.Parameters.Add(New MySqlParameter("p_RoleID", roleId))
-                                    cmd.Parameters.Add(New MySqlParameter("p_CategoryName", dtrow.Item("Category Name")))
+                                    'cmd.Parameters.Add(New MySqlParameter("p_CategoryName", dtrow.Item("Category Name")))
+                                    cmd.Parameters.Add(New MySqlParameter("p_CategoryName", "Registration For RUN FOR EQUALITY"))
                                     cmd.Parameters.Add(New MySqlParameter("p_Year", currentYear))
                                     cmd.Parameters.Add(New MySqlParameter("p_UserId", userId))
                                     cmd.Parameters.Add(New MySqlParameter("p_EmergencyContactName", dtrow.Item("Emergency Contact Name")))
@@ -360,7 +360,7 @@ Public Class BIBDataRunner
 
     Protected Sub AddBIB_Click(sender As Object, e As EventArgs)
         lblError.Visible = False
-        txtCategory.Visible = True
+        'txtCategory.Visible = True
         txtName.Visible = True
         ddlGender.Visible = True
         txtBloodGroup.Visible = True
@@ -399,7 +399,7 @@ Public Class BIBDataRunner
                         Using reader As MySqlDataReader = cmd.ExecuteReader()
                             If reader.Read() Then
                                 txtBankRef.Text = reader("BankReferenceNo").ToString()
-                                txtCategory.Text = reader("CategoryName").ToString()
+                                'txtCategory.Text = reader("CategoryName").ToString()
                                 txtName.Text = reader("RunnerName").ToString()
                                 ddlGender.SelectedValue = If(reader("Gender").ToString().ToLower().StartsWith("m"), "Male", "Female")
                                 txtBloodGroup.Text = reader("BloodGroup").ToString()
@@ -428,7 +428,7 @@ Public Class BIBDataRunner
 
     Protected Sub btnSave_Click(sender As Object, e As EventArgs)
         Dim bankReference As String = txtBankRef.Text
-        Dim category As String = txtCategory.Text
+        Dim category As String = "Registration For RUN FOR EQUALITY" 'txtCategory.Text
         Dim name As String = txtName.Text
         Dim gender As String = ddlGender.SelectedValue
         Dim email As String = txtEmail.Text
@@ -519,13 +519,13 @@ Public Class BIBDataRunner
             Using con As New MySqlConnection(constr)
                 Dim query As String
 
-                query = "UPDATE bibdata SET BankReferenceNo=@bankRef, CategoryName=@cat, RunnerName=@name, gender=@gender, BloodGroup=@blood, 
+                query = "UPDATE bibdata SET BankReferenceNo=@bankRef, RunnerName=@name, gender=@gender, BloodGroup=@blood, 
                         TShirtSize=@size, MobileNumber=@mobile, RunCatagory=@run, BIBNo=@bib, Year=@year, EmailID=@email, EmergencyContactName=@emergencyContactName,
                          EmergencyContactNumber=@emergencyContactNumber, RunnerDOB=@runnerDOB WHERE ID=@id"
 
                 Using cmd As New MySqlCommand(query, con)
                     cmd.Parameters.AddWithValue("@bankRef", txtBankRef.Text.Trim())
-                    cmd.Parameters.AddWithValue("@cat", txtCategory.Text.Trim())
+                    'cmd.Parameters.AddWithValue("@cat", txtCategory.Text.Trim())
                     cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
                     cmd.Parameters.AddWithValue("@gender", ddlGender.SelectedValue)
                     cmd.Parameters.AddWithValue("@blood", txtBloodGroup.Text.Trim())
@@ -824,7 +824,7 @@ Public Class BIBDataRunner
     Private Function Reset()
         txtBankRef.Text = String.Empty
         txtBibNumber.Text = String.Empty
-        txtCategory.Text = "Registration For RUN FOR EQUALITY"
+        ' txtCategory.Text = "Registration For RUN FOR EQUALITY"
         txtEmail.Text = String.Empty
         txtMobile.Text = String.Empty
         txtName.Text = String.Empty
