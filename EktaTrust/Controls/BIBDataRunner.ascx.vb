@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports System.Globalization
 Imports System.IO
 Imports System.Net
 Imports Microsoft.VisualBasic.ApplicationServices
@@ -289,7 +290,7 @@ Public Class BIBDataRunner
                                     cmd.Parameters.Add(New MySqlParameter("p_UserId", userId))
                                     cmd.Parameters.Add(New MySqlParameter("p_EmergencyContactName", dtrow.Item("Emergency Contact Name")))
                                     cmd.Parameters.Add(New MySqlParameter("p_EmergencyContactNumber", dtrow.Item("Emergency Contact Number")))
-                                    cmd.Parameters.Add(New MySqlParameter("p_RunnerDOB", dtrow.Item("Runner DOB")))
+                                    cmd.Parameters.Add(New MySqlParameter("p_RunnerDOB", If(IsValidDate(dtrow("Runner DOB").ToString()), CDate(dtrow("Runner DOB")), DBNull.Value)))
                                     cmd.Connection = con
                                     con.Open()
                                     Try
@@ -306,8 +307,8 @@ Public Class BIBDataRunner
                             End Using
                             'If roleId = 3 Then
                             If rowAffected > 0 Then
-                                    insertedRecords = insertedRecords + 1
-                                End If
+                                insertedRecords = insertedRecords + 1
+                            End If
                             If roleId = 3 AndAlso insertedRecords >= limitToAdd Then
                                 Exit For 'break loop
                             End If
@@ -511,7 +512,7 @@ Public Class BIBDataRunner
         Try
             If IsBIBDataInserted(bibRecordId) Then
                 MessageUpdated.Text = MSG_BIBDataExists
-                ScriptManager.RegisterStartupScript(Me, Me.GetType(), "clickCancelButton", "$('#" & btnCancel.ClientID & "').click();", True)
+                'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "clickCancelButton", "$('#" & btnCancel.ClientID & "').click();", True)
                 Return
             End If
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
@@ -546,12 +547,12 @@ Public Class BIBDataRunner
 
             ' Clear form and refresh
             hfEditID.Value = ""
-            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "clickCancelButton", "$('#" & btnCancel.ClientID & "').click();", True)
+            'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "clickCancelButton", "$('#" & btnCancel.ClientID & "').click();", True)
             MessageUpdated.Text = MSG_UpdateSuccess
             BindGridView()
         Catch ex As Exception
             MessageUpdated.Text = $"<b style='color: red;'>{ex.Message}</b>"
-            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "clickCancelButton", "$('#" & btnCancel.ClientID & "').click();", True)
+            'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "clickCancelButton", "$('#" & btnCancel.ClientID & "').click();", True)
         Finally
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "HideLoader", "$('#loader').hide();", True)
         End Try
@@ -797,4 +798,43 @@ Public Class BIBDataRunner
         End Try
     End Sub
 #End Region
+
+    Public Function IsValidDate(inputDate As String) As Boolean
+        If String.IsNullOrWhiteSpace(inputDate) Then
+            Return False
+        End If
+
+        Dim parsedDate As DateTime
+        Try
+
+            ' Strict HTML5 date format: yyyy-MM-dd
+            Return DateTime.TryParseExact(
+            inputDate.Trim(),
+            "yyyy-MM-dd",
+            CultureInfo.InvariantCulture,
+            DateTimeStyles.None,
+            parsedDate
+        )
+        Catch
+
+        End Try
+        Return False
+    End Function
+
+    Private Function Reset()
+        txtBankRef.Text = String.Empty
+        txtBibNumber.Text = String.Empty
+        txtCategory.Text = "Registration For RUN FOR EQUALITY"
+        txtEmail.Text = String.Empty
+        txtMobile.Text = String.Empty
+        txtName.Text = String.Empty
+        ddlGender.Text = String.Empty
+        txtBloodGroup.Text = String.Empty
+        txtTshirtSize.Text = String.Empty
+        txtMobile.Text = String.Empty
+        txtRunCategory.ClearSelection()
+        txtEmgMobile.Text = String.Empty
+        txtEmgName.Text = String.Empty
+        txtDOB.Text = String.Empty
+    End Function
 End Class

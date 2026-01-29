@@ -20,6 +20,7 @@
   <link href="../Css/css/font-awesome.min.css" rel="stylesheet" />
   <link href="../Css/css/main.css" rel="stylesheet" />
     <link href="../Css/css/responsive.css" rel="stylesheet" />
+    <script src="../Js/js/bootstrap.min.js"></script>
 
   <script>$(function () {
     $('.navbar-toggle-sidebar').click(function () {
