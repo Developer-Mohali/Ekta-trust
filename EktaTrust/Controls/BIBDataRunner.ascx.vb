@@ -354,7 +354,7 @@ Public Class BIBDataRunner
                       "<br/> Skipped Records: " & (totalRows - proceedRecords)
             BindGridView()
         Else
-            MessageUpdated.Text = MSG_BIBDataExists
+            MessageUpdated.Text = "<b style='color: red;'>One or more required fields (RunnerName, Gender, RunCategory, MobileNumber) are missing or empty.</b>"
         End If
     End Sub
     Shared csvSplit As Regex = New Regex("(?:^|,)(""(?:[^""]+|"""")*""|[^,]*)", RegexOptions.Compiled)
