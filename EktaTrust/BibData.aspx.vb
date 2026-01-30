@@ -1,19 +1,23 @@
 ﻿Imports System.Data.OleDb
+Imports MySql.Data.MySqlClient
 
 Public Class BibData
     Inherits System.Web.UI.Page
 
     Dim dateTable As New DataTable
+    Protected year As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         hdnMsgBiBData.Visible = False
+        year = Request.QueryString("year")?.ToString()
     End Sub
 
     Protected Sub SearchButton_Click(ByVal sender As Object, ByVal e As EventArgs)
         Dim path As String = Server.MapPath("~/Files/BibData/BibData.xlsx")
         Dim mobile As String = txtMobileNo.Text
 
-        dateTable = LoadAndFilterExcel(path, mobile)
+        'dateTable = LoadAndFilterExcel(path, mobile)
+        dateTable = GetBIBDataByNumber(mobile)
 
         If dateTable.Rows.Count > 0 Then
             hdnMsgBiBData.InnerText = "Congratulations Your details are as follows!"
@@ -102,5 +106,35 @@ Public Class BibData
         End Select
     End Function
 
+    Private Function GetBIBDataByNumber(mobile As String) As DataTable
+        Dim dt As New DataTable()
+
+        Try
+            Dim query As String =
+                "SELECT DISTINCT CategoryName as category_name, RunnerName as participate_name, Gender as gender, BloodGroup as blood_group, TShirtSize as tshirt_size,
+                  RunCatagory as run_category, BIBNo as bib_no, CollectBIB as collect_bib FROM bibdata WHERE MobileNumber = @mobile AND Year = @year"
+
+            Dim constr As String =
+                ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand(query, con)
+
+                    cmd.Parameters.AddWithValue("@mobile", mobile)
+                    cmd.Parameters.AddWithValue("@year", year)
+
+                    Using sda As New MySqlDataAdapter(cmd)
+                        con.Open()
+                        sda.Fill(dt)
+                    End Using
+                End Using
+            End Using
+
+        Catch ex As Exception
+            Throw   ' don't swallow errors
+        End Try
+
+        Return dt
+    End Function
 
 End Class

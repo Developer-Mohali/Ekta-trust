@@ -49,8 +49,20 @@ function TotalRecord() {
         <tbody>
                   <tr>
 
-        <td> Upload CSV file
-           <asp:FileUpload ID="BIBDataFileUpload" style="display:inline-block;margin-left: 12px;" runat="server" />
+        <td> 
+            <div class="col-md-12" style="padding-left: 0px;">
+    <div class="col-md-6" style="padding-left: 0px;">
+         Upload CSV file:
+      <asp:FileUpload ID="BIBDataFileUpload" style="display:inline-block;margin-left: 12px;" runat="server" />
+    </div>
+    <div class="col-md-6" runat="server" id="divUploadUserDDL">
+        Created By:
+    <asp:DropDownList ID="ddlUploadedBy" runat="server" class="form-control" style="display: inline; width:50%"></asp:DropDownList>
+ </div>
+</div>
+
+
+          
         </td><td>
            <asp:Button ID="btnUpload" Text="Upload" runat="server" OnClientClick="$('#loader').show();" OnClick="ImportFromExcel" />
                             
@@ -65,16 +77,20 @@ function TotalRecord() {
     <tr>
         <td>
             <div class="col-md-12" style="padding-left: 0px;">
-                <div class="col-md-6" style="padding-left: 0px;">
+                <div class="col-md-4" style="padding-left: 0px;">
                      Search by Bib No:
                  <asp:Panel runat="server" DefaultButton="btnSearch" style="display: inline;">
                     <asp:TextBox ID="txtSearch" style="display: inline; width:50%" class="form-control" runat="server"></asp:TextBox>
                    </asp:Panel>
                 </div>
-                <div class="col-md-6" runat="server" id="divCreatedByView">
-                    Created By:
+                <div class="col-md-4" runat="server" id="divCreatedByView">
+                    Search By User:
                 <asp:DropDownList ID="ddlBiBCreatedUsers" runat="server" class="form-control" AutoPostBack="true" style="display: inline; width:50%" OnSelectedIndexChanged="ddlBiBCreatedUsers_SelectedIndexChanged"></asp:DropDownList>
              </div>
+                <div class="col-md-4" runat="server" id="divtxtDateSearch">
+                       Search By Reg Date:
+                    <asp:TextBox ID="txtDateSearch" style="display: inline; width:50%" TextMode="Date" class="form-control" runat="server"/>               
+                </div>
             </div>
         </td><td>
             <asp:Button ID="btnSearch" runat="server" Text="Search" 
@@ -90,15 +106,28 @@ function TotalRecord() {
    EmptyDataText="No records has been added." Style="font-weight: normal;" OnRowCommand="gvMIP_RowAction" onpageindexchanging="gvEvent_PageIndexChanging" >
 <Columns> 
     
-    <asp:BoundField HeaderText="Category" DataField="CategoryName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+  <%--  <asp:BoundField HeaderText="Category" DataField="CategoryName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
+        <asp:BoundField HeaderText="BIB No." DataField="BIBNo" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
     <asp:BoundField HeaderText="Name" DataField="RunnerName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>  
-    <asp:BoundField HeaderText="Gender" DataField="Gender" ItemStyle-HorizontalAlign="Left"></asp:BoundField>   
-    <asp:BoundField HeaderText="Blood Group" DataField="BloodGroup" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
-    <asp:BoundField HeaderText="T-shirt Size" DataField="TShirtSize" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
-    <asp:BoundField HeaderText="Contact Number" DataField="MobileNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
     <asp:BoundField HeaderText="Run Category" DataField="RunCatagory" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
-    <asp:BoundField HeaderText="BIB Number" DataField="BIBNo" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
-    <asp:BoundField HeaderText="Year" DataField="Year" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+    <asp:BoundField HeaderText="T-shirt Size" DataField="TShirtSize" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+    <asp:BoundField HeaderText="Gender" DataField="Gender" ItemStyle-HorizontalAlign="Left"></asp:BoundField>   
+   <asp:TemplateField HeaderText="DOB">
+    <ItemTemplate>
+        <%# If(Eval("RunnerDOB") Is DBNull.Value OrElse String.IsNullOrEmpty(Eval("RunnerDOB").ToString()), "", Convert.ToDateTime(Eval("RunnerDOB")).ToString("dd MMM yyyy")) %>
+    </ItemTemplate>
+</asp:TemplateField>
+
+  
+   <%-- <asp:BoundField HeaderText="Blood Group" DataField="BloodGroup" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
+
+    <asp:BoundField HeaderText="Contact Number" DataField="MobileNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+    <asp:BoundField HeaderText="Emergency Contact Name" DataField="EmergencyContactName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+    <asp:BoundField HeaderText="Emergency Contact Number" DataField="EmergencyContactNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+    <asp:BoundField HeaderText="Payment Reference" DataField="BankReferenceNo" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+    <asp:BoundField HeaderText="Created By" DataField="CreatedBy" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+    <asp:BoundField HeaderText="Registration At" DataField="CreatedAt" DataFormatString="{0:dd-MMM-yyyy}" HtmlEncode="false" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+<%--    <asp:BoundField HeaderText="Year" DataField="Year" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
 
        <asp:TemplateField HeaderText="Action" ItemStyle-Width="72" >
         <ItemTemplate>
@@ -138,9 +167,19 @@ function TotalRecord() {
         <label>Bank Reference: </label>
         <asp:Textbox ID="txtBankRef" runat="server" class="form-control" Width="95%" />
     </div>
+         <div class="form-group">
+        <label>Run Category:  <span style="color:red">*</span></label>
+         <asp:DropDownList ID="txtRunCategory" runat="server" class="form-control" Width="95%" AutoPostBack="true" OnSelectedIndexChanged="txtRunCategory_SelectedIndexChanged">
+             <asp:ListItem Text="Select Run Category" Value="" />
+             <asp:ListItem Text="21.09KM" Value="21.09KM" />
+             <asp:ListItem Text="10KM" Value="10KM" />
+             <asp:ListItem Text="5KM" Value="5KM" />
+         </asp:DropDownList>
+         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtRunCategory" InitialValue="" ErrorMessage="Run Category is Required" ForeColor="Red" Display="Dynamic" ValidationGroup="BibDataSave" />
+    </div>
      <div class="form-group">
         <label>BIB Number: <span style="color:red">*</span></label>
-        <asp:Textbox ID="txtBibNumber" runat="server" class="form-control" Width="95%" />
+        <asp:Textbox ID="txtBibNumber"  Enabled="false" runat="server" class="form-control" Width="95%" />
          <asp:RequiredFieldValidator ID="RequiredBiBNo" ControlToValidate="txtBibNumber" runat="server" ErrorMessage="BIB No. is Required" ValidationGroup="BibDataSave" ForeColor="Red" Display="Dynamic" />
         </div>
 <%--    <div class="form-group">
@@ -162,14 +201,18 @@ function TotalRecord() {
            <asp:RequiredFieldValidator ID="rfvGender" runat="server" ControlToValidate="ddlGender" InitialValue="" ErrorMessage="Please select Gender" ForeColor="Red" Display="Dynamic" ValidationGroup="BibDataSave">
     </asp:RequiredFieldValidator>
     </div>
-    <div class="form-group">
+      <div class="form-group">
+     <label>Date Of Birth:</label>
+      <asp:TextBox ID="txtDOB" cols="40" Rows="6" runat="server" TextMode="Date" class="form-control" style="width:95%"/>
+ </div>
+<%--    <div class="form-group">
         <label>Email: </label>
         <asp:TextBox ID="txtEmail" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
-    </div>
-    <div class="form-group">
+    </div>--%>
+   <%-- <div class="form-group">
         <label>Bloob Group: </label>
         <asp:TextBox ID="txtBloodGroup" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
-    </div>
+    </div>--%>
     <div class="form-group">
         <label>T-Shirt size: </label>
         <asp:DropDownList ID="txtTshirtSize" runat="server" class="form-control" Width="95%">
@@ -190,17 +233,7 @@ function TotalRecord() {
     <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Phone number should be 10 digit" 
     ControlToValidate="txtMobile" ValidationExpression="^\d{10}$" ValidationGroup="BibDataSave" ForeColor="Red" Display="Dynamic" />
     </div>
-     <div class="form-group">
-        <label>Run Category:  <span style="color:red">*</span></label>
-         <asp:DropDownList ID="txtRunCategory" runat="server" class="form-control" Width="95%">
-             <asp:ListItem Text="Select Run Category" Value="" />
-             <asp:ListItem Text="21.09KM" Value="21.09KM" />
-             <asp:ListItem Text="10KM" Value="10KM" />
-             <asp:ListItem Text="5KM" Value="5KM" />
-         </asp:DropDownList>
-         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtRunCategory" InitialValue="" ErrorMessage="Run Category is Required" ForeColor="Red" Display="Dynamic" ValidationGroup="BibDataSave" />
-    </div>
-    <div class="form-group">
+<%--    <div class="form-group">
         <label>Year:  <span style="color:red">*</span></label>
         <asp:DropDownList ID="txtYear" runat="server" class="form-control" Width="95%">
             <asp:ListItem Text="2025" Value="2025" />
@@ -211,7 +244,7 @@ function TotalRecord() {
             <asp:ListItem Text="2030" Value="2030" />
         </asp:DropDownList>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtYear" InitialValue="" ErrorMessage="Year is Required" ForeColor="Red" Display="Dynamic" ValidationGroup="BibDataSave" />
-    </div>
+    </div>--%>
     <div class="form-group">
         <label>Emergency Contact Name:</label>
          <asp:TextBox ID="txtEmgName" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
@@ -220,10 +253,6 @@ function TotalRecord() {
       <label>Emergency Contact Number:</label>
        <asp:TextBox ID="txtEmgMobile" cols="40" Rows="6" runat="server" TextMode="Number" class="form-control" style="width:95%"/>
   </div>
-  <div class="form-group">
-     <label>Date Of Birth:</label>
-      <asp:TextBox ID="txtDOB" cols="40" Rows="6" runat="server" TextMode="Date" class="form-control" style="width:95%"/>
- </div>
 
     <div class="form-group">
     <asp:Button ID="btnAdd" CommandName="Save" runat="server" ValidationGroup="BibDataSave" class="btn btn-primary btn-lg" OnClientClick="return validateAndSubmit();"  Text="Save" OnClick="btnSave_Click"/>
@@ -277,11 +306,11 @@ function TotalRecord() {
     $('#ContentPlaceHolder1_BIBDataRunner_btnCancel').click(function () {
         $('#ContentPlaceHolder1_BIBDataRunner_txtBankRef').val('');
         $('#ContentPlaceHolder1_BIBDataRunner_txtBibNumber').val('');
-        $('#ContentPlaceHolder1_BIBDataRunner_txtCategory').val('Registration For RUN FOR EQUALITY');
+       // $('#ContentPlaceHolder1_BIBDataRunner_txtCategory').val('Registration For RUN FOR EQUALITY');
         $('#ContentPlaceHolder1_BIBDataRunner_txtName').val('');
         $('#ContentPlaceHolder1_BIBDataRunner_ddlGender').val('');
-        $('#ContentPlaceHolder1_BIBDataRunner_txtEmail').val('');
-        $('#ContentPlaceHolder1_BIBDataRunner_txtBloodGroup').val('');
+       // $('#ContentPlaceHolder1_BIBDataRunner_txtEmail').val('');
+        //$('#ContentPlaceHolder1_BIBDataRunner_txtBloodGroup').val('');
         $('#ContentPlaceHolder1_BIBDataRunner_txtTshirtSize').val('');
         $('#ContentPlaceHolder1_BIBDataRunner_txtMobile').val('');
         $('#ContentPlaceHolder1_BIBDataRunner_txtRunCategory').val('');
