@@ -180,7 +180,7 @@
 
           <div class="col-sm-6">
             
-                    <img src="Gallery_2025/Route Map clear - 05.02.2025.jpg"style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"/>
+                    <img src="Gallery_2025/Route-Map-clear-2026.jpg"style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"/>
                      <%--<img src="Images/ekta-combine-2025.jpg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"  />--%>
                      <%--<img src="Images/ekta-combine.jpg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"  />--%>
               
