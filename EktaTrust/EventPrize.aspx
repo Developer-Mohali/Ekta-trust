@@ -49,7 +49,7 @@
                      </tr>                     
                     <tr>
                         <td> <br />
-                            <b>Event Date-</b> 14.04.2025<br />
+                            <b>Event Date-</b> 14.04.2026<br />
                           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Place-</b>  Albert Hall, JLN Marg, Jaipur (Rajasthan)<br /><br />
                            
                             <div class="hidden">
@@ -60,7 +60,7 @@
                             </div>
                             
                           
-                            <b>Reporting Time-</b>14.04.2025<br /><br />
+                            <b>Reporting Time-</b>14.04.2026<br /><br />
                          <b>Time-</b>&nbsp;&nbsp;21.09 KM &nbsp;- 4:15 AM <br />
                       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10 KM&nbsp;&nbsp;- 5:15 AM<br />
               

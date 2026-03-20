@@ -37,7 +37,7 @@
                      </tr>                     
                     <tr>
                         <td> <%--<video src="RunForEqualityGallery/RunForEqualityFMAds.mpeg" height="0" width="0" id="FMaudio" autoplay="autoplay"></video>--%><br />
-                            <b>Event Date-</b> 14.04.2025<br />
+                            <b>Event Date-</b> 14.04.2026<br />
                           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Place-</b>  Albert Hall, JLN Marg, Jaipur (Rajasthan)<br /><br />
                             <%--Tentative Route - JLN Marg<br /><br />--%>
                            <div class="hidden">
@@ -48,7 +48,7 @@
                            </div>
                             <%--Reporting Time<br /><br />
                              14.04.2023<br />--%>
-                            <b>Reporting Time-</b>14.04.2025<br /><br />
+                            <b>Reporting Time-</b>14.04.2026<br /><br />
                          <b>Time-</b>&nbsp;&nbsp;21.09 KM &nbsp;- 4:15 AM <br />
                       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10 KM&nbsp;&nbsp;- 5:15 AM<br />
                            <%-- Run for Equality Schedule will be published shortly --%>
