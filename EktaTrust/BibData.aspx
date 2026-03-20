@@ -25,7 +25,7 @@
     </style>
 
 <div class="container">
-        <h2 class="wow fadeInDown crtificate">BIB Data  <span id="lblYear">2025</span></h2>
+        <h2 class="wow fadeInDown crtificate">BIB Data  <span id="lblYear"><%= year %></span></h2>
         <div class="row contact-wrap  wow fadeInDown">
             <div class="status alert alert-success" style="display: none"></div>
             <span style="color: gray; font-weight: bold">
