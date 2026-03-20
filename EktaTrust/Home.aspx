@@ -355,7 +355,7 @@ cursor: pointer;
                                 <br />
                                 <div class="media-body">
                                    <%-- <h3 class="media-heading">Bib-Expo Details</h3>--%>
-                                   <a href="../EventPrize" target="_self"> <h2 class="media-heading">Run for equality 14.04.2025 Registration</h2></a>
+                                   <a href="../EventPrize" target="_self"> <h2 class="media-heading">Run for equality 21.03.2025 Registration</h2></a>
                                     <%--<p>Registration for 14<span class="ordinal">th</span> April Event</p>--%>
                                    <%-- <p>BIB EXPO Details</p>--%>
                                     <a href="../EventPrize" target="_self" class="btn btn-default">Register Here</a>                                   

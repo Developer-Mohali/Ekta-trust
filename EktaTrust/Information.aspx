@@ -23,7 +23,7 @@
                     <tr>
                         <td colspan="2" >
                             <%--<h6>5th Run for Equality-2023 Details</h6>--%>
-                            <h4>6th Run for Equality-2025 Details</h4>
+                            <h4>7th Run for Equality-2026 Details</h4>
                         </td>
                     </tr>
                      <tr style="box-shadow: 0px 1px 10px 2px lightgrey;" >
@@ -59,7 +59,9 @@
                    <%-- Registration before - 31.03.2023 Rs-500--%>
 
                            <b>Registration Fee-</b> <br />
-                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Fix Rs 500 in all categories(5k, 10k, 21.09k)<br /><br />
+        <%--                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Fix Rs 500 in all categories(5k, 10k, 21.09k)<br /><br />--%>
+                              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rs 1500 for 21KM<br />
+                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rs 1000 for 5KM & 10KM<br /><br />
                       <%--&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2. 10k - Rs 700<br />
                            <%-- Run for Equality Schedule will be published shortly 
                        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. 21.09k - Rs 1000 <br /><br />--%>

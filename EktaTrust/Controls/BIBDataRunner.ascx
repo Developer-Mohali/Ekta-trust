@@ -126,7 +126,7 @@ function TotalRecord() {
     <asp:BoundField HeaderText="Emergency Contact Number" DataField="EmergencyContactNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
     <asp:BoundField HeaderText="Payment Reference" DataField="BankReferenceNo" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
     <asp:BoundField HeaderText="Created By" DataField="CreatedBy" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
-    <asp:BoundField HeaderText="Registration At" DataField="CreatedAt" DataFormatString="{0:dd-MMM-yyyy}" HtmlEncode="false" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+    <asp:BoundField HeaderText="Registration On" DataField="CreatedAt" DataFormatString="{0:dd-MMM-yyyy}" HtmlEncode="false" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
 <%--    <asp:BoundField HeaderText="Year" DataField="Year" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
 
        <asp:TemplateField HeaderText="Action" ItemStyle-Width="72" >

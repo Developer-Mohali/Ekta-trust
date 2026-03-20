@@ -13,7 +13,9 @@
     <div class="clsBackImage wow fadeInDown animated about-us">
         <div class="col-sm-12">
             <div style="margin: 6px auto; padding-left: 15px;padding-right: 15px;">
-              <h2 class="wow fadeInDown"><center>Run For Equality 2025</center></h2>
+              <h2 class="wow fadeInDown"><center>Run For Equality 7-Cyberthon                    
+                  <p style="font-size: small; font-style: oblique; text-transform: none;">A Step towards a cyber safe world</p></center>
+              </h2>
             </div>
              <%--<div class="col-sm-3">
                <h2 style="margin-left: 31px;"></h2>
@@ -32,7 +34,7 @@
                   
                     <tr>
                         <td colspan="2" >
-                            <h4>6th Run for Equality-2025 Details</h4>
+                            <h4>7th Run for Equality-2026 Details</h4>
                            
                         </td>
                     </tr>
@@ -69,7 +71,10 @@
                   
 
                            <b>Registration Fee-</b> <br />
-                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Fix Rs 500 in all categories(5k, 10k, 21.09k)<br /><br />
+                            <%-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Fix Rs 500 in all categories(5k, 10k, 21.09k)<br /><br />--%>
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rs 1500 for 21KM<br />
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rs 1000 for 5KM & 10KM<br /><br />
+
                            <b>On Spot registration in BIB EXPO</b><br />
                             &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs 1000 in all categories(5k, 10k, 21.09k) <br />
 
@@ -204,7 +209,7 @@
                     <center>
                          <input type="checkbox" id="cbTermsAndCondition"  style="margin-left: 17px;" checked/><input type="button" id="btnTermsAndConditions" value="I Accept All Terms and Conditions" class="float-left" style="background-color:transparent;border:none;color:blue;text-decoration: underline; "  Text="I Accept Terms and Conditions" />
                
-                      <button onclick="termsAndCondition(event)" style="font-size:larger; margin-top: 0px;font-size:larger;" id="EventRegistration" class="btn btn-success" ><%--Register Me--%>Registration Closed</button>
+                      <button onclick="termsAndCondition(event)" style="font-size:larger; margin-top: 0px;font-size:larger;" id="EventRegistration" class="btn btn-success" >Register Me<%--Registration Closed--%></button>
                   
                     </center>
               
@@ -291,14 +296,14 @@
      
 
             
-             var win = window.open('../RegistrationClosed', '_blank');
-              win.focus();
-            //if (isInstagramInAppBrowser()) {
-            //    window.location.href = 'https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784';
-            //} else {
-            //    var win = window.open('https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784', '_blank');
-            //    win.focus();
-            //}
+             //var win = window.open('../RegistrationClosed', '_blank');
+             // win.focus();
+            if (isInstagramInAppBrowser()) {
+                window.location.href = 'https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784';
+            } else {
+                var win = window.open('https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784', '_blank');
+                win.focus();
+            }
         }
         else {
             alert('Please Check Terms And Conditions!');
