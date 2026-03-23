@@ -86,8 +86,9 @@
                             <b>Registration Fee-</b>
                             <br />
                             <%-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Fix Rs 500 in all categories(5k, 10k, 21.09k)<br /><br />--%>
-                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rs 1500 for 21KM<br />
-                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rs 1000 for 5KM & 10KM<br />
+                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rs 1600 - 21KM<br />
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rs 1100 - 10KM<br />
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rs 500 - 5KM<br /><br />
                             <br />
 
                             <b>On Spot registration in BIB EXPO</b><br />
