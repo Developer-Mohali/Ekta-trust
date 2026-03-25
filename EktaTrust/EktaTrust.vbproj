@@ -68,6 +68,10 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>C:\Users\Admin\Downloads\Json90r1\Bin\Net20\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PaytmChecksum, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\PaytmChecksum.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -555,6 +559,8 @@
     <Content Include="PaymentProcess.aspx" />
     <Content Include="PaymentRequest.aspx" />
     <Content Include="PaymentResponse.aspx" />
+    <Content Include="PaytmCallBack.aspx" />
+    <Content Include="PaytmPaymentResponse.aspx" />
     <Content Include="RegistrationCreativeCompetition.aspx" />
     <Content Include="RPSC2020.aspx" />
     <Content Include="RpscMipGallery2025.aspx" />
@@ -1485,6 +1491,7 @@
       <DependentUpon>Library.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Logger.vb" />
     <Compile Include="MachediManpura.aspx.designer.vb">
       <DependentUpon>MachediManpura.aspx</DependentUpon>
     </Compile>
@@ -1617,6 +1624,20 @@
     <Compile Include="PaymentResponse.aspx.vb">
       <DependentUpon>PaymentResponse.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaytmCallBack.aspx.designer.vb">
+      <DependentUpon>PaytmCallBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaytmCallBack.aspx.vb">
+      <DependentUpon>PaytmCallBack.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PaytmPaymentResponse.aspx.designer.vb">
+      <DependentUpon>PaytmPaymentResponse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaytmPaymentResponse.aspx.vb">
+      <DependentUpon>PaytmPaymentResponse.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Profile.aspx.designer.vb">
       <DependentUpon>Profile.aspx</DependentUpon>
