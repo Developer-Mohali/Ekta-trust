@@ -11,59 +11,59 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Donate
+Partial Public Class PaytmPaymentResponse
 
     '''<summary>
-    '''txtFullName control.
+    '''statusTitle control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtFullName As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents statusTitle As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''txtAmount control.
+    '''lblMessage control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtAmount As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lblMessage As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''txtMobileNumber control.
+    '''lblOrderId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtMobileNumber As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lblOrderId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''ddlModeOfPayment1 control.
+    '''lblTxnId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlModeOfPayment1 As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblTxnId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''txtComments control.
+    '''lblAmount control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtComments As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lblAmount As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''btnAddNew control.
+    '''pnlRetry control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddNew As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents pnlRetry As Global.System.Web.UI.WebControls.Panel
 End Class

@@ -11,14 +11,14 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Donation
+Partial Public Class PaytmCallBack
 
     '''<summary>
-    '''ddlModeOfPayment1 control.
+    '''lblPaymentStatus control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlModeOfPayment1 As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblPaymentStatus As Global.System.Web.UI.WebControls.Label
 End Class

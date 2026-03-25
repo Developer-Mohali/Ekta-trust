@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class EventRegistration
 
     '''<summary>
+    '''ltPaytmScript control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ltPaytmScript As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
     '''drpEvent control.
     '''</summary>
     '''<remarks>
@@ -21,6 +30,24 @@ Partial Public Class EventRegistration
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents drpEvent As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''txtDOB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDOB As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtTshirtSize control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtTshirtSize As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''ddlTShirt control.

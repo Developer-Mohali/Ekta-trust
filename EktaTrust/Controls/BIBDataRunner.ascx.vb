@@ -312,6 +312,11 @@ Public Class BIBDataRunner
                                     cmd.Parameters.Add(New MySqlParameter("p_EmergencyContactNumber", dtrow.Item("Emergency Contact Number")))
                                     cmd.Parameters.Add(New MySqlParameter("p_RunnerDOB", If(IsValidDate(dtrow("Runner DOB").ToString()), CDate(dtrow("Runner DOB")), DBNull.Value)))
                                     cmd.Parameters.Add(New MySqlParameter("p_CreatedBy", loginId))
+                                    cmd.Parameters.Add(New MySqlParameter("p_OrderId", ""))
+                                    cmd.Parameters.Add(New MySqlParameter("p_PaymentStatus", ""))
+                                    cmd.Parameters.Add(New MySqlParameter("p_Amount", ""))
+                                    cmd.Parameters.Add(New MySqlParameter("p_TxnId", ""))
+                                    cmd.Parameters.Add(New MySqlParameter("p_PaytmResponse", ""))
                                     cmd.Connection = con
                                     con.Open()
                                     Try
@@ -508,6 +513,11 @@ Public Class BIBDataRunner
                         cmd.Parameters.Add(New MySqlParameter("p_EmergencyContactNumber", (emergencyContactNumber)))
                         cmd.Parameters.Add(New MySqlParameter("p_RunnerDOB", (runnerDOB)))
                         cmd.Parameters.Add(New MySqlParameter("p_CreatedBy", (loginId)))
+                        cmd.Parameters.Add(New MySqlParameter("p_OrderId", ""))
+                        cmd.Parameters.Add(New MySqlParameter("p_PaymentStatus", ""))
+                        cmd.Parameters.Add(New MySqlParameter("p_Amount", ""))
+                        cmd.Parameters.Add(New MySqlParameter("p_TxnId", ""))
+                        cmd.Parameters.Add(New MySqlParameter("p_PaytmResponse", ""))
                         cmd.Connection = con
                         con.Open()
                         Try

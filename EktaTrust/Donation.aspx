@@ -30,33 +30,38 @@
       <br/>
     <div class="contact-wrap">
         <img src="images/donation.jpg" style=" padding-top:70px; padding-right:100px;" class="img-responsive pull-right hidden-sm hidden-xs hidden-md  wow fadeInDown" alt=""/>
-    <%--  <form id="main-contact-form" class="contact-form " name="contact-form" method="post" action="#">
+      <form id="main-contact-form" class="contact-form " name="contact-form" method="post" action="#">
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 nopadding">
           <div class="form-group">
-            <label>Name *</label>
-            <input type="text" name="name" class="form-control" required>
+            <label>Full Name *</label>
+            <input type="text" name="name" id="txtName" class="form-control" required />
           </div>
           <div class="form-group">
-            <label>Email *</label>
-            <input type="email" name="email" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label class="text-danger"> Donate Amount [INR] : <small>* in figures only</small></label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Address</label>
-            <textarea name="message" id="message" required class="form-control" rows="8"></textarea>
+            <label>Amount *</label>
+            <input type="text" name="txtAmount" id="txtAmount" class="form-control" required />
           </div>
           <div class="form-group">
             <label>Mobile</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" id="txtMobile" />
           </div>
           <div class="form-group">
-            <button type="submit" name="submit" class="btn btn-primary btn-lg">Donate Now</button>
+            <asp:DropDownList CssClass="form-control" ID="ddlModeOfPayment1" runat="server">
+              <asp:ListItem Value="Select">Select Payment Way</asp:ListItem>
+                <asp:ListItem Value="UPI">UPI</asp:ListItem>
+                <asp:ListItem Value="Credit Card">Credit Card</asp:ListItem>
+              <asp:ListItem Value="Debit Card">Debit Card</asp:ListItem>
+              <asp:ListItem Value="Net Banking">Net Banking</asp:ListItem>                                       
+           </asp:DropDownList>
+          </div>
+            <div class="form-group">
+              <label>Comment</label>
+              <textarea type="text" class="form-control" id="txtComment"></textarea>
+            </div>
+          <div class="form-group">
+            <button type="submit" name="submit" id="btnDonate" class="btn btn-primary btn-lg">Donate Now</button>
           </div>
         </div>
-      </form>--%>
+      </form>
       <!--/.row--> 
     </div>
   </div>
@@ -101,4 +106,59 @@
   </div>
 </section>
 <!--/#bottom-->
+    <script>
+        $("#btnDonate").click(function () {
+
+            var name = $("#txtName").val().trim();
+            var amount = $("#txtAmount").val().trim();
+            var mobile = $("#txtMobile").val().trim();
+            var paymentMode = $("#<%= ddlModeOfPayment1.ClientID %>").val();
+
+        // ✅ Validation
+        if (name === "") {
+            alert("Enter Full Name");
+            return;
+        }
+
+        if (amount === "" || isNaN(amount) || parseFloat(amount) <= 0) {
+            alert("Enter valid amount");
+            return;
+        }
+
+        if (paymentMode === "Select") {
+            alert("Select payment mode");
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Donation.aspx/AddDonation",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                name: name,
+                amount: amount,
+                mobile: mobile,
+                paymentMode: paymentMode,
+                comment: $('#txtComment').val()
+            }),
+            dataType: "json",
+            success: function (response) {
+
+                // response.d is returned from WebMethod
+                //var result = response.d;
+
+                //if (result.success) {
+                //    // redirect to Paytm or next step
+                //    window.location.href = result.redirectUrl;
+                //} else {
+                //    alert(result.message);
+                //}
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+
+    });
+    </script>
 </asp:Content>

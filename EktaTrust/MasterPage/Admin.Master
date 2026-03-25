@@ -169,7 +169,21 @@ body section {
                  height: 300px;
              }
          }
+              #loader {
+        position: fixed;
+        z-index: 10005;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+    }
 
+    #loader img {
+        position: relative;
+        top: 40%;
+    }
     </style>
 
 
@@ -178,7 +192,9 @@ body section {
     </asp:ContentPlaceHolder>
 </head>
  <body class="homepage">
-
+             <div id="loader" style="display:none">
+                <img src="./CssGallery/resource/loading.gif" alt="Loading..." />
+            </div>
    
 
 <form id="msform" runat="server">
@@ -547,6 +563,13 @@ body section {
     //        bestMatch.closest('li').addClass('active'); // add to closest li only
     //    }
     //});
+    function showLoader() {
+        document.getElementById("loader").style.display = "block";
+    }
+
+    function hideLoader() {
+        document.getElementById("loader").style.display = "none";
+    }
 </script>
 
 

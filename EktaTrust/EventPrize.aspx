@@ -227,7 +227,7 @@
                     --%>
                     <br />
                     <center>
-                        <input type="checkbox" id="cbTermsAndCondition" style="margin-left: 17px;" checked /><input type="button" id="btnTermsAndConditions" value="I Accept All Terms and Conditions" class="float-left" style="background-color: transparent; border: none; color: blue; text-decoration: underline;" text="I Accept Terms and Conditions" />
+<%--                        <input type="checkbox" id="cbTermsAndCondition" style="margin-left: 17px;" checked /><input type="button" id="btnTermsAndConditions" value="I Accept All Terms and Conditions" class="float-left" style="background-color: transparent; border: none; color: blue; text-decoration: underline;" text="I Accept Terms and Conditions" />--%>
 
                         <button onclick="termsAndCondition(event)" style="font-size: larger; margin-top: 0px; font-size: larger;" id="EventRegistration" class="btn btn-success">Register Me<%--Registration Closed--%></button>
 
@@ -309,24 +309,24 @@
         function termsAndCondition(event) {
             event.preventDefault(); // Prevent default behavior (if inside a form)
             event.stopPropagation(); // Stop further event bubbling
-            var isChecked = $("#cbTermsAndCondition").is(":checked");
-            if (isChecked) {
+            //var isChecked = $("#cbTermsAndCondition").is(":checked");
+            //if (isChecked) {
 
 
+                window.location.href = '../EventRegistration.aspx';
+                //var win = window.open('../EventRegistration.aspx');
+                 //win.focus();
+                //if (isInstagramInAppBrowser()) {
+                //    window.location.href = 'https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784';
+                //} else {
+                //    var win = window.open('https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784', '_blank');
+                //    win.focus();
+                //}
+            //}
+            //else {
+            //    alert('Please Check Terms And Conditions!');
 
-                //var win = window.open('../RegistrationClosed', '_blank');
-                // win.focus();
-                if (isInstagramInAppBrowser()) {
-                    window.location.href = 'https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784';
-                } else {
-                    var win = window.open('https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784', '_blank');
-                    win.focus();
-                }
-            }
-            else {
-                alert('Please Check Terms And Conditions!');
-
-            }
+            //}
         }
     </script>
 
