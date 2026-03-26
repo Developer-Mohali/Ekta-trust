@@ -78,7 +78,7 @@ function TotalRecord() {
         <td>
             <div class="col-md-12" style="padding-left: 0px;">
                 <div class="col-md-4" style="padding-left: 0px;">
-                     Search by Bib No:
+                     Search by Bib No/Payment Status:
                  <asp:Panel runat="server" DefaultButton="btnSearch" style="display: inline;">
                     <asp:TextBox ID="txtSearch" style="display: inline; width:50%" class="form-control" runat="server"></asp:TextBox>
                    </asp:Panel>
@@ -103,7 +103,7 @@ function TotalRecord() {
  <br />
           
  <asp:GridView ID="gvEvent" runat="server" class="table table-bordered table-hover table-striped" AutoGenerateColumns="false" DataKeyNames="ID"  PageSize="25" 
-   EmptyDataText="No records has been added." Style="font-weight: normal;" OnRowCommand="gvMIP_RowAction" onpageindexchanging="gvEvent_PageIndexChanging" >
+   EmptyDataText="No records has been added." Style="font-weight: normal;" OnRowCommand="gvMIP_RowAction" onpageindexchanging="gvEvent_PageIndexChanging" OnRowDataBound="GridView1_RowDataBound">
 <Columns> 
     
   <%--  <asp:BoundField HeaderText="Category" DataField="CategoryName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
@@ -122,9 +122,11 @@ function TotalRecord() {
    <%-- <asp:BoundField HeaderText="Blood Group" DataField="BloodGroup" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
 
     <asp:BoundField HeaderText="Contact Number" DataField="MobileNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
-    <asp:BoundField HeaderText="Emergency Contact Name" DataField="EmergencyContactName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+ <%--   <asp:BoundField HeaderText="Emergency Contact Name" DataField="EmergencyContactName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
     <asp:BoundField HeaderText="Emergency Contact Number" DataField="EmergencyContactNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
-    <asp:BoundField HeaderText="Payment Reference" DataField="BankReferenceNo" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+ <%--   <asp:BoundField HeaderText="Payment Reference" DataField="BankReferenceNo" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
+     <asp:BoundField HeaderText="Payment Status" DataField="PaymentStatus" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+     <asp:BoundField HeaderText="OrderId" DataField="OrderId" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
     <asp:BoundField HeaderText="Created By" DataField="CreatedBy" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
     <asp:BoundField HeaderText="Registration On" DataField="CreatedAt" DataFormatString="{0:dd-MMM-yyyy}" HtmlEncode="false" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
 <%--    <asp:BoundField HeaderText="Year" DataField="Year" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>

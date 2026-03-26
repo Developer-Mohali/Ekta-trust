@@ -209,7 +209,7 @@ cursor: pointer;
         <%-- <a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784" target="_blank">
             <button id="btnfeedback" type="button" class="feedback"></button>
         </a>--%>
-        <a href="../Donate" target="_blank">
+        <a href="../Donation" target="_blank">
             <button id="btnfeedback" type="button" class="feedback"></button>
         </a>
     </div>

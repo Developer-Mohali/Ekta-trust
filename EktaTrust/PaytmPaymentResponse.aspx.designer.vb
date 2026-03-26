@@ -59,6 +59,33 @@ Partial Public Class PaytmPaymentResponse
     Protected WithEvents lblAmount As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''Panelpayment control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Panelpayment As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''lblpaymentType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpaymentType As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblpaymentMode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpaymentMode As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''pnlRetry control.
     '''</summary>
     '''<remarks>

@@ -211,16 +211,16 @@ body section {
     }
 
     /* Custom, iPhone Retina */
-        @media only screen and (max-width : 320px) {
+        @media only screen and (max-width : 380px) {
             body section {
                 margin-top: 151px;
                 padding: 20px 0;
             }
-                #otp {
+          /*      #otp {
     width:100% !important;
     height: 51px !important;
     margin-top: 1% !important;
-}
+}*/
             .fadeInDown {
                 margin-top: 55px;
             }
@@ -228,8 +228,23 @@ body section {
             padding: 4px 30px;
             margin: -25px 10%;
         }
+             .terms-font-size{
+                 font-size: 11px;
+             }
+             .d-flex{
+                 display:flex;
+             }
+             .clsBackImage {
+                 height:830px;
+             }
+             .col-sm-2, .col-sm-8{
+                 padding-left:0px;
+             }
         }
 
+        section{
+            display:none;
+        }
     </style>
     <link href="Css/MediaQuery.css" rel="stylesheet" />
 </asp:Content>
@@ -252,8 +267,8 @@ body section {
                     <%--<div style="height :540px;">--%>
 
 
-                    <h2 class="fs-title">Information</h2>
-                    <h3 class="fs-subtitle">Please Provide your Information.   <span class="pull-right" style="color:red"><b> Event Date -</b> 14th April 2026<br /> <b>Venue -</b> JLN Marg, Jaipur*</span></h3>
+                 <%--   <h2 class="fs-title">Information</h2>--%>
+                    <h3 class="fs-subtitle">Run for Equality Registration.   <span class="pull-right" style="color:red"><b> Event Date -</b> 14th April 2026<br /> <b>Venue -</b> JLN Marg, Jaipur*</span></h3>
                   
                     <br />
                     <div class="form-group col-sm-12">
@@ -323,7 +338,7 @@ body section {
                     <div class="form-group col-sm-12">
                         <input type="checkbox" name="TermCondition" checked="checked" class="styled" id="TermCondition" />                   
                         <a style="text-decoration: underline;" href="../TermsAndCondition" target="_blank">
-                            <label style="cursor: pointer">I Accept the Terms and Conditions</label>
+                            <label class="terms-font-size" style="cursor: pointer">I Accept the Terms and Conditions</label>
                         </a>
                     </div>
                     <input type="hidden" id="random" />
@@ -331,9 +346,9 @@ body section {
 
                     <div class="form-group col-sm-12">
 
-                        <div>
+                        <div class="d-flex">
                             <%--<input  type = "text" id="otp" Class="col-sm-4" name="otp" placeholder="Enter OTP Here" /><input type="button" id="otpgenerate" style="width: auto;" name="submit" onclick="OTPNumber()" Class="submit action-button" value="Generate OTP" /> --%>
-                          <input type="button" name="submitbtn" id="submitbtn" class="action-button next" value="Submit Data" />
+                          <input type="button" name="submitbtn" id="submitbtn" class="action-button" value="Submit Data" />
                          <input type="button" class="action-button" value="Back"  onclick="window.location.href='../EventPrize.aspx';" style="background-color: #ef5430 ! IMPORTANT; border-color: #e13810 !important;" />
                             
                         </div>
@@ -374,7 +389,7 @@ body section {
 
                 <!--Second fieldset start-->
 
-                <fieldset id="shirt_information">
+<%--                <fieldset id="shirt_information">
                     <div>
                         <h2 class="fs-title">T-Shirt Details</h2>
                         <h3 class="fs-subtitle">Please chose your T-shirt size</h3>
@@ -396,10 +411,10 @@ body section {
                         <input type="button" name="previous" class="previous action-button" value="Previous" />
                         <input type="button" name="next" class="next action-button" value="Next" />
                     </div>
-                </fieldset>
+                </fieldset>--%>
 
                 <!-- End Second fieldset-->
-                <fieldset id="Emergency">
+          <%--      <fieldset id="Emergency">
                     <div>
                         <h2 class="fs-title">Emergency Contacts</h2>
                         <h3 class="fs-subtitle">Please provide emergency contact numbers.</h3>
@@ -419,12 +434,12 @@ body section {
                         <input type="button" name="previous" class="previous action-button" value="Previous" />
                         <input type="button" id="submitEventDetail" name="next" class="action-button" value="Next" />
                     </div>
-                </fieldset>
-                <fieldset id="Payment">
+                </fieldset>--%>
+          <%--      <fieldset id="Payment">
                     <h2 class="fs-title">Payment</h2>
                     <h3 class="fs-subtitle">Please provide payment information.</h3>
 
-                </fieldset>
+                </fieldset>--%>
             </div>
             <div class="col-sm-2">
             </div>
@@ -863,7 +878,6 @@ body section {
             }
 
             function openPaytm(data) {
-                console.log(data.txnToken);
                 var config = {
                     root: "",
                     flow: "DEFAULT",
@@ -896,7 +910,6 @@ body section {
                         window.Paytm.CheckoutJS.invoke();
                     }).catch(function (err) {
                         console.log(err);
-                        console.log(Paytm.CheckoutJS);
                     });
                 }
             }

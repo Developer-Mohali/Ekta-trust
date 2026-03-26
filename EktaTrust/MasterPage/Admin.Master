@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Home | Ekta Trust</title>
@@ -387,7 +387,8 @@ body section {
 
     <li class="menu-item"><a href="../Literature">Literature</a></li>
     <li class="menu-item"><a href="../RunForEquality2025">Gallery</a></li>
-    <li class="menu-item"><a href="../Donate">Donate Us</a></li>
+    <li class="menu-item"><a href="../Donation">Donate Us</a></li>
+<%--    <li class="menu-item"><a href="../Donate">Donate Us</a></li>--%>
     <li class="menu-item"><a href="../LogIn.aspx">Login </a></li>
                    
 </ul>
@@ -402,7 +403,7 @@ body section {
          <%--<a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784" target="_blank">
             <button id="btnfeedback" type="button" class="feedback"></button>
         </a>--%>
-        <a href="../Donate" target="_blank">
+        <a href="../Donation" target="_blank">
             <button id="btnfeedback" type="button" class="feedback"></button>
         </a>
    </div>

@@ -8,6 +8,7 @@ Public Class PaytmPaymentResponse
         If Not IsPostBack Then
 
             Dim orderId As String = Request.QueryString("orderId")
+            Dim paymentType As String = Request.QueryString("type")
 
             If String.IsNullOrEmpty(orderId) Then
                 lblMessage.Text = "Invalid Request"
@@ -29,6 +30,12 @@ Public Class PaytmPaymentResponse
             lblOrderId.Text = orderId
             lblTxnId.Text = txnId
             lblAmount.Text = row("Amount").ToString()
+
+            If paymentType.Trim() = "donation" Then
+                lblpaymentType.Text = "Donation"
+                lblpaymentMode.Text = GetPaymentModeName(row("ModeOfPayment").ToString())
+                Panelpayment.Visible = True
+            End If
 
             Select Case status
 
@@ -58,19 +65,13 @@ Public Class PaytmPaymentResponse
 
     Private Function GetPaymentByOrderId(orderId As String) As DataTable
         Dim dt As New DataTable()
-        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Try
-            Using con As New MySqlConnection(constr)
-                Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount FROM bibdata WHERE OrderId = @OrderId", con)
-
-                    cmd.Parameters.AddWithValue("@OrderId", orderId)
-
-                    Using da As New MySqlDataAdapter(cmd)
-                        da.Fill(dt)
-                    End Using
-                End Using
-            End Using
-
+            Dim paymentType As String = Request.QueryString("type")
+            If paymentType.Trim() = "donation" Then
+                dt = GetDonationPaymentInfo(orderId)
+            Else
+                dt = GetBIBPaymentInfo(orderId)
+            End If
             Return dt
         Catch ex As Exception
             Logger.LogError(ex.Message, ex)
@@ -78,4 +79,76 @@ Public Class PaytmPaymentResponse
         End Try
     End Function
 
+    Private Function GetBIBPaymentInfo(orderId As String)
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+        Dim dt As New DataTable()
+        Using con As New MySqlConnection(constr)
+            Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount FROM bibdata WHERE OrderId = @OrderId", con)
+
+                cmd.Parameters.AddWithValue("@OrderId", orderId)
+
+                Using da As New MySqlDataAdapter(cmd)
+                    da.Fill(dt)
+                End Using
+            End Using
+        End Using
+        Return dt
+    End Function
+
+    Private Function GetDonationPaymentInfo(orderId As String)
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+        Dim dt As New DataTable()
+        Using con As New MySqlConnection(constr)
+            Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount, ModeOfPayment FROM donation WHERE OrderId = @OrderId", con)
+
+                cmd.Parameters.AddWithValue("@OrderId", orderId)
+
+                Using da As New MySqlDataAdapter(cmd)
+                    da.Fill(dt)
+                End Using
+            End Using
+        End Using
+        Return dt
+    End Function
+
+    Public Shared Function GetPaymentModeName(paytmMode As String) As String
+
+        If String.IsNullOrEmpty(paytmMode) Then
+            Return "Unknown"
+        End If
+
+        Select Case paytmMode.ToUpper()
+
+            Case "CC", "CREDIT_CARD"
+                Return "Credit Card"
+
+            Case "DC", "DEBIT_CARD"
+                Return "Debit Card"
+
+            Case "NB"
+                Return "Net Banking"
+
+            Case "WALLET", "BALANCE"
+                Return "Wallet"
+
+            Case "PDC"
+                Return "Postpaid"
+
+            Case "EMI"
+                Return "EMI"
+
+            Case "EMI_DC"
+                Return "Debit Card EMI"
+
+            Case "BNPL"
+                Return "Buy Now Pay Later"
+
+            Case Else
+                Return paytmMode ' fallback (don’t lose data)
+
+        End Select
+
+    End Function
 End Class

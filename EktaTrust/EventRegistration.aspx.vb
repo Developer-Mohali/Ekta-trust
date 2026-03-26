@@ -308,7 +308,7 @@ Public Class EventRegistration
         Dim year As String = DateTime.Now.Year.ToString()
 
         ' ✅ Generate UNIQUE Order ID
-        Dim orderId As String = "BIB_" & DateTime.Now.Ticks.ToString() & "_" & bibNumber
+        Dim orderId As String = DateTime.Now.Ticks.ToString() & "_" & bibNumber
 
         Try
             'InitiateTransaction("Ekta123456", "1600")

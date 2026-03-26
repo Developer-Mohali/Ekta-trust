@@ -48,13 +48,4 @@ Partial Public Class EventRegistration
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtTshirtSize As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''ddlTShirt control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlTShirt As Global.System.Web.UI.WebControls.DropDownList
 End Class

@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <asp:Literal ID="ltPaytmScript" runat="server"></asp:Literal>
     <div class="about-us">
   <div class="container">
     <h2 class="wow fadeInDown">Donation</h2>
@@ -40,11 +41,19 @@
             <label>Amount *</label>
             <input type="text" name="txtAmount" id="txtAmount" class="form-control" required />
           </div>
+           <div class="form-group">
+            <label>PAN</label>
+            <input type="text" name="txtPan" id="txtPan" class="form-control" />
+          </div>
           <div class="form-group">
             <label>Mobile</label>
             <input type="text" class="form-control" id="txtMobile" />
           </div>
-          <div class="form-group">
+           <div class="form-group">
+            <label>EmailAddress</label>
+            <input type="text" class="form-control" id="txtEmail" />
+           </div>
+     <%--     <div class="form-group">
             <asp:DropDownList CssClass="form-control" ID="ddlModeOfPayment1" runat="server">
               <asp:ListItem Value="Select">Select Payment Way</asp:ListItem>
                 <asp:ListItem Value="UPI">UPI</asp:ListItem>
@@ -52,9 +61,9 @@
               <asp:ListItem Value="Debit Card">Debit Card</asp:ListItem>
               <asp:ListItem Value="Net Banking">Net Banking</asp:ListItem>                                       
            </asp:DropDownList>
-          </div>
+          </div>--%>
             <div class="form-group">
-              <label>Comment</label>
+              <label>Address</label>
               <textarea type="text" class="form-control" id="txtComment"></textarea>
             </div>
           <div class="form-group">
@@ -107,12 +116,13 @@
 </section>
 <!--/#bottom-->
     <script>
-        $("#btnDonate").click(function () {
+        $("#btnDonate").click(function (event) {
 
             var name = $("#txtName").val().trim();
             var amount = $("#txtAmount").val().trim();
             var mobile = $("#txtMobile").val().trim();
-            var paymentMode = $("#<%= ddlModeOfPayment1.ClientID %>").val();
+            var email = $('#txtEmail').val().trim();
+            <%--var paymentMode = $("#<%= ddlModeOfPayment1.ClientID %>").val();--%>
 
         // ✅ Validation
         if (name === "") {
@@ -124,41 +134,123 @@
             alert("Enter valid amount");
             return;
         }
+            event.preventDefault();
+        //if (paymentMode === "Select") {
+        //    alert("Select payment mode");
+        //    return;
+            //}
+            $('#loader').show();
+            try {
+                $.ajax({
+                    type: "POST",
+                    url: "/Donation.aspx/AddDonation",
+                    contentType: "application/json;",
+                    data: JSON.stringify({
+                        name: name,
+                        amount: amount,
+                        mobile: mobile,
+                        pan: $('#txtPan').val(),
+                        address: $('#txtComment').val(),
+                        email: email
+                    }),
+                    dataType: "json",
+                    success: function (response) {
 
-        if (paymentMode === "Select") {
-            alert("Select payment mode");
-            return;
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "/Donation.aspx/AddDonation",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                name: name,
-                amount: amount,
-                mobile: mobile,
-                paymentMode: paymentMode,
-                comment: $('#txtComment').val()
-            }),
-            dataType: "json",
-            success: function (response) {
-
-                // response.d is returned from WebMethod
-                //var result = response.d;
-
-                //if (result.success) {
-                //    // redirect to Paytm or next step
-                //    window.location.href = result.redirectUrl;
-                //} else {
-                //    alert(result.message);
-                //}
-            },
-            error: function (err) {
-                console.log(err);
+                        // response.d is returned from WebMethod
+                        var result = response.d;
+                        debugger
+                        if (result.success) {
+                            paytmPaymentPopupOpen(amount, result.orderId, name, mobile, email);
+                            // redirect to Paytm or next step
+                            ///window.location.href = result.redirectUrl;
+                        } else {
+                            alert(result.message);
+                        }
+                    },
+                    error: function (err) {
+                        console.log('error while donating: ', err);
+                    }
+                });
+            } catch (err) {
+                console.log('Error in while donating:==> ', err);
+                $('#loader').hide();
             }
+
         });
 
-    });
+        // main paytm function to initiate transaction from paytm...
+        function paytmPaymentPopupOpen(amount, orderId, name, phone = '', email = '') {
+            try {
+                $.ajax({
+                    type: "POST",
+                    url: "/EventRegistration.aspx/InitiateTransaction",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        amount: amount,
+                        orderId: orderId,
+                        name: name,
+                        phone: phone,
+                        email: email
+                    }),
+                    dataType: "json",
+                    success: function (res) {
+                        var data = res.d;
+                        setTimeout(() => {
+                            $('#loader').hide();
+                        }, 1000);
+                        if (data.success) {
+                            openPaytm(data);
+                        } else {
+                            alert(data.message);
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                        $('#loader').hide();
+                        alert("Server error");
+                    }
+                });
+            } catch (err) {
+                console.log('Error in paytmPaymentPopupOpen==> ', err);
+                $('#loader').hide();
+            }
+        }
+
+        function openPaytm(data) {
+            var config = {
+                root: "",
+                flow: "DEFAULT",
+                data: {
+                    orderId: data.orderId,
+                    token: data.txnToken,
+                    tokenType: "TXN_TOKEN",
+                    amount: data.amount
+                },
+                handler: {
+                    notifyMerchant: function (eventName, data) {
+
+                        console.log("Event:", eventName);
+
+                        if (eventName === "PAYMENT_SUCCESS") {
+                            alert("Payment Successful");
+                            location.reload();
+                        }
+
+                        if (eventName === "PAYMENT_FAILURE") {
+                            alert("Payment Failed");
+                        }
+                    }
+                }
+            };
+
+
+            if (window.Paytm && window.Paytm.CheckoutJS) {
+                window.Paytm.CheckoutJS.init(config).then(function () {
+                    window.Paytm.CheckoutJS.invoke();
+                }).catch(function (err) {
+                    console.log(err);
+                });
+            }
+        }
     </script>
 </asp:Content>

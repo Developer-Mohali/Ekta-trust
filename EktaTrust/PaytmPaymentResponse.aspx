@@ -107,7 +107,10 @@ body section {
     <p><b>Order ID:</b> <asp:Label ID="lblOrderId" runat="server"></asp:Label></p>
     <p><b>Transaction ID:</b> <asp:Label ID="lblTxnId" runat="server"></asp:Label></p>
     <p><b>Amount:</b> ₹ <asp:Label ID="lblAmount" runat="server"></asp:Label></p>
-
+    <asp:Panel ID="Panelpayment" runat="server" Visible="false">
+        <p><b>Transaction Type:</b> <asp:Label ID="lblpaymentType" runat="server"></asp:Label></p>
+        <p><b>Payment Mode:</b> <asp:Label ID="lblpaymentMode" runat="server"></asp:Label></p>
+    </asp:Panel>
     <br />
 
     <asp:Panel ID="pnlRetry" runat="server" Visible="false">

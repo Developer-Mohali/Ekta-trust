@@ -5,26 +5,26 @@ Public Class PaytmCallBack
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Dim PaymentFrom As String = ""
+
+        ' getting previous page info, so update payment info in particular table...
+        If Request.UrlReferrer IsNot Nothing Then
+            Dim previousPageUrl As String = Request.UrlReferrer.AbsoluteUri
+            If previousPageUrl.Contains("Donation") Then
+                PaymentFrom = "Donation"
+            End If
+        End If
+
+
         ' 🔴 Handle Paytm POST callback
         If Request.HttpMethod = "POST" AndAlso Not String.IsNullOrEmpty(Request.Form("ORDERID")) Then
 
-            HandlePaytmCallback()
+            HandlePaytmCallback(PaymentFrom)
 
-        End If
-
-        ' ✅ Handle redirect message (clean UX)
-        If Not IsPostBack Then
-            Dim status As String = Request.QueryString("status")
-
-            If status = "success" Then
-                ' ShowMessage("Payment Successful!", True)
-            ElseIf status = "failed" Then
-                ' ShowMessage("Payment Failed!", False)
-            End If
         End If
     End Sub
 
-    Private Sub HandlePaytmCallback()
+    Private Sub HandlePaytmCallback(PaymentFrom As String)
 
         Try
             Dim merchantKey As String = ConfigurationManager.AppSettings("MerchantKey")
@@ -49,24 +49,30 @@ Public Class PaytmCallBack
                 Dim orderId As String = Request.Form("ORDERID")
                 Dim txnId As String = Request.Form("TXNID")
 
-                ' 🔴 IMPORTANT: Prevent duplicate processing
-                'If IsOrderAlreadyProcessed(orderId) Then Exit Sub
-
                 If status = "TXN_SUCCESS" Then
 
                     ' ✅ Update DB → SUCCESS
-                    UpdateOrder(orderId, "Success", txnId, fullResponseJson)
+                    If PaymentFrom = "Donation" Then
+                        UpdateOderInDonation(orderId, "Success", txnId, fullResponseJson)
+                        Response.Redirect("PaytmPaymentResponse.aspx?status=success&orderId=" & orderId & "&type=donation", False)
+                    Else
+                        UpdateOrderInBIB(orderId, "Success", txnId, fullResponseJson)
+                        Response.Redirect("PaytmPaymentResponse.aspx?status=success&orderId=" & orderId & "&type=registration", False)
+                    End If
 
-                    ' Redirect to avoid resubmission
-                    Response.Redirect("PaytmPaymentResponse.aspx?status=success&orderId=" & orderId)
-
+                    Context.ApplicationInstance.CompleteRequest()
                 Else
 
                     ' ❌ Update DB → FAILED
-                    UpdateOrder(orderId, "Failed", txnId, fullResponseJson)
+                    If PaymentFrom = "Donation" Then
+                        UpdateOderInDonation(orderId, "Failed", txnId, fullResponseJson)
+                        Response.Redirect("PaytmPaymentResponse.aspx?status=failed&orderId=" & orderId & "&type=donation", False)
+                    Else
+                        UpdateOrderInBIB(orderId, "Failed", txnId, fullResponseJson)
+                        Response.Redirect("PaytmPaymentResponse.aspx?status=failed&orderId=" & orderId & "&type=registration", False)
+                    End If
 
-                    Response.Redirect("PaytmPaymentResponse.aspx?status=failed&orderId=" & orderId)
-
+                    Context.ApplicationInstance.CompleteRequest()
                 End If
 
             Else
@@ -80,8 +86,7 @@ Public Class PaytmCallBack
     End Sub
 
 
-    Private Sub UpdateOrder(orderId As String, status As String, txnId As String, apiResponse As String)
-
+    Private Sub UpdateOrderInBIB(orderId As String, status As String, txnId As String, apiResponse As String)
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Try
             Using con As New MySqlConnection(constr)
@@ -95,11 +100,41 @@ Public Class PaytmCallBack
                     cmd.Parameters.AddWithValue("@orderId", orderId)
 
                     con.Open()
-                    cmd.ExecuteNonQuery()
+                    Dim RowAffected = cmd.ExecuteNonQuery()
+                    If (RowAffected = 0) Then
+                        Logger.LogInfo("UpdateOrderInBIB ::: Paytm Payment transaction update failed:::" & Environment.NewLine & "PaytmResponse:::" & apiResponse)
+                    End If
                 End Using
             End Using
         Catch ex As Exception
             Logger.LogError($"Error in PaytmCallBack->UpdateOrder ::: Error ::: {ex.Message}", ex)
+        End Try
+    End Sub
+
+    Private Sub UpdateOderInDonation(orderId As String, status As String, txnId As String, apiResponse As String)
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+        Dim paymentMode As String = Request.Form("PAYMENTMODE")
+        Try
+            Using con As New MySqlConnection(constr)
+                Dim Query As String = "UPDATE donation SET PaymentStatus=@paymentStatus, PaytmResponse= @paytmResponse, TxnId = @txnId, ModeOfPayment = @ModeOfPayment
+                                    WHERE OrderId=@orderId"
+
+                Using cmd As New MySqlCommand(Query, con)
+                    cmd.Parameters.AddWithValue("@paymentStatus", status)
+                    cmd.Parameters.AddWithValue("@paytmResponse", apiResponse)
+                    cmd.Parameters.AddWithValue("@txnId", txnId)
+                    cmd.Parameters.AddWithValue("@orderId", orderId)
+                    cmd.Parameters.AddWithValue("@ModeOfPayment", paymentMode)
+
+                    con.Open()
+                    Dim RowAffected = cmd.ExecuteNonQuery()
+                    If (RowAffected = 0) Then
+                        Logger.LogInfo("UpdateOderInDonation ::: Paytm Payment transaction update failed:::" & Environment.NewLine & "PaytmResponse:::" & apiResponse)
+                    End If
+                End Using
+            End Using
+        Catch ex As Exception
+            Logger.LogError($"Error in PaytmCallBack->UpdateOderInDonation ::: Error ::: {ex.Message}", ex)
         End Try
     End Sub
 End Class

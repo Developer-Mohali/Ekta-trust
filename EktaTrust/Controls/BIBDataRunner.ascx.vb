@@ -70,7 +70,7 @@ Public Class BIBDataRunner
             Using con As New MySqlConnection(constr)
                 Dim query As String = "SELECT DISTINCT bd.ID, bd.BIBNo, bd.RunnerName, bd.RunCatagory, bd.TShirtSize, bd.Gender, bd.RunnerDOB, 
                                         bd.MobileNumber, bd.EmergencyContactName, bd.EmergencyContactNumber,
-                                        bd.BankReferenceNo, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.CreatedAt FROM bibdata bd 
+                                        bd.BankReferenceNo, PaymentStatus, OrderId, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.CreatedAt FROM bibdata bd 
                                         left join user u  on bd.UserId = u.ID
                                         left join signup s on s.UserId = bd.UserId"
                 Dim cmd As New MySqlCommand()
@@ -85,8 +85,9 @@ Public Class BIBDataRunner
                         End If
                     Else
                         If String.IsNullOrEmpty(selectedUser) Then
-                            query += " WHERE bd.BIBNo LIKE @BIBNo "
+                            query += " WHERE bd.BIBNo LIKE @BIBNo OR bd.PaymentStatus LIKE @payStatus"
                             cmd.Parameters.AddWithValue("@BIBNo", "%" & txtSearch.Text.Trim() & "%")
+                            cmd.Parameters.AddWithValue("@payStatus", "%" & txtSearch.Text.Trim() & "%")
                         Else
                             query += $" WHERE bd.UserId = @UserId bd.BIBNo LIKE @BIBNo "
                             cmd.Parameters.AddWithValue("@BIBNo", "%" & txtSearch.Text.Trim() & "%")
@@ -792,19 +793,42 @@ Public Class BIBDataRunner
             Using con As New MySqlConnection(connStr)
                 Dim query As String = "SELECT DISTINCT bd.BIBNo, bd.RunnerName, bd.RunCatagory as `Run Category`, bd.TShirtSize, bd.Gender, bd.RunnerDOB, 
                                         bd.MobileNumber as `Contact Number`, bd.EmergencyContactName, bd.EmergencyContactNumber,
-                                        bd.BankReferenceNo as `Payment Reference`, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.CreatedAt as `Registration At` FROM bibdata bd 
+                                        bd.BankReferenceNo as `Payment Reference`, PaymentStatus as `Payment Status`, OrderId, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.CreatedAt as `Registration At` FROM bibdata bd 
                                         left join user u  on bd.UserId = u.ID
                                         left join signup s on s.UserId = bd.UserId"
                 Dim cmd As New MySqlCommand()
                 cmd.Connection = con
 
-                'Get the BIB data if created By is selected or not.
-                If (String.IsNullOrEmpty(selectedUser)) Then
-                    query += " ORDER BY bd.ID DESC"
+                ' Admin: See all data
+                If String.IsNullOrWhiteSpace(txtSearch.Text) Then
+                    If String.IsNullOrEmpty(selectedUser) = False Then
+                        query += $" WHERE bd.UserId = @UserId"
+                        cmd.Parameters.AddWithValue("@UserId", selectedUser)
+                    End If
                 Else
-                    query += " WHERE bd.UserId = @UserId ORDER BY bd.ID DESC"
-                    cmd.Parameters.AddWithValue("@UserId", selectedUser)
+                    If String.IsNullOrEmpty(selectedUser) Then
+                        query += " WHERE bd.BIBNo LIKE @BIBNo OR bd.PaymentStatus LIKE @payStatus"
+                        cmd.Parameters.AddWithValue("@BIBNo", "%" & txtSearch.Text.Trim() & "%")
+                        cmd.Parameters.AddWithValue("@payStatus", "%" & txtSearch.Text.Trim() & "%")
+                    Else
+                        query += $" WHERE bd.UserId = @UserId bd.BIBNo LIKE @BIBNo OR bd.PaymentStatus LIKE @payStatus"
+                        cmd.Parameters.AddWithValue("@BIBNo", "%" & txtSearch.Text.Trim() & "%")
+                        cmd.Parameters.AddWithValue("@payStatus", "%" & txtSearch.Text.Trim() & "%")
+                        cmd.Parameters.AddWithValue("@UserId", selectedUser)
+                    End If
                 End If
+
+                ' Additional filtration by created date...
+                If String.IsNullOrEmpty(txtDateSearch.Text) = False And query.Contains("WHERE") Then
+                    query += " DATE(bd.CreatedAt) = @CreatedDate"
+                    cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
+                ElseIf String.IsNullOrEmpty(txtDateSearch.Text) = False Then
+                    query += " WHERE DATE(bd.CreatedAt) = @CreatedDate"
+                    cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
+                End If
+
+                ' Order by id, so latest data comes first...
+                query += " ORDER BY bd.ID DESC"
 
                 cmd.CommandText = query
                 Using sda As New MySqlDataAdapter(cmd)
@@ -819,7 +843,7 @@ Public Class BIBDataRunner
         Return dt
     End Function
 
-    Protected Sub btnExport_Click(sender As Object, e As EventArgs)
+    Protected Sub btnExport_ClickOLD(sender As Object, e As EventArgs)
         Try
             'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "ShowLoader", "$('#loader').show()", True)
             Dim dt As DataTable = GetExportData()
@@ -848,6 +872,68 @@ Public Class BIBDataRunner
             Response.Write(sb.ToString())
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "HideLoader", "$('#loader').hide();", True)
             Response.End()
+        Catch
+            MessageUpdated.Text = "Got error while exporting excel"
+        Finally
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "HideLoader", "$('#loader').hide();", True)
+        End Try
+    End Sub
+
+    Protected Sub btnExport_Click(sender As Object, e As EventArgs)
+        Try
+            Dim dt As DataTable = GetExportData()
+
+            Response.Clear()
+            Response.Buffer = True
+            Response.AddHeader("content-disposition", "attachment;filename=BibReport.xls")
+            Response.ContentType = "application/vnd.ms-excel"
+            Response.Charset = ""
+
+            Dim sw As New StringWriter()
+            Dim hw As New HtmlTextWriter(sw)
+
+            hw.WriteLine("<table border='1'>")
+
+            ' Header
+            hw.WriteLine("<tr>")
+            For Each col As DataColumn In dt.Columns
+                hw.WriteLine("<th style='background-color:#d9d9d9'>" & col.ColumnName & "</th>")
+            Next
+            hw.WriteLine("</tr>")
+
+            ' Rows
+            For Each row As DataRow In dt.Rows
+                hw.WriteLine("<tr>")
+                For i As Integer = 0 To dt.Columns.Count - 1
+                    Dim cellValue As String = row(i).ToString()
+                    Dim bgColor As String = ""
+
+                    ' Column index 10 = Payment Status
+                    If i = 10 Then
+                        Select Case cellValue.Trim().ToLower()
+                            Case "success"
+                                bgColor = "LightGreen"
+                            Case "pending"
+                                bgColor = "LightYellow"
+                            Case "failed"
+                                bgColor = "LightCoral"
+                            Case Else
+                                bgColor = "White"
+                        End Select
+                        hw.WriteLine("<td style='background-color:" & bgColor & "'>" & cellValue & "</td>")
+                    Else
+                        hw.WriteLine("<td>" & cellValue & "</td>")
+                    End If
+
+                Next
+                hw.WriteLine("</tr>")
+            Next
+
+            hw.WriteLine("</table>")
+
+            Response.Write(sw.ToString())
+            Response.End()
+
         Catch
             MessageUpdated.Text = "Got error while exporting excel"
         Finally
@@ -947,4 +1033,24 @@ Public Class BIBDataRunner
         End Try
     End Function
 
+    Protected Sub GridView1_RowDataBound(sender As Object, e As GridViewRowEventArgs) 'Handles GridView1.RowDataBound
+        If e.Row.RowType = DataControlRowType.DataRow Then
+
+            ' Payment Status column index (zero-based)
+            Dim cell As TableCell = e.Row.Cells(8)
+            Dim status As String = cell.Text.Trim().ToLower()
+
+            Select Case status
+                Case "success"
+                    cell.BackColor = System.Drawing.Color.LightGreen
+                Case "pending"
+                    cell.BackColor = System.Drawing.Color.LightYellow
+                Case "failed"
+                    cell.BackColor = System.Drawing.Color.LightCoral
+                Case Else
+                    cell.BackColor = System.Drawing.Color.White
+            End Select
+
+        End If
+    End Sub
 End Class
