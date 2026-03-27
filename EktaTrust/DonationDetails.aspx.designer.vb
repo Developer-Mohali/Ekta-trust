@@ -12,7 +12,16 @@ Option Explicit On
 
 
 Partial Public Class DonationDetails
-    
+
+    '''<summary>
+    '''AdminSideMenuControl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AdminSideMenuControl As Global.EktaTrust.AdminSideMenuControl
+
     '''<summary>
     '''MessageUpdated control.
     '''</summary>
@@ -21,7 +30,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MessageUpdated As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''ddlSearchBy control.
     '''</summary>
@@ -30,7 +39,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlSearchBy As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''txtSearch control.
     '''</summary>
@@ -39,7 +48,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''ddlYear control.
     '''</summary>
@@ -48,7 +57,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlYear As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''btnSearch control.
     '''</summary>
@@ -57,7 +66,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSearch As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''lblmsg control.
     '''</summary>
@@ -66,7 +75,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblmsg As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''gvEvent control.
     '''</summary>
@@ -75,7 +84,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gvEvent As Global.System.Web.UI.WebControls.GridView
-    
+
     '''<summary>
     '''lblRecords control.
     '''</summary>
@@ -84,7 +93,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblRecords As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblresult control.
     '''</summary>
@@ -93,7 +102,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblresult As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''btnShowPopup control.
     '''</summary>
@@ -102,7 +111,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnShowPopup As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''ModalPopupExtender1 control.
     '''</summary>
@@ -111,7 +120,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ModalPopupExtender1 As Global.AjaxControlToolkit.ModalPopupExtender
-    
+
     '''<summary>
     '''pnlpopup control.
     '''</summary>
@@ -120,7 +129,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlpopup As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''lblDonationId control.
     '''</summary>
@@ -129,7 +138,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblDonationId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''textFullName control.
     '''</summary>
@@ -138,7 +147,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents textFullName As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''textAmount control.
     '''</summary>
@@ -147,7 +156,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents textAmount As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''textMobileNumber control.
     '''</summary>
@@ -156,7 +165,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents textMobileNumber As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''ddlModeOfPayment control.
     '''</summary>
@@ -165,7 +174,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlModeOfPayment As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''textComments control.
     '''</summary>
@@ -174,7 +183,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents textComments As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnUpdate control.
     '''</summary>
@@ -183,7 +192,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''btnCancel control.
     '''</summary>
@@ -192,7 +201,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''txtFullName control.
     '''</summary>
@@ -201,7 +210,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtFullName As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtAmount control.
     '''</summary>
@@ -210,7 +219,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtAmount As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtMobileNumber control.
     '''</summary>
@@ -219,7 +228,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtMobileNumber As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''ddlModeOfPayment1 control.
     '''</summary>
@@ -228,7 +237,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlModeOfPayment1 As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''txtComments control.
     '''</summary>
@@ -237,7 +246,7 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtComments As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnAddNew control.
     '''</summary>

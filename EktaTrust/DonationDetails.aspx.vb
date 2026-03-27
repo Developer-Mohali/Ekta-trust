@@ -25,18 +25,17 @@ Public Class DonationDetails
 
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
-            Using cmd As New MySqlCommand("select DonationID,FullName,Amount,MobileNumber,ModeOfPayment,Comments" + " from Donation")
-                Using sda As New MySqlDataAdapter()
-                    cmd.Connection = con
+            Using cmd As New MySqlCommand("select DonationID,FullName,Amount,MobileNumber,ModeOfPayment,PanNuber,PaymentStatus,Address, OrderId, CreatedDate" + " from Donation order by DonationID desc")
+                cmd.Connection = con
+                Using sda As New MySqlDataAdapter(cmd)
+                    Dim dt As New DataTable()
                     con.Open()
-                    sda.SelectCommand = cmd
-                    Dim ds As New DataSet()
-                    sda.Fill(ds)
-                    If ds.Tables(0).Rows.Count > 0 Then
-                        lblRecords.Text = ds.Tables(0).Rows.Count
-                        gvEvent.DataSource = ds
-                        gvEvent.DataBind()
-                    End If
+                    sda.Fill(dt)
+                    con.Close()
+
+                    lblRecords.Text = dt.Rows.Count
+                    gvEvent.DataSource = dt
+                    gvEvent.DataBind()
                 End Using
                 con.Close()
                 con.Dispose()
@@ -123,10 +122,11 @@ Public Class DonationDetails
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
             Using cmd As New MySqlCommand()
-                Dim sql As String = "SELECT DonationID, FullName, Amount,MobileNumber,ModeOfPayment,Comments FROM Donation "
+                Dim sql As String = "select DonationID,FullName,Amount,MobileNumber,ModeOfPayment,PanNuber,PaymentStatus,Address, OrderId, CreatedDate" + " from Donation order by DonationID desc"
                 If Not String.IsNullOrEmpty(txtSearch.Text.Trim()) Then
-                    sql += " where FullName=@FullName"
+                    sql += " where FullName=@FullName OR PaymentStatus=@status"
                     cmd.Parameters.AddWithValue("@FullName", txtSearch.Text.Trim())
+                    cmd.Parameters.AddWithValue("@status", txtSearch.Text.Trim())
                 End If
                 cmd.CommandText = sql
                 cmd.Connection = con
@@ -146,6 +146,27 @@ Public Class DonationDetails
         If e.Row.RowType = DataControlRowType.DataRow Then
             Dim buttonId As ImageButton = DirectCast(e.Row.FindControl("ButtonDelete"), ImageButton)
 
+            ' Payment Mode update like 'CC to Credit card' column index (zero-based)
+            Dim paymentModeCell As TableCell = e.Row.Cells(3)
+            Dim paymentMode As String = paymentModeCell.Text
+            paymentModeCell.Text = GetPaymentModeName(paymentMode)
+            ' End of Payment Mode update
+
+            ' Payment Status column index (zero-based)
+            Dim cell As TableCell = e.Row.Cells(5)
+            Dim status As String = cell.Text.Trim().ToLower()
+
+            Select Case status
+                Case "success"
+                    cell.BackColor = System.Drawing.Color.LightGreen
+                Case "pending"
+                    cell.BackColor = System.Drawing.Color.LightYellow
+                Case "failed"
+                    cell.BackColor = System.Drawing.Color.LightCoral
+                Case Else
+                    cell.BackColor = System.Drawing.Color.White
+            End Select
+            ' End of Payment Status
         End If
     End Sub
     Protected Sub btnAddNew_Click(sender As Object, e As EventArgs)
@@ -179,4 +200,42 @@ Public Class DonationDetails
         Me.BindGridView()
     End Sub
 
+    Private Function GetPaymentModeName(paytmMode As String) As String
+
+        If String.IsNullOrEmpty(paytmMode) Then
+            Return "Unknown"
+        End If
+
+        Select Case paytmMode.ToUpper()
+
+            Case "CC", "CREDIT_CARD"
+                Return "Credit Card"
+
+            Case "DC", "DEBIT_CARD"
+                Return "Debit Card"
+
+            Case "NB"
+                Return "Net Banking"
+
+            Case "WALLET", "BALANCE"
+                Return "Wallet"
+
+            Case "PDC"
+                Return "Postpaid"
+
+            Case "EMI"
+                Return "EMI"
+
+            Case "EMI_DC"
+                Return "Debit Card EMI"
+
+            Case "BNPL"
+                Return "Buy Now Pay Later"
+
+            Case Else
+                Return paytmMode ' fallback (don’t lose data)
+
+        End Select
+
+    End Function
 End Class

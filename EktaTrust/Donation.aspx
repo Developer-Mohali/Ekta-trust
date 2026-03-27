@@ -2,15 +2,20 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <!--event registration -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- jQuery easing plugin -->
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
      <asp:Literal ID="ltPaytmScript" runat="server"></asp:Literal>
     <div class="about-us">
   <div class="container">
     <h2 class="wow fadeInDown">Donation</h2>
     <p></p>
-    <p>The online transfer facility through this website is available now.<%-- It will be introduced shortly...--%></p><p>The details of the account are given below:</p>
-    <p><strong>ATM/Debit Card</strong></p>
+    <p>The online transfer facility through this website is available now.<%-- It will be introduced shortly...--%></p><%--<p>The details of the account are given below:</p>--%>
+    <p><strong>UPI/Debit Card</strong></p>
       <p style="background-color: black; padding: 10px; border-radius: 10px; font-size:18px; "><strong style="color: white;"> Ekta Navnirman Trust</strong></p>
-    <table class="tables" >
+<%--    <table class="tables" >
         <tr>
            <td style="font-weight: bold;">A\C NO.:</td> 
             <td style="padding: 0px 0px 0px 15px;">35834326038</td> 
@@ -27,7 +32,7 @@
            <td style="font-weight: bold;">Branch :</td>  
            <td style="padding: 0px 0px 0px 15px;"> SBI Chandpole Bazar, Jaipur</td> 
         </tr>
-    </table>
+    </table>--%>
       <br/>
     <div class="contact-wrap">
         <img src="images/donation.jpg" style=" padding-top:70px; padding-right:100px;" class="img-responsive pull-right hidden-sm hidden-xs hidden-md  wow fadeInDown" alt=""/>
@@ -35,14 +40,14 @@
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 nopadding">
           <div class="form-group">
             <label>Full Name *</label>
-            <input type="text" name="name" id="txtName" class="form-control" required />
+            <input type="text" name="name" id="txtName" class="form-control" />
           </div>
           <div class="form-group">
             <label>Amount *</label>
-            <input type="text" name="txtAmount" id="txtAmount" class="form-control" required />
+            <input type="text" name="txtAmount" id="txtAmount" class="form-control" />
           </div>
            <div class="form-group">
-            <label>PAN</label>
+            <label>Pan Number *</label>
             <input type="text" name="txtPan" id="txtPan" class="form-control" />
           </div>
           <div class="form-group">
@@ -116,14 +121,72 @@
 </section>
 <!--/#bottom-->
     <script>
-        $("#btnDonate").click(function (event) {
+        $(document).ready(function () {
+            $("#msform").validate({
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                err:
+                {
+                    container: 'tooltip'
+                },
+                errorElement: 'span',
+                errorClass: 'help-block',
+                highlight: function (element, errorClass, validClass) {
+                    $(element).closest('.form-group').addClass("has-error");
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).closest('.form-group').removeClass("has-error");
+                },
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 3
+                    },
+                    txtAmount: {
+                        required: true,
+                        number: true,
+                        min: 1
+                    },
+                    txtPan: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 10
+                    }
+                },
 
+                messages: {
+                    name: {
+                        required: "Please enter your full name",
+                        minlength: "Name must be at least 3 characters long"
+                    },
+                    txtAmount: {
+                        required: "Please enter amount",
+                        number: "Only numeric values allowed",
+                        min: "Amount must be greater than 0"
+                    },
+                    txtPan: {
+                        required: "Pan Number is Required",
+                        minlength: "PAN must be 10 characters",
+                        maxlength: "PAN must be 10 characters"
+                    }
+                }
+            });
+        });
+
+        $("#btnDonate").click(function (event) {
+            event.preventDefault();
             var name = $("#txtName").val().trim();
             var amount = $("#txtAmount").val().trim();
             var mobile = $("#txtMobile").val().trim();
             var email = $('#txtEmail').val().trim();
             <%--var paymentMode = $("#<%= ddlModeOfPayment1.ClientID %>").val();--%>
 
+            if (!$("#msform").valid()) {
+                return;
+            }
         // ✅ Validation
         if (name === "") {
             alert("Enter Full Name");
@@ -134,7 +197,7 @@
             alert("Enter valid amount");
             return;
         }
-            event.preventDefault();
+
         //if (paymentMode === "Select") {
         //    alert("Select payment mode");
         //    return;

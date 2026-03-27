@@ -4,6 +4,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <%--    <script src="../Js/jquery.blockUI.js"></script>--%>
+     <%@ Register Src="~/Controls/AdminSideMenuControl.ascx" TagPrefix="ucSM" TagName="AdminSideMenuControl" %> 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
   
@@ -39,7 +40,7 @@
 </style>
     <div class="container-fluid main-container">
          <div class="col-md-2 sidebar">
-             <div class="row"> 
+            <%-- <div class="row"> 
                 <!-- uncomment code for absolute positioning tweek see top comment in css -->
                <div class="absolute-wrapper"> </div>
                 <!-- Menu -->
@@ -73,6 +74,12 @@
                <!-- /.navbar-collapse --> 
                </nav>
                </div>
+            </div>--%>
+            <div class="row"> 
+                  <!-- uncomment code for absolute positioning tweek see top comment in css -->
+                  <div class="absolute-wrapper"> </div>
+                  <!-- Menu -->
+                   <ucSM:AdminSideMenuControl runat="server" id="AdminSideMenuControl" />
             </div>
          </div>
          <div class="col-md-10 ">
@@ -96,6 +103,7 @@
                         <td>
                             Year By:
                             <asp:DropDownList ID="ddlYear" runat="server" AutoPostBack="True">
+                                <asp:ListItem Text="2026">2026</asp:ListItem>
                                 <asp:ListItem Text="2022">2022</asp:ListItem>
                                 <asp:ListItem Text="2021">2021</asp:ListItem>
                                 <asp:ListItem Text="2020">2020</asp:ListItem>
@@ -120,7 +128,12 @@
                    <asp:BoundField HeaderText="Amount" DataField="Amount" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
                    <asp:BoundField HeaderText="Mobile Number" DataField="MobileNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>   
                    <asp:BoundField HeaderText="Mode Of Payment" DataField="ModeOfPayment" ItemStyle-HorizontalAlign="Left"></asp:BoundField>  
-                   <asp:BoundField HeaderText="Comments" DataField="Comments" ItemStyle-HorizontalAlign="Left"></asp:BoundField>             
+                   <asp:BoundField HeaderText="Pan Number" DataField="PanNuber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>   
+                   <asp:BoundField HeaderText="Payment Status" DataField="PaymentStatus" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+                 <%--  <asp:BoundField HeaderText="Comments" DataField="Comments" ItemStyle-HorizontalAlign="Left"></asp:BoundField>  --%>           
+                   <asp:BoundField HeaderText="Address" DataField="Address" ItemStyle-HorizontalAlign="Left"></asp:BoundField>   
+                     <asp:BoundField HeaderText="OrderId" DataField="OrderId" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+                   <asp:BoundField HeaderText="Donated On" DataField="CreatedDate" ItemStyle-HorizontalAlign="Left"></asp:BoundField>             
                   <asp:TemplateField HeaderText="Action" ItemStyle-Width="72" >
                       <ItemTemplate>
                           <asp:ImageButton ID="imgbtn" ImageUrl="Images/UI_Icons-09-128.png" runat="server" Width="25" Height="25" OnClick="imgbtn_Click" />

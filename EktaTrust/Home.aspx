@@ -209,7 +209,7 @@ cursor: pointer;
         <%-- <a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784" target="_blank">
             <button id="btnfeedback" type="button" class="feedback"></button>
         </a>--%>
-        <a href="../Donation" target="_blank">
+        <a href="../Donation">
             <button id="btnfeedback" type="button" class="feedback"></button>
         </a>
     </div>
@@ -530,7 +530,8 @@ cursor: pointer;
         <div class="get-started  wow fadeInDown" style="padding: 0px;">
             <div class="container">
                 <div class="contribute col-lg-6 col-sm-5 col-md-5 ">
-                    <a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784" target="_blank">
+                   <%-- <a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784" target="_blank">--%>
+                    <a href="Donation">
                         <img src="images/donate1.png" id="imgdonate" class="img-responsive" alt="" /></a>
                 </div>
                <%-- <div class="pull-right">

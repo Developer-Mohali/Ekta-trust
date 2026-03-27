@@ -142,7 +142,10 @@
 <section>
 <div class="get-started  wow fadeInDown">
     <div class="container">
-      <div class="contribute col-lg-6 col-sm-5 col-md-5 "><a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784" target="_blank"><img src="images/donate1.png" class="img-responsive" alt=""></a></div>
+      <div class="contribute col-lg-6 col-sm-5 col-md-5 ">
+ <%--         <a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784" target="_blank">--%>
+          <a href="Donation">
+          <img src="images/donate1.png" class="img-responsive" alt=""></a></div>
       <div class="pull-right">
       <%--<div class="col-sm-8 col-md-8 col-lg-10 pull-right" style="margin-top:4px;"><a href="Trust%20Activities"><img src="images/activities_btn.png" class="img-responsive" alt=""></a></div></div>--%>
     </div>

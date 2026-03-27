@@ -55,7 +55,7 @@
             margin: 0 10%;
             /*stacking fieldse
     ts above each other*/
-            position: absolute;
+          /*  position: absolute;*/
             opacity: 0.85;
         }
             /*Hide all except first fieldset*/
@@ -179,7 +179,7 @@
 
         #msform fieldset {
             padding: 4px 30px;
-            margin: -25px 10%;
+           /* margin: -25px 10%;*/
         }
         #otp {
     width:100% !important;
@@ -224,10 +224,10 @@ body section {
             .fadeInDown {
                 margin-top: 55px;
             }
-             #msform fieldset {
+      /*       #msform fieldset {
             padding: 4px 30px;
             margin: -25px 10%;
-        }
+        }*/
              .terms-font-size{
                  font-size: 11px;
              }
@@ -237,13 +237,19 @@ body section {
              .clsBackImage {
                  height:830px;
              }
-             .col-sm-2, .col-sm-8{
-                 padding-left:0px;
-             }
+           #msform fieldset{
+               margin:unset !important;
+           }
         }
 
         section{
             display:none;
+        }
+        /* iPad styles */
+        @media only screen and (min-width: 768px) and (max-width: 1024px) {
+            .clsBackImage{
+                min-height: 80vh!important;
+            }
         }
     </style>
     <link href="Css/MediaQuery.css" rel="stylesheet" />
@@ -253,16 +259,16 @@ body section {
     <div class="clsBackImage">
 
         <!-- progressbar -->
-        <div style="width: 83%; padding-left: 19%; padding-top: 20px">
+        <div style="width: 83%; padding-left: 19%;">
            <%-- <ul id="progressbar">
                 <li class="active">Basic Information</li>
             </ul>--%>
         </div>
         <!--First fieldsets to colect basic information -->
-        <div>
-            <div class="col-sm-2">
-            </div>
-            <div id="PaymentTab" class="col-sm-8">
+        <div class="container">
+         <%--   <div class="col-sm-2">
+            </div>--%>
+            <div id="PaymentTab" class="col-sm-12">
                 <fieldset id="basic_information">
                     <%--<div style="height :540px;">--%>
 
@@ -441,8 +447,8 @@ body section {
 
                 </fieldset>--%>
             </div>
-            <div class="col-sm-2">
-            </div>
+          <%--  <div class="col-sm-2">
+            </div>--%>
         </div>
 
         <script>

@@ -23,7 +23,7 @@
            <li ><a href="TrainingActivity.aspx"> Training Activites</a></li>
            <li><a href="Joining.aspx"> Joining</a></li>
            <li><a href="ContactDetails.aspx"> Contact Detail</a></li>
-           <li><a href="#"> Donation</a></li>
+           <li><a href="DonationDetails.aspx"> Donation</a></li>
             <li><a href="SUGGESTIONTRUSTACTIVITIES.aspx"> Trust Activities</a></li>
             <li><a href="EventDetails.aspx">Events</a></li>
            <li><a href="MIPRegistrationDetails.aspx">MIP-Registration Details</a></li>
