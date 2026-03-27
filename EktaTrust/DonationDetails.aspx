@@ -103,12 +103,8 @@
                         <td>
                             Year By:
                             <asp:DropDownList ID="ddlYear" runat="server" AutoPostBack="True">
-                                <asp:ListItem Text="2026">2026</asp:ListItem>
-                                <asp:ListItem Text="2022">2022</asp:ListItem>
-                                <asp:ListItem Text="2021">2021</asp:ListItem>
-                                <asp:ListItem Text="2020">2020</asp:ListItem>
-                                <asp:ListItem Text="2019">2019</asp:ListItem>
-                                <asp:ListItem Text="2018">2018</asp:ListItem>
+                                <asp:ListItem Selected Text="2026">2026</asp:ListItem>
+                                <asp:ListItem Text="2025">2025</asp:ListItem>
                               <%--<asp:ListItem Text="2017">2017</asp:ListItem>      --%>     
                             </asp:DropDownList>
                         </td>

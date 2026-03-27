@@ -115,11 +115,17 @@ Public Class BIBDataRunner
 
                 ' Additional filtration and make order desc...
                 If String.IsNullOrEmpty(txtDateSearch.Text) = False And query.Contains("WHERE") Then
-                    query += " DATE(bd.CreatedAt) = @CreatedDate"
+                    query += " And DATE(bd.CreatedAt) = @CreatedDate"
                     cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
                 ElseIf String.IsNullOrEmpty(txtDateSearch.Text) = False Then
                     query += " WHERE DATE(bd.CreatedAt) = @CreatedDate"
                     cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
+                ElseIf query.Contains("WHERE") Then
+                    query += " And YEAR(bd.CreatedAt) = @YearBy"
+                    cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
+                Else
+                    query += " WHERE YEAR(bd.CreatedAt) = @YearBy"
+                    cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
                 End If
                 query += $" ORDER BY bd.ID DESC"
 
@@ -140,6 +146,10 @@ Public Class BIBDataRunner
         Finally
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "HideLoader", "$('#loader').hide();", True)
         End Try
+    End Sub
+
+    Protected Sub ddlYearBy_SelectedIndexChanged(sender As Object, e As EventArgs)
+        BindGridView()
     End Sub
 
 
@@ -793,7 +803,8 @@ Public Class BIBDataRunner
             Using con As New MySqlConnection(connStr)
                 Dim query As String = "SELECT DISTINCT bd.BIBNo, bd.RunnerName, bd.RunCatagory as `Run Category`, bd.TShirtSize, bd.Gender, bd.RunnerDOB, 
                                         bd.MobileNumber as `Contact Number`, bd.EmergencyContactName, bd.EmergencyContactNumber,
-                                        bd.BankReferenceNo as `Payment Reference`, PaymentStatus as `Payment Status`, OrderId, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.CreatedAt as `Registration At` FROM bibdata bd 
+                                        bd.BankReferenceNo as `Payment Reference`, PaymentStatus as `Payment Status`, OrderId, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.CreatedAt as `Registration At` 
+                                        bd.TxnId as `Transaction Id` FROM bibdata bd 
                                         left join user u  on bd.UserId = u.ID
                                         left join signup s on s.UserId = bd.UserId"
                 Dim cmd As New MySqlCommand()
@@ -825,6 +836,12 @@ Public Class BIBDataRunner
                 ElseIf String.IsNullOrEmpty(txtDateSearch.Text) = False Then
                     query += " WHERE DATE(bd.CreatedAt) = @CreatedDate"
                     cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
+                ElseIf query.Contains("WHERE") Then
+                    query += " And YEAR(bd.CreatedAt) = @YearBy"
+                    cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
+                Else
+                    query += " WHERE YEAR(bd.CreatedAt) = @YearBy"
+                    cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
                 End If
 
                 ' Order by id, so latest data comes first...

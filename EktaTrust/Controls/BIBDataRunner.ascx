@@ -51,14 +51,22 @@ function TotalRecord() {
 
         <td> 
             <div class="col-md-12" style="padding-left: 0px;">
-    <div class="col-md-6" style="padding-left: 0px;">
+    <div class="col-md-5" style="padding-left: 0px;">
          Upload CSV file:
       <asp:FileUpload ID="BIBDataFileUpload" style="display:inline-block;margin-left: 12px;" runat="server" />
     </div>
-    <div class="col-md-6" runat="server" id="divUploadUserDDL">
+    <div class="col-md-4" runat="server" id="divUploadUserDDL">
         Created By:
     <asp:DropDownList ID="ddlUploadedBy" runat="server" class="form-control" style="display: inline; width:50%"></asp:DropDownList>
  </div>
+     <div class="col-md-3" runat="server" id="divYearBy">
+        Year By:
+        <asp:DropDownList ID="ddlYearBy" runat="server" CssClass="form-control" Style="display: inline; width:50%" AutoPostBack="true" OnSelectedIndexChanged="ddlYearBy_SelectedIndexChanged">
+            <asp:ListItem Text="2026" Value="2026" Selected="True" />
+            <asp:ListItem Text="2025" Value="2025" />
+            <asp:ListItem Text="2024" Value="2024" />
+        </asp:DropDownList>
+    </div>
 </div>
 
 

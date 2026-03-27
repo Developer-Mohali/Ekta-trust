@@ -22,11 +22,13 @@ Public Class DonationDetails
 
     'This method use To bind Gridview.
     Private Sub BindGridView()
-
+        Dim query As String = "select DonationID,FullName,Amount,MobileNumber,ModeOfPayment,PanNuber,PaymentStatus,Address, OrderId, CreatedDate" + " from Donation order by DonationID desc"
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
-            Using cmd As New MySqlCommand("select DonationID,FullName,Amount,MobileNumber,ModeOfPayment,PanNuber,PaymentStatus,Address, OrderId, CreatedDate" + " from Donation order by DonationID desc")
+            Using cmd As New MySqlCommand(query)
                 cmd.Connection = con
+                query += " WHERE YEAR(CreatedDate) = @YearBy"
+                cmd.Parameters.AddWithValue("@YearBy", ddlYear.SelectedValue)
                 Using sda As New MySqlDataAdapter(cmd)
                     Dim dt As New DataTable()
                     con.Open()

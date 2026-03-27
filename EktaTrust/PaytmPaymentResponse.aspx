@@ -119,7 +119,7 @@ body section {
 
     <br />
 
-    <a href="EventRegistration.aspx" class="btn btn-primary">Go Back</a>
+    <a href="/" class="btn btn-primary">Go Back</a>
 </div>
 
 

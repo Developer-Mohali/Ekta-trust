@@ -59,6 +59,24 @@ Partial Public Class BIBDataRunner
     Protected WithEvents ddlUploadedBy As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''divYearBy control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divYearBy As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''ddlYearBy control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlYearBy As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
     '''btnUpload control.
     '''</summary>
     '''<remarks>

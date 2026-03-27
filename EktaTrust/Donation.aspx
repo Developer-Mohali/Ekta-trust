@@ -48,7 +48,7 @@
           </div>
            <div class="form-group">
             <label>Pan Number *</label>
-            <input type="text" name="txtPan" id="txtPan" class="form-control" />
+            <input type="text" name="txtPan" id="txtPan" class="form-control" style="text-transform: uppercase;" />
           </div>
           <div class="form-group">
             <label>Mobile</label>
