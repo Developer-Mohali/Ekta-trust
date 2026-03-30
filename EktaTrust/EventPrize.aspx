@@ -27,7 +27,7 @@
                         Run For Equality 7-Cyberthon                    
                   <p style="font-size: small; font-style: oblique; text-transform: none;">A Step towards a cyber safe world</p>
                     </center>
-                      <button style="float:right" id="EventRegistration" class="btn btn-success">Run Registeration</button>
+                      <button onclick="termsAndCondition(event)" style="float:right" id="EventRegistration" class="btn btn-success">Run Registeration</button>
                 </h2>
             </div>
             <%--<div class="col-sm-3">
