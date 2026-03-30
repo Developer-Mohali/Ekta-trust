@@ -68,9 +68,17 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>C:\Users\Admin\Downloads\Json90r1\Bin\Net20\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Otp.NET, Version=1.4.1.0, Culture=neutral, PublicKeyToken=38a48df817e173a6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Otp.NET.1.4.1\lib\net461\Otp.NET.dll</HintPath>
+    </Reference>
     <Reference Include="PaytmChecksum, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\PaytmChecksum.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.7.0.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.7.0\lib\net40\QRCoder.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -122,6 +130,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -517,6 +526,7 @@
     <Content Include="LatestNewsDetails.aspx" />
     <Content Include="Library.aspx" />
     <Content Include="MachediManpura.aspx" />
+    <Content Include="ManageAuthenticator.aspx" />
     <Content Include="ManageNews.aspx" />
     <Content Include="Manoharpur.aspx" />
     <Content Include="MigrantsRegistration.aspx" />
@@ -1498,6 +1508,13 @@
     <Compile Include="MachediManpura.aspx.vb">
       <DependentUpon>MachediManpura.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageAuthenticator.aspx.designer.vb">
+      <DependentUpon>ManageAuthenticator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageAuthenticator.aspx.vb">
+      <DependentUpon>ManageAuthenticator.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ManageNews.aspx.designer.vb">
       <DependentUpon>ManageNews.aspx</DependentUpon>

@@ -291,6 +291,9 @@ cursor: pointer;
                 <img style="width: 100%;" src="Images/slider/new_img_1.jpg" alt="" />
             </div>
             <div class="item">
+                <img style="width: 100%;" src="Images/slider/buddha-banenr2.jpg" alt="" />
+            </div>
+            <div class="item">
                 <img style="width: 100%;" src="Images/slider/new_img_8.jpg" alt="" />
             </div>
             <div class="item">
@@ -300,7 +303,8 @@ cursor: pointer;
                 <img style="width: 100%;" src="Images/slider/new_img_4.jpg" alt="" />
             </div>
             <div class="item">
-                <img style="width: 100%;" src="Images/slider/new_img_5.jpg" alt="" />
+                <img style="width: 100%;" src="Images/slider/buddha-banenr.jpg" alt="" />
+        <%--        <img style="width: 100%;" src="Images/slider/new_img_5.jpg" alt="" />--%>
             </div>
             <div class="item">
                 <img style="width: 100%;" src="Images/slider/new_img_7.jpg" alt="" />
