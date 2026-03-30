@@ -837,7 +837,7 @@ body section {
 
             function getAmountByRunCategory(runCategory) {
                 if (runCategory.includes('21.09KM')) {
-                    return '1600'
+                    return '1100'
                 } else if (runCategory.includes('10KM')) {
                     return '1100'
                 } else if (runCategory.includes('5KM')) {
