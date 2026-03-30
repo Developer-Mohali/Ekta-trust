@@ -480,11 +480,23 @@ body section {
     </script>
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            $("#exampleModal").modal('show');
+        //$(document).ready(function () {
+        //    $("#exampleModal").modal('show');
               
-        });
+        //});
+        $(document).ready(function () {
+            var url = window.location.pathname.toLowerCase();
+            $('#mainMenu li').removeClass('active');
+            $('#mainMenu li a').each(function () {
+                var href = $(this).attr('href').toLowerCase();
+                if (url.indexOf(href.replace('..', '')) !== -1) {
+                    $(this).parent().addClass('active');
 
+                    // for dropdown parent highlight
+                    $(this).closest('.dropdown').addClass('active');
+                }
+            });
+        });
         //   $("#btnfeedback").click(function () {         
         //        window.location.href = "https://www.onlinesbi.com/sbicollect/icollecthome.htm?corpID=922784";
         //});  

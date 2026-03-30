@@ -23,11 +23,16 @@
         <div class="col-sm-12">
             <div style="margin: 6px auto; padding-left: 15px; padding-right: 15px;">
                 <h2 class="wow fadeInDown" style="display: flow-root;">
+                     <div class="col-sm-4"></div>
+                     <div class="col-sm-4">
                     <center>
                         Run For Equality 7-Cyberthon                    
-                  <p style="font-size: small; font-style: oblique; text-transform: none;">A Step towards a cyber safe world</p>
+                            <p style="font-size: small; font-style: oblique; text-transform: none;">A Step towards a cyber safe world</p>
                     </center>
-                      <button onclick="termsAndCondition(event)" style="float:right" id="EventRegistration" class="btn btn-success">Run Registeration</button>
+                         </div>
+                     <div class="col-sm-4">
+                          <button onclick="termsAndCondition(event)" style="float:right" id="EventRegistration" class="btn btn-success">Run Registeration</button>
+                     </div>
                 </h2>
             </div>
             <%--<div class="col-sm-3">

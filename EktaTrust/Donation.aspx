@@ -34,7 +34,65 @@
         </tr>
     </table>--%>
       <br/>
-    <div class="contact-wrap">
+      <div class="container">
+  <div class="row">
+    
+    <!-- Form Section -->
+    <div class="col-lg-6 col-md-12">
+      <div class="panel panel-default" style="padding:25px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+        
+      <%--  <h3 class="text-center" style="margin-bottom:20px;">Donate Now</h3>--%>
+
+        <form id="main-contact-form" method="post" action="#">
+          
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="txtName" class="form-control" placeholder="Enter your full name" />
+          </div>
+
+          <div class="form-group">
+            <label>Amount (₹) *</label>
+            <input type="number" id="txtAmount" class="form-control" placeholder="Enter donation amount" />
+          </div>
+
+          <div class="form-group">
+            <label>PAN Number *</label>
+            <input type="text" id="txtPan" class="form-control" placeholder="ABCDE1234F" style="text-transform:uppercase;" />
+          </div>
+
+          <div class="form-group">
+            <label>Mobile Number</label>
+            <input type="tel" id="txtMobile" class="form-control" placeholder="Enter mobile number" />
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="txtEmail" class="form-control" placeholder="Enter email address" />
+          </div>
+
+          <div class="form-group">
+            <label>Address</label>
+            <textarea id="txtComment" class="form-control" rows="2" placeholder="Enter your address"></textarea>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" id="btnDonate" class="btn btn-success btn-lg" style="padding:10px 30px; border-radius:30px;">
+              Donate Now
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- Image Section -->
+    <div class="col-lg-6 hidden-md hidden-sm hidden-xs text-center">
+     <img src="images/donation.jpg" style=" padding-top:70px; padding-right:100px;" class="img-responsive pull-right hidden-sm hidden-xs hidden-md  wow fadeInDown" alt=""/>
+    </div>
+
+  </div>
+</div>
+<%--    <div class="contact-wrap">
         <img src="images/donation.jpg" style=" padding-top:70px; padding-right:100px;" class="img-responsive pull-right hidden-sm hidden-xs hidden-md  wow fadeInDown" alt=""/>
       <form id="main-contact-form" class="contact-form " name="contact-form" method="post" action="#">
         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 nopadding">
@@ -66,7 +124,7 @@
               <asp:ListItem Value="Debit Card">Debit Card</asp:ListItem>
               <asp:ListItem Value="Net Banking">Net Banking</asp:ListItem>                                       
            </asp:DropDownList>
-          </div>--%>
+          </div>--%
             <div class="form-group">
               <label>Address</label>
               <textarea type="text" class="form-control" id="txtComment"></textarea>
@@ -77,7 +135,7 @@
         </div>
       </form>
       <!--/.row--> 
-    </div>
+    </div>--%>
   </div>
 </div>
 <!--/.container--><!--/#main-slider-->
