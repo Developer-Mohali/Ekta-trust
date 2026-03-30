@@ -98,7 +98,7 @@ Public Class LogIn
                                 pnlLogin.Visible = True
                                 Form1.Visible = False
                             Else
-                                Response.Redirect("AdminUserBIBNO")
+                                Response.Redirect("AdminUserBIBNO.aspx")
                             End If
                             'Response.Redirect("AdminUserBIBNO.aspx")
                         End If
