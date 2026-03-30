@@ -69,7 +69,7 @@
 
 
                      <%--Registration after - 31.03.2023 Rs - 1000(Tshirt subject to availability)--%><b>On Spot registration in BIB EXPO</b><br />
-                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs 1000 in all categories(5k, 10k, 21.09k) <br />
+                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs 1500 in all categories(5k, 10k, 21.09k) <br />
                     </td>
                     </tr>
                 <tr class="hidden">
@@ -111,7 +111,7 @@
               </tr>
        <tr>
            <td colspan="2">
-               <h6>21K (First Three Runners)</h6>
+               <h6>21KM (First Three Runners)</h6>
            </td>
        </tr>
        <tr>
@@ -129,7 +129,7 @@
 
        <tr>
            <td colspan="2">
-               <h6>10K (First Three Runners)</h6>
+               <h6>10KM (First Three Runners)</h6>
            </td>
        </tr>
        <tr>
@@ -147,7 +147,7 @@
 
        <tr>
            <td colspan="2">
-               <h6>5K (First Three Runners)</h6>
+               <h6>5KM (First Three Runners)</h6>
            </td>
        </tr>
        <tr>

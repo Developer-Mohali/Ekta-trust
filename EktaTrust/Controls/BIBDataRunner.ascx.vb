@@ -934,6 +934,10 @@ Public Class BIBDataRunner
                                 bgColor = "LightYellow"
                             Case "failed"
                                 bgColor = "LightCoral"
+                            Case "cancelled"
+                                bgColor = "LightGray"
+                            Case "expired"
+                                bgColor = "Orange"
                             Case Else
                                 bgColor = "White"
                         End Select
@@ -1064,6 +1068,10 @@ Public Class BIBDataRunner
                     cell.BackColor = System.Drawing.Color.LightYellow
                 Case "failed"
                     cell.BackColor = System.Drawing.Color.LightCoral
+                Case "cancelled"
+                    cell.BackColor = System.Drawing.Color.LightGray
+                Case "expired"
+                    cell.BackColor = System.Drawing.Color.Orange
                 Case Else
                     cell.BackColor = System.Drawing.Color.White
             End Select

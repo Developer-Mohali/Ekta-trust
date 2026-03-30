@@ -4,7 +4,16 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-
+<style>
+    @media only screen and (max-width : 430px) {
+        h2.fadeInDown {
+            text-align: center;
+        }
+        #EventRegistration{
+            float:unset !important;
+        }
+    }
+</style>
 
 
 
@@ -13,11 +22,12 @@
     <div class="clsBackImage wow fadeInDown animated about-us">
         <div class="col-sm-12">
             <div style="margin: 6px auto; padding-left: 15px; padding-right: 15px;">
-                <h2 class="wow fadeInDown">
+                <h2 class="wow fadeInDown" style="display: flow-root;">
                     <center>
                         Run For Equality 7-Cyberthon                    
                   <p style="font-size: small; font-style: oblique; text-transform: none;">A Step towards a cyber safe world</p>
                     </center>
+                      <button style="float:right" id="EventRegistration" class="btn btn-success">Run Registeration</button>
                 </h2>
             </div>
             <%--<div class="col-sm-3">
@@ -31,7 +41,7 @@
 
             <div class="col-sm-4">
 
-                <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey; width: 100%; margin-top: 10px">
+                <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey; width: 100%;">
 
 
 
@@ -92,7 +102,7 @@
                             <br />
 
                             <b>On Spot registration in BIB EXPO</b><br />
-                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs 1000 in all categories(5k, 10k, 21.09k)
+                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs 1500 in all categories(5k, 10k, 21.09k)
                             <br />
 
                             <br />
@@ -161,7 +171,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <h6>21K (First Three Runners)</h6>
+                            <h6>21KM (First Three Runners)</h6>
                         </td>
                     </tr>
                     <tr>
@@ -179,7 +189,7 @@
 
                     <tr>
                         <td colspan="2">
-                            <h6>10K (First Three Runners)</h6>
+                            <h6>10KM (First Three Runners)</h6>
                         </td>
                     </tr>
                     <tr>
@@ -197,7 +207,7 @@
 
                     <tr>
                         <td colspan="2">
-                            <h6>5K (First Three Runners)</h6>
+                            <h6>5KM (First Three Runners)</h6>
                         </td>
                     </tr>
                     <tr>
@@ -229,7 +239,7 @@
                     <center>
 <%--                        <input type="checkbox" id="cbTermsAndCondition" style="margin-left: 17px;" checked /><input type="button" id="btnTermsAndConditions" value="I Accept All Terms and Conditions" class="float-left" style="background-color: transparent; border: none; color: blue; text-decoration: underline;" text="I Accept Terms and Conditions" />--%>
 
-                        <button onclick="termsAndCondition(event)" style="font-size: larger; margin-top: 0px; font-size: larger;" id="EventRegistration" class="btn btn-success">Register Me<%--Registration Closed--%></button>
+                      <%--  <button onclick="termsAndCondition(event)" style="font-size: larger; margin-top: 0px; font-size: larger;" id="EventRegistration" class="btn btn-success">Register Me<%--Registration Closed></button>--%>
 
                     </center>
 
@@ -243,9 +253,9 @@
                 <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey;">
                     <tr>
                         <td colspan="2">
-                            <h6>
+                            <h4>
                                 <center>Terms and Conditions</center>
-                            </h6>
+                            </h4>
                         </td>
                     </tr>
                     <tr>
@@ -296,11 +306,22 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-
+            setEqualHeightFromFirst();  // set col height auto set to equal...
             var vid = document.getElementById("FMaudio");
             vid.volume = 0.2;
 
         });
+        function setEqualHeightFromFirst() {
+            if ($(window).width() >= 992) {
+                // Get height of first .col-sm-4
+                var firstHeight = $('.col-sm-4 table').first().outerHeight();
+                var headerHeight = $('.col-sm-4 table tr').first().outerHeight();
+
+                // Set all .col-sm-4 to that height
+                $('.col-sm-4 table').css('height', firstHeight + 'px');
+                $('.col-sm-4 table tr:first-child').css('height', headerHeight + 'px');
+            }
+        }
     </script>
     <script>
         function isInstagramInAppBrowser() {

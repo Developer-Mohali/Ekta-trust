@@ -137,4 +137,34 @@ Public Class PaytmCallBack
             Logger.LogError($"Error in PaytmCallBack->UpdateOderInDonation ::: Error ::: {ex.Message}", ex)
         End Try
     End Sub
+
+    ' Update payment status in DB inCase user don't attempt the payment or close the paytm popup...
+    <System.Web.Services.WebMethod()>
+    Public Shared Sub UpdatePaymentStatus(orderId As String, status As String, apiResponse As String, isDonation As Boolean)
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+        Dim Query As String
+        Try
+            Using con As New MySqlConnection(constr)
+                If isDonation Then
+                    Query = "UPDATE donation SET PaymentStatus=@paymentStatus, PaytmResponse= @paytmResponse WHERE OrderId=@orderId"
+                Else
+                    Query = "UPDATE bibdata SET PaymentStatus=@paymentStatus, PaytmResponse= @paytmResponse WHERE OrderId=@orderId"
+                End If
+
+                Using cmd As New MySqlCommand(Query, con)
+                    cmd.Parameters.AddWithValue("@paymentStatus", status)
+                    cmd.Parameters.AddWithValue("@paytmResponse", apiResponse)
+                    cmd.Parameters.AddWithValue("@orderId", orderId)
+
+                    con.Open()
+                    Dim RowAffected = cmd.ExecuteNonQuery()
+                    If (RowAffected = 0) Then
+                        Logger.LogInfo("UpdatePaymentStatus ::: Paytm Payment transaction update failed::: FROM PAGE IsDonation : " & isDonation & Environment.NewLine & "PaytmResponse:::" & apiResponse)
+                    End If
+                End Using
+            End Using
+        Catch ex As Exception
+            Logger.LogError($"Error in PaytmCallBack->UpdatePaymentStatus ::: Error ::: {ex.Message}", ex)
+        End Try
+    End Sub
 End Class

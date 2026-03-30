@@ -354,7 +354,7 @@ body section {
 
                         <div class="d-flex">
                             <%--<input  type = "text" id="otp" Class="col-sm-4" name="otp" placeholder="Enter OTP Here" /><input type="button" id="otpgenerate" style="width: auto;" name="submit" onclick="OTPNumber()" Class="submit action-button" value="Generate OTP" /> --%>
-                          <input type="button" name="submitbtn" id="submitbtn" class="action-button" value="Submit Data" />
+                          <input type="button" name="submitbtn" id="submitbtn" class="action-button" value="Submit" />
                          <input type="button" class="action-button" value="Back"  onclick="window.location.href='../EventPrize.aspx';" style="background-color: #ef5430 ! IMPORTANT; border-color: #e13810 !important;" />
                             
                         </div>
@@ -883,28 +883,39 @@ body section {
                 }
             }
 
-            function openPaytm(data) {
+            function openPaytm(resData) {
                 var config = {
                     root: "",
                     flow: "DEFAULT",
                     data: {
-                        orderId: data.orderId,
-                        token: data.txnToken,
+                        orderId: resData.orderId,
+                        token: resData.txnToken,
                         tokenType: "TXN_TOKEN",
-                        amount: data.amount
+                        amount: resData.amount
                     },
                     handler: {
                         notifyMerchant: function (eventName, data) {
 
                             console.log("Event:", eventName);
+                            console.log("notifyMerchant-data:", data);
 
                             if (eventName === "PAYMENT_SUCCESS") {
-                                alert("Payment Successful");
+                                //alert("Payment Successful");
                                 location.reload();
                             }
 
                             if (eventName === "PAYMENT_FAILURE") {
-                                alert("Payment Failed");
+                                //alert("Payment Failed");
+                                updatePaymentStatus(resData.orderId, data, "Failed");
+                            }
+
+                            if (eventName === "APP_CLOSED") {
+                                //alert("Payment cancelled by user");
+                                updatePaymentStatus(resData.orderId, data, "Cancelled");
+                            }
+                            if (eventName === "SESSION_EXPIRED") {
+                                //alert("Session expired. Please try again.");
+                                updatePaymentStatus(resData.orderId, data, "Expired");
                             }
                         }
                     }
@@ -918,6 +929,23 @@ body section {
                         console.log(err);
                     });
                 }
+            }
+
+            function updatePaymentStatus(orderId, paytmRes, status) {
+                $.ajax({
+                    type: "POST",
+                    url: "/PaytmCallBack.aspx/UpdatePaymentStatus",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        orderId: orderId,
+                        status: status,
+                        apiResponse: JSON.stringify(paytmRes),
+                        isDonation: false
+                    }),
+                    success: function () {
+                        console.log("Status updated:", status);
+                    }
+                });
             }
         </script>
 

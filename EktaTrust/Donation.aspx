@@ -13,7 +13,7 @@
     <h2 class="wow fadeInDown">Donation</h2>
     <p></p>
     <p>The online transfer facility through this website is available now.<%-- It will be introduced shortly...--%></p><%--<p>The details of the account are given below:</p>--%>
-    <p><strong>UPI/Debit Card</strong></p>
+   <p><strong>Accepted Payment Methods:</strong> UPI, Credit/Debit Card, Net Banking</p>
       <p style="background-color: black; padding: 10px; border-radius: 10px; font-size:18px; "><strong style="color: white;"> Ekta Navnirman Trust</strong></p>
 <%--    <table class="tables" >
         <tr>
@@ -72,7 +72,7 @@
               <textarea type="text" class="form-control" id="txtComment"></textarea>
             </div>
           <div class="form-group">
-            <button type="submit" name="submit" id="btnDonate" class="btn btn-primary btn-lg">Donate Now</button>
+            <button type="submit" name="submit" id="btnDonate" class="btn btn-success btn-lg">Donate Now</button>
           </div>
         </div>
       </form>
@@ -221,7 +221,6 @@
 
                         // response.d is returned from WebMethod
                         var result = response.d;
-                        debugger
                         if (result.success) {
                             paytmPaymentPopupOpen(amount, result.orderId, name, mobile, email);
                             // redirect to Paytm or next step
@@ -279,15 +278,15 @@
             }
         }
 
-        function openPaytm(data) {
+        function openPaytm(resData) {
             var config = {
                 root: "",
                 flow: "DEFAULT",
                 data: {
-                    orderId: data.orderId,
-                    token: data.txnToken,
+                    orderId: resData.orderId,
+                    token: resData.txnToken,
                     tokenType: "TXN_TOKEN",
-                    amount: data.amount
+                    amount: resData.amount
                 },
                 handler: {
                     notifyMerchant: function (eventName, data) {
@@ -295,12 +294,23 @@
                         console.log("Event:", eventName);
 
                         if (eventName === "PAYMENT_SUCCESS") {
-                            alert("Payment Successful");
-                            location.reload();
+                            //alert("Payment Successful");
+                            //location.reload();
                         }
 
                         if (eventName === "PAYMENT_FAILURE") {
-                            alert("Payment Failed");
+                            //alert("Payment Failed");
+                            updatePaymentStatus(resData.orderId, data, "Failed");
+                        }
+
+                        if (eventName === "APP_CLOSED") {
+                            //alert("Payment cancelled by user");
+                            updatePaymentStatus(resData.orderId, data, "Cancelled");
+                        }
+
+                        if (eventName === "SESSION_EXPIRED") {
+                            //alert("Session expired. Please try again.");
+                            updatePaymentStatus(resData.orderId, data, "Expired");
                         }
                     }
                 }
@@ -314,6 +324,22 @@
                     console.log(err);
                 });
             }
+        }
+        function updatePaymentStatus(orderId, paytmRes, status) {
+            $.ajax({
+                type: "POST",
+                url: "/PaytmCallBack.aspx/UpdatePaymentStatus",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    orderId: orderId,
+                    status: status,
+                    apiResponse: JSON.stringify(paytmRes),
+                    isDonation:true
+                }),
+                success: function () {
+                    console.log("Status updated:", status);
+                }
+            });
         }
     </script>
 </asp:Content>
