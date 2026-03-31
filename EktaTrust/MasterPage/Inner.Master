@@ -139,7 +139,7 @@
             <li class="divider"></li>
             <%--<li><a href="#" id="ButtonLogout" runat="server" onclick="ButtonLogout_Click">Logout</a></li>--%>
          <li>
-             <asp:Button runat="server" CssClass="btnLogOut" OnClick="ButtonLogout_Click" Text="Logout" />
+             <asp:Button runat="server" CssClass="btnLogOut" CausesValidation="false" OnClick="ButtonLogout_Click" Text="Logout" />
          </li>
                  </ul>
             
