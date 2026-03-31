@@ -47,17 +47,17 @@
           
           <div class="form-group">
             <label>Full Name *</label>
-            <input type="text" id="txtName" class="form-control" placeholder="Enter your full name" />
+            <input type="text" id="txtName" name="txtName" class="form-control" placeholder="Enter your full name" />
           </div>
 
           <div class="form-group">
             <label>Amount (₹) *</label>
-            <input type="number" id="txtAmount" class="form-control" placeholder="Enter donation amount" />
+            <input type="number" id="txtAmount" name="txtAmount" class="form-control" placeholder="Enter donation amount" />
           </div>
 
           <div class="form-group">
             <label>PAN Number *</label>
-            <input type="text" id="txtPan" class="form-control" placeholder="ABCDE1234F" style="text-transform:uppercase;" />
+            <input type="text" id="txtPan" name="txtPan" class="form-control" placeholder="ABCDE1234F" style="text-transform:uppercase;" />
           </div>
 
           <div class="form-group">
@@ -199,7 +199,7 @@
                     $(element).closest('.form-group').removeClass("has-error");
                 },
                 rules: {
-                    name: {
+                    txtName: {
                         required: true,
                         minlength: 3
                     },
@@ -216,7 +216,7 @@
                 },
 
                 messages: {
-                    name: {
+                    txtName: {
                         required: "Please enter your full name",
                         minlength: "Name must be at least 3 characters long"
                     },

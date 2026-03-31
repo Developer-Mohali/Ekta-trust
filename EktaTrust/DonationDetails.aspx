@@ -94,6 +94,7 @@
                          <asp:DropDownList ID="ddlSearchBy" runat="server" AutoPostBack="True" >          
                             <asp:ListItem Text="All"></asp:ListItem>
                             <asp:ListItem Text="Full Name"></asp:ListItem>                   
+                            <asp:ListItem Text="Payment Status"></asp:ListItem>                   
                          </asp:DropDownList> 
                         </td>
                         <td> 
@@ -259,6 +260,16 @@
     </div>
   </div>        
 <script type="text/javascript">
+    $(document).ready(function () {
+        var msg = $('#<%= lblmsg.ClientID %>');
+            if (msg && msg.text().trim() !== "") {
+                setTimeout(function () {
+                    msg.fadeOut();     // hides with animation
+                    msg.text('');      // clears the message content
+                }, 5000); // 5000ms = 5 seconsds
+            }
+    });
+
     $(document).ready(function () {
        
         TotalRecord();

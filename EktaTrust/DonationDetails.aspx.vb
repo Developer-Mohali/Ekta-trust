@@ -122,24 +122,35 @@ Public Class DonationDetails
 
     Private Sub SearchCustomers()
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
-        Using con As New MySqlConnection(constr)
-            Using cmd As New MySqlCommand()
-                Dim sql As String = "select DonationID,FullName,Amount,MobileNumber,ModeOfPayment,PanNuber,PaymentStatus,Address, OrderId, CreatedDate" + " from Donation order by DonationID desc"
-                If Not String.IsNullOrEmpty(txtSearch.Text.Trim()) Then
-                    sql += " where FullName=@FullName OR PaymentStatus=@status"
-                    cmd.Parameters.AddWithValue("@FullName", txtSearch.Text.Trim())
-                    cmd.Parameters.AddWithValue("@status", txtSearch.Text.Trim())
-                End If
-                cmd.CommandText = sql
-                cmd.Connection = con
-                Using sda As New MySqlDataAdapter(cmd)
-                    Dim dt As New DataTable()
-                    sda.Fill(dt)
-                    gvEvent.DataSource = dt
-                    gvEvent.DataBind()
+        Try
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand()
+                    Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber, PaymentStatus, Address, OrderId, CreatedDate FROM Donation"
+                    If Not String.IsNullOrEmpty(txtSearch.Text) Then
+                        If ddlSearchBy.SelectedItem.Text = "Full Name" Then
+                            sql += " WHERE FullName LIKE @Search"
+                        ElseIf ddlSearchBy.SelectedItem.Text = "Payment Status" Then
+                            sql += " WHERE PaymentStatus LIKE @Search"
+                        Else ' All
+                            sql += " WHERE FullName LIKE @Search OR PaymentStatus LIKE @Search"
+                        End If
+                        cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
+                    End If
+                    ' order by desc
+                    sql += " order by DonationID desc"
+                    cmd.CommandText = sql
+                    cmd.Connection = con
+                    Using sda As New MySqlDataAdapter(cmd)
+                        Dim dt As New DataTable()
+                        sda.Fill(dt)
+                        gvEvent.DataSource = dt
+                        gvEvent.DataBind()
+                    End Using
                 End Using
             End Using
-        End Using
+        Catch ex As Exception
+            lblmsg.Text = ex.Message
+        End Try
     End Sub
     Public Overrides Sub VerifyRenderingInServerForm(control As Control)
         ' Verifies that the control is rendered
@@ -165,6 +176,10 @@ Public Class DonationDetails
                     cell.BackColor = System.Drawing.Color.LightYellow
                 Case "failed"
                     cell.BackColor = System.Drawing.Color.LightCoral
+                Case "cancelled"
+                    cell.BackColor = System.Drawing.Color.LightGray
+                Case "expired"
+                    cell.BackColor = System.Drawing.Color.Orange
                 Case Else
                     cell.BackColor = System.Drawing.Color.White
             End Select

@@ -132,6 +132,7 @@
             <ul class="dropdown-menu" role="menu">
            <%-- <li class="dropdown-header">SETTINGS</li>--%>
             <li><a href="/ManageAuthenticator.aspx">Authenticator</a></li>
+            <li><a href="/ChangePassword.aspx">Change Password</a></li>
             <%--<li class=""><a href="#">Other Link</a></li>
             <li class=""><a href="#">Other Link</a></li>
             <li class=""><a href="#">Other Link</a></li>--%>

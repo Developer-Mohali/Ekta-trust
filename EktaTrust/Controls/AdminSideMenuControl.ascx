@@ -11,6 +11,12 @@
         padding:0px;
     }
 
+    @media only screen and (min-width: 421px) {
+        .container-fluid.main-container{
+            padding:unset;
+        }
+    }
+
 </style>
    <!-- Menu -->
    <div class="side-menu">
