@@ -20,14 +20,14 @@ Public Class Inner
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         lb1.Text = "<b><font color=Brown>" + "</font>" + "<b><font color=gray>" + Session("EmailAddress") + "</font>"
-        If Session("EmailAddress") Is Nothing Then
+        If Session("Authorize") = False Or Session("EmailAddress") Is Nothing Then
 
             ' This variable not exists, so it is new session or expired session
             Response.Redirect("/login")
             ' Session variable exists, so it is active visitor
         End If
         Dim pageNameWithoutExt As String = System.IO.Path.GetFileNameWithoutExtension(Request.Url.AbsolutePath)
-        If Session("RoleId") IsNot Nothing Then
+        If Session("Authorize") = False Or Session("RoleId") IsNot Nothing Then
             Dim roleId As Integer = Convert.ToInt32(Session("RoleId"))
             If roleId = 3 Then
                 If pageNameWithoutExt <> "AdminUserBIBNO" Then
@@ -61,6 +61,7 @@ Public Class Inner
     Protected Sub ButtonLogout_Click(ByVal sender As Object, ByVal e As EventArgs)
         Session("EmailAddress") = ""
         Session.Abandon()
+        Session("Authorize") = False
         Response.Redirect("Login.aspx")
 
 

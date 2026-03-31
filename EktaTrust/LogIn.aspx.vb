@@ -64,6 +64,7 @@ Public Class LogIn
                     pnlLogin.Visible = True
                     Form1.Visible = False
                 Else
+                    Session("Authorize") = True
                     Response.Redirect("DashBoard")
                 End If
 
@@ -98,6 +99,7 @@ Public Class LogIn
                                 pnlLogin.Visible = True
                                 Form1.Visible = False
                             Else
+                                Session("Authorize") = True
                                 Response.Redirect("AdminUserBIBNO.aspx")
                             End If
                             'Response.Redirect("AdminUserBIBNO.aspx")
@@ -108,6 +110,7 @@ Public Class LogIn
                         pnlLogin.Visible = True
                         Form1.Visible = False
                     Else
+                        Session("Authorize") = True
                         Response.Redirect("DashBoard")
                     End If
 
@@ -139,6 +142,7 @@ Public Class LogIn
             totp.VerifyTotp(txtOtp.Text.Trim(), Nothing, VerificationWindow.RfcSpecifiedNetworkDelay)
 
         If isValid Then
+            Session("Authorize") = True
             Response.Redirect("DashBoard")
         Else
             lblError.Text = "Invalid OTP. Try again."
