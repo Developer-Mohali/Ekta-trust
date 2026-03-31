@@ -62,24 +62,30 @@ Public Class ManageAuthenticator
     End Sub
 
     Protected Sub btnVerify_Click(sender As Object, e As EventArgs)
-        Dim userCode As String = txtOtp.Text.Trim()
+        Try
+            Dim userCode As String = txtOtp.Text.Trim()
+            Dim keyBytes As Byte() = Base32Encoding.ToBytes(Base32Secret)
+            Dim totp As New Totp(keyBytes)
 
-        Dim keyBytes As Byte() = Base32Encoding.ToBytes(Base32Secret)
-        Dim totp As New Totp(keyBytes)
+            Dim isValid As Boolean =
+                    totp.VerifyTotp(userCode, Nothing, VerificationWindow.RfcSpecifiedNetworkDelay)
 
-        Dim isValid As Boolean =
-                totp.VerifyTotp(userCode, Nothing, VerificationWindow.RfcSpecifiedNetworkDelay)
-
-        If isValid Then
-            ' Save Base32Secret to database (ENCRYPTED)
-            UpdateSecretKeyInDB(True)
-
-            lblMessage.ForeColor = Drawing.Color.Green
-            lblMessage.Text = "2FA Enabled Successfully!"
-        Else
-            lblMessage.ForeColor = Drawing.Color.Red
-            lblMessage.Text = "Invalid code. Try again."
-        End If
+            If isValid Then
+                ' Save Base32Secret to database (ENCRYPTED)
+                UpdateSecretKeyInDB(True)
+                chkEnable2FA.Checked = True
+                btnVerify.Enabled = False
+                lblMessage.ForeColor = Drawing.Color.Green
+                lblMessage.Text = "2FA Enabled Successfully!"
+            Else
+                lblMessage.ForeColor = Drawing.Color.Red
+                lblMessage.Text = "Invalid code. Try again."
+            End If
+        Catch ex As Exception
+            Throw
+        Finally
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "HideLoader", "$('#loader').hide();", True)
+        End Try
     End Sub
 
     Private Sub UpdateSecretKeyInDB(twoEnable As Boolean)
@@ -108,25 +114,31 @@ Public Class ManageAuthenticator
     End Sub
 
     Protected Sub chkEnable2FA_CheckedChanged(sender As Object, e As EventArgs)
+        Try
+            If Not String.IsNullOrEmpty(Session("TwoFASecret")) Then
+                ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "loader", "showLoader();", True)
+                UpdateSecretKeyInDB(chkEnable2FA.Checked)
 
-        If Not String.IsNullOrEmpty(Session("TwoFASecret")) Then
+                If chkEnable2FA.Checked Then
+                    btnVerify.Enabled = False
+                    lblMessage.ForeColor = Drawing.Color.Green
+                    lblMessage.Text = "Two-Factor Authentication has been enabled successfully."
+                Else
+                    btnVerify.Enabled = True
+                    lblMessage.ForeColor = Drawing.Color.Red
+                    lblMessage.Text = "Two-Factor Authentication has been disabled."
+                End If
 
-            UpdateSecretKeyInDB(chkEnable2FA.Checked)
-
-            If chkEnable2FA.Checked Then
-                lblMessage.ForeColor = Drawing.Color.Green
-                lblMessage.Text = "Two-Factor Authentication has been enabled successfully."
             Else
+                chkEnable2FA.Checked = False
                 lblMessage.ForeColor = Drawing.Color.Red
-                lblMessage.Text = "Two-Factor Authentication has been disabled."
+                lblMessage.Text = "Please set up and verify 2FA using the authenticator app before enabling or disabling it."
             End If
-
-        Else
-            chkEnable2FA.Checked = False
-            lblMessage.ForeColor = Drawing.Color.Red
-            lblMessage.Text = "Please set up and verify 2FA using the authenticator app before enabling or disabling it."
-        End If
-
+        Catch ex As Exception
+            Throw
+        Finally
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "hideLoader", "hideLoader();", True)
+        End Try
     End Sub
 
 End Class

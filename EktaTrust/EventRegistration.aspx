@@ -274,8 +274,8 @@ body section {
 
 
                  <%--   <h2 class="fs-title">Information</h2>--%>
-                    <h3 class="fs-subtitle"><span style="font-size: medium;font-weight: bolder;">Run for Equality Registration. </span>   <span class="pull-right" style="color:red"><b> Event Date -</b> 14th April 2026<br /> <b>Venue -</b> JLN Marg, Jaipur*</span></h3>
-                  
+                    <h3 class="fs-subtitle" style="padding-top:10px;"><span style="font-size: medium;font-weight: bolder;">Run for Equality Registration. </span>   <span class="pull-right" style="color:red"><b> Event Date -</b> 14th April 2026<br /> <b>Venue -</b> JLN Marg, Jaipur*</span></h3>
+
                     <br />
                     <div class="form-group col-sm-12">
                         <label style="margin-right:10px;">Full Name:</label>

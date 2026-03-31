@@ -143,6 +143,7 @@ function TotalRecord() {
         <ItemTemplate>
              <asp:ImageButton ID="ButtonEdit" runat="server" ToolTip="Edit" CommandName="EditRow" CommandArgument='<%# Container.DataItemIndex %>' Width="25" Height="25"  CssClass="input" ImageUrl="../Images/edit.png" />
             <asp:ImageButton ID="ButtonDelete" runat="server" ToolTip="Delete" CommandName="DeleteRow" CommandArgument='<%# Container.DataItemIndex %>' OnClientClick="return confirm('Are you sure you want to delete this event?');"  Text="Delete" Width="25" Height="25"  CssClass="input" ImageUrl="../Images/minimal-97-128.png" />
+             <i class="fa fa-eye" style="cursor:pointer; font-size: large;" onclick='showJson(<%# Eval("Id") %>)' title="View Payment Response"></i>
         </ItemTemplate>
        </asp:TemplateField>
 
@@ -283,6 +284,16 @@ function TotalRecord() {
 
 </div>
 
+<div id="jsonModal" style="display:none; position:fixed; top:10%; left:20%; width:60%; background:#fff; padding:20px; border:1px solid #ccc; z-index:9999;">
+    
+    <h4>Payment Response</h4>
+    
+    <pre id="jsonContent" style="max-height:400px; overflow:auto; background:#f5f5f5; padding:10px;"></pre>
+    
+    <button onclick="closeModal()" class="btn btn-danger">Close</button>
+
+</div>
+
 <script type="text/javascript">
     
     $(document).ready(function () {
@@ -331,5 +342,36 @@ function TotalRecord() {
     });
     function closeBibPopup() {
         $('#ContentPlaceHolder1_BIBDataRunner_btnCancel').click();
+    }
+
+    function showJson(id) {
+        showLoader();
+        try {
+            $.ajax({
+                type: "POST",
+                url: "/AdminBIBData.aspx/GetJsonData",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ id: id }),
+                success: function (response) {
+                    var data = response.d;
+                    hideLoader();
+                    // Pretty format JSON
+                    var formatted = JSON.stringify(JSON.parse(data), null, 4);
+
+                    $("#jsonContent").text(formatted);
+                    $("#jsonModal").show();
+                },
+                error: function () {
+                    hideLoader();
+                    alert("Error loading data");
+                }
+            });
+        } catch {
+            hideLoader();
+        }
+    }
+
+    function closeModal() {
+        $("#jsonModal").hide();
     }
 </script>

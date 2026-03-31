@@ -113,7 +113,7 @@ input:checked + .slider:before {
 
                         <!-- Button -->
                         <asp:Button ID="btnVerify" runat="server" Text="Verify & Enable"
-                            CssClass="btn btn-success btn-block"
+                            CssClass="btn btn-success btn-block" OnClientClick="$('#loader').show();"
                             OnClick="btnVerify_Click" />
 
                         <br />
@@ -132,5 +132,12 @@ input:checked + .slider:before {
 
 </div>
 
-
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById('<%= chkEnable2FA.ClientID %>')
+        .addEventListener("change", function () {
+            $('#loader').show();
+        });
+});
+</script>
 </asp:Content>

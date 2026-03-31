@@ -294,6 +294,9 @@ cursor: pointer;
                 <img style="width: 100%;" src="Images/slider/buddha-banenr2.jpg" alt="" />
             </div>
             <div class="item">
+                <img style="width: 100%;" src="Images/slider/buddha-banenr5.jpg" alt="" />
+            </div>
+            <div class="item">
                 <img style="width: 100%;" src="Images/slider/new_img_8.jpg" alt="" />
             </div>
             <div class="item">
@@ -302,10 +305,9 @@ cursor: pointer;
             <div class="item">
                 <img style="width: 100%;" src="Images/slider/new_img_4.jpg" alt="" />
             </div>
-            <div class="item">
-                <img style="width: 100%;" src="Images/slider/buddha-banenr.jpg" alt="" />
-        <%--        <img style="width: 100%;" src="Images/slider/new_img_5.jpg" alt="" />--%>
-            </div>
+           <%-- <div class="item">
+                <img style="width: 100%;" src="Images/slider/new_img_5.jpg" alt="" />
+            </div>--%>
             <div class="item">
                 <img style="width: 100%;" src="Images/slider/new_img_7.jpg" alt="" />
             </div>
@@ -382,11 +384,23 @@ cursor: pointer;
                                 </div>
                             </div>
                         </div>
-                         <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                           <div class="media services-wrap wow fadeInDown" >
+                               <div class="pull-left">
+                                   <a href="../Literature" target="new">
+                                       <img src="images/books.jpg" class="img-responsive" style="height: 150px; width:115px;" /></a>
+                               </div>
+                               <div class="media-body">
+                              <a href="../Literature"><h3 class="media-heading padding-top" style="padding-top: 0px;">बाबासाहेब के अनमोल वचन।</h3></a>
+                                   <a href="../Literature" target="_self" class="btn btn-default">Click Here </a>
+                               </div>
+                           </div>
+                       </div>
+                         <%--<div class="col-sm-6 col-md-6 col-lg-6">
                             <div class="media services-wrap wow fadeInDown" >
                                 <div class="pull-left">
                                     <a href="../MatrimonialInformation" target="new">
-                                        <%-- <img src="images/SavitaBheem.jpg" class="img-responsive" alt="" /></a>--%>
+                                        <%-- <img src="images/SavitaBheem.jpg" class="img-responsive" alt="" /></a>--%
                                         <img src="RunForEquality2018/MarrigePic.jpg" class="img-responsive" style="height: 150px;" /></a>
                                 </div>
                                 <div class="media-body">
@@ -394,7 +408,7 @@ cursor: pointer;
                                     <a href="../MatrimonialInformation" target="_self" class="btn btn-default">Click Here </a>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                         <%--<div class="col-sm-6 col-md-6 col-lg-6">
                             <div class="media services-wrap wow fadeInDown">
                                 <div class="pull-left">

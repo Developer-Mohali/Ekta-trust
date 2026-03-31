@@ -369,13 +369,13 @@ body section {
 
              <%--<li class="menu-item"><a href="../EventPrize">Run Registration</a></li>--%>
 
-             <li class="dropdown dropdown-submenu">
+<%--             <li class="dropdown dropdown-submenu">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matrimonial</a>
                  <ul class="dropdown-menu">
                      <li class="menu-item"><a href="../MatrimonialInformation.aspx">Matrimonial Registration</a></li>
                      <li class="menu-item"><a href="../MatrimonialLogin">Matrimonial Login</a></li>
                  </ul>
-             </li>
+             </li>--%>
 
              <li class="menu-item"><a href="../Enroll.aspx">Students Registration</a></li>
              <li class="menu-item"><a href="../CareerCounselling.aspx">Career Counselling</a></li>
@@ -488,12 +488,18 @@ body section {
             var url = window.location.pathname.toLowerCase();
             $('#mainMenu li').removeClass('active');
             $('#mainMenu li a').each(function () {
-                var href = $(this).attr('href').toLowerCase();
-                if (url.indexOf(href.replace('..', '')) !== -1) {
+                var href = $(this).attr('href');
+                if (!href) return;
+                href = href.toLowerCase().replace('..', '');
+                // Match full path OR last segment
+                if (url === href || url.endsWith(href)) {
                     $(this).parent().addClass('active');
 
-                    // for dropdown parent highlight
-                    $(this).closest('.dropdown').addClass('active');
+                    // Activate all parent <li> (for nested menus)
+                    $(this).parents('li').addClass('active');
+
+                    // Activate dropdowns if any
+                    $(this).parents('.dropdown').addClass('active');
                 }
             });
         });
