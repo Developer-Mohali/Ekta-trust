@@ -67,5 +67,11 @@ Public Class Inner
 
     End Sub
 
+    Protected Overrides Sub OnLoad(e As EventArgs)
+        MyBase.OnLoad(e)
+        If Session("EmailAddress") Is Nothing Then
+            Response.Redirect("Login.aspx")
+        End If
+    End Sub
 
 End Class

@@ -4,11 +4,15 @@ Imports System.Configuration
 Imports System.Drawing
 Imports System.IO
 Imports Newtonsoft.Json
+Imports iTextSharp.text.pdf
+Imports Mysqlx.Crud
 
 Public Class DonationDetails
     Inherits System.Web.UI.Page
     Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Dim donationId As String = Request.QueryString("id")
+        GenerateDonationReceipt(donationId)
         If con.State = ConnectionState.Closed Then
             con.Open()
         End If
@@ -73,18 +77,18 @@ Public Class DonationDetails
         Dim gvrow As GridViewRow = DirectCast(btndetails.NamingContainer, GridViewRow)
         lblDonationId.Text = gvEvent.DataKeys(gvrow.RowIndex).Value.ToString()
         If gvrow.Cells(0).Text = "&nbsp;" Then
-                textFullName.Text = ""
-            Else
-                textFullName.Text = gvrow.Cells(0).Text
+            textFullName.Text = ""
+        Else
+            textFullName.Text = gvrow.Cells(0).Text
         End If
         If gvrow.Cells(1).Text = "&nbsp;" Then
             textAmount.Text = ""
         Else
             textAmount.Text = gvrow.Cells(1).Text
         End If
-            textFullName.Text = gvrow.Cells(0).Text
-            textAmount.Text = gvrow.Cells(1).Text
-            textMobileNumber.Text = gvrow.Cells(2).Text
+        textFullName.Text = gvrow.Cells(0).Text
+        textAmount.Text = gvrow.Cells(1).Text
+        textMobileNumber.Text = gvrow.Cells(2).Text
         ddlModeOfPayment.SelectedItem.Value = gvrow.Cells(3).Text
         textComments.Text = gvrow.Cells(4).Text
         Me.ModalPopupExtender1.Show()
@@ -162,7 +166,7 @@ Public Class DonationDetails
             ' Payment Mode update like 'CC to Credit card' column index (zero-based)
             Dim paymentModeCell As TableCell = e.Row.Cells(3)
             Dim paymentMode As String = paymentModeCell.Text
-            paymentModeCell.Text = GetPaymentModeName(paymentMode)
+            paymentModeCell.Text = PaytmPaymentResponse.GetPaymentModeName(paymentMode)
             ' End of Payment Mode update
 
             ' Payment Status column index (zero-based)
@@ -217,42 +221,147 @@ Public Class DonationDetails
         Me.BindGridView()
     End Sub
 
-    Private Function GetPaymentModeName(paytmMode As String) As String
+    Private Sub GenerateDonationReciept()
+        'Certificate.GenerateDonationCertificate()
+    End Sub
 
-        If String.IsNullOrEmpty(paytmMode) Then
-            Return "Unknown"
-        End If
+    Protected Sub generate_Certificate(sender As Object, e As EventArgs)
+        Try
+            Dim btn As LinkButton = CType(sender, LinkButton)
+            Dim row As GridViewRow = CType(btn.NamingContainer, GridViewRow)
 
-        Select Case paytmMode.ToUpper()
+            ' ✅ Correct way to get ID
+            Dim donationId As String = gvEvent.DataKeys(row.RowIndex).Value.ToString()
 
-            Case "CC", "CREDIT_CARD"
-                Return "Credit Card"
+            Dim paymentStatus As String = row.Cells(5).Text.Trim().ToLower()
 
-            Case "DC", "DEBIT_CARD"
-                Return "Debit Card"
+            If paymentStatus = "success" Then
+                Dim donorName As String = row.Cells(0).Text
+                Dim amount As Decimal = Convert.ToDecimal(row.Cells(1).Text)
+                Dim paymentMode As String = row.Cells(3).Text
+                Dim donationDate As String = Convert.ToDateTime(row.Cells(8).Text).ToString("dd/MM/yyyy")
 
-            Case "NB"
-                Return "Net Banking"
+                ' 👉 Call your PDF function
+                CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationId)
+            Else
+                MessageUpdated.Text = "Only Success payment generate Receipt"
+                MessageUpdated.ForeColor = Color.Red
+            End If
+        Catch ex As Exception
+            MessageUpdated.Text = ex.Message
+            MessageUpdated.ForeColor = Color.Red
+        End Try
+    End Sub
 
-            Case "WALLET", "BALANCE"
-                Return "Wallet"
+    Public Sub GenerateDonationReceipt(id As String)
+        Try
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Dim dt As New DataTable()
 
-            Case "PDC"
-                Return "Postpaid"
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount, ModeOfPayment, FullName, EmailId, CreatedDate, DonationID FROM donation WHERE DonationID = @id", con)
 
-            Case "EMI"
-                Return "EMI"
+                    cmd.Parameters.AddWithValue("@id", id)
 
-            Case "EMI_DC"
-                Return "Debit Card EMI"
+                    Using da As New MySqlDataAdapter(cmd)
+                        da.Fill(dt)
+                    End Using
 
-            Case "BNPL"
-                Return "Buy Now Pay Later"
+                End Using
+            End Using
 
-            Case Else
-                Return paytmMode ' fallback (don’t lose data)
+            ' ✅ Check data exists
+            If dt.Rows.Count = 0 Then
+                Throw New Exception("No donation record found.")
+            End If
 
-        End Select
+            Dim row As DataRow = dt.Rows(0)
+
+            ' ✅ Extract values safely
+            Dim donorName As String = If(IsDBNull(row("FullName")), "", row("FullName").ToString())
+            Dim amount As Decimal = If(IsDBNull(row("Amount")), 0, Convert.ToDecimal(row("Amount")))
+            Dim paymentMode As String = If(IsDBNull(row("ModeOfPayment")), "", row("ModeOfPayment").ToString())
+            Dim donationDate As String = ""
+
+            If Not IsDBNull(row("CreatedDate")) Then
+                donationDate = Convert.ToDateTime(row("CreatedDate")).ToString("dd/MM/yyyy")
+            End If
+
+            Dim donationNo As String = If(IsDBNull(row("DonationID")), "", row("DonationID").ToString())
+
+            CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationNo)
+
+        Catch ex As Exception
+            Throw New Exception("Error in GenerateDonationReceipt: " & ex.Message)
+        End Try
+    End Sub
+
+    Public Function CreateDonationCertificate(name As String, amount As Decimal, paymentMode As String, donationDate As String, donationNo As String) As String
+
+        Try
+            Dim templateFile As String = Server.MapPath("~/doc/donationTemplate.pdf")
+
+            Dim reader As New iTextSharp.text.pdf.PdfReader(templateFile)
+            Dim pageSize As iTextSharp.text.Rectangle = reader.GetPageSize(1)
+
+            Using outputPdf As New MemoryStream()
+
+                Using stamper As New PdfStamper(reader, outputPdf)
+
+                    Dim bf As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, False)
+                    Dim cb As PdfContentByte = stamper.GetOverContent(1)
+
+                    cb.BeginText()
+
+                    ' 🔹 Receipt No
+                    cb.SetFontAndSize(bf, 12)
+                    cb.SetTextMatrix(80, 375)
+                    cb.ShowText(donationNo)
+
+                    ' 🔹 Date
+                    cb.SetTextMatrix(700, 380)
+                    cb.ShowText(donationDate)
+
+                    ' 🔹 Donor Name
+                    cb.SetFontAndSize(bf, 14)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, name, 240, 340, 0)
+
+                    ' 🔹 Amount in Words
+                    cb.SetFontAndSize(bf, 13)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, PaytmPaymentResponse.NumberToWords(amount), 200, 275, 0)
+
+                    ' 🔹 Payment Mode
+                    cb.SetFontAndSize(bf, 12)
+                    cb.SetTextMatrix(350, 210)
+                    cb.ShowText(PaytmPaymentResponse.GetPaymentModeName(paymentMode))
+
+                    ' 🔹 Form Date
+                    cb.SetFontAndSize(bf, 13)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, donationDate, 260, 175, 0)
+
+                    ' 🔹 Amount Numeric (₹ box)
+                    cb.SetFontAndSize(bf, 14)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, amount, 120, 95, 0)
+
+                    cb.EndText()
+
+                    stamper.Close()
+                End Using
+
+                Dim pdfBytes As Byte() = outputPdf.ToArray()
+
+                Response.Clear()
+                Response.ContentType = "application/pdf"
+                Response.AddHeader("Content-Disposition", "attachment; filename=Donation_" & donationNo & ".pdf")
+                Response.BinaryWrite(pdfBytes)
+                Response.Flush()
+
+                HttpContext.Current.ApplicationInstance.CompleteRequest()
+
+            End Using
+        Catch ex As Exception
+            Console.WriteLine(ex)
+        End Try
 
     End Function
 End Class

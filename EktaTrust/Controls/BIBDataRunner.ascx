@@ -141,8 +141,8 @@ function TotalRecord() {
 
        <asp:TemplateField HeaderText="Action" ItemStyle-Width="72" >
         <ItemTemplate>
-             <asp:ImageButton ID="ButtonEdit" runat="server" ToolTip="Edit" CommandName="EditRow" CommandArgument='<%# Container.DataItemIndex %>' Width="25" Height="25"  CssClass="input" ImageUrl="../Images/edit.png" />
-            <asp:ImageButton ID="ButtonDelete" runat="server" ToolTip="Delete" CommandName="DeleteRow" CommandArgument='<%# Container.DataItemIndex %>' OnClientClick="return confirm('Are you sure you want to delete this event?');"  Text="Delete" Width="25" Height="25"  CssClass="input" ImageUrl="../Images/minimal-97-128.png" />
+             <asp:ImageButton ID="ButtonEdit" runat="server" ToolTip="Edit" CommandName="EditRow" CommandArgument='<%# Eval("Id") %>' Width="25" Height="25"  CssClass="input" ImageUrl="../Images/edit.png" />
+            <asp:ImageButton ID="ButtonDelete" runat="server" ToolTip="Delete" CommandName="DeleteRow" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('Are you sure you want to delete this event?');"  Text="Delete" Width="25" Height="25"  CssClass="input" ImageUrl="../Images/minimal-97-128.png" />
              <i class="fa fa-eye" style="cursor:pointer; font-size: large;" onclick='showJson(<%# Eval("Id") %>)' title="Payment Response"></i>
         </ItemTemplate>
        </asp:TemplateField>

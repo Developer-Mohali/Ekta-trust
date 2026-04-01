@@ -643,6 +643,21 @@ body section {
                 //$(".next").click(function () {
                 function validateForm() {
                     var form = $("#msform");
+                    $.validator.addMethod("validDOB", function (value, element) {
+                        if (value === "") return false;
+
+                        // Check proper date format (yyyy-mm-dd from TextMode=Date)
+                        var date = new Date(value);
+
+                        // Invalid date check
+                        if (isNaN(date.getTime())) return false;
+
+                        // Optional: future date restriction
+                        var today = new Date();
+                        if (date > today) return false;
+
+                        return true;
+                    }, "Please enter a valid Date of Birth");
                     form.validate({
                         feedbackIcons: {
                             valid: 'glyphicon glyphicon-ok',
@@ -683,7 +698,9 @@ body section {
                             //    required: true,
                             //    equalTo: '#random'
                             //},
-
+                            ContentPlaceHolder1_txtDOB: {
+                                validDOB: true
+                            },
                             TermCondition: {
 
                                 required: true
@@ -712,6 +729,9 @@ body section {
                             },
                             ddlGender: {
                                 required: "Gender is Required"
+                            },
+                            ContentPlaceHolder1_txtDOB: {
+                                validDOB: "Enter a valid DOB"
                             },
                             //email: {
                             //    required: "Email Required"

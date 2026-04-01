@@ -76,7 +76,7 @@
             <section>
                 <div class="row  wow fadeInDown">
 
-                    <div class=" col-lg-3">
+                    <div class=" col-lg-4">
 
                         <p>If you cannot reach us by the office number, do not hesitate to contact us by the mobile number or by e-mail. We will get back to you as soon as possible.</p>
 
@@ -154,7 +154,7 @@
 
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="panel">
 
                             <div class="wow fadeInDown">
@@ -215,7 +215,7 @@
                         </div>
 
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="panel">
                             <div class="wow fadeInDown">
                                 <div class="row">
@@ -273,7 +273,7 @@
                         </div>
 
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3" style="display:none;">
                         <div class="panel">
                             <div class="wow fadeInDown">
                                 <div class="row">
@@ -352,7 +352,7 @@
                                         <%--<td><i class="glyphicon glyphicon-phone">900-171-6311</i></td>--%>
                                     </tr>
                                     <tr>
-                                        <td class="text-danger">Ms. Yashoda Salvi (Trustee)</td>
+                                        <td class="text-danger">Ms. Yashoda Salvi</td>
                                         <td><i class="glyphicon glyphicon-envelope"></i><a href="mailto:salvi.yashoda@gmail.com">salvi.yashoda@gmail.com</a></td>
                                         <%--<td><i class="glyphicon glyphicon-phone">900-171-6311</i></td>--%>
 

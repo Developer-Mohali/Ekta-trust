@@ -135,6 +135,10 @@
                       <ItemTemplate>
                           <asp:ImageButton ID="imgbtn" ImageUrl="Images/UI_Icons-09-128.png" runat="server" Width="25" Height="25" OnClick="imgbtn_Click" />
                           <asp:ImageButton ID="ButtonDelete" runat="server" CommandName="Delete" Text="Delete" Width="25" Height="25" OnClientClick="return confirm('Are you sure you want to delete this event?');" CssClass="input" ImageUrl="Images/minimal-97-128.png" />
+                        <!-- Certificate -->
+                        <asp:LinkButton ID="btnCertificate" runat="server" ToolTip="Generate Certificate" OnClick="generate_Certificate">
+                            <i class="fa fa-file-pdf-o" style="color:red; font-size:18px;"></i>Cert
+                        </asp:LinkButton>
                       </ItemTemplate>
                   </asp:TemplateField>
                 </Columns>

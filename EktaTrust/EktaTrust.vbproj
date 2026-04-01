@@ -248,6 +248,7 @@
     <Content Include="Css\PaymentCSS\js\script.js" />
     <Content Include="Demo.html" />
     <Content Include="Dhodsar.aspx" />
+    <Content Include="doc\DonationTemplate.html" />
     <Content Include="Donate.aspx" />
     <Content Include="DonationDetails.aspx" />
     <Content Include="EktaCreativeCompetition.aspx" />

@@ -422,5 +422,30 @@ Public Class SendEmail
         Return RetValue
     End Function
 
+    Public Shared Function SendMailWithAttachment(toEmail As String, Messageto As String, subject As String, body As String) As String
+        Dim RetValue As String = ""
+        Try
 
+            Dim fromMail As String = System.Configuration.ConfigurationManager.AppSettings("From")
+            Dim Password As String = System.Configuration.ConfigurationManager.AppSettings("Password")
+
+            Dim mail As MailMessage = New MailMessage()
+            ' ✅ Correct FROM (your system email)
+            mail.From = New MailAddress(fromMail, "Ekta Navnirman Trust")
+
+            ' ✅ Correct TO (email + name)
+            mail.To.Add(New MailAddress(toEmail, Messageto))
+            mail.Subject = subject
+            mail.Body = body
+            Dim smtp As SmtpClient = New SmtpClient("mail.ektatrust.org.in", 8889)
+            Dim Credentials As NetworkCredential = New NetworkCredential(fromMail, Password)
+            smtp.Credentials = Credentials
+            smtp.Send(mail)
+
+        Catch ex As Exception
+            log("ErrorStep1", ex.Message, "SendMailWithAttachment", "", "", "", "", "")
+            RetValue = "<font color='red'>Error while sending Email.</font>"
+        End Try
+        Return RetValue
+    End Function
 End Class

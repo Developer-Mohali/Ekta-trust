@@ -417,21 +417,25 @@ Public Class BIBDataRunner
     End Sub
 
     Protected Sub gvMIP_RowAction(sender As Object, e As GridViewCommandEventArgs)
-        ' Get the selected row's ID
-        Dim id As Integer = Convert.ToInt32(gvEvent.DataKeys(e.CommandArgument).Value)
         Try
+            ' Get the selected row's ID
+            Dim id As Integer = Convert.ToInt32(e.CommandArgument)
+            'If id >= 0 AndAlso id < gvEvent.DataKeys.Count Then
+            '    id = Convert.ToInt32(gvEvent.DataKeys(id).Value)
+            'End If
+
             ' called delete function..
             If e.CommandName = "DeleteRow" Then
-                RowDeleting(id)
+                RowDeleting(ID)
                 Return
             ElseIf e.CommandName = "EditRow" Then
                 ' Store it in a hidden field for saving after editing
-                hfEditID.Value = id.ToString()
+                hfEditID.Value = ID.ToString()
 
                 Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
                 Using con As New MySqlConnection(constr)
                     Using cmd As New MySqlCommand("SELECT * FROM bibdata WHERE ID = @Id", con)
-                        cmd.Parameters.AddWithValue("@Id", id)
+                        cmd.Parameters.AddWithValue("@Id", ID)
                         con.Open()
                         Using reader As MySqlDataReader = cmd.ExecuteReader()
                             If reader.Read() Then
@@ -942,6 +946,8 @@ Public Class BIBDataRunner
                                 bgColor = "White"
                         End Select
                         hw.WriteLine("<td style='background-color:" & bgColor & "'>" & cellValue & "</td>")
+                    ElseIf i = 12 AndAlso (String.IsNullOrEmpty(cellValue) Or cellValue = "&nbsp;") Then
+                        hw.WriteLine("<td>Self</td>")
                     Else
                         hw.WriteLine("<td>" & cellValue & "</td>")
                     End If
@@ -1056,6 +1062,12 @@ Public Class BIBDataRunner
 
     Protected Sub GridView1_RowDataBound(sender As Object, e As GridViewRowEventArgs) 'Handles GridView1.RowDataBound
         If e.Row.RowType = DataControlRowType.DataRow Then
+
+            Dim createdByCell As TableCell = e.Row.Cells(10)
+            Dim createdBy = createdByCell.Text.Trim().ToLower()
+            If String.IsNullOrEmpty(createdBy) Or createdBy = "&nbsp;" Then
+                createdByCell.Text = "Self"
+            End If
 
             ' Payment Status column index (zero-based)
             Dim cell As TableCell = e.Row.Cells(8)

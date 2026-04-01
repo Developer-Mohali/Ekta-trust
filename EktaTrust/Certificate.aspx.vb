@@ -15,7 +15,6 @@ Public Class Certificate
         'If Not IsPostBack Then
         '    BindYearDropDown()
         'End If
-
     End Sub
     Protected Sub SearchButton_Click(ByVal sender As Object, ByVal e As EventArgs)
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
@@ -551,5 +550,81 @@ Public Class Certificate
 
     End Sub
 
+
+    Public Function CraeteDonationCertificate(name As String, amount As String, paymentMode As String, donationDate As DateTime, donationNo As String) As String
+
+        Try
+            'Dim donorName As String = "SHRI YOGESH KUMAR JI"
+            'amount = "10000"
+            'Dim amountWords As String = "TEN THOUSAND RUPEES ONLY"
+            'receiptNo = "048"
+            'Dim paymentMode As String = "UPI"
+            'Dim donationDate As String = DateTime.Now.ToString("dd/MM/yyyy")
+
+            Dim templateFile As String = Server.MapPath("~/doc/donationTemplate.pdf")
+
+            Dim reader As New iTextSharp.text.pdf.PdfReader(templateFile)
+            Dim pageSize As iTextSharp.text.Rectangle = reader.GetPageSize(1)
+
+            Using outputPdf As New MemoryStream()
+
+                Using stamper As New PdfStamper(reader, outputPdf)
+
+                    Dim bf As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, False)
+                    Dim cb As PdfContentByte = stamper.GetOverContent(1)
+
+                    cb.BeginText()
+
+                    ' 🔹 Receipt No
+                    cb.SetFontAndSize(bf, 12)
+                    cb.SetTextMatrix(80, 375)
+                    cb.ShowText(donationNo)
+
+                    ' 🔹 Date
+                    cb.SetTextMatrix(700, 380)
+                    cb.ShowText(donationDate)
+
+                    ' 🔹 Donor Name
+                    cb.SetFontAndSize(bf, 14)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, name, 240, 340, 0)
+
+                    ' 🔹 Amount in Words
+                    cb.SetFontAndSize(bf, 13)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, PaytmPaymentResponse.NumberToWords(amount), 200, 275, 0)
+
+                    ' 🔹 Payment Mode
+                    cb.SetFontAndSize(bf, 12)
+                    cb.SetTextMatrix(350, 210)
+                    cb.ShowText(paymentMode)
+
+                    ' 🔹 Form Date
+                    cb.SetFontAndSize(bf, 13)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, donationDate, 260, 175, 0)
+
+                    ' 🔹 Amount Numeric (₹ box)
+                    cb.SetFontAndSize(bf, 14)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, amount, 120, 95, 0)
+
+                    cb.EndText()
+
+                    stamper.Close()
+                End Using
+
+                Dim pdfBytes As Byte() = outputPdf.ToArray()
+
+                Response.Clear()
+                Response.ContentType = "application/pdf"
+                Response.AddHeader("Content-Disposition", "attachment; filename=Donation_" & donationNo & ".pdf")
+                Response.BinaryWrite(pdfBytes)
+                Response.Flush()
+
+                HttpContext.Current.ApplicationInstance.CompleteRequest()
+
+            End Using
+        Catch ex As Exception
+            Console.WriteLine(ex)
+        End Try
+
+    End Function
 
 End Class

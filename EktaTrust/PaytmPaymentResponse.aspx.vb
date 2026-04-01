@@ -8,14 +8,14 @@ Public Class PaytmPaymentResponse
         If Not IsPostBack Then
 
             Dim orderId As String = Request.QueryString("orderId")
-            Dim paymentType As String = Request.QueryString("type")
+            Dim paymentFrom As String = Request.QueryString("type")
 
             If String.IsNullOrEmpty(orderId) Then
                 lblMessage.Text = "Invalid Request"
                 Exit Sub
             End If
 
-            Dim dt As DataTable = GetPaymentByOrderId(orderId)
+            Dim dt As DataTable = GetPaymentByOrderId(orderId, paymentFrom)
 
             If dt Is Nothing OrElse dt.Rows.Count = 0 Then
                 lblMessage.Text = "Payment record not found."
@@ -31,10 +31,15 @@ Public Class PaytmPaymentResponse
             lblTxnId.Text = txnId
             lblAmount.Text = row("Amount").ToString()
 
-            If paymentType.Trim() = "donation" Then
+            If paymentFrom.Trim() = "donation" Then
                 lblpaymentType.Text = "Donation"
                 lblpaymentMode.Text = GetPaymentModeName(row("ModeOfPayment").ToString())
                 Panelpayment.Visible = True
+
+                If status.ToLower() = "success" Then
+                    'Send mail to donated person...
+                    SendDonationMail(row("EmailId"), row("FullName"), row("Amount"), row("CreatedDate"), row("DonationID"))
+                End If
             End If
 
             Select Case status
@@ -63,10 +68,9 @@ Public Class PaytmPaymentResponse
         End If
     End Sub
 
-    Private Function GetPaymentByOrderId(orderId As String) As DataTable
+    Private Function GetPaymentByOrderId(orderId As String, paymentType As String) As DataTable
         Dim dt As New DataTable()
         Try
-            Dim paymentType As String = Request.QueryString("type")
             If paymentType.Trim() = "donation" Then
                 dt = GetDonationPaymentInfo(orderId)
             Else
@@ -101,7 +105,7 @@ Public Class PaytmPaymentResponse
 
         Dim dt As New DataTable()
         Using con As New MySqlConnection(constr)
-            Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount, ModeOfPayment FROM donation WHERE OrderId = @OrderId", con)
+            Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount, ModeOfPayment, FullName, EmailId, CreatedDate, DonationID FROM donation WHERE OrderId = @OrderId", con)
 
                 cmd.Parameters.AddWithValue("@OrderId", orderId)
 
@@ -149,6 +153,103 @@ Public Class PaytmPaymentResponse
                 Return paytmMode ' fallback (don’t lose data)
 
         End Select
+
+    End Function
+
+    Private Sub SendDonationMail(emailID As String, fullName As String, amount As String, donatedDate As String, donationId As String)
+        Try
+            Dim htmlTemplate As String = System.IO.File.ReadAllText(Server.MapPath("~/doc/DonationTemplate.html"))
+
+            htmlTemplate = htmlTemplate.Replace("{{DonorName}}", fullName)
+            ' htmlTemplate = htmlTemplate.Replace("{{Amount}}", amount)
+            ' htmlTemplate = htmlTemplate.Replace("{{Date}}", donatedDate)
+
+            'finding baseUrl
+            Dim baseUrl As String = Request.Url.Scheme & "://" & Request.Url.Authority
+            Dim downloadUrl As String = baseUrl & "/DonationDetails.aspx?id=" & donationId
+
+            htmlTemplate = htmlTemplate.Replace("{{DownloadLink}}", downloadUrl)
+
+            Dim subject As String = "Donation Receipt for Tax Deduction (80G) - Receipt No " & donationId
+            SendEmail.SendMailWithAttachment(emailID, fullName, subject, htmlTemplate)
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Public Shared Function NumberToWords(ByVal num As Decimal) As String
+
+        If num = 0 Then Return "ZERO RUPEES ONLY"
+
+        Dim words As String = ""
+
+        Dim units() As String = {"", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN",
+                                "ELEVEN", "TWELVE", "THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN",
+                                "SEVENTEEN", "EIGHTEEN", "NINETEEN"}
+
+        Dim tens() As String = {"", "", "TWENTY", "THIRTY", "FORTY", "FIFTY", "SIXTY", "SEVENTY", "EIGHTY", "NINETY"}
+
+        Dim n As Long = CLng(Math.Floor(num))
+
+        Dim crore As Integer = n \ 10000000
+        n = n Mod 10000000
+
+        Dim lakh As Integer = n \ 100000
+        n = n Mod 100000
+
+        Dim thousand As Integer = n \ 1000
+        n = n Mod 1000
+
+        Dim hundred As Integer = n \ 100
+        n = n Mod 100
+
+        If crore > 0 Then
+            words &= ConvertBelowThousand(crore, units, tens) & " CRORE "
+        End If
+
+        If lakh > 0 Then
+            words &= ConvertBelowThousand(lakh, units, tens) & " LAKH "
+        End If
+
+        If thousand > 0 Then
+            words &= ConvertBelowThousand(thousand, units, tens) & " THOUSAND "
+        End If
+
+        If hundred > 0 Then
+            words &= ConvertBelowThousand(hundred, units, tens) & " HUNDRED "
+        End If
+
+        If n > 0 Then
+            If words <> "" Then words &= "AND "
+            words &= ConvertBelowThousand(n, units, tens)
+        End If
+
+        words &= " RUPEES ONLY"
+
+        Return words.Trim()
+
+    End Function
+
+    Private Shared Function ConvertBelowThousand(ByVal num As Integer, units() As String, tens() As String) As String
+
+        Dim result As String = ""
+
+        If num > 99 Then
+            result &= units(num \ 100) & " HUNDRED "
+            num = num Mod 100
+        End If
+
+        If num > 19 Then
+            result &= tens(num \ 10) & " "
+            num = num Mod 10
+        End If
+
+        If num > 0 Then
+            result &= units(num) & " "
+        End If
+
+        Return result.Trim()
 
     End Function
 End Class
