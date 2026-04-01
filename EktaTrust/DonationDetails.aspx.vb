@@ -12,7 +12,10 @@ Public Class DonationDetails
     Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim donationId As String = Request.QueryString("id")
-        GenerateDonationReceipt(donationId)
+        If Not String.IsNullOrEmpty(donationId) Then
+            GenerateDonationReceipt(donationId)
+        End If
+
         If con.State = ConnectionState.Closed Then
             con.Open()
         End If
@@ -292,7 +295,7 @@ Public Class DonationDetails
             CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationNo)
 
         Catch ex As Exception
-            Throw New Exception("Error in GenerateDonationReceipt: " & ex.Message)
+
         End Try
     End Sub
 
