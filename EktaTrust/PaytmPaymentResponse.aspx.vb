@@ -296,14 +296,16 @@ Public Class PaytmPaymentResponse
 
             Dim donationNo As String = If(IsDBNull(row("DonationID")), "", row("DonationID").ToString())
 
-            CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationNo)
+            Dim transactionId As String = If(IsDBNull(row("TxnId")), "", row("TxnId").ToString())
+
+            CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationNo, transactionId)
 
         Catch ex As Exception
 
         End Try
     End Sub
 
-    Private Function CreateDonationCertificate(name As String, amount As Decimal, paymentMode As String, donationDate As String, donationNo As String) As String
+    Private Function CreateDonationCertificate(name As String, amount As Decimal, paymentMode As String, donationDate As String, donationNo As String, transactionId As String) As String
 
         Try
             Dim templateFile As String = Server.MapPath("~/doc/donationTemplate.pdf")
@@ -331,7 +333,7 @@ Public Class PaytmPaymentResponse
 
                     ' 🔹 Donor Name
                     cb.SetFontAndSize(bf, 25)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, name, 420, 590, 0)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, name.ToUpper(), 420, 590, 0)
 
                     ' 🔹 Amount in Words
                     cb.SetFontAndSize(bf, 22)
@@ -342,9 +344,15 @@ Public Class PaytmPaymentResponse
                     cb.SetTextMatrix(580, 345)
                     cb.ShowText(PaytmPaymentResponse.GetPaymentModeName(paymentMode))
 
+
+                    ' 🔹 Transaction Id
+                    cb.SetFontAndSize(bf, 22)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, transactionId, 480, 280, 0)
+
+
                     ' 🔹 Form Date
                     cb.SetFontAndSize(bf, 22)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, donationDate, 480, 280, 0)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, donationDate, 680, 280, 0)
 
                     ' 🔹 Amount Numeric (₹ box)
                     cb.SetFontAndSize(bf, 30)

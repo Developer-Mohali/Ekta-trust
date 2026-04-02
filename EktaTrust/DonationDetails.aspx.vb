@@ -29,7 +29,7 @@ Public Class DonationDetails
 
     'This method use To bind Gridview.
     Private Sub BindGridView()
-        Dim query As String = "select DonationID,FullName,Amount,MobileNumber,ModeOfPayment,PanNuber,PaymentStatus,Address, OrderId, CreatedDate" + " from Donation order by DonationID desc"
+        Dim query As String = "select DonationID,FullName,Amount,MobileNumber,ModeOfPayment,PanNuber,PaymentStatus,Address, OrderId,TxnId, CreatedDate" + " from Donation order by DonationID desc"
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
             Using cmd As New MySqlCommand(query)
@@ -132,7 +132,7 @@ Public Class DonationDetails
         Try
             Using con As New MySqlConnection(constr)
                 Using cmd As New MySqlCommand()
-                    Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber, PaymentStatus, Address, OrderId, CreatedDate FROM Donation"
+                    Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber, PaymentStatus, Address, OrderId,TxnId, CreatedDate FROM Donation"
                     If Not String.IsNullOrEmpty(txtSearch.Text) Then
                         If ddlSearchBy.SelectedItem.Text = "Full Name" Then
                             sql += " WHERE FullName LIKE @Search"
@@ -243,9 +243,10 @@ Public Class DonationDetails
                 Dim amount As Decimal = Convert.ToDecimal(row.Cells(1).Text)
                 Dim paymentMode As String = row.Cells(3).Text
                 Dim donationDate As String = Convert.ToDateTime(row.Cells(8).Text).ToString("dd/MM/yyyy")
+                Dim transactionId As String = row.Cells(9).Text
 
                 ' 👉 Call your PDF function
-                CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationId)
+                CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationId, transactionId)
             Else
                 MessageUpdated.Text = "Only Success payment generate Receipt"
                 MessageUpdated.ForeColor = Color.Red
@@ -292,14 +293,16 @@ Public Class DonationDetails
 
             Dim donationNo As String = If(IsDBNull(row("DonationID")), "", row("DonationID").ToString())
 
-            CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationNo)
+            Dim transactionId As String = If(IsDBNull(row("TxnId")), "", row("TxnId").ToString())
+
+            CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationNo, transactionId)
 
         Catch ex As Exception
 
         End Try
     End Sub
 
-    Public Function CreateDonationCertificate(name As String, amount As Decimal, paymentMode As String, donationDate As String, donationNo As String) As String
+    Public Function CreateDonationCertificate(name As String, amount As Decimal, paymentMode As String, donationDate As String, donationNo As String, transactionId As String) As String
 
         Try
             Dim templateFile As String = Server.MapPath("~/doc/donationTemplate.pdf")
@@ -327,7 +330,7 @@ Public Class DonationDetails
 
                     ' 🔹 Donor Name
                     cb.SetFontAndSize(bf, 25)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, name, 420, 590, 0)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, name.ToUpper(), 420, 590, 0)
 
                     ' 🔹 Amount in Words
                     cb.SetFontAndSize(bf, 22)
@@ -338,9 +341,14 @@ Public Class DonationDetails
                     cb.SetTextMatrix(580, 345)
                     cb.ShowText(PaytmPaymentResponse.GetPaymentModeName(paymentMode))
 
+                    ' 🔹 Transaction Id
+                    cb.SetFontAndSize(bf, 22)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, transactionId, 480, 280, 0)
+
+
                     ' 🔹 Form Date
                     cb.SetFontAndSize(bf, 22)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, donationDate, 480, 280, 0)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, donationDate, 680, 280, 0)
 
                     ' 🔹 Amount Numeric (₹ box)
                     cb.SetFontAndSize(bf, 30)
