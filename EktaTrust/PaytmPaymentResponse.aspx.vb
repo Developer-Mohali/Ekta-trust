@@ -324,7 +324,7 @@ Public Class PaytmPaymentResponse
 
                     ' 🔹 Receipt No
                     cb.SetFontAndSize(bf, 22)
-                    cb.SetTextMatrix(120, 660)
+                    cb.SetTextMatrix(135, 660)
                     cb.ShowText(donationNo)
 
                     ' 🔹 Date
@@ -347,7 +347,7 @@ Public Class PaytmPaymentResponse
 
                     ' 🔹 Transaction Id
                     cb.SetFontAndSize(bf, 22)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, transactionId, 480, 280, 0)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, transactionId, 110, 280, 0)
 
 
                     ' 🔹 Form Date
