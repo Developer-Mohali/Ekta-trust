@@ -32,7 +32,7 @@ Public Class EventRegistration
 
             If env = "Prod" Then
                 mid = ConfigurationManager.AppSettings("ProdMID")
-                ltPaytmScript.Text = $"<script src='${paytmJsUrl}" & mid & ".js' crossorigin='anonymous'></script>"
+                ltPaytmScript.Text = $"<script src='{paytmJsUrl}" & mid & ".js' crossorigin='anonymous'></script>"
             Else
                 mid = ConfigurationManager.AppSettings("MID")
                 ltPaytmScript.Text = $"<script src='{paytmJsUrl}" & mid & ".js' crossorigin='anonymous'></script>"
