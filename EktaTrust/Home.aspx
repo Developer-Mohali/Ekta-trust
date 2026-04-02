@@ -288,6 +288,9 @@ cursor: pointer;
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
+                <img style="width: 100%;" src="Images/slider/runForEquality.jpg" alt="" />
+            </div>
+            <div class="item">
                 <img style="width: 100%;" src="Images/slider/new_img_1.jpg" alt="" />
             </div>
             <div class="item">

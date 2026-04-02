@@ -121,10 +121,10 @@ Public Class BIBDataRunner
                     query += " WHERE DATE(bd.CreatedAt) = @CreatedDate"
                     cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
                 ElseIf query.Contains("WHERE") Then
-                    query += " And YEAR(bd.CreatedAt) = @YearBy"
+                    query += " And YEAR = @YearBy"
                     cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
                 Else
-                    query += " WHERE YEAR(bd.CreatedAt) = @YearBy"
+                    query += " WHERE YEAR = @YearBy"
                     cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
                 End If
                 query += $" ORDER BY bd.ID DESC"

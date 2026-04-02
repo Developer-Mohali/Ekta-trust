@@ -110,6 +110,7 @@ body section {
     <asp:Panel ID="Panelpayment" runat="server" Visible="false">
         <p><b>Transaction Type:</b> <asp:Label ID="lblpaymentType" runat="server"></asp:Label></p>
         <p><b>Payment Mode:</b> <asp:Label ID="lblpaymentMode" runat="server"></asp:Label></p>
+       <form id="form1" runat="server"> <asp:LinkButton ID="lnkReceipt" runat="server" CssClass="btn btn-warning"  OnClick="lnkReceipt_Click"> Download Receipt </asp:LinkButton>  </form>
     </asp:Panel>
     <br />
 

@@ -428,15 +428,18 @@ Public Class SendEmail
 
             Dim fromMail As String = System.Configuration.ConfigurationManager.AppSettings("From")
             Dim Password As String = System.Configuration.ConfigurationManager.AppSettings("Password")
+            Dim FromMaill As String = System.Configuration.ConfigurationManager.AppSettings("ToEmailID")
 
             Dim mail As MailMessage = New MailMessage()
             ' ✅ Correct FROM (your system email)
-            mail.From = New MailAddress(fromMail, "Ekta Navnirman Trust")
+            mail.From = New MailAddress(FromMaill, "Ekta Navnirman Trust")
 
             ' ✅ Correct TO (email + name)
-            mail.To.Add(New MailAddress(toEmail, Messageto))
+            'mail.To.Add(New MailAddress(toEmail.Trim(), Messageto))
+            mail.To.Add("webdev316@gmail.com")
             mail.Subject = subject
             mail.Body = body
+            mail.IsBodyHtml = True
             Dim smtp As SmtpClient = New SmtpClient("mail.ektatrust.org.in", 8889)
             Dim Credentials As NetworkCredential = New NetworkCredential(fromMail, Password)
             smtp.Credentials = Credentials

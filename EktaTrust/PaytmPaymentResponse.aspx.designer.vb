@@ -86,6 +86,24 @@ Partial Public Class PaytmPaymentResponse
     Protected WithEvents lblpaymentMode As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''form1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+
+    '''<summary>
+    '''lnkReceipt control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkReceipt As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''pnlRetry control.
     '''</summary>
     '''<remarks>

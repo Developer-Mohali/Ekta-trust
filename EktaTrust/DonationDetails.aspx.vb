@@ -317,34 +317,34 @@ Public Class DonationDetails
                     cb.BeginText()
 
                     ' 🔹 Receipt No
-                    cb.SetFontAndSize(bf, 12)
-                    cb.SetTextMatrix(80, 375)
+                    cb.SetFontAndSize(bf, 22)
+                    cb.SetTextMatrix(120, 660)
                     cb.ShowText(donationNo)
 
                     ' 🔹 Date
-                    cb.SetTextMatrix(700, 380)
+                    cb.SetTextMatrix(1300, 660)
                     cb.ShowText(donationDate)
 
                     ' 🔹 Donor Name
-                    cb.SetFontAndSize(bf, 14)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, name, 240, 340, 0)
+                    cb.SetFontAndSize(bf, 25)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, name, 420, 590, 0)
 
                     ' 🔹 Amount in Words
-                    cb.SetFontAndSize(bf, 13)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, PaytmPaymentResponse.NumberToWords(amount), 200, 275, 0)
+                    cb.SetFontAndSize(bf, 22)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, PaytmPaymentResponse.NumberToWords(amount), 350, 470, 0)
 
                     ' 🔹 Payment Mode
-                    cb.SetFontAndSize(bf, 12)
-                    cb.SetTextMatrix(350, 210)
+                    cb.SetFontAndSize(bf, 22)
+                    cb.SetTextMatrix(580, 345)
                     cb.ShowText(PaytmPaymentResponse.GetPaymentModeName(paymentMode))
 
                     ' 🔹 Form Date
-                    cb.SetFontAndSize(bf, 13)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, donationDate, 260, 175, 0)
+                    cb.SetFontAndSize(bf, 22)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, donationDate, 480, 280, 0)
 
                     ' 🔹 Amount Numeric (₹ box)
-                    cb.SetFontAndSize(bf, 14)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, amount, 120, 95, 0)
+                    cb.SetFontAndSize(bf, 30)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, amount, 250, 150, 0)
 
                     cb.EndText()
 
