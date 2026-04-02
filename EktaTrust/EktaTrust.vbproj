@@ -843,6 +843,7 @@
     <Content Include="doc\फेंसीड्रेसकॉम्पिटीशन2025एकतानवनिर्माणट्रस्ट.pdf" />
     <Content Include="doc\Result-EKTA-CREATIVE-COMPETITION-2025.pdf" />
     <Content Include="doc\donationTemplate.pdf" />
+    <Content Include="doc\runRegistration.pdf" />
     <None Include="ScriptLibrary\jquery-1.4.1-vsdoc.js" />
     <Content Include="ScriptLibrary\jquery-1.4.1.js" />
     <Content Include="ScriptLibrary\jquery-1.4.1.min.js" />

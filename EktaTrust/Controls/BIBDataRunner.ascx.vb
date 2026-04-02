@@ -3,8 +3,10 @@ Imports System.Drawing
 Imports System.Globalization
 Imports System.IO
 Imports System.Net
+Imports iTextSharp.text.pdf
 Imports Microsoft.VisualBasic.ApplicationServices
 Imports MySql.Data.MySqlClient
+Imports Mysqlx.Crud
 
 Public Class BIBDataRunner
     Inherits System.Web.UI.UserControl
@@ -426,16 +428,16 @@ Public Class BIBDataRunner
 
             ' called delete function..
             If e.CommandName = "DeleteRow" Then
-                RowDeleting(ID)
+                RowDeleting(id)
                 Return
             ElseIf e.CommandName = "EditRow" Then
                 ' Store it in a hidden field for saving after editing
-                hfEditID.Value = ID.ToString()
+                hfEditID.Value = id.ToString()
 
                 Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
                 Using con As New MySqlConnection(constr)
                     Using cmd As New MySqlCommand("SELECT * FROM bibdata WHERE ID = @Id", con)
-                        cmd.Parameters.AddWithValue("@Id", ID)
+                        cmd.Parameters.AddWithValue("@Id", id)
                         con.Open()
                         Using reader As MySqlDataReader = cmd.ExecuteReader()
                             If reader.Read() Then
@@ -1090,4 +1092,140 @@ Public Class BIBDataRunner
 
         End If
     End Sub
+
+    Protected Sub generate_Certificate(sender As Object, e As EventArgs)
+        Try
+            Dim btn As LinkButton = CType(sender, LinkButton)
+            Dim row As GridViewRow = CType(btn.NamingContainer, GridViewRow)
+
+            Dim orderId As String = row.Cells(9).Text.Trim().ToLower()
+
+            Dim paymentStatus As String = row.Cells(8).Text.Trim().ToLower()
+            If paymentStatus = "success" Then
+                ' 👉 Call your PDF function
+                CreateRunReceiptCertificate(orderId)
+
+            Else
+                MessageUpdated.Text = "Only Success payment generate Receipt"
+                MessageUpdated.ForeColor = Color.Red
+            End If
+        Catch ex As Exception
+            MessageUpdated.Text = ex.Message
+            MessageUpdated.ForeColor = Color.Red
+        End Try
+    End Sub
+
+
+    Private Function CreateRunReceiptCertificate(orderId As String) As String
+
+        Try
+
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Dim dt As New DataTable()
+
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand("SELECT BIBNo, RunnerName, RunCatagory, TShirtSize, Amount,TxnId, createdAt FROM bibdata WHERE OrderId=@orderId", con)
+
+                    cmd.Parameters.AddWithValue("@orderId", orderId)
+
+                    Using da As New MySqlDataAdapter(cmd)
+                        da.Fill(dt)
+                    End Using
+
+                End Using
+            End Using
+
+            ' ✅ Check data exists
+            If dt.Rows.Count = 0 Then
+                Throw New Exception("No donation record found.")
+            End If
+
+            Dim row As DataRow = dt.Rows(0)
+
+            Dim runnerName As String = If(IsDBNull(row("RunnerName")), "", row("RunnerName").ToString())
+            Dim amount As Decimal = If(IsDBNull(row("Amount")), 0, Convert.ToDecimal(row("Amount")))
+            Dim transactionId As String = If(IsDBNull(row("TxnId")), "", row("TxnId").ToString())
+            Dim bibNo As String = If(IsDBNull(row("BIBNo")), "", row("BIBNo").ToString())
+            Dim runCategory As String = If(IsDBNull(row("RunCatagory")), "", row("RunCatagory").ToString())
+            Dim transDate As String = If(IsDBNull(row("createdAt")), "", Convert.ToDateTime(row("createdAt")).ToString("dd/MM/yyyy"))
+            Dim runCatagory As String = If(IsDBNull(row("RunCatagory")), "", row("RunCatagory").ToString())
+            Dim tShirtSize As String = If(IsDBNull(row("TShirtSize")), "", row("TShirtSize").ToString())
+
+            Dim runDate As String = "14/04/2026"
+
+
+            Dim templateFile As String = Server.MapPath("~/doc/runRegistration.pdf")
+
+            Dim reader As New iTextSharp.text.pdf.PdfReader(templateFile)
+            Dim pageSize As iTextSharp.text.Rectangle = reader.GetPageSize(1)
+
+            Using outputPdf As New MemoryStream()
+
+                Using stamper As New PdfStamper(reader, outputPdf)
+
+                    Dim bf As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, False)
+                    Dim cb As PdfContentByte = stamper.GetOverContent(1)
+
+                    cb.BeginText()
+
+                    ' 🔹 Receipt No
+                    cb.SetFontAndSize(bf, 22)
+                    cb.SetTextMatrix(135, 660)
+                    cb.ShowText(bibNo)
+
+                    ' 🔹 Date
+                    cb.SetTextMatrix(1255, 660)
+                    cb.ShowText(transDate)
+
+                    ' 🔹 Runner Name
+                    cb.SetFontAndSize(bf, 25)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, runnerName.ToUpper(), 250, 600, 0)
+
+                    ' 🔹 Run Cat
+                    cb.SetFontAndSize(bf, 22)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, runCatagory, 250, 540, 0)
+
+                    ' 🔹 Tshirt
+                    cb.SetFontAndSize(bf, 22)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, tShirtSize, 250, 480, 0)
+
+                    ' 🔹 Run Date
+                    cb.SetFontAndSize(bf, 22)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, runDate, 250, 430, 0)
+
+                    ' 🔹 Amount in Words
+                    cb.SetFontAndSize(bf, 22)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, PaytmPaymentResponse.NumberToWords(amount), 250, 305, 0)
+
+                    ' 🔹 Transaction Id
+                    cb.SetFontAndSize(bf, 22)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, transactionId, 330, 255, 0)
+
+                    ' 🔹 Amount Numeric (₹ box)
+                    cb.SetFontAndSize(bf, 30)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, amount, 260, 130, 0)
+
+                    cb.EndText()
+
+                    stamper.Close()
+                End Using
+
+                Dim pdfBytes As Byte() = outputPdf.ToArray()
+
+                Response.Clear()
+                Response.ContentType = "application/pdf"
+                Response.AddHeader("Content-Disposition", "attachment; filename=RunReceipt_" & bibNo & ".pdf")
+                Response.BinaryWrite(pdfBytes)
+                Response.Flush()
+
+                HttpContext.Current.ApplicationInstance.CompleteRequest()
+
+            End Using
+        Catch ex As Exception
+            Console.WriteLine(ex)
+        End Try
+
+    End Function
+
+
 End Class

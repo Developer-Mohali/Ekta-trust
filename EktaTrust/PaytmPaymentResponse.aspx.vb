@@ -46,6 +46,12 @@ Public Class PaytmPaymentResponse
                     SendDonationMail(row("EmailId"), row("FullName"), row("Amount"), row("CreatedDate"), row("DonationID"))
                 End If
             End If
+            If paymentFrom.Trim() = "registration" Then
+                If status.ToLower() = "success" Then
+                    Panelpayment.Visible = True
+                    lnkReceipt.Visible = True
+                End If
+            End If
 
             Select Case status
 
@@ -260,45 +266,56 @@ Public Class PaytmPaymentResponse
 
     Protected Sub lnkReceipt_Click(sender As Object, e As EventArgs)
         Try
-            Dim btn As LinkButton = CType(sender, LinkButton)
-            Dim id As String = btn.CommandArgument
-            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
-            Dim dt As New DataTable()
 
-            Using con As New MySqlConnection(constr)
-                Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount, ModeOfPayment, FullName, EmailId, CreatedDate, DonationID FROM donation WHERE DonationID = @id", con)
+            Dim paymentFrom As String = Request.QueryString("type")
 
-                    cmd.Parameters.AddWithValue("@id", id)
+            If paymentFrom.Trim() = "donation" Then
 
-                    Using da As New MySqlDataAdapter(cmd)
-                        da.Fill(dt)
+                Dim btn As LinkButton = CType(sender, LinkButton)
+                Dim id As String = btn.CommandArgument
+                Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+                Dim dt As New DataTable()
+
+                Using con As New MySqlConnection(constr)
+                    Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount, ModeOfPayment, FullName, EmailId, CreatedDate, DonationID FROM donation WHERE DonationID = @id", con)
+
+                        cmd.Parameters.AddWithValue("@id", id)
+
+                        Using da As New MySqlDataAdapter(cmd)
+                            da.Fill(dt)
+                        End Using
+
                     End Using
-
                 End Using
-            End Using
 
-            ' ✅ Check data exists
-            If dt.Rows.Count = 0 Then
-                Throw New Exception("No donation record found.")
+                ' ✅ Check data exists
+                If dt.Rows.Count = 0 Then
+                    Throw New Exception("No donation record found.")
+                End If
+
+                Dim row As DataRow = dt.Rows(0)
+
+                ' ✅ Extract values safely
+                Dim donorName As String = If(IsDBNull(row("FullName")), "", row("FullName").ToString())
+                Dim amount As Decimal = If(IsDBNull(row("Amount")), 0, Convert.ToDecimal(row("Amount")))
+                Dim paymentMode As String = If(IsDBNull(row("ModeOfPayment")), "", row("ModeOfPayment").ToString())
+                Dim donationDate As String = ""
+
+                If Not IsDBNull(row("CreatedDate")) Then
+                    donationDate = Convert.ToDateTime(row("CreatedDate")).ToString("dd/MM/yyyy")
+                End If
+
+                Dim donationNo As String = If(IsDBNull(row("DonationID")), "", row("DonationID").ToString())
+
+                Dim transactionId As String = If(IsDBNull(row("TxnId")), "", row("TxnId").ToString())
+
+                CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationNo, transactionId)
+
+
+
+            Else
+                CreateRunReceiptCertificate()
             End If
-
-            Dim row As DataRow = dt.Rows(0)
-
-            ' ✅ Extract values safely
-            Dim donorName As String = If(IsDBNull(row("FullName")), "", row("FullName").ToString())
-            Dim amount As Decimal = If(IsDBNull(row("Amount")), 0, Convert.ToDecimal(row("Amount")))
-            Dim paymentMode As String = If(IsDBNull(row("ModeOfPayment")), "", row("ModeOfPayment").ToString())
-            Dim donationDate As String = ""
-
-            If Not IsDBNull(row("CreatedDate")) Then
-                donationDate = Convert.ToDateTime(row("CreatedDate")).ToString("dd/MM/yyyy")
-            End If
-
-            Dim donationNo As String = If(IsDBNull(row("DonationID")), "", row("DonationID").ToString())
-
-            Dim transactionId As String = If(IsDBNull(row("TxnId")), "", row("TxnId").ToString())
-
-            CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationNo, transactionId)
 
         Catch ex As Exception
 
@@ -379,4 +396,118 @@ Public Class PaytmPaymentResponse
         End Try
 
     End Function
+
+
+    Private Function CreateRunReceiptCertificate() As String
+
+        Try
+            Dim orderId As String = Request.QueryString("orderId")
+
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Dim dt As New DataTable()
+
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand("SELECT BIBNo, RunnerName, RunCatagory, TShirtSize, Amount,TxnId, createdAt FROM bibdata WHERE OrderId=@orderId", con)
+
+                    cmd.Parameters.AddWithValue("@orderId", orderId)
+
+                    Using da As New MySqlDataAdapter(cmd)
+                        da.Fill(dt)
+                    End Using
+
+                End Using
+            End Using
+
+            ' ✅ Check data exists
+            If dt.Rows.Count = 0 Then
+                Throw New Exception("No donation record found.")
+            End If
+
+            Dim row As DataRow = dt.Rows(0)
+
+            Dim runnerName As String = If(IsDBNull(row("RunnerName")), "", row("RunnerName").ToString())
+            Dim amount As Decimal = If(IsDBNull(row("Amount")), 0, Convert.ToDecimal(row("Amount")))
+            Dim transactionId As String = If(IsDBNull(row("TxnId")), "", row("TxnId").ToString())
+            Dim bibNo As String = If(IsDBNull(row("BIBNo")), "", row("BIBNo").ToString())
+            Dim runCategory As String = If(IsDBNull(row("RunCatagory")), "", row("RunCatagory").ToString())
+            Dim transDate As String = If(IsDBNull(row("createdAt")), "", Convert.ToDateTime(row("createdAt")).ToString("dd/MM/yyyy"))
+            Dim runCatagory As String = If(IsDBNull(row("RunCatagory")), "", row("RunCatagory").ToString())
+            Dim tShirtSize As String = If(IsDBNull(row("TShirtSize")), "", row("TShirtSize").ToString())
+
+            Dim runDate As String = "14/04/2026"
+
+
+            Dim templateFile As String = Server.MapPath("~/doc/runRegistration.pdf")
+
+            Dim reader As New iTextSharp.text.pdf.PdfReader(templateFile)
+            Dim pageSize As iTextSharp.text.Rectangle = reader.GetPageSize(1)
+
+            Using outputPdf As New MemoryStream()
+
+                Using stamper As New PdfStamper(reader, outputPdf)
+                    Dim bf As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, False)
+                    Dim cb As PdfContentByte = stamper.GetOverContent(1)
+
+                    cb.BeginText()
+
+                    ' 🔹 Receipt No
+                    cb.SetFontAndSize(bf, 22)
+                    cb.SetTextMatrix(135, 660)
+                    cb.ShowText(bibNo)
+
+                    ' 🔹 Date
+                    cb.SetTextMatrix(1255, 660)
+                    cb.ShowText(transDate)
+
+                    ' 🔹 Runner Name
+                    cb.SetFontAndSize(bf, 25)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, runnerName.ToUpper(), 250, 600, 0)
+
+                    ' 🔹 Run Cat
+                    cb.SetFontAndSize(bf, 22)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, runCatagory, 250, 540, 0)
+
+                    ' 🔹 Tshirt
+                    cb.SetFontAndSize(bf, 22)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, tShirtSize, 250, 480, 0)
+
+                    ' 🔹 Run Date
+                    cb.SetFontAndSize(bf, 22)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, runDate, 250, 430, 0)
+
+                    ' 🔹 Amount in Words
+                    cb.SetFontAndSize(bf, 22)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, PaytmPaymentResponse.NumberToWords(amount), 250, 305, 0)
+
+                    ' 🔹 Transaction Id
+                    cb.SetFontAndSize(bf, 22)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, transactionId, 330, 255, 0)
+
+                    ' 🔹 Amount Numeric (₹ box)
+                    cb.SetFontAndSize(bf, 30)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, amount, 260, 130, 0)
+
+                    cb.EndText()
+
+                    stamper.Close()
+                End Using
+
+                Dim pdfBytes As Byte() = outputPdf.ToArray()
+
+                Response.Clear()
+                Response.ContentType = "application/pdf"
+                Response.AddHeader("Content-Disposition", "attachment; filename=RunReceipt_" & bibNo & ".pdf")
+                Response.BinaryWrite(pdfBytes)
+                Response.Flush()
+
+                HttpContext.Current.ApplicationInstance.CompleteRequest()
+
+            End Using
+        Catch ex As Exception
+            Console.WriteLine(ex)
+        End Try
+
+    End Function
+
+
 End Class

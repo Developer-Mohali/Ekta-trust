@@ -23,16 +23,16 @@
         <div class="col-sm-12">
             <div style="margin: 6px auto; padding-left: 15px; padding-right: 15px;">
                 <h2 class="wow fadeInDown" style="display: flow-root;">
-                     <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                         <button onclick="termsAndCondition(event)" style="float:left" id="EventRegistration" class="btn btn-success">Register Now</button>
+                    </div>
                      <div class="col-sm-4">
-                    <center>
-                        Run For Equality 7-Cyberthon                    
-                            <p style="font-size: small; font-style: oblique; text-transform: none;">A Step towards a cyber safe world</p>
-                    </center>
-                         </div>
-                     <div class="col-sm-4">
-                          <button onclick="termsAndCondition(event)" style="float:right" id="EventRegistration" class="btn btn-success">Run Registeration</button>
+                            <center>
+                                Run For Equality 7-Cyberthon                    
+                                    <p style="font-size: small; font-style: oblique; text-transform: none;">A Step towards a cyber safe world</p>
+                            </center>
                      </div>
+                     <div class="col-sm-4"></div>
                 </h2>
             </div>
             <%--<div class="col-sm-3">
@@ -125,7 +125,7 @@
                            <b>  BIB EXPO Time </b>- 09AM To 6PM  <br />
                            <b> BIB EXPO Place </b>- Institute of Local self-Government, Tonk Road, Jaipur <br />--%>
 
-                            <b>BIB Expo will be held at the Institute of Local self-Government, Tonk Road, Jaipur </br> on 13th April from 9AM to 6PM.</b>
+                            <b>BIB Expo will be held at the Institute of Local self-Government, Tonk Road, Jaipur </br> on 12th April from 9AM to 6PM.</b>
                             <br />
                             <b>BIB Expo Location : </b><a href="https://g.co/kgs/adLsfKf" target="_blank" style="text-decoration: underline; color: blue">https://g.co/kgs/adLsfKf </a>
                         </td>

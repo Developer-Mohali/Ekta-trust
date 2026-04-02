@@ -1,4 +1,6 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports iTextSharp.text.pdf
+Imports System.IO
+Imports MySql.Data.MySqlClient
 
 Public Class AdminBIBData
     Inherits System.Web.UI.Page
