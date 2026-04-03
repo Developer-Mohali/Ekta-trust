@@ -348,11 +348,11 @@ Public Class DonationDetails
 
                     ' 🔹 Transaction Id
                     cb.SetFontAndSize(bf, 20)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, transactionId, 110, 280, 0)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, transactionId, 310, 280, 0)
 
                     ' 🔹 Form Date
                     cb.SetFontAndSize(bf, 22)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, donationDate, 680, 280, 0)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, donationDate, 1100, 280, 0)
 
                     ' 🔹 Amount Numeric (₹ box)
                     cb.SetFontAndSize(bf, 30)
