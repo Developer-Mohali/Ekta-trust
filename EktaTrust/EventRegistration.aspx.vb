@@ -406,7 +406,7 @@ Public Class EventRegistration
 
 
     <System.Web.Services.WebMethod()>
-    Public Shared Function InitiateTransaction(amount As String, orderId As String, name As String, phone As String, email As String) As Object
+    Public Shared Function InitiateTransaction(amount As String, orderId As String, name As String, phone As String, email As String, paymentfor As String) As Object
         Try
             Dim mid As String = ConfigurationManager.AppSettings("MID")
             Dim merchantKey As String = ConfigurationManager.AppSettings("MerchantKey")
@@ -445,7 +445,7 @@ Public Class EventRegistration
             body.Add("channelId", "WEB")
             body.Add("txnAmount", txnAmount)
             body.Add("userInfo", userInfo)
-            body.Add("callbackUrl", callBackUrl)
+            body.Add("callbackUrl", callBackUrl + "?paymentfor=" + paymentfor)
 
             ' ✅ Generate checksum
             Dim jsonBody As String = JsonConvert.SerializeObject(body)

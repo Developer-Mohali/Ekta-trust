@@ -876,7 +876,8 @@ body section {
                             orderId: orderId,
                             name: name,
                             phone: phone,
-                            email: email
+                            email: email,
+                            paymentfor:"registration"
                         }),
                         dataType: "json",
                         success: function (res) {

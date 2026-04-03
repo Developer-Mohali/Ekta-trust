@@ -310,7 +310,8 @@
                         orderId: orderId,
                         name: name,
                         phone: phone,
-                        email: email
+                        email: email,
+                        paymentfor: "donation"
                     }),
                     dataType: "json",
                     success: function (res) {

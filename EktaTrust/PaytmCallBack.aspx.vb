@@ -16,6 +16,7 @@ Public Class PaytmCallBack
         End If
 
 
+
         ' 🔴 Handle Paytm POST callback
         If Request.HttpMethod = "POST" AndAlso Not String.IsNullOrEmpty(Request.Form("ORDERID")) Then
 
@@ -30,6 +31,8 @@ Public Class PaytmCallBack
             Dim merchantKey As String = ConfigurationManager.AppSettings("MerchantKey")
 
             Dim paytmParams As New Dictionary(Of String, String)
+
+            Dim paymentFor As String = Request.QueryString("paymentfor")
 
             ' 🔹 Read all Paytm POST data
             For Each key As String In Request.Form.Keys
@@ -52,7 +55,7 @@ Public Class PaytmCallBack
                 If status = "TXN_SUCCESS" Then
 
                     ' ✅ Update DB → SUCCESS
-                    If PaymentFrom.Trim().ToLower() = "donation" Then
+                    If paymentFor.Trim().ToLower() = "donation" Then
                         UpdateOderInDonation(orderId, "Success", txnId, fullResponseJson)
                         Response.Redirect("PaytmPaymentResponse.aspx?status=success&orderId=" & orderId & "&type=donation", False)
                     Else
@@ -64,7 +67,7 @@ Public Class PaytmCallBack
                 Else
 
                     ' ❌ Update DB → FAILED
-                    If PaymentFrom.Trim().ToLower() = "donation" Then
+                    If paymentFor.Trim().ToLower() = "donation" Then
                         UpdateOderInDonation(orderId, "Failed", txnId, fullResponseJson)
                         Response.Redirect("PaytmPaymentResponse.aspx?status=failed&orderId=" & orderId & "&type=donation", False)
                     Else
