@@ -52,7 +52,7 @@ Public Class PaytmCallBack
                 If status = "TXN_SUCCESS" Then
 
                     ' ✅ Update DB → SUCCESS
-                    If PaymentFrom = "Donation" Then
+                    If PaymentFrom.Trim().ToLower() = "donation" Then
                         UpdateOderInDonation(orderId, "Success", txnId, fullResponseJson)
                         Response.Redirect("PaytmPaymentResponse.aspx?status=success&orderId=" & orderId & "&type=donation", False)
                     Else
@@ -64,7 +64,7 @@ Public Class PaytmCallBack
                 Else
 
                     ' ❌ Update DB → FAILED
-                    If PaymentFrom = "Donation" Then
+                    If PaymentFrom.Trim().ToLower() = "donation" Then
                         UpdateOderInDonation(orderId, "Failed", txnId, fullResponseJson)
                         Response.Redirect("PaytmPaymentResponse.aspx?status=failed&orderId=" & orderId & "&type=donation", False)
                     Else
