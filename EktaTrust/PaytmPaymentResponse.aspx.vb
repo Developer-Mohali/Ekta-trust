@@ -2,6 +2,7 @@
 Imports iTextSharp.text.pdf
 Imports System.IO
 Imports MySql.Data.MySqlClient
+Imports System
 
 Public Class PaytmPaymentResponse
     Inherits System.Web.UI.Page
@@ -277,7 +278,7 @@ Public Class PaytmPaymentResponse
                 Dim dt As New DataTable()
 
                 Using con As New MySqlConnection(constr)
-                    Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount, ModeOfPayment, FullName, EmailId, CreatedDate, DonationID FROM donation WHERE DonationID = @id", con)
+                    Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount, ModeOfPayment, FullName, EmailId, CreatedDate, DonationID, SerialNo FROM donation WHERE DonationID = @id", con)
 
                         cmd.Parameters.AddWithValue("@id", id)
 
@@ -306,12 +307,12 @@ Public Class PaytmPaymentResponse
                 End If
 
                 Dim donationNo As String = If(IsDBNull(row("DonationID")), "", row("DonationID").ToString())
+                Dim serialNo As Integer = If(IsDBNull(row("SerialNo")), 0, Convert.ToInt32(row("SerialNo")))
+                Dim serialNoPre As String = serialNo.ToString("D6")
 
                 Dim transactionId As String = If(IsDBNull(row("TxnId")), "", row("TxnId").ToString())
 
-                CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationNo, transactionId)
-
-
+                CreateDonationCertificate(donorName, amount, paymentMode, donationDate, serialNoPre, transactionId)
 
             Else
                 CreateRunReceiptCertificate()
@@ -322,7 +323,7 @@ Public Class PaytmPaymentResponse
         End Try
     End Sub
 
-    Private Function CreateDonationCertificate(name As String, amount As Decimal, paymentMode As String, donationDate As String, donationNo As String, transactionId As String) As String
+    Private Function CreateDonationCertificate(name As String, amount As Decimal, paymentMode As String, donationDate As String, serialNo As String, transactionId As String) As String
 
         Try
             Dim templateFile As String = Server.MapPath("~/doc/donationTemplate.pdf")
@@ -342,7 +343,7 @@ Public Class PaytmPaymentResponse
                     ' 🔹 Receipt No
                     cb.SetFontAndSize(bf, 22)
                     cb.SetTextMatrix(135, 660)
-                    cb.ShowText(donationNo)
+                    cb.ShowText(serialNo)
 
                     ' 🔹 Date
                     cb.SetTextMatrix(1300, 660)
@@ -384,7 +385,7 @@ Public Class PaytmPaymentResponse
 
                 Response.Clear()
                 Response.ContentType = "application/pdf"
-                Response.AddHeader("Content-Disposition", "attachment; filename=Donation_" & donationNo & ".pdf")
+                Response.AddHeader("Content-Disposition", "attachment; filename=Donation_" & serialNo & ".pdf")
                 Response.BinaryWrite(pdfBytes)
                 Response.Flush()
 

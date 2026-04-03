@@ -145,8 +145,8 @@ function TotalRecord() {
             <asp:ImageButton ID="ButtonDelete" runat="server" ToolTip="Delete" CommandName="DeleteRow" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('Are you sure you want to delete this event?');"  Text="Delete" Width="25" Height="25"  CssClass="input" ImageUrl="../Images/minimal-97-128.png" />
              <i class="fa fa-eye" style="cursor:pointer; font-size: large;" onclick='showJson(<%# Eval("Id") %>)' title="Payment Response"></i>
        
-                   <asp:LinkButton ID="btnCertificate" runat="server" ToolTip="Generate Certificate" OnClick="generate_Certificate">
-                        <i class="fa fa-file-pdf-o" style="color:red; font-size:18px;"></i>Cert
+                   <asp:LinkButton ID="btnCertificate" runat="server" ToolTip="Generate Certificate" OnClick="generate_Certificate">                       
+                        <i class="fa fa-download" style="cursor:pointer; font-size: large;"></i>
                     </asp:LinkButton>    
         </ItemTemplate>
           

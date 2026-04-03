@@ -6,6 +6,7 @@ Imports System.IO
 Imports Newtonsoft.Json
 Imports iTextSharp.text.pdf
 Imports Mysqlx.Crud
+Imports System
 
 Public Class DonationDetails
     Inherits System.Web.UI.Page
@@ -246,7 +247,8 @@ Public Class DonationDetails
                 Dim transactionId As String = row.Cells(9).Text
 
                 ' 👉 Call your PDF function
-                CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationId, transactionId)
+                'CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationId, transactionId)
+                GenerateDonationReceipt(donationId)
             Else
                 MessageUpdated.Text = "Only Success payment generate Receipt"
                 MessageUpdated.ForeColor = Color.Red
@@ -263,7 +265,7 @@ Public Class DonationDetails
             Dim dt As New DataTable()
 
             Using con As New MySqlConnection(constr)
-                Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount, ModeOfPayment, FullName, EmailId, CreatedDate, DonationID FROM donation WHERE DonationID = @id", con)
+                Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount, ModeOfPayment, FullName, EmailId, CreatedDate, DonationID, SerialNo FROM donation WHERE DonationID = @id", con)
 
                     cmd.Parameters.AddWithValue("@id", id)
 
@@ -292,17 +294,20 @@ Public Class DonationDetails
             End If
 
             Dim donationNo As String = If(IsDBNull(row("DonationID")), "", row("DonationID").ToString())
+            Dim serialNo As Integer = If(IsDBNull(row("SerialNo")), 0, Convert.ToInt32(row("SerialNo")))
 
             Dim transactionId As String = If(IsDBNull(row("TxnId")), "", row("TxnId").ToString())
 
-            CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationNo, transactionId)
+            Dim serialNoPre As String = serialNo.ToString("D6")
+
+            CreateDonationCertificate(donorName, amount, paymentMode, donationDate, serialNoPre, transactionId)
 
         Catch ex As Exception
 
         End Try
     End Sub
 
-    Public Function CreateDonationCertificate(name As String, amount As Decimal, paymentMode As String, donationDate As String, donationNo As String, transactionId As String) As String
+    Public Function CreateDonationCertificate(name As String, amount As Decimal, paymentMode As String, donationDate As String, serialNo As String, transactionId As String) As String
 
         Try
             Dim templateFile As String = Server.MapPath("~/doc/donationTemplate.pdf")
@@ -322,7 +327,7 @@ Public Class DonationDetails
                     ' 🔹 Receipt No
                     cb.SetFontAndSize(bf, 22)
                     cb.SetTextMatrix(135, 660)
-                    cb.ShowText(donationNo)
+                    cb.ShowText(serialNo)
 
                     ' 🔹 Date
                     cb.SetTextMatrix(1300, 660)
@@ -362,7 +367,7 @@ Public Class DonationDetails
 
                 Response.Clear()
                 Response.ContentType = "application/pdf"
-                Response.AddHeader("Content-Disposition", "attachment; filename=Donation_" & donationNo & ".pdf")
+                Response.AddHeader("Content-Disposition", "attachment; filename=Donation_" & serialNo & ".pdf")
                 Response.BinaryWrite(pdfBytes)
                 Response.Flush()
 

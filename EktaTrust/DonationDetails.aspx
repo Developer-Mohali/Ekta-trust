@@ -131,14 +131,14 @@
                    <asp:BoundField HeaderText="Address" DataField="Address" ItemStyle-HorizontalAlign="Left"></asp:BoundField>   
                      <asp:BoundField HeaderText="OrderId" DataField="OrderId" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
                    <asp:BoundField HeaderText="Donated On" DataField="CreatedDate" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
-                   <asp:BoundField HeaderText="TransId" DataField="TxnId" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
+                   <asp:BoundField HeaderText="TransId" DataField="TxnId" ItemStyle-HorizontalAlign="Left" Visible="false"></asp:BoundField> 
                   <asp:TemplateField HeaderText="Action" ItemStyle-Width="72" >
                       <ItemTemplate>
                           <asp:ImageButton ID="imgbtn" ImageUrl="Images/UI_Icons-09-128.png" runat="server" Width="25" Height="25" OnClick="imgbtn_Click" />
                           <asp:ImageButton ID="ButtonDelete" runat="server" CommandName="Delete" Text="Delete" Width="25" Height="25" OnClientClick="return confirm('Are you sure you want to delete this event?');" CssClass="input" ImageUrl="Images/minimal-97-128.png" />
                         <!-- Certificate -->
                         <asp:LinkButton ID="btnCertificate" runat="server" ToolTip="Generate Certificate" OnClick="generate_Certificate">
-                            <i class="fa fa-file-pdf-o" style="color:red; font-size:18px;"></i>Cert
+                            <i class="fa fa-download" style="cursor:pointer; font-size: large;"></i>
                         </asp:LinkButton>
                       </ItemTemplate>
                   </asp:TemplateField>

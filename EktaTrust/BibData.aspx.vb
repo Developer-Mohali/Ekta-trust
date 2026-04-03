@@ -113,7 +113,7 @@ Public Class BibData
             year = Request.QueryString("year")?.ToString()
             Dim query As String =
                 "SELECT DISTINCT CategoryName as category_name, RunnerName as participate_name, Gender as gender, BloodGroup as blood_group, TShirtSize as tshirt_size,
-                  RunCatagory as run_category, BIBNo as bib_no, CollectBIB as collect_bib FROM bibdata WHERE MobileNumber = @mobile AND Year = @year and paymentstatus='success'"
+                  RunCatagory as run_category, BIBNo as bib_no, CollectBIB as collect_bib FROM bibdata WHERE MobileNumber = @mobile AND Year = @year and (paymentstatus='success' or createdby <> 0)"
 
             Dim constr As String =
                 ConfigurationManager.ConnectionStrings("constr").ConnectionString

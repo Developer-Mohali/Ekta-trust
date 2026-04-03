@@ -432,11 +432,11 @@ Public Class SendEmail
 
             Dim mail As MailMessage = New MailMessage()
             ' ✅ Correct FROM (your system email)
-            mail.From = New MailAddress(FromMaill, "Ekta Navnirman Trust")
+            mail.From = New MailAddress(fromMail, "Ekta Navnirman Trust")
 
             ' ✅ Correct TO (email + name)
             'mail.To.Add(New MailAddress(toEmail.Trim(), Messageto))
-            mail.To.Add("webdev316@gmail.com")
+            mail.To.Add(toEmail)
             mail.Subject = subject
             mail.Body = body
             mail.IsBodyHtml = True

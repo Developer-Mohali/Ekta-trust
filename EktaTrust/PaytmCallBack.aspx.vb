@@ -1,4 +1,5 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System
+Imports MySql.Data.MySqlClient
 Imports Newtonsoft.Json
 
 Public Class PaytmCallBack
@@ -114,12 +115,47 @@ Public Class PaytmCallBack
         End Try
     End Sub
 
+    Public Function GenerateSerialNumber() As String
+        Dim serialNumber As String = "000001"
+
+        Try
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand("SELECT COUNT(DonationID) FROM db_a460a8_ekta.donation WHERE PaymentStatus = 'Success'", con)
+
+                    con.Open()
+                    Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+                    ' Increment for next serial
+                    count += 1
+
+                    ' Format to 6 digits
+                    serialNumber = count.ToString("D6")
+                End Using
+            End Using
+
+        Catch ex As Exception
+            ' handle/log error if needed
+        End Try
+
+        Return serialNumber
+    End Function
+
     Private Sub UpdateOderInDonation(orderId As String, status As String, txnId As String, apiResponse As String)
+
+        Dim serialNumber As String
+
+        If status = "Success" Then
+            serialNumber = GenerateSerialNumber()
+        End If
+
+
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Dim paymentMode As String = Request.Form("PAYMENTMODE")
         Try
             Using con As New MySqlConnection(constr)
-                Dim Query As String = "UPDATE donation SET PaymentStatus=@paymentStatus, PaytmResponse= @paytmResponse, TxnId = @txnId, ModeOfPayment = @ModeOfPayment
+                Dim Query As String = "UPDATE donation SET PaymentStatus=@paymentStatus, PaytmResponse= @paytmResponse, TxnId = @txnId, ModeOfPayment = @ModeOfPayment, SerialNo=@SerialNo
                                     WHERE OrderId=@orderId"
 
                 Using cmd As New MySqlCommand(Query, con)
@@ -128,6 +164,7 @@ Public Class PaytmCallBack
                     cmd.Parameters.AddWithValue("@txnId", txnId)
                     cmd.Parameters.AddWithValue("@orderId", orderId)
                     cmd.Parameters.AddWithValue("@ModeOfPayment", paymentMode)
+                    cmd.Parameters.AddWithValue("@SerialNo",serialNumber)
 
                     con.Open()
                     Dim RowAffected = cmd.ExecuteNonQuery()

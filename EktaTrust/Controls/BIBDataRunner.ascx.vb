@@ -420,48 +420,52 @@ Public Class BIBDataRunner
 
     Protected Sub gvMIP_RowAction(sender As Object, e As GridViewCommandEventArgs)
         Try
-            ' Get the selected row's ID
-            Dim id As Integer = Convert.ToInt32(e.CommandArgument)
-            'If id >= 0 AndAlso id < gvEvent.DataKeys.Count Then
-            '    id = Convert.ToInt32(gvEvent.DataKeys(id).Value)
-            'End If
+            If Not String.IsNullOrEmpty(e.CommandArgument?.ToString()) Then
 
-            ' called delete function..
-            If e.CommandName = "DeleteRow" Then
-                RowDeleting(id)
-                Return
-            ElseIf e.CommandName = "EditRow" Then
-                ' Store it in a hidden field for saving after editing
-                hfEditID.Value = id.ToString()
+                ' Get the selected row's ID
+                Dim id As Integer = Convert.ToInt32(e.CommandArgument)
+                'If id >= 0 AndAlso id < gvEvent.DataKeys.Count Then
+                '    id = Convert.ToInt32(gvEvent.DataKeys(id).Value)
+                'End If
 
-                Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
-                Using con As New MySqlConnection(constr)
-                    Using cmd As New MySqlCommand("SELECT * FROM bibdata WHERE ID = @Id", con)
-                        cmd.Parameters.AddWithValue("@Id", id)
-                        con.Open()
-                        Using reader As MySqlDataReader = cmd.ExecuteReader()
-                            If reader.Read() Then
-                                txtBankRef.Text = reader("BankReferenceNo").ToString()
-                                'txtCategory.Text = reader("CategoryName").ToString()
-                                txtName.Text = reader("RunnerName").ToString()
-                                ddlGender.SelectedValue = If(reader("Gender").ToString().ToLower().StartsWith("m"), "Male", "Female")
-                                'txtBloodGroup.Text = reader("BloodGroup").ToString()
-                                txtTshirtSize.Text = reader("TShirtSize").ToString()
-                                txtMobile.Text = reader("MobileNumber").ToString()
-                                txtRunCategory.SelectedValue = reader("RunCatagory").ToString().Replace(" ", "").ToUpper()
-                                txtBibNumber.Text = reader("BIBNo").ToString()
-                                'txtYear.Text = reader("Year").ToString()
-                                'txtEmail.Text = reader("EmailID").ToString()
-                                txtEmgName.Text = reader("EmergencyContactName").ToString()
-                                txtEmgMobile.Text = reader("EmergencyContactNumber").ToString()
-                                txtDOB.Text = reader("RunnerDOB").ToString()
-                            End If
+                ' called delete function..
+                If e.CommandName = "DeleteRow" Then
+                    RowDeleting(id)
+                    Return
+                ElseIf e.CommandName = "EditRow" Then
+                    ' Store it in a hidden field for saving after editing
+                    hfEditID.Value = id.ToString()
+
+                    Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+                    Using con As New MySqlConnection(constr)
+                        Using cmd As New MySqlCommand("SELECT * FROM bibdata WHERE ID = @Id", con)
+                            cmd.Parameters.AddWithValue("@Id", id)
+                            con.Open()
+                            Using reader As MySqlDataReader = cmd.ExecuteReader()
+                                If reader.Read() Then
+                                    txtBankRef.Text = reader("BankReferenceNo").ToString()
+                                    'txtCategory.Text = reader("CategoryName").ToString()
+                                    txtName.Text = reader("RunnerName").ToString()
+                                    ddlGender.SelectedValue = If(reader("Gender").ToString().ToLower().StartsWith("m"), "Male", "Female")
+                                    'txtBloodGroup.Text = reader("BloodGroup").ToString()
+                                    txtTshirtSize.Text = reader("TShirtSize").ToString()
+                                    txtMobile.Text = reader("MobileNumber").ToString()
+                                    txtRunCategory.SelectedValue = reader("RunCatagory").ToString().Replace(" ", "").ToUpper()
+                                    txtBibNumber.Text = reader("BIBNo").ToString()
+                                    'txtYear.Text = reader("Year").ToString()
+                                    'txtEmail.Text = reader("EmailID").ToString()
+                                    txtEmgName.Text = reader("EmergencyContactName").ToString()
+                                    txtEmgMobile.Text = reader("EmergencyContactNumber").ToString()
+                                    txtDOB.Text = reader("RunnerDOB").ToString()
+                                End If
+                            End Using
                         End Using
                     End Using
-                End Using
 
-                ' Show the modal popup
-                ModalPopupExtender1.Show()
+                    ' Show the modal popup
+                    ModalPopupExtender1.Show()
+                End If
+
             End If
         Catch ex As Exception
             MessageUpdated.Text = $"<b style='color: red;'>{ex.Message}</b>"
