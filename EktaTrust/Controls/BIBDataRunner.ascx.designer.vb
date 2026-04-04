@@ -266,15 +266,6 @@ Partial Public Class BIBDataRunner
     Protected WithEvents txtBibNumber As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''RequiredBiBNo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredBiBNo As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
     '''txtName control.
     '''</summary>
     '''<remarks>
@@ -372,6 +363,15 @@ Partial Public Class BIBDataRunner
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtEmgMobile As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''ddlStatusOfPayment control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlStatusOfPayment As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''btnAdd control.

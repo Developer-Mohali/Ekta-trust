@@ -457,6 +457,7 @@ Public Class BIBDataRunner
                                     txtEmgName.Text = reader("EmergencyContactName").ToString()
                                     txtEmgMobile.Text = reader("EmergencyContactNumber").ToString()
                                     txtDOB.Text = reader("RunnerDOB").ToString()
+                                    ddlStatusOfPayment.SelectedValue = reader("PaymentStatus").ToString().Replace(" ", "")
                                 End If
                             End Using
                         End Using
@@ -489,6 +490,11 @@ Public Class BIBDataRunner
         Dim emergencyContactName As String = txtEmgName.Text
         Dim emergencyContactNumber As String = txtEmgMobile.Text
         Dim runnerDOB As String = txtDOB.Text
+        Dim statusOfPayment As String = ""
+
+        If ddlStatusOfPayment.SelectedItem IsNot Nothing Then
+            statusOfPayment = ddlStatusOfPayment.SelectedItem.Text
+        End If
         Integer.TryParse(hfEditID.Value, idToUpdate)
         Dim rowAffected = 0
 
@@ -535,7 +541,7 @@ Public Class BIBDataRunner
                         cmd.Parameters.Add(New MySqlParameter("p_RunnerDOB", (runnerDOB)))
                         cmd.Parameters.Add(New MySqlParameter("p_CreatedBy", (loginId)))
                         cmd.Parameters.Add(New MySqlParameter("p_OrderId", ""))
-                        cmd.Parameters.Add(New MySqlParameter("p_PaymentStatus", ""))
+                        cmd.Parameters.Add(New MySqlParameter("p_PaymentStatus", statusOfPayment))
                         cmd.Parameters.Add(New MySqlParameter("p_Amount", ""))
                         cmd.Parameters.Add(New MySqlParameter("p_TxnId", ""))
                         cmd.Parameters.Add(New MySqlParameter("p_PaytmResponse", ""))
@@ -587,7 +593,7 @@ Public Class BIBDataRunner
                 'EmergencyContactNumber =@emergencyContactNumber, RunnerDOB=@runnerDOB WHERE ID=@id"
                 query = "UPDATE bibdata SET BankReferenceNo=@bankRef, RunnerName=@name, gender=@gender, 
                         TShirtSize=@size, MobileNumber=@mobile, RunCatagory=@run, BIBNo=@bib, EmergencyContactName=@emergencyContactName,
-                         EmergencyContactNumber=@emergencyContactNumber, RunnerDOB=@runnerDOB WHERE ID=@id"
+                         EmergencyContactNumber=@emergencyContactNumber, RunnerDOB=@runnerDOB, PaymentStatus=@PaymentStatus WHERE ID=@id"
 
                 Using cmd As New MySqlCommand(query, con)
                     cmd.Parameters.AddWithValue("@bankRef", txtBankRef.Text.Trim())
@@ -605,7 +611,7 @@ Public Class BIBDataRunner
                     cmd.Parameters.AddWithValue("@emergencyContactNumber", txtEmgMobile.Text.Trim())
                     cmd.Parameters.AddWithValue("@runnerDOB", txtDOB.Text.Trim())
                     cmd.Parameters.AddWithValue("@id", bibRecordId)
-
+                    cmd.Parameters.AddWithValue("@PaymentStatus", ddlStatusOfPayment.SelectedItem.Text)
                     con.Open()
                     cmd.ExecuteNonQuery()
                 End Using

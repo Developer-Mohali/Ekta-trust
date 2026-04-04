@@ -196,7 +196,7 @@ function TotalRecord() {
      <div class="form-group">
         <label>BIB Number: <span style="color:red">*</span></label>
         <asp:Textbox ID="txtBibNumber"  Enabled="false" runat="server" class="form-control" Width="95%" />
-         <asp:RequiredFieldValidator ID="RequiredBiBNo" ControlToValidate="txtBibNumber" runat="server" ErrorMessage="BIB No. is Required" ValidationGroup="BibDataSave" ForeColor="Red" Display="Dynamic" />
+        <%-- <asp:RequiredFieldValidator ID="RequiredBiBNo" ControlToValidate="txtBibNumber" runat="server" ErrorMessage="BIB No. is Required" ValidationGroup="BibDataSave" ForeColor="Red" Display="Dynamic" />--%>
         </div>
 <%--    <div class="form-group">
     <label>Category: </label>
@@ -269,7 +269,17 @@ function TotalRecord() {
       <label>Emergency Contact Number:</label>
        <asp:TextBox ID="txtEmgMobile" cols="40" Rows="6" runat="server" TextMode="Number" class="form-control" style="width:95%"/>
   </div>
-
+      <div class="form-group" Width="95%">
+     <label>Payment Status: </label>
+     <asp:DropDownList CssClass="form-control" ID="ddlStatusOfPayment"  runat="server">
+       <asp:ListItem value="Select">Select Payment Status</asp:ListItem>
+       <asp:ListItem value="Pending">Pending</asp:ListItem>
+       <asp:ListItem value="Success">Success</asp:ListItem>
+       <asp:ListItem value="Cancelled">Cancelled</asp:ListItem>   
+       <asp:ListItem value="Failed">Failed</asp:ListItem>
+         
+     </asp:DropDownList>
+   </div>
     <div class="form-group">
     <asp:Button ID="btnAdd" CommandName="Save" runat="server" ValidationGroup="BibDataSave" class="btn btn-primary btn-lg" OnClientClick="return validateAndSubmit();"  Text="Save" OnClick="btnSave_Click"/>
     <asp:Button ID="btnCancel" runat="server"  class="btn btn-primary btn-lg" Text="Cancel" />

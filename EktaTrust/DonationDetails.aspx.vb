@@ -77,6 +77,8 @@ Public Class DonationDetails
     End Sub
     'This method is used To Edit the data
     Protected Sub imgbtn_Click(sender As Object, e As ImageClickEventArgs)
+        btnUpdate.Visible = True
+        btnAddNew.Visible = False
         Dim btndetails As ImageButton = TryCast(sender, ImageButton)
         Dim gvrow As GridViewRow = DirectCast(btndetails.NamingContainer, GridViewRow)
         lblDonationId.Text = gvEvent.DataKeys(gvrow.RowIndex).Value.ToString()
@@ -93,23 +95,39 @@ Public Class DonationDetails
         textFullName.Text = gvrow.Cells(0).Text
         textAmount.Text = gvrow.Cells(1).Text
         textMobileNumber.Text = gvrow.Cells(2).Text
-        ddlModeOfPayment.SelectedItem.Value = gvrow.Cells(3).Text
-        textComments.Text = gvrow.Cells(4).Text
+
+        If ddlModeOfPayment.Items.FindByValue(gvrow.Cells(3).Text) IsNot Nothing Then
+            ddlModeOfPayment.SelectedValue = gvrow.Cells(3).Text.Trim()
+        Else
+            ddlModeOfPayment.ClearSelection()
+        End If
+
+        If ddlStatusOfPayment.Items.FindByValue(gvrow.Cells(5).Text) IsNot Nothing Then
+            ddlStatusOfPayment.SelectedValue = gvrow.Cells(5).Text.Trim()
+        Else
+            ddlModeOfPayment.ClearSelection()
+        End If
+        If gvrow.Cells(6).Text = "&nbsp;" Then
+            txtAddress.Text = ""
+        Else
+            txtAddress.Text = gvrow.Cells(6).Text
+        End If
         Me.ModalPopupExtender1.Show()
-        BindGridView()
+        ' BindGridView()
     End Sub
 
     'This method is used To Update the data
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs)
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
-            Using cmd As New MySqlCommand("UPDATE Donation SET  FullName=@FullName, Amount=@Amount,MobileNumber=@MobileNumber,ModeOfPayment=@ModeOfPayment,Comments=@Comments  WHERE DonationID = @DonationID", con)
+            Using cmd As New MySqlCommand("UPDATE Donation SET  FullName=@FullName, Amount=@Amount,MobileNumber=@MobileNumber,ModeOfPayment=@ModeOfPayment,PaymentStatus=@StatusOfPayment,Address=@Address  WHERE DonationID = @DonationID", con)
                 cmd.Parameters.AddWithValue("@DonationID", Convert.ToInt32(lblDonationId.Text))
                 cmd.Parameters.AddWithValue("@FullName", textFullName.Text)
                 cmd.Parameters.AddWithValue("@Amount", textAmount.Text)
                 cmd.Parameters.AddWithValue("@MobileNumber", textMobileNumber.Text)
                 cmd.Parameters.AddWithValue("@ModeOfPayment", ddlModeOfPayment.SelectedItem.Value)
-                cmd.Parameters.AddWithValue("@Comments", textComments.Text)
+                cmd.Parameters.AddWithValue("@StatusOfPayment", ddlStatusOfPayment.SelectedItem.Value)
+                cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
                 cmd.Connection = con
                 con.Open()
                 cmd.ExecuteNonQuery()
@@ -196,30 +214,42 @@ Public Class DonationDetails
     End Sub
     Protected Sub btnAddNew_Click(sender As Object, e As EventArgs)
         Me.ModalPopupExtender1.Show()
+        lblDonationId.Text = 0
+        textFullName.Text = ""
+        textAmount.Text = ""
+        textMobileNumber.Text = ""
+        'ddlModeOfPayment.SelectedItem.Text = ""
+        'ddlStatusOfPayment.SelectedItem.Text = ""
+        txtAddress.Text = ""
+        btnUpdate.Visible = False
+        btnAddNew.Visible = True
     End Sub
 
     'This method is used To insert the data
     Protected Sub btnAddNew_Click1(sender As Object, e As EventArgs)
-        Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,ModeOfPayment,Comments,CreatedDate)VALUES(@FullName, @Amount,@MobileNumber,@ModeOfPayment,@Comments,@CreatedDate)"
+        Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,ModeOfPayment,PaymentStatus,Address,CreatedDate)VALUES(@FullName, @Amount,@MobileNumber,@ModeOfPayment,@StatusOfPayment,@Address,@CreatedDate)"
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As MySqlConnection = New MySqlConnection(constr)
             Using cmd As MySqlCommand = New MySqlCommand(query)
-                cmd.Parameters.AddWithValue("@FullName", txtFullName.Text)
-                cmd.Parameters.AddWithValue("@Amount", txtAmount.Text)
-                cmd.Parameters.AddWithValue("@MobileNumber", txtMobileNumber.Text)
-                cmd.Parameters.AddWithValue("@ModeOfPayment", ddlModeOfPayment1.SelectedItem.Text)
-                cmd.Parameters.AddWithValue("@Comments", txtComments.Text)
+                cmd.Parameters.AddWithValue("@FullName", textFullName.Text)
+                cmd.Parameters.AddWithValue("@Amount", textAmount.Text)
+                cmd.Parameters.AddWithValue("@MobileNumber", textMobileNumber.Text)
+                cmd.Parameters.AddWithValue("@ModeOfPayment", ddlModeOfPayment.SelectedItem.Text)
+                cmd.Parameters.AddWithValue("@StatusOfPayment", ddlStatusOfPayment.SelectedItem.Text)
+                cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
                 cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now)
                 cmd.Connection = con
                 con.Open()
                 cmd.ExecuteNonQuery()
                 MessageUpdated.Text = "<b>Insert successfull.</b>"
                 con.Close()
-                txtFullName.Text = ""
-                txtAmount.Text = ""
-                txtMobileNumber.Text = ""
-                ddlModeOfPayment1.SelectedItem.Text = ""
-                txtComments.Text = ""
+                lblDonationId.Text = 0
+                textFullName.Text = ""
+                textAmount.Text = ""
+                textMobileNumber.Text = ""
+                ddlModeOfPayment.SelectedItem.Text = ""
+                ddlStatusOfPayment.SelectedItem.Text = ""
+                txtAddress.Text = ""
             End Using
         End Using
         Me.BindGridView()
@@ -379,4 +409,5 @@ Public Class DonationDetails
         End Try
 
     End Function
+
 End Class

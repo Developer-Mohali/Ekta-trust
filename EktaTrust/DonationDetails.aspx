@@ -40,41 +40,6 @@
 </style>
     <div class="container-fluid main-container">
          <div class="col-md-2 sidebar">
-            <%-- <div class="row"> 
-                <!-- uncomment code for absolute positioning tweek see top comment in css -->
-               <div class="absolute-wrapper"> </div>
-                <!-- Menu -->
-                <div class="side-menu">
-                <nav class="navbar navbar-default" role="navigation">         
-                <!-- Main Menu -->
-                  <div class="side-menu-container">
-                    <ul class="nav navbar-nav">
-                      <li><a href="DashBoard.aspx"> Dashboard</a></li>
-                      <li ><a href="TrainingActivity.aspx"> Training Activites</a></li>
-                      <li><a href="Joining.aspx"> Joining</a></li>
-                      <li><a href="ContactDetails.aspx"> Contact Detail</a></li>
-                      <li><a href="#"> Donation</a></li>
-                      <li><a href="SUGGESTIONTRUSTACTIVITIES.aspx"> Trust Activities</a></li>
-                      <li ><a href="EventDetails.aspx">Events</a></li>
-                      <li><a href="MIPRegistrationDetails.aspx">MIP Registration Details</a></li>
-                      <li><a href="MIPFacultyRegistrationDetails.aspx">MIP Faculty Registration Details</a></li>
-                      <li><a href="SendNotificationMIP.aspx">Send Notification</a></li>
-                      <li><a href="TemplateListing.aspx">Templates</a></li>
-                      <li><a href="LogDetails.aspx" id="LogDetails">Log Details</a></li>
-                      <li><a href="UserDetails.aspx">Users</a></li>
-                      <li><a href="MatrimonialDetails.aspx">Matrimonial Details</a></li>
-                      <li><a href="CareerCounsellingDetails.aspx">Career Counselling Details</a></li>
-                      <li><a href="AtrocityReportingDetails.aspx">Atrocities Reporting Details</a></li>
-                      <li><a href="AddNotification.aspx">Add New Notification</a></li>
-                      <li class="active"><a href="DonationDetails.aspx">Donation Details</a></li>
-                         <li><a href="CertificationReport.aspx">Certification</a></li>
-                        <li><a href="FeedbackAndSuggestion.aspx">Feedback And Suggestion</a></li>
-                   </ul>                
-                 </div>
-               <!-- /.navbar-collapse --> 
-               </nav>
-               </div>
-            </div>--%>
             <div class="row"> 
                   <!-- uncomment code for absolute positioning tweek see top comment in css -->
                   <div class="absolute-wrapper"> </div>
@@ -114,7 +79,7 @@
                             <asp:Label ID="lblmsg" runat="server" Font-Bold="True" ForeColor="Red" Text=""></asp:Label>
                         </td>
                         <td>                
-                          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#EventDetailsModalAdd">Add New</button>     
+                          <asp:Button  runat="server" class="btn btn-info btn-lg"  Text="Add New"  OnClick="btnAddNew_Click" />
                         </td>
                       </tr>  
                                     
@@ -171,36 +136,53 @@
                           <div class="form-group">
                             <label>Full Name: </label>
                             <asp:TextBox ID="textFullName" runat="server" class="form-control" style="width:95%"/>
+                               <span id="nameError" class="help-block" style="color: red"></span>
                           </div>
 
                           <div class="form-group">
                             <label>Amount: </label>
                             <asp:TextBox ID="textAmount" runat="server" class="form-control" style="width:95%"/>
+                                <span id="amountError" class="help-block" style="color: red"></span>
                           </div>
     
                           <div class="form-group">
                             <label>Mobile Number: </label>
                             <asp:TextBox ID="textMobileNumber" runat="server" class="form-control" style="width:95%"/>
+                               <span id="mobileNumberError" class="help-block" style="color: red"></span>
                           </div>
 
                          <div class="form-group" style="width: 95%">
                            <label>Mode Of Payment: </label>
                            <asp:DropDownList CssClass="form-control" ID="ddlModeOfPayment"  runat="server">
                              <asp:ListItem value="Select">Select Payment Way</asp:ListItem>
-                             <asp:ListItem Value="Credit Card">Credit Card</asp:ListItem>
-                             <asp:ListItem Value="Debit card">Debit Card</asp:ListItem>
-                             <asp:ListItem Value="Net Banking">Net Banking</asp:ListItem>                      
+                             <asp:ListItem value="Credit Card">Credit Card</asp:ListItem>
+                             <asp:ListItem value="Debit Card">Debit Card</asp:ListItem>
+                             <asp:ListItem value="Net Banking">Net Banking</asp:ListItem>                      
+                             <asp:ListItem value="UPI">UPI</asp:ListItem>                      
                            </asp:DropDownList>
+                             <span id="modeOfPaymentError" class="help-block" style="color: red"></span>
                          </div>
 
+                           <div class="form-group" style="width: 95%">
+                              <label>Payment Status: </label>
+                              <asp:DropDownList CssClass="form-control" ID="ddlStatusOfPayment"  runat="server">
+                                <asp:ListItem value="Select">Select Payment Status</asp:ListItem>
+                                <asp:ListItem value="Pending">Pending</asp:ListItem>
+                                <asp:ListItem value="Success">Success</asp:ListItem>
+                                <asp:ListItem value="Cancelled">Cancelled</asp:ListItem>
+                                   <asp:ListItem value="Failed">Failed</asp:ListItem>
+                              </asp:DropDownList>
+                            </div>
+
                           <div class="form-group">
-                            <label>Comments </label>
-                            <asp:TextBox ID="textComments" runat="server" class="form-control" style="width:95%"/>                          
+                            <label>Address </label>
+                            <asp:TextBox ID="txtAddress" runat="server" class="form-control" style="width:95%"/>                          
                           </div>
                                                    
                           <div class="form-group">
-                           <asp:Button ID="btnUpdate" CommandName="Update" runat="server" class="btn btn-primary btn-lg"  Text="Update" OnClick="btnUpdate_Click"/>
-                           <asp:Button ID="btnCancel" runat="server"  class="btn btn-primary btn-lg" Text="Cancel" />
+                           <asp:Button ID="btnUpdate" CommandName="Update" runat="server" class="btn btn-primary btn-lg"  OnClientClick="return onNextButtonClient();"  Text="Update" OnClick="btnUpdate_Click"/>
+                              <asp:Button ID="btnAddNew" class="btn btn-default" runat="server" Text="Add New" OnClick="btnAddNew_Click1" OnClientClick="return onNextButtonClient();" />
+                           <asp:Button ID="btnCancel" runat="server"  class="btn btn-primary btn-lg" Text="Cancel" OnClientClick="clearInformation()" />
                           </div>
                            
                        </div>       
@@ -216,7 +198,7 @@
         
 
   <!-- Modal -->
-  <div class="modal fade" id="EventDetailsModalAdd" role="dialog">
+  <div class="modal fade" id="EventDetailsModalAdd123456" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -225,7 +207,7 @@
           <button type="button" onclick="clearInformation();" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Donation Details</h4>
         </div>
-        <div class="modal-body">
+     <%--   <div class="modal-body">
 
                     <div class="form-group col-sm-12">
                         <asp:TextBox ID="txtFullName" CssClass="form-control" MaxLength="20" runat="server" placeholder="Enter FullName" AutoComplete="off"></asp:TextBox>
@@ -247,16 +229,25 @@
                                <asp:ListItem Value="Credit Card">Credit Card</asp:ListItem>
                              <asp:ListItem Value="Debit Card">Debit Card</asp:ListItem>
                              <asp:ListItem Value="Net Banking">Net Banking</asp:ListItem>                                       
+                             <asp:ListItem Value="UPI">UPI</asp:ListItem>                                       
                           </asp:DropDownList>
                          </div>
+                   <div class="form-group col-sm-12">
+                            <asp:DropDownList CssClass="form-control" ID="ddlStatusOfPayment1"  runat="server">
+                                <asp:ListItem value="Select">Select Payment Status</asp:ListItem>
+                                <asp:ListItem Value="Pending" Selected="True">Pending</asp:ListItem>
+                                <asp:ListItem Value="Success">Success</asp:ListItem>
+                                <asp:ListItem Value="Cancelled">Cancelled</asp:ListItem>                                               
+                            </asp:DropDownList>
+                   </div>
 
                     <div class="form-group col-sm-12">
-                        <asp:TextBox ID="txtComments" CssClass="form-control" TextMode="MultiLine" MaxLength="700" runat="server" placeholder="Enter Comment" AutoComplete="off"></asp:TextBox>
+                        <asp:TextBox ID="txtAddress1" CssClass="form-control" TextMode="MultiLine" MaxLength="700" runat="server" placeholder="Enter Comment" AutoComplete="off"></asp:TextBox>
                          <span id="commentsError" class="help-block" style="color: red"></span>
                     </div>
-            </div>
+            </div>--%>
         <div class="modal-footer" style="border-top:0px;border-bottom:1px solid #e5e5e5;">
-            <asp:Button ID="btnAddNew" class="btn btn-default" runat="server" Text="Add New" OnClick="btnAddNew_Click1" OnClientClick="return onNextButtonClient()" />
+            
           <button type="button" class="btn btn-default" onclick="clearInformation();" data-dismiss="modal">Close</button>
 
         </div>
@@ -290,7 +281,7 @@
     // This function is used to onclient click to check validation
     function onNextButtonClient() {
         var validation = 1;
-        if ($("#<%=txtFullName.ClientID %>").val() == "")
+        if ($("#<%=textFullName.ClientID %>").val() == "")
         {
             $('#nameError').show();
             $('#nameError').html("Please Enter Name");
@@ -300,7 +291,7 @@
         {
             $('#nameError').hide();
         }     
-        if ($("#<%=txtAmount.ClientID %>").val() == "")
+        if ($("#<%=textAmount.ClientID %>").val() == "")
         {
             $('#amountError').show();
             $('#amountError').html("Please Enter Amount");
@@ -310,7 +301,7 @@
         {
             $('#amountError').hide();
         }
-        if ($("#<%=txtMobileNumber.ClientID %>").val() == "")
+        if ($("#<%=textMobileNumber.ClientID %>").val() == "")
         {
             $('#mobileNumberError').show();
             $('#mobileNumberError').html("Please Enter Mobile Number");
@@ -320,7 +311,7 @@
         {
             $('#mobileNumberError').hide();
         }
-        if ($("#<%=ddlModeOfPayment1.ClientID %>").val() == "")
+        if ($("#<%=ddlModeOfPayment.ClientID %>").val() == "")
         {
             $('#modeOfPaymentError').show();
             $('#modeOfPaymentError').html("Please Enter Mode Of payement");
@@ -330,16 +321,6 @@
         {
             $('#modeOfPaymentError').hide();
         }
-        if ($("#<%=txtComments.ClientID %>").val() == "")
-        {
-            $('#commentsError').show();
-            $('#commentsError').html("Please Enter Comment");
-            validation = 0;
-        }
-        else
-        {
-            $('#commentsError').hide();
-        }       
         if (validation == 0)
         {
             return false;
@@ -348,7 +329,7 @@
     }
 
     // This function is used to hide error name
-    $("#<%=txtFullName.ClientID %>").click(function () {
+<%--    $("#<%=txtFullName.ClientID %>").click(function () {
         $('#nameError').hide();
     });
     $("#<%=txtAmount.ClientID %>").click(function () {
@@ -360,17 +341,18 @@
     $("#<%=ddlModeOfPayment1.ClientID %>").click(function () {
         $('#modeOfPaymentError').hide();
     });
-    $("#<%=txtComments.ClientID %>").click(function () {
+    $("#<%=txtAddress.ClientID %>").click(function () {
         $('#commentsError').hide();
-    });
+    });--%>
  
     function clearInformation()
     {
-        $("#<%=txtFullName.ClientID %>").val('');
-        $("#<%=txtAmount.ClientID %>").val('');
-        $("#<%=txtMobileNumber.ClientID %>").val('');
-        $("#<%=ddlModeOfPayment1.ClientID %>").val('');
-        $("#<%=txtComments.ClientID %>").val('');
+        $("#<%=textFullName.ClientID %>").val('');
+        $("#<%=textAmount.ClientID %>").val('');
+        $("#<%=textMobileNumber.ClientID %>").val('');
+        $("#<%=ddlModeOfPayment.ClientID %>").val('');
+        $("#<%=ddlStatusOfPayment.ClientID %>").val('');
+        $("#<%=txtAddress.ClientID %>").val('');
         $('#nameError').hide();
     }
 
