@@ -101,7 +101,8 @@
                       <ItemTemplate>
                           <asp:ImageButton ID="imgbtn" ImageUrl="Images/UI_Icons-09-128.png" runat="server" Width="25" Height="25" OnClick="imgbtn_Click" />
                           <asp:ImageButton ID="ButtonDelete" runat="server" CommandName="Delete" Text="Delete" Width="25" Height="25" OnClientClick="return confirm('Are you sure you want to delete this event?');" CssClass="input" ImageUrl="Images/minimal-97-128.png" />
-                        <!-- Certificate -->
+                   <i class="fa fa-refresh" style="cursor:pointer; font-size: large;" onclick='showJson("<%# HttpUtility.JavaScriptStringEncode(Eval("OrderId").ToString()) %>", "<%# HttpUtility.JavaScriptStringEncode(Eval("PaymentStatus").ToString()) %>")' title="Refresh status from Paytm"></i>
+                          <!-- Certificate -->
                         <asp:LinkButton ID="btnCertificate" runat="server" ToolTip="Generate Certificate" OnClick="generate_Certificate">
                             <i class="fa fa-download" style="cursor:pointer; font-size: large;"></i>
                         </asp:LinkButton>
@@ -254,7 +255,17 @@
       </div>
       
     </div>
-  </div>        
+  </div>   
+    <div id="jsonModal" style="display:none; position:fixed; top:10%; left:20%; width:60%; background:#fff; padding:20px; border:1px solid #ccc; z-index:9999;">
+    
+    <h4>Payment Response</h4>
+    
+    <pre id="jsonContent" style="max-height:400px; overflow:auto; background:#f5f5f5; padding:10px;"></pre>
+    
+    <button type="button" onclick="closeModal(event)" class="btn btn-danger">Close</button>
+
+</div>
+    <asp:Button ID="btnBindGrid" runat="server" OnClick="btnBindGrid_Click" Style="display:none;" />
 <script type="text/javascript">
     $(document).ready(function () {
         var msg = $('#<%= lblmsg.ClientID %>');
@@ -356,5 +367,44 @@
         $('#nameError').hide();
     }
 
+    function showJson(id, status) {
+        showLoader();
+        try {
+            $.ajax({
+                type: "POST",
+                url: "/AdminBIBData.aspx/GetJsonData",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    id: id,
+                    currentStatus: status,
+                    paymentFor: 'Donation'
+                }),
+                success: function (response) {
+                    var data = response.d;
+                    hideLoader();
+                    // Pretty format JSON
+                    var formatted = JSON.stringify(JSON.parse(data), null, 4);
+
+                    $("#jsonContent").text(formatted);
+                    $("#jsonModal").show();
+                    if (status.toLowerCase() == 'pending' && (formatted.includes('TXN_SUCCESS') || formatted.includes('TXN_FAILURE'))) {
+                        __doPostBack('<%= gvEvent.UniqueID %>', '');
+                     }
+                },
+                error: function () {
+                    hideLoader();
+                    //alert("Error loading data");
+                }
+            });
+        } catch {
+            hideLoader();
+        }
+    }
+
+    function closeModal(e) {
+        if (e) e.preventDefault();
+        $("#jsonModal").hide();
+        __doPostBack('<%= btnBindGrid.UniqueID %>', '');
+    }
 </script>
 </asp:Content>

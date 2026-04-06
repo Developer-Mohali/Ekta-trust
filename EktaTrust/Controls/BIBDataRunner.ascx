@@ -143,7 +143,7 @@ function TotalRecord() {
         <ItemTemplate>
              <asp:ImageButton ID="ButtonEdit" runat="server" ToolTip="Edit" CommandName="EditRow" CommandArgument='<%# Eval("Id") %>' Width="25" Height="25"  CssClass="input" ImageUrl="../Images/edit.png" />
             <asp:ImageButton ID="ButtonDelete" runat="server" ToolTip="Delete" CommandName="DeleteRow" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('Are you sure you want to delete this event?');"  Text="Delete" Width="25" Height="25"  CssClass="input" ImageUrl="../Images/minimal-97-128.png" />
-             <i class="fa fa-eye" style="cursor:pointer; font-size: large;" onclick='showJson("<%# HttpUtility.JavaScriptStringEncode(Eval("OrderId").ToString()) %>")' title="Payment Response"></i>
+             <i class="fa fa-refresh" style="cursor:pointer; font-size: large;" onclick='showJson("<%# HttpUtility.JavaScriptStringEncode(Eval("OrderId").ToString()) %>", "<%# HttpUtility.JavaScriptStringEncode(Eval("PaymentStatus").ToString()) %>")' title="Refresh status from Paytm"></i>
        
                    <asp:LinkButton ID="btnCertificate" runat="server" ToolTip="Generate Certificate" OnClick="generate_Certificate">                       
                         <i class="fa fa-download" style="cursor:pointer; font-size: large;"></i>
@@ -308,7 +308,7 @@ function TotalRecord() {
     <button type="button" onclick="closeModal(event)" class="btn btn-danger">Close</button>
 
 </div>
-
+<asp:Button ID="btnBindGrid" runat="server" OnClick="btnBindGrid_Click" Style="display:none;" />
 <script type="text/javascript">
     
     $(document).ready(function () {
@@ -359,14 +359,18 @@ function TotalRecord() {
         $('#ContentPlaceHolder1_BIBDataRunner_btnCancel').click();
     }
 
-    function showJson(id) {
+    function showJson(id, status) {
         showLoader();
         try {
             $.ajax({
                 type: "POST",
                 url: "/AdminBIBData.aspx/GetJsonData",
                 contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({ id: id }),
+                data: JSON.stringify({
+                    id: id,
+                    currentStatus: status,
+                    paymentFor:'Registration'
+                }),
                 success: function (response) {
                     var data = response.d;
                     hideLoader();
@@ -389,5 +393,6 @@ function TotalRecord() {
     function closeModal(e) {
         if (e) e.preventDefault();
         $("#jsonModal").hide();
+        __doPostBack('<%= btnBindGrid.UniqueID %>', '');
     }
 </script>

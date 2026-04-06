@@ -10,29 +10,26 @@ Public Class AdminBIBData
     End Sub
 
     <System.Web.Services.WebMethod()>
-    Public Shared Function GetJsonData(id As String) As String
+    Public Shared Function GetJsonData(id As String, currentStatus As String, paymentFor As String) As String
         ' fetch Paytm payment response from paytm api...
         Dim response = PaytmCallBack.CheckPaytmStatus(id)
         If Not String.IsNullOrEmpty(response) Then
+            ' update payment status in DB, if its success in current response
+            Try
+                If Not (currentStatus.ToUpper().Contains("SUCCESS") Or currentStatus.ToUpper().Contains("FAILED") Or currentStatus.ToUpper().Contains("CANCELLED")) Then
+                    Dim json = Newtonsoft.Json.Linq.JObject.Parse(response)
+                    Dim status = json("body")("resultInfo")("resultStatus").ToString()
+                    If status = "TXN_SUCCESS" Then
+                        PaytmCallBack.UpdatePaymentStatus(id, "Success", response, paymentFor.ToLower().Equals("donation"))
+                    ElseIf status = "TXN_FAILURE" Then
+                        PaytmCallBack.UpdatePaymentStatus(id, "Failed", response, paymentFor.ToLower().Equals("donation"))
+                    End If
+                End If
+            Catch ex As Exception
+
+            End Try
             Return response
         End If
-        ' Fetch JSON from DB
-        Dim jsonData As String = ""
-        Dim connStr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
-        Using con As New MySqlConnection(connStr)
-            Using cmd As New MySqlCommand("SELECT PaytmResponse FROM bibdata WHERE OrderId=@Id", con)
-                cmd.Parameters.AddWithValue("@Id", id)
-
-                con.Open()
-                Dim result = cmd.ExecuteScalar()
-
-                If result IsNot Nothing Then
-                    jsonData = result.ToString()
-                End If
-            End Using
-        End Using
-
-        Return jsonData
-
+        Return String.Empty
     End Function
 End Class

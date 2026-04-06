@@ -8,6 +8,7 @@ Public Class PaytmWebhook
 
     Sub ProcessRequest(ByVal context As HttpContext) Implements IHttpHandler.ProcessRequest
         Try
+            Logger.LogInfo("Webhook called from Paytm. Response::: " & JsonConvert.SerializeObject(context.Request))
             Dim paytmParams As New Dictionary(Of String, String)()
             Dim merchantKey As String = ConfigurationManager.AppSettings("MerchantKey")
 

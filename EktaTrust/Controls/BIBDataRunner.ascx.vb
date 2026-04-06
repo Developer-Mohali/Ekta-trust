@@ -1237,5 +1237,7 @@ Public Class BIBDataRunner
 
     End Function
 
-
+    Protected Sub btnBindGrid_Click(sender As Object, e As EventArgs)
+        BindGridView()
+    End Sub
 End Class
