@@ -125,7 +125,7 @@
                            <b>  BIB EXPO Time </b>- 09AM To 6PM  <br />
                            <b> BIB EXPO Place </b>- Institute of Local self-Government, Tonk Road, Jaipur <br />--%>
 
-                            <b>BIB Expo will be held at the Institute of Local self-Government, Tonk Road, Jaipur </br> on 12th April from 9AM to 6PM.</b>
+                            <b>BIB Expo will be held at the Institute of Local self-Government, Tonk Road, Jaipur </br> on 13th April from 9AM to 6PM.</b>
                             <br />
                             <b>BIB Expo Location : </b><a href="https://g.co/kgs/adLsfKf" target="_blank" style="text-decoration: underline; color: blue">https://g.co/kgs/adLsfKf </a>
                         </td>
@@ -181,15 +181,18 @@
                     </tr>
                     <tr>
                         <td>First</td>
-                        <td>Rs. 11,000</td>
+                 <%--       <td>Rs. 11,000</td>--%>
+                        <td>Rs. 9,100</td>
                     </tr>
                     <tr>
                         <td>Second</td>
-                        <td>Rs. 5,100</td>
+             <%--           <td>Rs. 5,100</td>--%>
+                        <td>Rs. 7,100</td>
                     </tr>
                     <tr>
                         <td>Third</td>
-                        <td>Rs. 3,100</td>
+                        <%--<td>Rs. 3,100</td>--%>
+                        <td>Rs. 5,100</td>
                     </tr>
 
                     <tr>

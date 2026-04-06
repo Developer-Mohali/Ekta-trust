@@ -116,15 +116,18 @@
        </tr>
        <tr>
            <td>First</td>
-           <td>Rs. 11,000</td>
+         <%--  <td>Rs. 11,000</td>--%>
+           <td>Rs. 9,100</td>
        </tr>
        <tr>
            <td>Second</td>
-           <td>Rs. 5,100</td>
+        <%--   <td>Rs. 5,100</td>--%>
+           <td>Rs. 7,100</td>
        </tr>
        <tr>
            <td>Third</td>
-           <td>Rs. 3,100</td>
+       <%--    <td>Rs. 3,100</td>--%>
+           <td>Rs. 5,100</td>
        </tr>
 
        <tr>
