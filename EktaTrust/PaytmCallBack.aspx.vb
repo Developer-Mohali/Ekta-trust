@@ -58,14 +58,6 @@ Public Class PaytmCallBack
                 Dim txnId As String = Request.Form("TXNID")
                 Dim paymentMode As String = Request.Form("PAYMENTMODE")
 
-                Try
-                    Dim paytmStatusForOrderId = CheckPaytmStatus(orderId)
-                    Dim json = Newtonsoft.Json.Linq.JObject.Parse(paytmStatusForOrderId)
-                    status = json("body")("resultInfo")("resultStatus").ToString()
-                Catch ex As Exception
-
-                End Try
-
                 If status = "TXN_SUCCESS" Then
 
                     ' ✅ Update DB → SUCCESS

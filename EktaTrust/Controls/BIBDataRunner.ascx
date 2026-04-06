@@ -305,7 +305,7 @@ function TotalRecord() {
     
     <pre id="jsonContent" style="max-height:400px; overflow:auto; background:#f5f5f5; padding:10px;"></pre>
     
-    <button onclick="closeModal(e)" class="btn btn-danger">Close</button>
+    <button type="button" onclick="closeModal(event)" class="btn btn-danger">Close</button>
 
 </div>
 
@@ -387,7 +387,7 @@ function TotalRecord() {
     }
 
     function closeModal(e) {
-        e.preventDefault();
+        if (e) e.preventDefault();
         $("#jsonModal").hide();
     }
 </script>
