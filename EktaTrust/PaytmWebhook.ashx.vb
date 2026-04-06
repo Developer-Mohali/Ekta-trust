@@ -1,0 +1,94 @@
+﻿Imports System.Web
+Imports System.Web.Services
+Imports MySql.Data.MySqlClient
+Imports Newtonsoft.Json
+
+Public Class PaytmWebhook
+    Implements System.Web.IHttpHandler
+
+    Sub ProcessRequest(ByVal context As HttpContext) Implements IHttpHandler.ProcessRequest
+        Try
+            Dim paytmParams As New Dictionary(Of String, String)()
+            Dim merchantKey As String = ConfigurationManager.AppSettings("MerchantKey")
+
+            ' Read POST data
+            For Each key As String In context.Request.Form.Keys
+                paytmParams.Add(key, context.Request.Form(key))
+            Next
+
+            Dim checksum As String = paytmParams("CHECKSUMHASH")
+            paytmParams.Remove("CHECKSUMHASH")
+            Dim orderId As String = paytmParams("ORDERID")
+            Dim txnId As String = paytmParams("TXNID")
+            Dim fullResponseJson As String = JsonConvert.SerializeObject(paytmParams)
+            Dim paymentMode As String = paytmParams("PAYMENTMODE")
+            Dim paymentFor As String = GetPaymentType(orderId)
+
+            ' Verify Checksum
+            Dim isValid As Boolean = Paytm.Checksum.verifySignature(paytmParams, merchantKey, checksum)
+
+            If isValid Then
+                If paytmParams("STATUS") = "TXN_SUCCESS" Then
+                    ' ✅ Update DB → SUCCESS
+                    If paymentFor.Trim().ToLower() = "donation" Then
+                        PaytmCallBack.UpdateOderInDonation(orderId, "Success", txnId, fullResponseJson, paymentMode)
+                    ElseIf paymentFor.Trim().ToLower() = "registration" Then
+                        PaytmCallBack.UpdateOrderInBIB(orderId, "Success", txnId, fullResponseJson)
+                    Else
+                        Logger.LogInfo($"paymentFor not found in Donation and Registration. ORDERID:: {orderId} ::: PaytmFullResponse:::" & fullResponseJson)
+                    End If
+                Else
+                    ' ❌ Update DB → FAILED
+                    If paymentFor.Trim().ToLower() = "donation" Then
+                        PaytmCallBack.UpdateOderInDonation(orderId, "Failed", txnId, fullResponseJson, paymentMode)
+                    ElseIf paymentFor.Trim().ToLower() = "registration" Then
+                        PaytmCallBack.UpdateOrderInBIB(orderId, "Failed", txnId, fullResponseJson)
+                    Else
+                        Logger.LogInfo($"paymentFor not found in Donation and Registration. ORDERID:: {orderId} ::: PaytmFullResponse:::" & fullResponseJson)
+                    End If
+                End If
+                context.Response.Write("Checksum Matched")
+            Else
+                Logger.LogInfo("Checksum Mismatched in ProcessRequest, while request from paytm using Webhook.")
+            End If
+        Catch ex As Exception
+            Logger.LogError($"Error in WebHook::ProcessRequest ::: Error ::: {ex.Message}", ex)
+        End Try
+    End Sub
+
+    ReadOnly Property IsReusable() As Boolean Implements IHttpHandler.IsReusable
+        Get
+            Return False
+        End Get
+    End Property
+
+    Function GetPaymentType(orderId As String) As String
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+        Using con As New MySqlConnection(constr)
+            Dim query As String = "
+            SELECT 'donation' AS paymentType 
+            FROM donation 
+            WHERE OrderId = @orderId
+            UNION
+            SELECT 'registration' AS paymentType 
+            FROM bibdata 
+            WHERE OrderId = @orderId
+            LIMIT 1"
+
+            Using cmd As New MySqlCommand(query, con)
+                cmd.Parameters.AddWithValue("@orderId", orderId)
+
+                con.Open()
+
+                Dim result = cmd.ExecuteScalar()
+
+                If result IsNot Nothing Then
+                    Return result.ToString()
+                Else
+                    Return "unknown"
+                End If
+            End Using
+        End Using
+    End Function
+End Class

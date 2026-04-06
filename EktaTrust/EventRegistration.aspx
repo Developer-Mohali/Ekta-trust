@@ -605,7 +605,7 @@ body section {
                                     if (result.success) {
                                         paytmPaymentPopupOpen(amount, result.orderId, data.name, data.phone, data.email);
                                     } else {
-                                        $('#loader').show();
+                                        $('#loader').hide();
                                         alert(result.message);
                                     }
                                     //if (msg.d == 2) {
@@ -698,7 +698,7 @@ body section {
                             //    required: true,
                             //    equalTo: '#random'
                             //},
-                            ContentPlaceHolder1_txtDOB: {
+                            <%=txtDOB.UniqueID  %>: {
                                 validDOB: true
                             },
                             TermCondition: {
@@ -730,7 +730,7 @@ body section {
                             ddlGender: {
                                 required: "Gender is Required"
                             },
-                            ContentPlaceHolder1_txtDOB: {
+                            <%=txtDOB.UniqueID  %>: {
                                 validDOB: "Enter a valid DOB"
                             },
                             //email: {

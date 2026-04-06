@@ -1,6 +1,10 @@
 ﻿Imports System
+Imports System.Collections.Generic
+Imports System.IO
+Imports System.Net
 Imports MySql.Data.MySqlClient
 Imports Newtonsoft.Json
+Imports Paytm
 
 Public Class PaytmCallBack
     Inherits System.Web.UI.Page
@@ -52,12 +56,21 @@ Public Class PaytmCallBack
                 Dim status As String = Request.Form("STATUS")
                 Dim orderId As String = Request.Form("ORDERID")
                 Dim txnId As String = Request.Form("TXNID")
+                Dim paymentMode As String = Request.Form("PAYMENTMODE")
+
+                Try
+                    Dim paytmStatusForOrderId = CheckPaytmStatus(orderId)
+                    Dim json = Newtonsoft.Json.Linq.JObject.Parse(paytmStatusForOrderId)
+                    status = json("body")("resultInfo")("resultStatus").ToString()
+                Catch ex As Exception
+
+                End Try
 
                 If status = "TXN_SUCCESS" Then
 
                     ' ✅ Update DB → SUCCESS
                     If paymentFor.Trim().ToLower() = "donation" Then
-                        UpdateOderInDonation(orderId, "Success", txnId, fullResponseJson)
+                        UpdateOderInDonation(orderId, "Success", txnId, fullResponseJson, paymentMode)
                         Response.Redirect("PaytmPaymentResponse.aspx?status=success&orderId=" & orderId & "&type=donation", False)
                     Else
                         UpdateOrderInBIB(orderId, "Success", txnId, fullResponseJson)
@@ -69,7 +82,7 @@ Public Class PaytmCallBack
 
                     ' ❌ Update DB → FAILED
                     If paymentFor.Trim().ToLower() = "donation" Then
-                        UpdateOderInDonation(orderId, "Failed", txnId, fullResponseJson)
+                        UpdateOderInDonation(orderId, "Failed", txnId, fullResponseJson, paymentMode)
                         Response.Redirect("PaytmPaymentResponse.aspx?status=failed&orderId=" & orderId & "&type=donation", False)
                     Else
                         UpdateOrderInBIB(orderId, "Failed", txnId, fullResponseJson)
@@ -90,7 +103,7 @@ Public Class PaytmCallBack
     End Sub
 
 
-    Private Sub UpdateOrderInBIB(orderId As String, status As String, txnId As String, apiResponse As String)
+    Public Shared Sub UpdateOrderInBIB(orderId As String, status As String, txnId As String, apiResponse As String)
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Try
             Using con As New MySqlConnection(constr)
@@ -115,7 +128,7 @@ Public Class PaytmCallBack
         End Try
     End Sub
 
-    Public Function GenerateSerialNumber() As String
+    Public Shared Function GenerateSerialNumber() As String
         Dim serialNumber As String = "000001"
 
         Try
@@ -142,7 +155,7 @@ Public Class PaytmCallBack
         Return serialNumber
     End Function
 
-    Private Sub UpdateOderInDonation(orderId As String, status As String, txnId As String, apiResponse As String)
+    Public Shared Sub UpdateOderInDonation(orderId As String, status As String, txnId As String, apiResponse As String, paymentMode As String)
 
         Dim serialNumber As String
 
@@ -152,7 +165,7 @@ Public Class PaytmCallBack
 
 
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
-        Dim paymentMode As String = Request.Form("PAYMENTMODE")
+
         Try
             Using con As New MySqlConnection(constr)
                 Dim Query As String = "UPDATE donation SET PaymentStatus=@paymentStatus, PaytmResponse= @paytmResponse, TxnId = @txnId, ModeOfPayment = @ModeOfPayment, SerialNo=@SerialNo
@@ -164,7 +177,7 @@ Public Class PaytmCallBack
                     cmd.Parameters.AddWithValue("@txnId", txnId)
                     cmd.Parameters.AddWithValue("@orderId", orderId)
                     cmd.Parameters.AddWithValue("@ModeOfPayment", paymentMode)
-                    cmd.Parameters.AddWithValue("@SerialNo",serialNumber)
+                    cmd.Parameters.AddWithValue("@SerialNo", serialNumber)
 
                     con.Open()
                     Dim RowAffected = cmd.ExecuteNonQuery()
@@ -207,4 +220,70 @@ Public Class PaytmCallBack
             Logger.LogError($"Error in PaytmCallBack->UpdatePaymentStatus ::: Error ::: {ex.Message}", ex)
         End Try
     End Sub
+
+    Public Shared Function CheckPaytmStatus(orderId As String) As String
+        Try
+            Dim mid As String = ConfigurationManager.AppSettings("MID")
+            Dim merchantKey As String = ConfigurationManager.AppSettings("MerchantKey")
+            Dim url As String = ConfigurationManager.AppSettings("PaytmStatusApiURL")
+
+            Dim body As New Dictionary(Of String, String)()
+            Dim head As New Dictionary(Of String, String)()
+            Dim requestBody As New Dictionary(Of String, Object)()
+
+            body.Add("mid", mid)
+            body.Add("orderId", orderId)
+
+            ' Generate Checksum
+            Dim paytmChecksum As String = Checksum.generateSignature(
+            JsonConvert.SerializeObject(body), merchantKey)
+
+            head.Add("signature", paytmChecksum)
+
+            requestBody.Add("body", body)
+            requestBody.Add("head", head)
+
+            Dim post_data As String = JsonConvert.SerializeObject(requestBody)
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+            Dim webRequest As HttpWebRequest = CType(webRequest.Create(url), HttpWebRequest)
+
+            webRequest.Method = "POST"
+            webRequest.ContentType = "application/json"
+            webRequest.Timeout = 30000 ' 30 seconds
+
+            Dim byteArray As Byte() = System.Text.Encoding.UTF8.GetBytes(post_data)
+            webRequest.ContentLength = byteArray.Length
+
+            Using requestStream As Stream = webRequest.GetRequestStream()
+                requestStream.Write(byteArray, 0, byteArray.Length)
+            End Using
+
+            Using response As HttpWebResponse = CType(webRequest.GetResponse(), HttpWebResponse)
+                Using responseReader As New StreamReader(response.GetResponseStream())
+                    Dim responseData As String = responseReader.ReadToEnd()
+
+                    ' ✅ RETURN RESPONSE
+                    Return responseData
+                End Using
+            End Using
+
+        Catch ex As WebException
+            ' Handle API errors
+            If ex.Response IsNot Nothing Then
+                Using reader As New StreamReader(ex.Response.GetResponseStream())
+                    Dim errorResponse As String = reader.ReadToEnd()
+                    Logger.LogError($"Paytm API Error: {errorResponse}", ex)
+                    Return errorResponse
+                End Using
+            End If
+
+            Logger.LogError($"Error in CheckPaytmStatus: {ex.Message}", ex)
+            Return "ERROR"
+
+        Catch ex As Exception
+            Logger.LogError($"Error in CheckPaytmStatus: {ex.Message}", ex)
+            Return "ERROR"
+        End Try
+    End Function
 End Class
