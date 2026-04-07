@@ -8,6 +8,8 @@ Public Class PaytmWebhook
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
+            Logger.LogWebHookInfo("Webhook Pageload called. Res::: ", JsonConvert.SerializeObject(Request.Form.Keys))
+
             Dim paytmParams As New Dictionary(Of String, String)()
             Dim merchantKey As String = ConfigurationManager.AppSettings("MerchantKey")
             ' Read POST data
@@ -35,28 +37,32 @@ Public Class PaytmWebhook
                     ' ✅ Update DB → SUCCESS
                     If paymentFor.Trim().ToLower() = "donation" Then
                         PaytmCallBack.UpdateOderInDonation(orderId, "Success", txnId, fullResponseJson, paymentMode)
+                        Logger.LogWebHookInfo("SUCCESS Status updated in DB for donation")
                     ElseIf paymentFor.Trim().ToLower() = "registration" Then
                         PaytmCallBack.UpdateOrderInBIB(orderId, "Success", txnId, fullResponseJson)
+                        Logger.LogWebHookInfo("SUCCESS Status updated in DB for registration")
                     Else
-                        Logger.LogInfo($"paymentFor not found in Donation and Registration. ORDERID:: {orderId} ::: PaytmFullResponse:::" & fullResponseJson)
+                        Logger.LogWebHookInfo($"paymentFor not found in Donation and Registration. ORDERID:: {orderId} ::: PaytmFullResponse:::" & fullResponseJson)
                     End If
                 Else
                     ' ❌ Update DB → FAILED
                     If paymentFor.Trim().ToLower() = "donation" Then
                         PaytmCallBack.UpdateOderInDonation(orderId, "Failed", txnId, fullResponseJson, paymentMode)
+                        Logger.LogWebHookInfo("Failed Status updated in DB for donation")
                     ElseIf paymentFor.Trim().ToLower() = "registration" Then
                         PaytmCallBack.UpdateOrderInBIB(orderId, "Failed", txnId, fullResponseJson)
+                        Logger.LogWebHookInfo("Failed Status updated in DB for registration")
                     Else
-                        Logger.LogInfo($"paymentFor not found in Donation and Registration. ORDERID:: {orderId} ::: PaytmFullResponse:::" & fullResponseJson)
+                        Logger.LogWebHookInfo($"paymentFor not found in Donation and Registration. ORDERID:: {orderId} ::: PaytmFullResponse:::" & fullResponseJson)
                     End If
                 End If
                 'Context.Response.Write("Checksum Matched")
             Else
-                Logger.LogInfo("Checksum Mismatched in ProcessRequest, while request from paytm using Webhook.")
+                Logger.LogWebHookInfo("Checksum Mismatched in ProcessRequest, while request from paytm using Webhook.")
             End If
         Catch ex As Exception
             Logger.LogError($"Error in WebHook::ProcessRequest ::: Error ::: {ex.Message}", ex)
-            Logger.LogInfo($"JSON Response from Paytm on error ::: {JsonConvert.SerializeObject(Request.Form.Keys)}")
+            Logger.LogWebHookInfo($"JSON Response from Paytm on error ::: {JsonConvert.SerializeObject(Request.Form.Keys)}")
         End Try
     End Sub
 

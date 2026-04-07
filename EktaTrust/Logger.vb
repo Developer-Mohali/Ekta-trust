@@ -68,4 +68,37 @@ Public Class Logger
 
     End Sub
 
+    Public Shared Sub LogWebHookInfo(message As String, Optional obj As String = Nothing)
+
+        Try
+            Dim logPath As String = HttpContext.Current.Server.MapPath("~/Logs/")
+
+            ' Create folder if not exists
+            If Not Directory.Exists(logPath) Then
+                Directory.CreateDirectory(logPath)
+            End If
+
+            ' File name per day
+            Dim filePath As String = logPath & "PaymentWebhookLog.txt"
+
+            Dim sb As New StringBuilder()
+
+            sb.AppendLine("--------------------------------------------------")
+            sb.AppendLine("Date: " & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+            sb.AppendLine("Message: " & message)
+
+            If obj IsNot Nothing Then
+                sb.AppendLine("Paytm Response: " & obj)
+            End If
+
+            sb.AppendLine("--------------------------------------------------")
+
+            File.AppendAllText(filePath, sb.ToString())
+
+        Catch
+            ' ❌ Never throw from logger
+        End Try
+
+    End Sub
+
 End Class
