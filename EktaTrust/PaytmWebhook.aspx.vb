@@ -18,7 +18,7 @@ Public Class PaytmWebhook
             Next
 
             If paytmParams.Count = 0 Then
-                Logger.LogInfo("Request form data not found from Paytm Webhook called.")
+                Logger.LogWebHookInfo("Request form data not found from Paytm Webhook called.")
                 Return
             End If
             Dim checksum As String = paytmParams("CHECKSUMHASH")
