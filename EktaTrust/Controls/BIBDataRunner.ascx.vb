@@ -141,7 +141,7 @@ Public Class BIBDataRunner
                     lblRecords.Text = dt.Rows.Count
                     If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
                         Try
-                            Dim total = dt.AsEnumerable().Where(Function(row) row("PaymentStatus").ToString() = "Success").Sum(Function(row) Convert.ToDecimal(row("Amount")))
+                            Dim total = dt.AsEnumerable().Where(Function(row) Not String.IsNullOrEmpty(row("Amount").ToString())).Sum(Function(row) Convert.ToDecimal(row("Amount")))
                             lblTotalAmount.Text = total.ToString()
                         Catch ex As Exception
                         End Try
@@ -824,9 +824,9 @@ Public Class BIBDataRunner
             Dim selectedUser As String = ddlBiBCreatedUsers.SelectedValue
 
             Using con As New MySqlConnection(connStr)
-                Dim query As String = "SELECT DISTINCT bd.BIBNo, bd.RunnerName, bd.RunCatagory as `Run Category`, bd.TShirtSize, bd.Gender, bd.RunnerDOB, 
+                Dim query As String = "SELECT DISTINCT bd.ID, bd.BIBNo, bd.RunnerName, bd.RunCatagory as `Run Category`, bd.TShirtSize, bd.Gender, bd.RunnerDOB, 
                                         bd.MobileNumber as `Contact Number`, bd.EmergencyContactName, bd.EmergencyContactNumber,
-                                        bd.BankReferenceNo as `Payment Reference`, PaymentStatus as `Payment Status`, OrderId, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.CreatedAt as `Registration At` 
+                                        bd.BankReferenceNo as `Payment Reference`, PaymentStatus as `Payment Status`, OrderId, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.CreatedAt as `Registration At`,   
                                         bd.TxnId as `Transaction Id` FROM bibdata bd 
                                         left join user u  on bd.UserId = u.ID
                                         left join signup s on s.UserId = bd.UserId"
@@ -948,8 +948,8 @@ Public Class BIBDataRunner
                     Dim cellValue As String = row(i).ToString()
                     Dim bgColor As String = ""
 
-                    ' Column index 10 = Payment Status
-                    If i = 10 Then
+                    ' Column index 11 = Payment Status
+                    If i = 11 Then
                         Select Case cellValue.Trim().ToLower()
                             Case "success"
                                 bgColor = "LightGreen"
@@ -965,8 +965,10 @@ Public Class BIBDataRunner
                                 bgColor = "White"
                         End Select
                         hw.WriteLine("<td style='background-color:" & bgColor & "'>" & cellValue & "</td>")
-                    ElseIf i = 12 AndAlso (String.IsNullOrEmpty(cellValue) Or cellValue = "&nbsp;") Then
+                    ElseIf i = 13 AndAlso (String.IsNullOrEmpty(cellValue) Or cellValue = "&nbsp;") Then
                         hw.WriteLine("<td>Self</td>")
+                    ElseIf i = 15 Then
+                        hw.WriteLine("<td style='mso-number-format:\@'>" & cellValue & "</td>")
                     Else
                         hw.WriteLine("<td>" & cellValue & "</td>")
                     End If
@@ -980,7 +982,7 @@ Public Class BIBDataRunner
             Response.Write(sw.ToString())
             Response.End()
 
-        Catch
+        Catch ex As Exception
             MessageUpdated.Text = "Got error while exporting excel"
         Finally
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "HideLoader", "$('#loader').hide();", True)

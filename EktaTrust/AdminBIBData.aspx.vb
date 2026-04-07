@@ -26,10 +26,33 @@ Public Class AdminBIBData
                     End If
                 End If
             Catch ex As Exception
-
+                Logger.LogError($"Error in GetJsonData :: OrderId :: {id} :: Error :::", ex)
             End Try
             Return response
         End If
         Return String.Empty
     End Function
+
+    <System.Web.Services.WebMethod()>
+    Public Shared Sub UpdatePendingPaymentStatus()
+        Try
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Dim dt As New DataTable()
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand("SELECT OrderId FROM bibdata WHERE PaymentStatus='Pending'", con)
+                    Using da As New MySqlDataAdapter(cmd)
+                        da.Fill(dt)
+                    End Using
+                End Using
+            End Using
+
+            If dt.Rows.Count > 0 Then
+                For Each row In dt.Rows
+                    AdminBIBData.GetJsonData(row("OrderId"), "Pending", "Registration")
+                Next
+            End If
+        Catch ex As Exception
+            Logger.LogError($"Error in UpdatePendingPaymentStatus :: Error :::", ex)
+        End Try
+    End Sub
 End Class

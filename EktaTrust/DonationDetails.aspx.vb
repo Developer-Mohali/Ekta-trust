@@ -44,6 +44,14 @@ Public Class DonationDetails
                     con.Close()
 
                     lblRecords.Text = dt.Rows.Count
+                    lblTotalAmount.Text = 0
+                    If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                        Try
+                            Dim total = dt.AsEnumerable().Where(Function(row) Not String.IsNullOrEmpty(row("Amount").ToString())).Sum(Function(row) Convert.ToDecimal(row("Amount")))
+                            lblTotalAmount.Text = total.ToString()
+                        Catch ex As Exception
+                        End Try
+                    End If
                     gvEvent.DataSource = dt
                     gvEvent.DataBind()
                 End Using

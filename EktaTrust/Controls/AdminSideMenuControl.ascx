@@ -26,18 +26,7 @@
        <div class="side-menu-container">
        <ul class="nav navbar-nav">
            <li><a href="DashBoard.aspx"> Dashboard</a></li>
-           <li ><a href="TrainingActivity.aspx"> Training Activites</a></li>
-           <li><a href="Joining.aspx"> Joining</a></li>
-           <li><a href="ContactDetails.aspx"> Contact Detail</a></li>
            <li><a href="DonationDetails.aspx"> Donation</a></li>
-            <li><a href="SUGGESTIONTRUSTACTIVITIES.aspx"> Trust Activities</a></li>
-            <li><a href="EventDetails.aspx">Events</a></li>
-           <li><a href="MIPRegistrationDetails.aspx">MIP-Registration Details</a></li>
-           <li><a href="MIPFacultyRegistrationDetails.aspx">MIP Faculty Registration Details</a></li>
-            <li><a href="SendNotificationMIP.aspx">Send Notification</a></li>
-           <li><a href="TemplateListing.aspx">Templates</a></li>
-           <li><a href="LogDetails.aspx" id="LogDetails">Log Details</a></li>
-      
            <li>
                 <a href="javascript:void(0);" class="nav-link bib-toggle">
                     Manage BIB User
@@ -49,6 +38,17 @@
                     <li><a class="list-group-item" href="AdminBIBData.aspx">BIB Data</a></li>
                 </ul>
             </li>
+           <li ><a href="ManageNews.aspx"> Manage News</a></li>
+           <li ><a href="TrainingActivity.aspx"> Training Activites</a></li>
+           <li><a href="Joining.aspx"> Joining</a></li>
+           <li><a href="ContactDetails.aspx"> Contact Detail</a></li>
+            <li><a href="SUGGESTIONTRUSTACTIVITIES.aspx"> Trust Activities</a></li>
+            <li><a href="EventDetails.aspx">Events</a></li>
+           <li><a href="MIPRegistrationDetails.aspx">MIP-Registration Details</a></li>
+           <li><a href="MIPFacultyRegistrationDetails.aspx">MIP Faculty Registration Details</a></li>
+            <li><a href="SendNotificationMIP.aspx">Send Notification</a></li>
+           <li><a href="TemplateListing.aspx">Templates</a></li>
+           <li><a href="LogDetails.aspx" id="LogDetails">Log Details</a></li>
 
           <%-- <li class="active"><a href="UserDetails.aspx">Users</a></li>--%>
            <li><a href="MatrimonialDetails.aspx">Matrimonial Details</a></li>

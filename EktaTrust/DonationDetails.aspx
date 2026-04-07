@@ -48,7 +48,7 @@
             </div>
          </div>
          <div class="col-md-10 ">
-             <h2 class="admin-heading">Donation Details</h2>           
+             <h2 class="admin-heading" style="font-size: 30px;">Donation Details</h2>           
              <div class="table-responsive">
                  <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green" style="margin-left:411px"></asp:Label>
                  <table class="table table-bordered table-hover table-striped">         
@@ -112,7 +112,8 @@
                 <FooterStyle BackColor="#336699" Font-Bold="True" ForeColor="White" HorizontalAlign="Right" />
                 </asp:GridView>
               
-                  Total Items Count: <asp:Label ID="lblRecords" runat="server" Text="Label"></asp:Label>
+                  Total Items Count: <asp:Label ID="lblRecords" runat="server" Text="Label"></asp:Label> <br />
+                  Total Reg Amount:  <asp:Label ID="lblTotalAmount" runat="server" Text="Label"></asp:Label> 
                 <table id="FooterTable" border="1" cellpadding="0" cellspacing="0" style="border-collapse:collapse">
                 </table>
                                  

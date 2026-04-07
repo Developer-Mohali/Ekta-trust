@@ -11,6 +11,7 @@
 
     </style>
 </asp:Content>
+ <%@ Register Src="~/Controls/AdminSideMenuControl.ascx" TagPrefix="ucSM" TagName="AdminSideMenuControl" %> 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <asp:Label ID="lblMessage" runat="server" style="margin-left:650px; font-size:medium"></asp:Label><br /> 
      <div class="container-fluid main-container">
@@ -20,7 +21,8 @@
             <!-- uncomment code for absolute positioning tweek see top comment in css -->
             <div class="absolute-wrapper"></div>
             <!-- Menu -->
-            <div class="side-menu">
+           <ucSM:AdminSideMenuControl runat="server" id="AdminSideMenuControl" />
+        <%--    <div class="side-menu">
                 <nav class="navbar navbar-default" role="navigation">
 
                     <!-- Main Menu -->
@@ -50,7 +52,7 @@
                         </ul>
                     </div>                   
                 </nav>
-            </div>
+            </div>--%>
         </div>
     </div> 
 

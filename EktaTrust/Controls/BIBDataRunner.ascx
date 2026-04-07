@@ -35,79 +35,103 @@ function TotalRecord() {
              appearance: none;
              margin: 0; 
          }
+         .btn{
+             height: fit-content;
+         }
+         .cus-buttons {
+             margin-top: 20px;
+         }
+         div:has(> table.table.table-bordered.table-hover.table-striped) {
+          overflow: auto;
+        }
+         hr{
+            margin-top: 10px;
+            margin-bottom: 10px;
+         }
+         .col-md-10{
+             padding:0px;
+         }
 </style>
 
-    <div class="col-md-12 ">
-        <h2 class="admin-heading">BIB Data</h2>
+    <div class="col-md-12">
+        <h2 class="admin-heading" style="font-size: 30px;">BIB Data</h2>
            
     <div class="table-responsive">
-       <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green"></asp:Label>
-       <asp:Label ID="AddCount" runat="server" Text="" ClientIDMode="Static"></asp:Label>
+        <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green"></asp:Label>
+        <asp:Label ID="AddCount" runat="server" Text="" ClientIDMode="Static"></asp:Label>
+ <br />
+<div class="card p-3" style="margin:unset;">
 
-        <table class="table table-bordered table-hover table-striped">
-           
-        <tbody>
-                  <tr>
+    <!-- 🔼 Top Row: Upload + Actions -->
+    <div class="row align-items-center mb-3">
 
-        <td> 
-            <div class="col-md-12" style="padding-left: 0px;">
-    <div class="col-md-5" style="padding-left: 0px;">
-         Upload CSV file:
-      <asp:FileUpload ID="BIBDataFileUpload" style="display:inline-block;margin-left: 12px;" runat="server" />
-    </div>
-    <div class="col-md-4" runat="server" id="divUploadUserDDL">
-        Created By:
-    <asp:DropDownList ID="ddlUploadedBy" runat="server" class="form-control" style="display: inline; width:50%"></asp:DropDownList>
- </div>
-     <div class="col-md-3" runat="server" id="divYearBy">
-        Year By:
-        <asp:DropDownList ID="ddlYearBy" runat="server" CssClass="form-control" Style="display: inline; width:50%" AutoPostBack="true" OnSelectedIndexChanged="ddlYearBy_SelectedIndexChanged">
-            <asp:ListItem Text="2026" Value="2026" Selected="True" />
-            <asp:ListItem Text="2025" Value="2025" />
-            <asp:ListItem Text="2024" Value="2024" />
-        </asp:DropDownList>
-    </div>
-</div>
+        <!-- Upload Section -->
+        <div class="col-md-6 d-flex align-items-center gap-2">
+            <label class="mb-0">Upload CSV:</label>
+            <asp:FileUpload ID="BIBDataFileUpload" runat="server" CssClass="form-control w-auto" />
 
-
-          
-        </td><td>
-           <asp:Button ID="btnUpload" Text="Upload" runat="server" OnClientClick="$('#loader').show();" OnClick="ImportFromExcel" />
-                            
-              <asp:Button ID="btnDownload" Text="Download Sample CSV File" runat="server" OnClick="DownloadFile" />
-            <asp:Button ID="btnExport" runat="server" Text="Export to Excel" OnClientClick="$('#loader').show(); setTimeout($('#loader').hide(), 2000);" OnClick="btnExport_Click" />
-
-              <asp:Button ID="btnAddBIB" runat="server" Text="Add New" OnClick="AddBIB_Click" UseSubmitBehavior="False" style="float: right;" />
-        </td>         
-                  </tr>
-
-            <br />
-    <tr>
-        <td>
-            <div class="col-md-12" style="padding-left: 0px;">
-                <div class="col-md-4" style="padding-left: 0px;">
-                     Search by Bib No/Payment Status:
-                 <asp:Panel runat="server" DefaultButton="btnSearch" style="display: inline;">
-                    <asp:TextBox ID="txtSearch" style="display: inline; width:50%" class="form-control" runat="server"></asp:TextBox>
-                   </asp:Panel>
-                </div>
-                <div class="col-md-4" runat="server" id="divCreatedByView">
-                    Search By User:
-                <asp:DropDownList ID="ddlBiBCreatedUsers" runat="server" class="form-control" AutoPostBack="true" style="display: inline; width:50%" OnSelectedIndexChanged="ddlBiBCreatedUsers_SelectedIndexChanged"></asp:DropDownList>
+            <div id="divUploadUserDDL" runat="server" ClientIDMode="Static">
+                <label class="mb-0 ms-2">Created By:</label>
+                <asp:DropDownList ID="ddlUploadedBy" runat="server" CssClass="form-control w-auto"></asp:DropDownList>
              </div>
-                <div class="col-md-4" runat="server" id="divtxtDateSearch">
-                       Search By Reg Date:
-                    <asp:TextBox ID="txtDateSearch" style="display: inline; width:50%" TextMode="Date" class="form-control" runat="server"/>               
-                </div>
-            </div>
-        </td><td>
-            <asp:Button ID="btnSearch" runat="server" Text="Search" 
-                />
-             <asp:Label ID="lblmsg" runat="server" Font-Bold="True" ForeColor="Red" Text=""></asp:Label>
-            
-        </td></tr>
-    
-            </tbody>
+        </div>
+
+        <!-- Buttons -->
+        <div class="col-md-6 text-end cus-buttons">
+            <asp:Button ID="btnUpload" Text="Upload" runat="server" CssClass="btn btn-primary" OnClientClick="$('#loader').show();" OnClick="ImportFromExcel" />
+
+            <asp:Button ID="btnDownload" Text="Sample CSV" runat="server" CssClass="btn btn-outline-secondary" OnClick="DownloadFile" />
+
+            <asp:Button ID="btnAddBIB" runat="server" Text="Add New" CssClass="btn btn-success" OnClick="AddBIB_Click" />
+
+             <asp:Button ID="btnExport" runat="server" CssClass="btn btn-primary" Text="Export to Excel" OnClientClick="$('#loader').show(); setTimeout($('#loader').hide(), 2000);" OnClick="btnExport_Click" Style="float:right;" />
+        </div>
+    </div>
+
+    <!-- 🔍 Search Row -->
+    <div class="row align-items-center">
+        <hr />
+        <!-- Main Search -->
+        <div class="col-md-4">
+            <label>Search</label>
+            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Bib No / Payment Status"></asp:TextBox>
+        </div>
+
+        <!-- Date -->
+        <div class="col-md-3" id="divtxtDateSearch" runat="server" ClientIDMode="Static">
+            <label>Reg Date</label>
+            <asp:TextBox ID="txtDateSearch" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
+        </div>
+
+        <!-- User -->
+        <div class="col-md-2" id="divCreatedByView" runat="server" ClientIDMode="Static">
+            <label>User</label>
+            <asp:DropDownList ID="ddlBiBCreatedUsers" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlBiBCreatedUsers_SelectedIndexChanged">
+            </asp:DropDownList>
+        </div>
+
+        <!-- Year -->
+        <div class="col-md-2">
+            <label>Year</label>
+            <asp:DropDownList ID="ddlYearBy" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlYearBy_SelectedIndexChanged">
+                <asp:ListItem Text="2026" Value="2026" Selected="True" />
+                <asp:ListItem Text="2025" Value="2025" />
+                <asp:ListItem Text="2024" Value="2024" />
+            </asp:DropDownList>
+        </div>
+
+        <!-- Search Button -->
+        <div class="col-md-1 d-flex align-items-end cus-buttons">
+            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary w-100" />
+        </div>
+    </div>
+
+    <!-- Message -->
+    <div class="mt-2">
+        <asp:Label ID="lblmsg" runat="server" CssClass="text-danger fw-bold"></asp:Label>
+    </div>
+
+</div>
  <br />
           
  <asp:GridView ID="gvEvent" runat="server" class="table table-bordered table-hover table-striped" AutoGenerateColumns="false" DataKeyNames="ID"  PageSize="25" 
@@ -321,6 +345,9 @@ function TotalRecord() {
                 msg.text('');      // clears the message content
             }, 5000); // 5000ms = 5 seconsds
         }
+        setInterval(function () {
+            updatePaytmenStatus();
+        }, 50000); // 5 minutes
     });
 
     function validateAndSubmit() {
@@ -396,5 +423,24 @@ function TotalRecord() {
         if (e) e.preventDefault();
         $("#jsonModal").hide();
         __doPostBack('<%= btnBindGrid.UniqueID %>', '');
+    }
+
+    function updatePaytmenStatus() {
+        try {
+            $.ajax({
+                type: "POST",
+                url: "/AdminBIBData.aspx/UpdatePendingPaymentStatus",
+                contentType: "application/json; charset=utf-8",
+                success: function (res) {
+                    __doPostBack('<%= btnBindGrid.UniqueID %>', '');
+                },
+                error: function () {
+                    hideLoader();
+                    //alert("Error loading data");
+                }
+            });
+        } catch (e) {
+            console.error('Error in updatePaytmenStatus', e);
+        }
     }
 </script>

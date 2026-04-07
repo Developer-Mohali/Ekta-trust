@@ -59,24 +59,6 @@ Partial Public Class BIBDataRunner
     Protected WithEvents ddlUploadedBy As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''divYearBy control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents divYearBy As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''ddlYearBy control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlYearBy As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
     '''btnUpload control.
     '''</summary>
     '''<remarks>
@@ -95,15 +77,6 @@ Partial Public Class BIBDataRunner
     Protected WithEvents btnDownload As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''btnExport control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
     '''btnAddBIB control.
     '''</summary>
     '''<remarks>
@@ -113,6 +86,15 @@ Partial Public Class BIBDataRunner
     Protected WithEvents btnAddBIB As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''btnExport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''txtSearch control.
     '''</summary>
     '''<remarks>
@@ -120,6 +102,24 @@ Partial Public Class BIBDataRunner
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''divtxtDateSearch control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divtxtDateSearch As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''txtDateSearch control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDateSearch As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''divCreatedByView control.
@@ -140,22 +140,13 @@ Partial Public Class BIBDataRunner
     Protected WithEvents ddlBiBCreatedUsers As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''divtxtDateSearch control.
+    '''ddlYearBy control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents divtxtDateSearch As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''txtDateSearch control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtDateSearch As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents ddlYearBy As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''btnSearch control.

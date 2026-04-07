@@ -95,6 +95,15 @@ Partial Public Class DonationDetails
     Protected WithEvents lblRecords As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''lblTotalAmount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTotalAmount As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''lblresult control.
     '''</summary>
     '''<remarks>
