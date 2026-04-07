@@ -387,9 +387,6 @@
 
                     $("#jsonContent").text(formatted);
                     $("#jsonModal").show();
-                    if (status.toLowerCase() == 'pending' && (formatted.includes('TXN_SUCCESS') || formatted.includes('TXN_FAILURE'))) {
-                        __doPostBack('<%= gvEvent.UniqueID %>', '');
-                     }
                 },
                 error: function () {
                     hideLoader();
