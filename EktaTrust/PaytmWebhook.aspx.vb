@@ -4,19 +4,21 @@ Imports MySql.Data.MySqlClient
 Imports Newtonsoft.Json
 
 Public Class PaytmWebhook
-    Implements System.Web.IHttpHandler
+    Inherits System.Web.UI.Page
 
-    Sub ProcessRequest(ByVal context As HttpContext) Implements IHttpHandler.ProcessRequest
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
-            Logger.LogInfo("Webhook called from Paytm. Response::: " & JsonConvert.SerializeObject(context.Request))
             Dim paytmParams As New Dictionary(Of String, String)()
             Dim merchantKey As String = ConfigurationManager.AppSettings("MerchantKey")
-
             ' Read POST data
-            For Each key As String In context.Request.Form.Keys
-                paytmParams.Add(key, context.Request.Form(key))
+            For Each key As String In Request.Form.Keys
+                paytmParams.Add(key, Request.Form(key))
             Next
 
+            If paytmParams.Count = 0 Then
+                Logger.LogInfo("Request form data not found.")
+                Return
+            End If
             Dim checksum As String = paytmParams("CHECKSUMHASH")
             paytmParams.Remove("CHECKSUMHASH")
             Dim orderId As String = paytmParams("ORDERID")
@@ -48,20 +50,15 @@ Public Class PaytmWebhook
                         Logger.LogInfo($"paymentFor not found in Donation and Registration. ORDERID:: {orderId} ::: PaytmFullResponse:::" & fullResponseJson)
                     End If
                 End If
-                context.Response.Write("Checksum Matched")
+                'Context.Response.Write("Checksum Matched")
             Else
                 Logger.LogInfo("Checksum Mismatched in ProcessRequest, while request from paytm using Webhook.")
             End If
         Catch ex As Exception
             Logger.LogError($"Error in WebHook::ProcessRequest ::: Error ::: {ex.Message}", ex)
+            Logger.LogInfo($"JSON Response from Paytm on error ::: {JsonConvert.SerializeObject(Request.Form.Keys)}")
         End Try
     End Sub
-
-    ReadOnly Property IsReusable() As Boolean Implements IHttpHandler.IsReusable
-        Get
-            Return False
-        End Get
-    End Property
 
     Function GetPaymentType(orderId As String) As String
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString

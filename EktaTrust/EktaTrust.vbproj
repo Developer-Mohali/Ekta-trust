@@ -844,7 +844,7 @@
     <Content Include="doc\Result-EKTA-CREATIVE-COMPETITION-2025.pdf" />
     <Content Include="doc\donationTemplate.pdf" />
     <Content Include="doc\runRegistration.pdf" />
-    <Content Include="PaytmWebhook.ashx" />
+    <Content Include="PaytmWebhook.aspx" />
     <None Include="ScriptLibrary\jquery-1.4.1-vsdoc.js" />
     <Content Include="ScriptLibrary\jquery-1.4.1.js" />
     <Content Include="ScriptLibrary\jquery-1.4.1.min.js" />
@@ -1660,8 +1660,9 @@
       <DependentUpon>PaytmPaymentResponse.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="PaytmWebhook.ashx.vb">
-      <DependentUpon>PaytmWebhook.ashx</DependentUpon>
+    <Compile Include="PaytmWebhook.aspx.vb">
+      <DependentUpon>PaytmWebhook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Profile.aspx.designer.vb">
       <DependentUpon>Profile.aspx</DependentUpon>

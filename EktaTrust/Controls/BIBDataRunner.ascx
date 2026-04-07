@@ -131,7 +131,8 @@ function TotalRecord() {
 
     <asp:BoundField HeaderText="Contact Number" DataField="MobileNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
  <%--   <asp:BoundField HeaderText="Emergency Contact Name" DataField="EmergencyContactName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
-    <asp:BoundField HeaderText="Emergency Contact Number" DataField="EmergencyContactNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+  <%--  <asp:BoundField HeaderText="Emergency Contact Number" DataField="EmergencyContactNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
+    <asp:BoundField HeaderText="Amount" DataField="Amount" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
  <%--   <asp:BoundField HeaderText="Payment Reference" DataField="BankReferenceNo" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
      <asp:BoundField HeaderText="Payment Status" DataField="PaymentStatus" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
      <asp:BoundField HeaderText="OrderId" DataField="OrderId" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
@@ -293,7 +294,8 @@ function TotalRecord() {
     </asp:Panel>   
 
       </table>
-             Total Items Count: <asp:Label ID="lblRecords" runat="server" Text="Label"></asp:Label> 
+             Total Items Count: <asp:Label ID="lblRecords" runat="server" Text="Label"></asp:Label> <br />
+             Total Reg Amount:  <asp:Label ID="lblTotalAmount" runat="server" Text="Label"></asp:Label> 
   </div>
 
 

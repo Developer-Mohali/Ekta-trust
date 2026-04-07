@@ -71,7 +71,7 @@ Public Class BIBDataRunner
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As New MySqlConnection(constr)
                 Dim query As String = "SELECT DISTINCT bd.ID, bd.BIBNo, bd.RunnerName, bd.RunCatagory, bd.TShirtSize, bd.Gender, bd.RunnerDOB, 
-                                        bd.MobileNumber, bd.EmergencyContactName, bd.EmergencyContactNumber,
+                                        bd.MobileNumber, bd.EmergencyContactName, bd.EmergencyContactNumber, Amount, 
                                         bd.BankReferenceNo, PaymentStatus, OrderId, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.CreatedAt FROM bibdata bd 
                                         left join user u  on bd.UserId = u.ID
                                         left join signup s on s.UserId = bd.UserId"
@@ -139,6 +139,13 @@ Public Class BIBDataRunner
                     con.Close()
 
                     lblRecords.Text = dt.Rows.Count
+                    If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                        Try
+                            Dim total = dt.AsEnumerable().Where(Function(row) row("PaymentStatus").ToString() = "Success").Sum(Function(row) Convert.ToDecimal(row("Amount")))
+                            lblTotalAmount.Text = total.ToString()
+                        Catch ex As Exception
+                        End Try
+                    End If
                     gvEvent.DataSource = dt
                     gvEvent.DataBind()
                 End Using
