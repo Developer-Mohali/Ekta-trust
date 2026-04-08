@@ -37,6 +37,19 @@
         {
             padding-left:10px !important;
         }
+        .btn{
+             height: fit-content;
+         }
+         .cus-buttons {
+             margin-top: 20px;
+         }
+         div:has(> table.table.table-bordered.table-hover.table-striped) {
+          overflow: auto;
+        }
+         hr{
+            margin-top: 10px;
+            margin-bottom: 10px;
+         }
 </style>
     <div class="container-fluid main-container">
          <div class="col-md-2 sidebar">
@@ -51,40 +64,65 @@
              <h2 class="admin-heading" style="font-size: 30px;">Donation Details</h2>           
              <div class="table-responsive">
                  <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green" style="margin-left:411px"></asp:Label>
-                 <table class="table table-bordered table-hover table-striped">         
-                   <tbody>          
-                      <tr>
-                        <td>
-                          Search By:
-                         <asp:DropDownList ID="ddlSearchBy" runat="server" AutoPostBack="True" >          
-                            <asp:ListItem Text="All"></asp:ListItem>
-                            <asp:ListItem Text="Full Name"></asp:ListItem>                   
-                            <asp:ListItem Text="Payment Status"></asp:ListItem>                   
-                         </asp:DropDownList> 
-                        </td>
-                        <td> 
-                           Search
-                           <asp:TextBox ID="txtSearch" runat="server" autocomplete="off"></asp:TextBox>
-                        </td>
-                        <td>
-                            Year By:
-                            <asp:DropDownList ID="ddlYear" runat="server" AutoPostBack="True">
-                                <asp:ListItem Selected Text="2026">2026</asp:ListItem>
-                                <asp:ListItem Text="2025">2025</asp:ListItem>
-                              <%--<asp:ListItem Text="2017">2017</asp:ListItem>      --%>     
+                 <asp:Label ID="lblmsg" runat="server" Font-Bold="True" ForeColor="Red" Text=""></asp:Label>
+                  <br />
+                <div class="card p-3" style="margin:unset;">
+
+                    <!-- 🔼 Top Row: Upload + Actions -->
+                    <div class="row align-items-center mb-3">
+
+                        <!-- Upload Section -->
+                    <%--    <div class="col-md-6 d-flex align-items-center gap-2">
+
+                        </div>--%>
+
+                        <!-- Buttons -->
+                        <div class="col-md-12 text-end">
+                            <asp:Button ID="btnAddBIB" runat="server" Text="Add New" CssClass="btn btn-success" OnClick="btnAddNew_Click" />
+                             <button class="btn btn-primary" title="Refresh Payment Status" onclick="updatePaytmenStatus()">Refresh Payment</button>
+
+                             <asp:Button ID="btnExport" runat="server" CssClass="btn btn-primary" Text="Export to Excel" OnClientClick="$('#loader').show(); setTimeout($('#loader').hide(), 2000);" OnClick="btnExport_Click" Style="float:right;" />
+                        </div>
+                    </div>
+
+                    <!-- 🔍 Search Row -->
+                    <div class="row align-items-center">
+                        <hr />
+                        <!-- Main Search -->
+                        <div class="col-md-4">
+                            <label>Search By:</label>
+                              <asp:DropDownList ID="ddlSearchBy" runat="server" CssClass="form-control" AutoPostBack="false" >          
+                                   <asp:ListItem Text="All"></asp:ListItem>
+                                   <asp:ListItem Text="Full Name"></asp:ListItem>                   
+                                   <asp:ListItem Text="Payment Status"></asp:ListItem>                   
+                                </asp:DropDownList>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Search</label>
+                            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                        </div>
+
+                        <!-- Year -->
+                        <div class="col-md-2">
+                            <label>Year</label>
+                            <asp:DropDownList ID="ddlYear" runat="server" CssClass="form-control" AutoPostBack="false">
+                                <asp:ListItem Text="2026" Value="2026" Selected="True" />
+                                <asp:ListItem Text="2025" Value="2025" />
+                                <asp:ListItem Text="2024" Value="2024" />
                             </asp:DropDownList>
-                        </td>
-                        <td>
-                            <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click"/>
-                            <asp:Label ID="lblmsg" runat="server" Font-Bold="True" ForeColor="Red" Text=""></asp:Label>
-                        </td>
-                        <td>                
-                          <asp:Button  runat="server" class="btn btn-info btn-lg"  Text="Add New"  OnClick="btnAddNew_Click" />
-                        </td>
-                      </tr>  
+                        </div>
+
+                        <!-- Search Button -->
+                        <div class="col-md-1 d-flex align-items-end cus-buttons">
+                            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary w-100" OnClick="btnSearch_Click" />
+                        </div>
+                    </div>
+
+                </div>
+ <br />
                                     
                 <asp:GridView ID="gvEvent" runat="server" class="table table-bordered table-hover table-striped" AutoGenerateColumns="false" DataKeyNames="DonationID"  PageSize="25" 
-                  onpageindexchanging="gvEvent_PageIndexChanging" OnRowDataBound="gvEvent_RowDataBound" ShowFooter="true"  OnRowDeleting="gvEvent_RowDeleting"  EmptyDataText="No records has been added." Style="font-weight: normal;" >
+                  onpageindexchanging="gvEvent_PageIndexChanging" OnRowDataBound="gvEvent_RowDataBound" OnRowDeleting="gvEvent_RowDeleting"  EmptyDataText="No records has been added." Style="font-weight: normal;" >
                 <Columns> 
                    <asp:BoundField HeaderText="Full Name" DataField="FullName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
                    <asp:BoundField HeaderText="Amount" DataField="Amount" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
@@ -109,13 +147,13 @@
                       </ItemTemplate>
                   </asp:TemplateField>
                 </Columns>
-                <FooterStyle BackColor="#336699" Font-Bold="True" ForeColor="White" HorizontalAlign="Right" />
+              <%--  <FooterStyle BackColor="#336699" Font-Bold="True" ForeColor="White" HorizontalAlign="Right" />--%>
                 </asp:GridView>
               
                   Total Items Count: <asp:Label ID="lblRecords" runat="server" Text="Label"></asp:Label> <br />
                   Total Reg Amount:  <asp:Label ID="lblTotalAmount" runat="server" Text="Label"></asp:Label> 
-                <table id="FooterTable" border="1" cellpadding="0" cellspacing="0" style="border-collapse:collapse">
-                </table>
+               <%-- <table id="FooterTable" border="1" cellpadding="0" cellspacing="0" style="border-collapse:collapse">
+                </table>--%>
                                  
             <asp:Label ID="lblresult" runat="server"/>
              <asp:Button ID="btnShowPopup" runat="server" style="display:none"  CssClass="col-lg-6 col-sm-6 col-md-6"/>
@@ -183,7 +221,7 @@
                                                    
                           <div class="form-group">
                            <asp:Button ID="btnUpdate" CommandName="Update" runat="server" class="btn btn-primary btn-lg"  OnClientClick="return onNextButtonClient();"  Text="Update" OnClick="btnUpdate_Click"/>
-                              <asp:Button ID="btnAddNew" class="btn btn-default" runat="server" Text="Add New" OnClick="btnAddNew_Click1" OnClientClick="return onNextButtonClient();" />
+                              <asp:Button ID="btnAddNew" class="btn btn-primary btn-lg" runat="server" Text="Add New" OnClick="btnAddNew_Click1" OnClientClick="return onNextButtonClient();" />
                            <asp:Button ID="btnCancel" runat="server"  class="btn btn-primary btn-lg" Text="Cancel" OnClientClick="clearInformation()" />
                           </div>
                            
@@ -192,8 +230,8 @@
                   </div>
                 </div>
             </asp:Panel>                    
-       </tbody>
-      </table>
+     <%--  </tbody>
+      </table>--%>
              </div>
          </div>
     </div>
@@ -275,7 +313,7 @@
                     msg.fadeOut();     // hides with animation
                     msg.text('');      // clears the message content
                 }, 5000); // 5000ms = 5 seconsds
-            }
+        }
     });
 
     $(document).ready(function () {
@@ -337,7 +375,7 @@
         {
             return false;
         }
-        else { return true }
+        else { $('#loader').show(); return true }
     }
 
     // This function is used to hide error name
@@ -404,5 +442,28 @@
         $("#jsonModal").hide();
         __doPostBack('<%= btnBindGrid.UniqueID %>', '');
     }
+
+    function updatePaytmenStatus(e) {
+        try {
+            if (e) e.preventDefault();
+            showLoader();
+            $.ajax({
+                type: "POST",
+                url: "/DonationDetails.aspx/UpdatePendingPaymentStatus",
+                contentType: "application/json; charset=utf-8",
+                success: function (res) {
+                    hideLoader();
+                    __doPostBack('<%= btnBindGrid.UniqueID %>', '');
+                },
+                error: function () {
+                    hideLoader();
+                    //alert("Error loading data");
+                }
+            });
+            } catch (e) {
+            console.error('Error in Donation updatePaytmenStatus', e);
+            hideLoader();
+            }
+        }
 </script>
 </asp:Content>

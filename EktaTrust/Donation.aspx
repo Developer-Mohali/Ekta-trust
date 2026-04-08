@@ -62,7 +62,7 @@
 
           <div class="form-group">
             <label>Mobile Number</label>
-            <input type="tel" id="txtMobile" class="form-control" placeholder="Enter mobile number" />
+            <input type="tel" id="txtMobile" class="form-control" autocomplete="off" placeholder="Enter mobile number" />
           </div>
 
           <div class="form-group">

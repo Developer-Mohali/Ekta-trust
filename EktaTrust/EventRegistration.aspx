@@ -296,7 +296,7 @@ body section {
                     <div class="form-group col-sm-12">
                         <label style="margin-right:10px;">Mobile Number:</label>
                         <div>
-                            <input type="text" maxlength="10" class="form-control" id="phone" name="phone" placeholder="Enter Mobile Number" />
+                            <input type="text" maxlength="10" class="form-control" id="phone" name="phone" autocomplete="off" placeholder="Enter Mobile Number" />
                             <span id="phoneError" class="help-block" style="color: red"></span>
                         </div>
                     </div>

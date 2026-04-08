@@ -147,7 +147,7 @@ Public Class PaytmCallBack
         Return serialNumber
     End Function
 
-    Public Shared Sub UpdateOderInDonation(orderId As String, status As String, txnId As String, apiResponse As String, paymentMode As String)
+    Public Shared Sub UpdateOderInDonation(orderId As String, status As String, txnId As String, apiResponse As String, Optional paymentMode As String = Nothing)
 
         Dim serialNumber As String
 

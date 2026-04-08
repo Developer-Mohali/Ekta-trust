@@ -126,28 +126,34 @@ Public Class DonationDetails
 
     'This method is used To Update the data
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs)
-        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
-        Using con As New MySqlConnection(constr)
-            Using cmd As New MySqlCommand("UPDATE Donation SET  FullName=@FullName, Amount=@Amount,MobileNumber=@MobileNumber,ModeOfPayment=@ModeOfPayment,PaymentStatus=@StatusOfPayment,Address=@Address  WHERE DonationID = @DonationID", con)
-                cmd.Parameters.AddWithValue("@DonationID", Convert.ToInt32(lblDonationId.Text))
-                cmd.Parameters.AddWithValue("@FullName", textFullName.Text)
-                cmd.Parameters.AddWithValue("@Amount", textAmount.Text)
-                cmd.Parameters.AddWithValue("@MobileNumber", textMobileNumber.Text)
-                cmd.Parameters.AddWithValue("@ModeOfPayment", ddlModeOfPayment.SelectedItem.Value)
-                cmd.Parameters.AddWithValue("@StatusOfPayment", ddlStatusOfPayment.SelectedItem.Value)
-                cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
-                cmd.Connection = con
-                con.Open()
-                cmd.ExecuteNonQuery()
-                MessageUpdated.Text = "<b>Updated successfull.</b>"
-                con.Close()
-                con.Dispose()
+        Try
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand("UPDATE Donation SET  FullName=@FullName, Amount=@Amount,MobileNumber=@MobileNumber,ModeOfPayment=@ModeOfPayment,PaymentStatus=@StatusOfPayment,Address=@Address  WHERE DonationID = @DonationID", con)
+                    cmd.Parameters.AddWithValue("@DonationID", Convert.ToInt32(lblDonationId.Text))
+                    cmd.Parameters.AddWithValue("@FullName", textFullName.Text)
+                    cmd.Parameters.AddWithValue("@Amount", textAmount.Text)
+                    cmd.Parameters.AddWithValue("@MobileNumber", textMobileNumber.Text)
+                    cmd.Parameters.AddWithValue("@ModeOfPayment", ddlModeOfPayment.SelectedItem.Value)
+                    cmd.Parameters.AddWithValue("@StatusOfPayment", ddlStatusOfPayment.SelectedItem.Value)
+                    cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
+                    cmd.Connection = con
+                    con.Open()
+                    cmd.ExecuteNonQuery()
+                    MessageUpdated.Text = "<b>Updated successfull.</b>"
+                    con.Close()
+                    con.Dispose()
 
+                End Using
             End Using
-        End Using
 
-        gvEvent.EditIndex = -1
-        BindGridView()
+            gvEvent.EditIndex = -1
+            BindGridView()
+        Catch ex As Exception
+            lblmsg.Text = ex.Message
+        Finally
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "HideLoader", "$('#loader').hide();", True)
+        End Try
     End Sub
     'This method is used for Search the data
     Protected Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
@@ -166,10 +172,16 @@ Public Class DonationDetails
                         ElseIf ddlSearchBy.SelectedItem.Text = "Payment Status" Then
                             sql += " WHERE PaymentStatus LIKE @Search"
                         Else ' All
-                            sql += " WHERE FullName LIKE @Search OR PaymentStatus LIKE @Search"
+                            sql += " WHERE (FullName LIKE @Search OR PaymentStatus LIKE @Search)"
                         End If
                         cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
                     End If
+                    If sql.Contains(" WHERE") Then
+                        sql += " And YEAR(CreatedDate) = @YearBy"
+                    Else
+                        sql += " WHERE YEAR(CreatedDate) = @YearBy"
+                    End If
+                    cmd.Parameters.AddWithValue("@YearBy", ddlYear.SelectedValue)
                     ' order by desc
                     sql += " order by DonationID desc"
                     cmd.CommandText = sql
@@ -177,6 +189,16 @@ Public Class DonationDetails
                     Using sda As New MySqlDataAdapter(cmd)
                         Dim dt As New DataTable()
                         sda.Fill(dt)
+                        con.Close()
+                        lblRecords.Text = dt.Rows.Count
+                        lblTotalAmount.Text = 0
+                        If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                            Try
+                                Dim total = dt.AsEnumerable().Where(Function(row) Not String.IsNullOrEmpty(row("Amount").ToString())).Sum(Function(row) Convert.ToDecimal(row("Amount")))
+                                lblTotalAmount.Text = total.ToString()
+                            Catch ex As Exception
+                            End Try
+                        End If
                         gvEvent.DataSource = dt
                         gvEvent.DataBind()
                     End Using
@@ -235,32 +257,40 @@ Public Class DonationDetails
 
     'This method is used To insert the data
     Protected Sub btnAddNew_Click1(sender As Object, e As EventArgs)
-        Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,ModeOfPayment,PaymentStatus,Address,CreatedDate)VALUES(@FullName, @Amount,@MobileNumber,@ModeOfPayment,@StatusOfPayment,@Address,@CreatedDate)"
-        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
-        Using con As MySqlConnection = New MySqlConnection(constr)
-            Using cmd As MySqlCommand = New MySqlCommand(query)
-                cmd.Parameters.AddWithValue("@FullName", textFullName.Text)
-                cmd.Parameters.AddWithValue("@Amount", textAmount.Text)
-                cmd.Parameters.AddWithValue("@MobileNumber", textMobileNumber.Text)
-                cmd.Parameters.AddWithValue("@ModeOfPayment", ddlModeOfPayment.SelectedItem.Text)
-                cmd.Parameters.AddWithValue("@StatusOfPayment", ddlStatusOfPayment.SelectedItem.Text)
-                cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
-                cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now)
-                cmd.Connection = con
-                con.Open()
-                cmd.ExecuteNonQuery()
-                MessageUpdated.Text = "<b>Insert successfull.</b>"
-                con.Close()
-                lblDonationId.Text = 0
-                textFullName.Text = ""
-                textAmount.Text = ""
-                textMobileNumber.Text = ""
-                ddlModeOfPayment.SelectedItem.Text = ""
-                ddlStatusOfPayment.SelectedItem.Text = ""
-                txtAddress.Text = ""
+        Try
+            Dim serialNumber = PaytmCallBack.GenerateSerialNumber()
+            Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,ModeOfPayment,PaymentStatus,Address,CreatedDate, SerialNo)VALUES(@FullName, @Amount,@MobileNumber,@ModeOfPayment,@StatusOfPayment,@Address,@CreatedDate, @SerialNo)"
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Using con As MySqlConnection = New MySqlConnection(constr)
+                Using cmd As MySqlCommand = New MySqlCommand(query)
+                    cmd.Parameters.AddWithValue("@FullName", textFullName.Text)
+                    cmd.Parameters.AddWithValue("@Amount", textAmount.Text)
+                    cmd.Parameters.AddWithValue("@MobileNumber", textMobileNumber.Text)
+                    cmd.Parameters.AddWithValue("@ModeOfPayment", ddlModeOfPayment.SelectedItem.Text)
+                    cmd.Parameters.AddWithValue("@StatusOfPayment", ddlStatusOfPayment.SelectedItem.Text)
+                    cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
+                    cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now)
+                    cmd.Parameters.AddWithValue("@SerialNo", serialNumber)
+                    cmd.Connection = con
+                    con.Open()
+                    cmd.ExecuteNonQuery()
+                    MessageUpdated.Text = "<b>Insert successfull.</b>"
+                    con.Close()
+                    lblDonationId.Text = 0
+                    textFullName.Text = ""
+                    textAmount.Text = ""
+                    textMobileNumber.Text = ""
+                    ddlModeOfPayment.SelectedItem.Text = ""
+                    ddlStatusOfPayment.SelectedItem.Text = ""
+                    txtAddress.Text = ""
+                End Using
             End Using
-        End Using
-        Me.BindGridView()
+            Me.BindGridView()
+        Catch ex As Exception
+            lblmsg.Text = ex.Message
+        Finally
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "HideLoader", "$('#loader').hide();", True)
+        End Try
     End Sub
 
     Private Sub GenerateDonationReciept()
@@ -421,4 +451,140 @@ Public Class DonationDetails
     Protected Sub btnBindGrid_Click(sender As Object, e As EventArgs)
         BindGridView()
     End Sub
+
+    <System.Web.Services.WebMethod()>
+    Public Shared Sub UpdatePendingPaymentStatus()
+        Try
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Dim dt As New DataTable()
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand("SELECT OrderId FROM donation WHERE PaymentStatus='Pending'", con)
+                    Using da As New MySqlDataAdapter(cmd)
+                        da.Fill(dt)
+                    End Using
+                End Using
+            End Using
+
+            If dt.Rows.Count > 0 Then
+                For Each row In dt.Rows
+                    AdminBIBData.GetJsonData(row("OrderId"), "Pending", "donation")
+                Next
+            End If
+        Catch ex As Exception
+            Logger.LogError($"Error in Donation:: UpdatePendingPaymentStatus :: Error :::", ex)
+        End Try
+    End Sub
+
+#Region "Export to Excel"
+    Private Function GetExportData() As DataTable
+        Dim dt As New DataTable()
+        Try
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand()
+                    Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber as `Pan Number`, PaymentStatus, Address, OrderId,TxnId as `Transaction Id`, CreatedDate as `Registration On` FROM Donation"
+                    If Not String.IsNullOrEmpty(txtSearch.Text) Then
+                        If ddlSearchBy.SelectedItem.Text = "Full Name" Then
+                            sql += " WHERE FullName LIKE @Search"
+                        ElseIf ddlSearchBy.SelectedItem.Text = "Payment Status" Then
+                            sql += " WHERE PaymentStatus LIKE @Search"
+                        Else ' All
+                            sql += " WHERE FullName LIKE @Search OR PaymentStatus LIKE @Search"
+                        End If
+                        cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
+                    End If
+                    If sql.Contains(" WHERE") Then
+                        sql += " YEAR(CreatedDate) = @YearBy"
+                    Else
+                        sql += " WHERE YEAR(CreatedDate) = @YearBy"
+                    End If
+                    cmd.Parameters.AddWithValue("@YearBy", ddlYear.SelectedValue)
+                    ' order by desc
+                    sql += " order by DonationID desc"
+                    cmd.CommandText = sql
+                    cmd.Connection = con
+                    Using sda As New MySqlDataAdapter(cmd)
+                        sda.Fill(dt)
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            Throw
+        Finally
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "HideLoader", "$('#loader').hide();", True)
+        End Try
+        Return dt
+    End Function
+
+    Protected Sub btnExport_Click(sender As Object, e As EventArgs)
+        Try
+            Dim dt As DataTable = GetExportData()
+
+            Response.Clear()
+            Response.Buffer = True
+            Response.AddHeader("content-disposition", "attachment;filename=DonationReport.xls")
+            Response.ContentType = "application/vnd.ms-excel"
+            Response.Charset = ""
+
+            Dim sw As New StringWriter()
+            Dim hw As New HtmlTextWriter(sw)
+
+            hw.WriteLine("<table border='1'>")
+
+            ' Header
+            hw.WriteLine("<tr>")
+            For Each col As DataColumn In dt.Columns
+                hw.WriteLine("<th style='background-color:#d9d9d9'>" & col.ColumnName & "</th>")
+            Next
+            hw.WriteLine("</tr>")
+
+            ' Rows
+            For Each row As DataRow In dt.Rows
+                hw.WriteLine("<tr>")
+                For i As Integer = 0 To dt.Columns.Count - 1
+                    Dim cellValue As String = row(i).ToString()
+                    Dim bgColor As String = ""
+
+                    ' Column index 11 = Payment Status
+                    If i = 6 Then
+                        Select Case cellValue.Trim().ToLower()
+                            Case "success"
+                                bgColor = "LightGreen"
+                            Case "pending"
+                                bgColor = "LightYellow"
+                            Case "failed"
+                                bgColor = "LightCoral"
+                            Case "cancelled"
+                                bgColor = "LightGray"
+                            Case "expired"
+                                bgColor = "Orange"
+                            Case Else
+                                bgColor = "White"
+                        End Select
+                        hw.WriteLine("<td style='background-color:" & bgColor & "'>" & cellValue & "</td>")
+                    ElseIf i = 4 Then
+                        Dim paymentType = PaytmPaymentResponse.GetPaymentModeName(cellValue)
+                        hw.WriteLine("<td>" & paymentType & "</td>")
+                    ElseIf i = 9 Then
+                        hw.WriteLine("<td style='mso-number-format:\@'>" & cellValue & "</td>")
+                    Else
+                        hw.WriteLine("<td>" & cellValue & "</td>")
+                    End If
+
+                Next
+                hw.WriteLine("</tr>")
+            Next
+
+            hw.WriteLine("</table>")
+
+            Response.Write(sw.ToString())
+            Response.End()
+
+        Catch ex As Exception
+            MessageUpdated.Text = "Got error while exporting excel"
+        Finally
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "HideLoader", "$('#loader').hide();", True)
+        End Try
+    End Sub
+#End Region
 End Class

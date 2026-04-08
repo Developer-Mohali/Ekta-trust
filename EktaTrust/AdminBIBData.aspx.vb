@@ -19,10 +19,19 @@ Public Class AdminBIBData
                 If Not (currentStatus.ToUpper().Contains("SUCCESS") Or currentStatus.ToUpper().Contains("FAILED") Or currentStatus.ToUpper().Contains("CANCELLED")) Then
                     Dim json = Newtonsoft.Json.Linq.JObject.Parse(response)
                     Dim status = json("body")("resultInfo")("resultStatus").ToString()
+                    Dim taxId = json("body")("txnId").ToString()
                     If status = "TXN_SUCCESS" Then
-                        PaytmCallBack.UpdatePaymentStatus(id, "Success", response, paymentFor.ToLower().Equals("donation"))
+                        If paymentFor.ToLower().Equals("donation") Then
+                            PaytmCallBack.UpdateOderInDonation(id, "Success", taxId, response)
+                        Else
+                            PaytmCallBack.UpdateOrderInBIB(id, "Success", taxId, response)
+                        End If
                     ElseIf status = "TXN_FAILURE" Then
-                        PaytmCallBack.UpdatePaymentStatus(id, "Failed", response, paymentFor.ToLower().Equals("donation"))
+                        If paymentFor.ToLower().Equals("donation") Then
+                            PaytmCallBack.UpdateOderInDonation(id, "Failed", taxId, response)
+                        Else
+                            PaytmCallBack.UpdateOrderInBIB(id, "Failed", taxId, response)
+                        End If
                     End If
                 End If
             Catch ex As Exception
@@ -48,7 +57,7 @@ Public Class AdminBIBData
 
             If dt.Rows.Count > 0 Then
                 For Each row In dt.Rows
-                    AdminBIBData.GetJsonData(row("OrderId"), "Pending", "Registration")
+                    GetJsonData(row("OrderId"), "Pending", "Registration")
                 Next
             End If
         Catch ex As Exception

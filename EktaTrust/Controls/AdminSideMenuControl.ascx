@@ -55,7 +55,7 @@
            <li><a href="CareerCounsellingDetails.aspx">Career Counselling Details</a></li>
            <li><a href="AtrocityReportingDetails.aspx">Atrocities Reporting Details</a></li>
            <li><a href="AddNotification.aspx">Add New Notification</a></li>
-           <li><a href="DonationDetails.aspx">Donation Details</a></li>
+          <%-- <li><a href="DonationDetails.aspx">Donation Details</a></li>--%>
            <li><a href="CertificationReport.aspx">Certification</a></li>
            <li><a href="FeedbackAndSuggestion.aspx">Feedback And Suggestion</a></li>
            <li><a href="CreativeCompetitionRegistered.aspx">Creative Competition</a></li>

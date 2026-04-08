@@ -51,6 +51,10 @@ function TotalRecord() {
          .col-md-10{
              padding:0px;
          }
+        .table a {
+            color: #337ab7;
+           padding-left:10px !important;
+       }
 </style>
 
     <div class="col-md-12">
@@ -83,6 +87,7 @@ function TotalRecord() {
             <asp:Button ID="btnDownload" Text="Sample CSV" runat="server" CssClass="btn btn-outline-secondary" OnClick="DownloadFile" />
 
             <asp:Button ID="btnAddBIB" runat="server" Text="Add New" CssClass="btn btn-success" OnClick="AddBIB_Click" />
+                        <button class="btn btn-primary" title="Refresh Payment Status" onclick="updatePaytmenStatus()">Refresh Payment</button>
 
              <asp:Button ID="btnExport" runat="server" CssClass="btn btn-primary" Text="Export to Excel" OnClientClick="$('#loader').show(); setTimeout($('#loader').hide(), 2000);" OnClick="btnExport_Click" Style="float:right;" />
         </div>
@@ -345,9 +350,6 @@ function TotalRecord() {
                 msg.text('');      // clears the message content
             }, 5000); // 5000ms = 5 seconsds
         }
-        setInterval(function () {
-            updatePaytmenStatus();
-        }, 50000); // 5 minutes
     });
 
     function validateAndSubmit() {
@@ -425,13 +427,16 @@ function TotalRecord() {
         __doPostBack('<%= btnBindGrid.UniqueID %>', '');
     }
 
-    function updatePaytmenStatus() {
+    function updatePaytmenStatus(e) {
         try {
+            if (e) e.preventDefault();
+            showLoader();
             $.ajax({
                 type: "POST",
                 url: "/AdminBIBData.aspx/UpdatePendingPaymentStatus",
                 contentType: "application/json; charset=utf-8",
                 success: function (res) {
+                    hideLoader();
                     __doPostBack('<%= btnBindGrid.UniqueID %>', '');
                 },
                 error: function () {
@@ -440,6 +445,7 @@ function TotalRecord() {
                 }
             });
         } catch (e) {
+            hideLoader();
             console.error('Error in updatePaytmenStatus', e);
         }
     }

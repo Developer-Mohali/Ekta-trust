@@ -139,6 +139,7 @@ Public Class BIBDataRunner
                     con.Close()
 
                     lblRecords.Text = dt.Rows.Count
+                    lblTotalAmount.Text = 0
                     If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
                         Try
                             Dim total = dt.AsEnumerable().Where(Function(row) Not String.IsNullOrEmpty(row("Amount").ToString())).Sum(Function(row) Convert.ToDecimal(row("Amount")))
@@ -826,7 +827,7 @@ Public Class BIBDataRunner
             Using con As New MySqlConnection(connStr)
                 Dim query As String = "SELECT DISTINCT bd.ID, bd.BIBNo, bd.RunnerName, bd.RunCatagory as `Run Category`, bd.TShirtSize, bd.Gender, bd.RunnerDOB, 
                                         bd.MobileNumber as `Contact Number`, bd.EmergencyContactName, bd.EmergencyContactNumber,
-                                        bd.BankReferenceNo as `Payment Reference`, PaymentStatus as `Payment Status`, OrderId, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.CreatedAt as `Registration At`,   
+                                        bd.BankReferenceNo as `Payment Reference`, PaymentStatus as `Payment Status`, OrderId, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.CreatedAt as `Registration On`,   
                                         bd.TxnId as `Transaction Id` FROM bibdata bd 
                                         left join user u  on bd.UserId = u.ID
                                         left join signup s on s.UserId = bd.UserId"
