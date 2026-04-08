@@ -117,7 +117,7 @@ z-index: 10000;
         <!-- Left: Search -->
         <div style="flex:1 1 auto; min-width:250px;">
             Search
-            <asp:TextBox ID="txtSearch" runat="server" style="width:200px;"></asp:TextBox>
+            <asp:TextBox ID="txtSearch" runat="server" autocomplete="off" style="width:200px;"></asp:TextBox>
             <asp:Button ID="Button1" runat="server" Text="Search" OnClick="Button1_Click" />
         </div>
 

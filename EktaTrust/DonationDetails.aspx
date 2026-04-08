@@ -63,7 +63,7 @@
          <div class="col-md-10 ">
              <h2 class="admin-heading" style="font-size: 30px;">Donation Details</h2>           
              <div class="table-responsive">
-                 <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green" style="margin-left:411px"></asp:Label>
+                 <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green"></asp:Label>
                  <asp:Label ID="lblmsg" runat="server" Font-Bold="True" ForeColor="Red" Text=""></asp:Label>
                   <br />
                 <div class="card p-3" style="margin:unset;">
@@ -313,6 +313,13 @@
                     msg.fadeOut();     // hides with animation
                     msg.text('');      // clears the message content
                 }, 5000); // 5000ms = 5 seconsds
+        }
+        var successMsg = $('#<%= MessageUpdated.ClientID %>');
+        if (successMsg && successMsg.text().trim() !== "") {
+            setTimeout(function () {
+                successMsg.fadeOut();     // hides with animation
+                successMsg.text('');      // clears the message content
+            }, 5000); // 5000ms = 5 seconsds
         }
     });
 

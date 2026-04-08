@@ -828,7 +828,7 @@ Public Class BIBDataRunner
                 Dim query As String = "SELECT DISTINCT bd.ID, bd.BIBNo, bd.RunnerName, bd.RunCatagory as `Run Category`, bd.TShirtSize, bd.Gender, bd.RunnerDOB, 
                                         bd.MobileNumber as `Contact Number`, bd.EmergencyContactName, bd.EmergencyContactNumber,
                                         bd.BankReferenceNo as `Payment Reference`, PaymentStatus as `Payment Status`, OrderId, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.CreatedAt as `Registration On`,   
-                                        bd.TxnId as `Transaction Id` FROM bibdata bd 
+                                        bd.TxnId as `Transaction Id`, bd.Amount FROM bibdata bd 
                                         left join user u  on bd.UserId = u.ID
                                         left join signup s on s.UserId = bd.UserId"
                 Dim cmd As New MySqlCommand()

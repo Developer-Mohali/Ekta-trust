@@ -494,7 +494,7 @@ Public Class DonationDetails
                         cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
                     End If
                     If sql.Contains(" WHERE") Then
-                        sql += " YEAR(CreatedDate) = @YearBy"
+                        sql += " And YEAR(CreatedDate) = @YearBy"
                     Else
                         sql += " WHERE YEAR(CreatedDate) = @YearBy"
                     End If
