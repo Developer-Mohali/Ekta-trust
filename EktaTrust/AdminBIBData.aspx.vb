@@ -19,7 +19,7 @@ Public Class AdminBIBData
                 If Not (currentStatus.ToUpper().Contains("SUCCESS") Or currentStatus.ToUpper().Contains("FAILED") Or currentStatus.ToUpper().Contains("CANCELLED")) Then
                     Dim json = Newtonsoft.Json.Linq.JObject.Parse(response)
                     Dim status = json("body")("resultInfo")("resultStatus").ToString()
-                    Dim taxId = json("body")("txnId").ToString()
+                    Dim taxId = If(json("body")?("txnId")?.ToString(), Nothing)
                     If status = "TXN_SUCCESS" Then
                         If paymentFor.ToLower().Equals("donation") Then
                             PaytmCallBack.UpdateOderInDonation(id, "Success", taxId, response)
@@ -35,7 +35,7 @@ Public Class AdminBIBData
                     End If
                 End If
             Catch ex As Exception
-                Logger.LogError($"Error in GetJsonData :: OrderId :: {id} :: Error :::", ex)
+                Logger.LogError($"Error in GetJsonData :: OrderId :: {id} :: PaymentFor :: {paymentFor} ::: Error :::", ex)
             End Try
             Return response
         End If

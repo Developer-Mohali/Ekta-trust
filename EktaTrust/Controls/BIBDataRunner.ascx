@@ -38,9 +38,6 @@ function TotalRecord() {
          .btn{
              height: fit-content;
          }
-         .cus-buttons {
-             margin-top: 20px;
-         }
          div:has(> table.table.table-bordered.table-hover.table-striped) {
           overflow: auto;
         }
@@ -58,22 +55,28 @@ function TotalRecord() {
 </style>
 
     <div class="col-md-12">
-        <h2 class="admin-heading" style="font-size: 30px;">BIB Data</h2>
-           
-    <div class="table-responsive">
+        <!-- Header -->
+        <div class="header-admin">
+            <div><h2 class="">BIB Data</h2></div>
+             <div>
+                 <button class="btn btn-primary" title="Refresh Payment Status" onclick="updatePaytmenStatus()">Refresh Payment</button>
+                 <asp:Button ID="btnAddBIB" runat="server" Text="Add New" CssClass="btn btn-success" OnClick="AddBIB_Click" />
+             </div>
+        </div>
+    <div class="table-responsive p-0">
         <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green"></asp:Label>
         <asp:Label ID="AddCount" runat="server" Text="" ClientIDMode="Static"></asp:Label>
- <br />
-<div class="card p-3" style="margin:unset;">
+
+<div class="card search-card">
 
     <!-- 🔼 Top Row: Upload + Actions -->
     <div class="row align-items-center mb-3">
 
         <!-- Upload Section -->
-        <div class="col-md-6 d-flex align-items-center gap-2">
+        <div class="col-md-3">
             <label class="mb-0">Upload CSV:</label>
             <asp:FileUpload ID="BIBDataFileUpload" runat="server" CssClass="form-control w-auto" />
-
+         </div>  <div class="col-md-3">
             <div id="divUploadUserDDL" runat="server" ClientIDMode="Static">
                 <label class="mb-0 ms-2">Created By:</label>
                 <asp:DropDownList ID="ddlUploadedBy" runat="server" CssClass="form-control w-auto"></asp:DropDownList>
@@ -85,10 +88,9 @@ function TotalRecord() {
             <asp:Button ID="btnUpload" Text="Upload" runat="server" CssClass="btn btn-primary" OnClientClick="$('#loader').show();" OnClick="ImportFromExcel" />
 
             <asp:Button ID="btnDownload" Text="Sample CSV" runat="server" CssClass="btn btn-outline-secondary" OnClick="DownloadFile" />
-
-            <asp:Button ID="btnAddBIB" runat="server" Text="Add New" CssClass="btn btn-success" OnClick="AddBIB_Click" />
-                        <button class="btn btn-primary" title="Refresh Payment Status" onclick="updatePaytmenStatus()">Refresh Payment</button>
-
+                <%--   <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-primary" ClientIDMode="Static" ToolTip="Generate Certificate" OnClick="btnExport_Click" Style="float:right;">                       
+                        <i class="fa fa-file-excel-o"></i>Export
+                    </asp:LinkButton>   --%>
              <asp:Button ID="btnExport" runat="server" CssClass="btn btn-primary" Text="Export to Excel" OnClientClick="$('#loader').show(); setTimeout($('#loader').hide(), 2000);" OnClick="btnExport_Click" Style="float:right;" />
         </div>
     </div>
@@ -99,7 +101,7 @@ function TotalRecord() {
         <!-- Main Search -->
         <div class="col-md-4">
             <label>Search</label>
-            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Bib No / Payment Status"></asp:TextBox>
+            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Bib No / Payment Status / OrderId"></asp:TextBox>
         </div>
 
         <!-- Date -->
@@ -140,7 +142,7 @@ function TotalRecord() {
  <br />
           
  <asp:GridView ID="gvEvent" runat="server" class="table table-bordered table-hover table-striped" AutoGenerateColumns="false" DataKeyNames="ID"  PageSize="25" 
-   EmptyDataText="No records has been added." Style="font-weight: normal;" OnRowCommand="gvMIP_RowAction" onpageindexchanging="gvEvent_PageIndexChanging" OnRowDataBound="GridView1_RowDataBound">
+   EmptyDataText="No records found." Style="font-weight: normal;" OnRowCommand="gvMIP_RowAction" onpageindexchanging="gvEvent_PageIndexChanging" OnRowDataBound="GridView1_RowDataBound">
 <Columns> 
     
   <%--  <asp:BoundField HeaderText="Category" DataField="CategoryName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
@@ -158,7 +160,7 @@ function TotalRecord() {
   
    <%-- <asp:BoundField HeaderText="Blood Group" DataField="BloodGroup" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
 
-    <asp:BoundField HeaderText="Contact Number" DataField="MobileNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+    <asp:BoundField HeaderText="Contact" DataField="MobileNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
  <%--   <asp:BoundField HeaderText="Emergency Contact Name" DataField="EmergencyContactName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
   <%--  <asp:BoundField HeaderText="Emergency Contact Number" DataField="EmergencyContactNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
     <asp:BoundField HeaderText="Amount" DataField="Amount" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
@@ -166,17 +168,16 @@ function TotalRecord() {
      <asp:BoundField HeaderText="Payment Status" DataField="PaymentStatus" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
      <asp:BoundField HeaderText="OrderId" DataField="OrderId" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
     <asp:BoundField HeaderText="Created By" DataField="CreatedBy" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
-    <asp:BoundField HeaderText="Registration On" DataField="CreatedAt" DataFormatString="{0:dd-MMM-yyyy}" HtmlEncode="false" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+    <asp:BoundField HeaderText="Reg. On" DataField="CreatedAt" DataFormatString="{0:dd-MMM-yyyy}" HtmlEncode="false" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
 <%--    <asp:BoundField HeaderText="Year" DataField="Year" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
 
-       <asp:TemplateField HeaderText="Action" ItemStyle-Width="72" >
+       <asp:TemplateField HeaderText="Action" ItemStyle-Width="90" >
         <ItemTemplate>
-             <asp:ImageButton ID="ButtonEdit" runat="server" ToolTip="Edit" CommandName="EditRow" CommandArgument='<%# Eval("Id") %>' Width="25" Height="25"  CssClass="input" ImageUrl="../Images/edit.png" />
-            <asp:ImageButton ID="ButtonDelete" runat="server" ToolTip="Delete" CommandName="DeleteRow" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('Are you sure you want to delete this event?');"  Text="Delete" Width="25" Height="25"  CssClass="input" ImageUrl="../Images/minimal-97-128.png" />
-             <i class="fa fa-refresh" style="cursor:pointer; font-size: large;" onclick='showJson("<%# HttpUtility.JavaScriptStringEncode(Eval("OrderId").ToString()) %>", "<%# HttpUtility.JavaScriptStringEncode(Eval("PaymentStatus").ToString()) %>")' title="Refresh status from Paytm"></i>
-       
-                   <asp:LinkButton ID="btnCertificate" runat="server" ToolTip="Generate Certificate" OnClick="generate_Certificate">                       
-                        <i class="fa fa-download" style="cursor:pointer; font-size: large;"></i>
+             <asp:ImageButton ID="ButtonEdit" runat="server" ToolTip="Edit" CommandName="EditRow" CommandArgument='<%# Eval("Id") %>' Width="15" Height="15"  CssClass="input" ImageUrl="../Images/edit.png" />
+            <asp:ImageButton ID="ButtonDelete" runat="server" ToolTip="Delete" CommandName="DeleteRow" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('Are you sure you want to delete this event?');"  Text="Delete" Width="15" Height="15"  CssClass="input" ImageUrl="../Images/minimal-97-128.png" />
+             <i class="fa fa-refresh" style="cursor:pointer; font-size: medium;" onclick='showJson("<%# HttpUtility.JavaScriptStringEncode(Eval("OrderId").ToString()) %>", "<%# HttpUtility.JavaScriptStringEncode(Eval("PaymentStatus").ToString()) %>")' title="Refresh status from Paytm"></i>
+                   <asp:LinkButton ID="btnCertificate" runat="server" ToolTip="Generate Certificate" OnClick="generate_Certificate" style="padding-left:0px !important;">                       
+                        <i class="fa fa-download" style="cursor:pointer; font-size: medium;"></i>
                     </asp:LinkButton>    
         </ItemTemplate>
           
@@ -184,7 +185,7 @@ function TotalRecord() {
 
 </Columns>
 </asp:GridView>
-            <br />
+          
             <!-- Modal -->
   <asp:Button ID="btnShowPopup" runat="server" style="display:none"  CssClass="col-lg-6 col-sm-6 col-md-6" UseSubmitBehavior="false" />
 <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="btnShowPopup" PopupControlID="pnlpopup" CancelControlID="btnCancel" BackgroundCssClass="modalBackground">
@@ -215,7 +216,7 @@ function TotalRecord() {
     </div>
          <div class="form-group">
         <label>Run Category:  <span style="color:red">*</span></label>
-         <asp:DropDownList ID="txtRunCategory" runat="server" class="form-control" Width="95%" AutoPostBack="true" OnSelectedIndexChanged="txtRunCategory_SelectedIndexChanged">
+         <asp:DropDownList ID="txtRunCategory" runat="server" class="form-control" Width="95%">
              <asp:ListItem Text="Select Run Category" Value="" />
              <asp:ListItem Text="21.09KM" Value="21.09KM" />
              <asp:ListItem Text="10KM" Value="10KM" />
@@ -223,11 +224,11 @@ function TotalRecord() {
          </asp:DropDownList>
          <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtRunCategory" InitialValue="" ErrorMessage="Run Category is Required" ForeColor="Red" Display="Dynamic" ValidationGroup="BibDataSave" />
     </div>
-     <div class="form-group">
+<%--     <div class="form-group">
         <label>BIB Number: <span style="color:red">*</span></label>
         <asp:Textbox ID="txtBibNumber"  Enabled="false" runat="server" class="form-control" Width="95%" />
-        <%-- <asp:RequiredFieldValidator ID="RequiredBiBNo" ControlToValidate="txtBibNumber" runat="server" ErrorMessage="BIB No. is Required" ValidationGroup="BibDataSave" ForeColor="Red" Display="Dynamic" />--%>
-        </div>
+         <asp:RequiredFieldValidator ID="RequiredBiBNo" ControlToValidate="txtBibNumber" runat="server" ErrorMessage="BIB No. is Required" ValidationGroup="BibDataSave" ForeColor="Red" Display="Dynamic" />
+        </div>--%>
 <%--    <div class="form-group">
     <label>Category: </label>
         <asp:Textbox ID="txtCategory" runat="server" class="form-control" Width="95%" Text="Registration For RUN FOR EQUALITY" />
@@ -311,6 +312,10 @@ function TotalRecord() {
      </asp:DropDownList>
    </div>
     <div class="form-group">
+        <label>Amount:</label>
+         <asp:TextBox ID="txtAmount" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
+    </div>
+    <div class="form-group">
     <asp:Button ID="btnAdd" CommandName="Save" runat="server" ValidationGroup="BibDataSave" class="btn btn-primary btn-lg" OnClientClick="return validateAndSubmit();"  Text="Save" OnClick="btnSave_Click"/>
     <asp:Button ID="btnCancel" runat="server"  class="btn btn-primary btn-lg" Text="Cancel" />
     </div>
@@ -331,9 +336,12 @@ function TotalRecord() {
 </div>
 
 <div id="jsonModal" style="display:none; position:fixed; top:10%; left:20%; width:60%; background:#fff; padding:20px; border:1px solid #ccc; z-index:9999;">
-    
-    <h4>Payment Response</h4>
-    
+     <div>
+        <h4>Payment Response</h4>
+         <button type="button" class="close" onclick="closeModal(event)" style="margin-top: -30px;">
+              <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
     <pre id="jsonContent" style="max-height:400px; overflow:auto; background:#f5f5f5; padding:10px;"></pre>
     
     <button type="button" onclick="closeModal(event)" class="btn btn-danger">Close</button>

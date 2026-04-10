@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class BIBDataRunner
 
     '''<summary>
+    '''btnAddBIB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAddBIB As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''MessageUpdated control.
     '''</summary>
     '''<remarks>
@@ -75,15 +84,6 @@ Partial Public Class BIBDataRunner
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnDownload As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''btnAddBIB control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAddBIB As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''btnExport control.
@@ -248,15 +248,6 @@ Partial Public Class BIBDataRunner
     Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''txtBibNumber control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtBibNumber As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
     '''txtName control.
     '''</summary>
     '''<remarks>
@@ -363,6 +354,15 @@ Partial Public Class BIBDataRunner
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlStatusOfPayment As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''txtAmount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtAmount As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''btnAdd control.

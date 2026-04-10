@@ -81,11 +81,20 @@ z-index: 10000;
         margin: 0; 
     }
 
-.gv-center-header th {
+/*.gv-center-header th {
     text-align: center !important;
     vertical-align: middle;
-}
-
+}*/
+        .btn{
+             height: fit-content;
+         }
+         div:has(> table.table.table-bordered.table-hover.table-striped) {
+          overflow: auto;
+        }
+         hr{
+            margin-top: 10px;
+            margin-bottom: 10px;
+         }
  
 </style>
 
@@ -98,45 +107,34 @@ z-index: 10000;
       </div>
   </div>
     <div class="col-md-10 ">
-   
-
-<br />
-
- <h2 class="admin-heading">User Details</h2>
+         <!-- Header -->
+        <div class="header-admin">
+            <div><h2 class="">User Details</h2></div>
+            <div>
+                 <asp:Button ID="Button2" runat="server" CssClass="btn btn-success" Text="Add New User" OnClick="Button2_Click" Style="float:right;" />
+            </div>
+        </div>
+<%--     <h2 class="admin-heading">User Details</h2>--%>
            
 <div class="table-responsive">
     <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green"></asp:Label>
-    <table class="table table-bordered table-hover table-striped">
-           
-        <tbody>
-           
-   <tr>
-       <td style="border-right:none;">
-    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; width:100%;">
+          <div class="card search-card">
 
-        <!-- Left: Search -->
-        <div style="flex:1 1 auto; min-width:250px;">
-            Search
-            <asp:TextBox ID="txtSearch" runat="server" autocomplete="off" style="width:200px;"></asp:TextBox>
-            <asp:Button ID="Button1" runat="server" Text="Search" OnClick="Button1_Click" />
+            <!-- 🔍 Search Row -->
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <label>Search:</label>
+                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Name / Email" autocomplete="off"></asp:TextBox>
+                </div>
+
+                <!-- Search Button -->
+                <div class="col-md-6 text-end cus-buttons">
+                    <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-primary w-100" OnClick="Button1_Click" />
+                </div>
+            </div>
         </div>
+<br />
 
-        <!-- Right: Add -->
-        <div style="margin-top:5px;">
-            <asp:Button ID="Button2" runat="server" Text="Add New User"
-                OnClick="Button2_Click" UseSubmitBehavior="False" />
-        </div>
-
-    </div>
-</td>
-
-
-    </tr>
-
-
-    
-
- <br/>
           
 <asp:GridView ID="gvUser" runat="server" OnRowDeleting="gvUser_RowDeleting" class="table table-bordered table-hover table-striped gv-center-header" AutoGenerateColumns="false" DataKeyNames="id"  PageSize="25" 
    ShowHeaderWhenEmpty="true" EmptyDataText="No records found." OnRowDataBound="gvUser_RowDataBound" Style="font-weight: normal;" >
@@ -153,19 +151,19 @@ z-index: 10000;
     <asp:BoundField HeaderText="Address" DataField="Address" ItemStyle-HorizontalAlign="Left"></asp:BoundField>  
     <asp:BoundField HeaderText="Mobile Number" DataField="MobileNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
  <asp:BoundField HeaderText="Role Name" DataField="roleName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
-    <asp:TemplateField HeaderText="" ItemStyle-Width="72" >
+    <asp:TemplateField HeaderText="Action" ItemStyle-Width="100">
         <ItemTemplate>
-          <asp:ImageButton ID="imgbtn" ImageUrl="Images/UI_Icons-09-128.png" runat="server" Width="25" Height="25" OnClick="imgbtn_Click"/>
-            <asp:ImageButton ID="ButtonDelete" runat="server" CommandName="Delete" OnClientClick="return confirm('Are you sure you want to delete this event?');"  Text="Delete" Width="25" Height="25"  CssClass="input" ImageUrl="Images/minimal-97-128.png" />
+          <asp:ImageButton ID="imgbtn" ImageUrl="../Images/edit.png" runat="server" Width="15" Height="15" OnClick="imgbtn_Click"/>
+            <asp:ImageButton ID="ButtonDelete" runat="server" CommandName="Delete" OnClientClick="return confirm('Are you sure you want to delete this event?');"  Text="Delete" Width="15" Height="15"  CssClass="input" ImageUrl="Images/minimal-97-128.png" />
         </ItemTemplate>
        </asp:TemplateField>
     
 </Columns>
 </asp:GridView>
                  Total Items Count: <asp:Label ID="lblRecords" runat="server" Text="Label"></asp:Label> 
-            <table border="1"cellpadding="0"cellspacing="0" style="border-collapse: collapse">
+     <%--       <table border="1"cellpadding="0"cellspacing="0" style="border-collapse: collapse">
 
-    </table>
+    </table>--%>
             
   <br />
             

@@ -1,15 +1,16 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage/Inner.Master" CodeBehind="DonationDetails.aspx.vb" Inherits="EktaTrust.DonationDetails" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<%--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
 <%--    <script src="../Js/jquery.blockUI.js"></script>--%>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"  type="text/javascript"></script> 
      <%@ Register Src="~/Controls/AdminSideMenuControl.ascx" TagPrefix="ucSM" TagName="AdminSideMenuControl" %> 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
   
   <style type="text/css">
-     .modalBackground
+    /* .modalBackground
         {
             background-color: Gray;
             filter: alpha(opacity=80);
@@ -28,24 +29,19 @@
         {
             height:190%;
             width:52%;
-        }
-       a 
+        }*/
+       .table a 
         {
+                    color: #337ab7;
             padding-left:10px !important;
         }
-       span 
+       /*span 
         {
             padding-left:10px !important;
-        }
+        }*/
         .btn{
              height: fit-content;
          }
-         .cus-buttons {
-             margin-top: 20px;
-         }
-         div:has(> table.table.table-bordered.table-hover.table-striped) {
-          overflow: auto;
-        }
          hr{
             margin-top: 10px;
             margin-bottom: 10px;
@@ -61,35 +57,25 @@
             </div>
          </div>
          <div class="col-md-10 ">
-             <h2 class="admin-heading" style="font-size: 30px;">Donation Details</h2>           
+                <!-- Header -->
+               <div class="header-admin">
+                   <div><h2 class="">Donation Details</h2></div>
+                    <div>
+                        <button class="btn btn-primary" title="Refresh Payment Status" onclick="updatePaytmenStatus()">Refresh Payment</button>
+                        <asp:Button ID="btnAddBIB" runat="server" Text="Add New" CssClass="btn btn-success" OnClick="btnAddNew_Click" />
+                    </div>
+               </div>
+         <%--    <h2 class="admin-heading">Donation Details</h2>     --%>      
              <div class="table-responsive">
                  <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green"></asp:Label>
                  <asp:Label ID="lblmsg" runat="server" Font-Bold="True" ForeColor="Red" Text=""></asp:Label>
-                  <br />
-                <div class="card p-3" style="margin:unset;">
-
-                    <!-- 🔼 Top Row: Upload + Actions -->
-                    <div class="row align-items-center mb-3">
-
-                        <!-- Upload Section -->
-                    <%--    <div class="col-md-6 d-flex align-items-center gap-2">
-
-                        </div>--%>
-
-                        <!-- Buttons -->
-                        <div class="col-md-12 text-end">
-                            <asp:Button ID="btnAddBIB" runat="server" Text="Add New" CssClass="btn btn-success" OnClick="btnAddNew_Click" />
-                             <button class="btn btn-primary" title="Refresh Payment Status" onclick="updatePaytmenStatus()">Refresh Payment</button>
-
-                             <asp:Button ID="btnExport" runat="server" CssClass="btn btn-primary" Text="Export to Excel" OnClientClick="$('#loader').show(); setTimeout($('#loader').hide(), 2000);" OnClick="btnExport_Click" Style="float:right;" />
-                        </div>
-                    </div>
+                
+                <div class="card search-card">
 
                     <!-- 🔍 Search Row -->
                     <div class="row align-items-center">
-                        <hr />
                         <!-- Main Search -->
-                        <div class="col-md-4">
+                        <div class="col-md-4" style="display:none;">
                             <label>Search By:</label>
                               <asp:DropDownList ID="ddlSearchBy" runat="server" CssClass="form-control" AutoPostBack="false" >          
                                    <asp:ListItem Text="All"></asp:ListItem>
@@ -99,7 +85,7 @@
                         </div>
                         <div class="col-md-4">
                             <label>Search</label>
-                            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Name / Payment Status / OrderId" autocomplete="off"></asp:TextBox>
                         </div>
 
                         <!-- Year -->
@@ -113,8 +99,9 @@
                         </div>
 
                         <!-- Search Button -->
-                        <div class="col-md-1 d-flex align-items-end cus-buttons">
+                        <div class="col-md-6 d-flex align-items-end cus-buttons">
                             <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary w-100" OnClick="btnSearch_Click" />
+                             <asp:Button ID="btnExport" runat="server" CssClass="btn btn-primary" Text="Export to Excel" OnClientClick="$('#loader').show(); setTimeout($('#loader').hide(), 2000);" OnClick="btnExport_Click" Style="float:right;" />
                         </div>
                     </div>
 
@@ -122,7 +109,7 @@
  <br />
                                     
                 <asp:GridView ID="gvEvent" runat="server" class="table table-bordered table-hover table-striped" AutoGenerateColumns="false" DataKeyNames="DonationID"  PageSize="25" 
-                  onpageindexchanging="gvEvent_PageIndexChanging" OnRowDataBound="gvEvent_RowDataBound" OnRowDeleting="gvEvent_RowDeleting"  EmptyDataText="No records has been added." Style="font-weight: normal;" >
+                  onpageindexchanging="gvEvent_PageIndexChanging" OnRowDataBound="gvEvent_RowDataBound" OnRowDeleting="gvEvent_RowDeleting"  EmptyDataText="No records found." Style="font-weight: normal;" >
                 <Columns> 
                    <asp:BoundField HeaderText="Full Name" DataField="FullName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
                    <asp:BoundField HeaderText="Amount" DataField="Amount" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
@@ -135,14 +122,14 @@
                      <asp:BoundField HeaderText="OrderId" DataField="OrderId" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
                    <asp:BoundField HeaderText="Donated On" DataField="CreatedDate" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
                    <asp:BoundField HeaderText="TransId" DataField="TxnId" ItemStyle-HorizontalAlign="Left" Visible="false"></asp:BoundField> 
-                  <asp:TemplateField HeaderText="Action" ItemStyle-Width="72" >
+                  <asp:TemplateField HeaderText="Action" ItemStyle-Width="90" >
                       <ItemTemplate>
-                          <asp:ImageButton ID="imgbtn" ImageUrl="Images/UI_Icons-09-128.png" runat="server" Width="25" Height="25" OnClick="imgbtn_Click" />
-                          <asp:ImageButton ID="ButtonDelete" runat="server" CommandName="Delete" Text="Delete" Width="25" Height="25" OnClientClick="return confirm('Are you sure you want to delete this event?');" CssClass="input" ImageUrl="Images/minimal-97-128.png" />
-                   <i class="fa fa-refresh" style="cursor:pointer; font-size: large;" onclick='showJson("<%# HttpUtility.JavaScriptStringEncode(Eval("OrderId").ToString()) %>", "<%# HttpUtility.JavaScriptStringEncode(Eval("PaymentStatus").ToString()) %>")' title="Refresh status from Paytm"></i>
+                          <asp:ImageButton ID="imgbtn" ImageUrl="../Images/edit.png" runat="server" Width="15" Height="15" OnClick="imgbtn_Click" />
+                          <asp:ImageButton ID="ButtonDelete" runat="server" CommandName="Delete" Text="Delete" Width="15" Height="15" OnClientClick="return confirm('Are you sure you want to delete this event?');" CssClass="input" ImageUrl="Images/minimal-97-128.png" />
+                   <i class="fa fa-refresh" style="cursor:pointer; font-size: medium;" onclick='showJson("<%# HttpUtility.JavaScriptStringEncode(Eval("OrderId").ToString()) %>", "<%# HttpUtility.JavaScriptStringEncode(Eval("PaymentStatus").ToString()) %>")' title="Refresh status from Paytm"></i>
                           <!-- Certificate -->
-                        <asp:LinkButton ID="btnCertificate" runat="server" ToolTip="Generate Certificate" OnClick="generate_Certificate">
-                            <i class="fa fa-download" style="cursor:pointer; font-size: large;"></i>
+                        <asp:LinkButton ID="btnCertificate" runat="server" ToolTip="Generate Certificate" OnClick="generate_Certificate" style="padding-left:0px !important;">
+                            <i class="fa fa-download" style="cursor:pointer; font-size: medium;"></i>
                         </asp:LinkButton>
                       </ItemTemplate>
                   </asp:TemplateField>
@@ -297,7 +284,12 @@
   </div>   
     <div id="jsonModal" style="display:none; position:fixed; top:10%; left:20%; width:60%; background:#fff; padding:20px; border:1px solid #ccc; z-index:9999;">
     
-    <h4>Payment Response</h4>
+     <div>
+        <h4>Payment Response</h4>
+         <button type="button" class="close" onclick="closeModal(event)" style="margin-top: -30px;">
+              <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
     
     <pre id="jsonContent" style="max-height:400px; overflow:auto; background:#f5f5f5; padding:10px;"></pre>
     

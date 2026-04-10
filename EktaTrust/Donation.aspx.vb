@@ -21,9 +21,10 @@ Public Class Donation
     'This method is used To insert the donation information into table...
     <System.Web.Services.WebMethod()>
     Public Shared Function AddDonation(name As String, amount As String, mobile As String, pan As String, address As String, email As String) As Object
-        Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,PanNuber,Address,CreatedDate, EmailId, OrderId, PaymentStatus)
-                                VALUES(@FullName, @Amount,@MobileNumber,@PanNuber,@Address,@CreatedDate,@EmailId, @OrderId, @PaymentStatus)"
+        Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,PanNuber,Address,CreatedDate, EmailId, OrderId, PaymentStatus, PaymentEnv)
+                                VALUES(@FullName, @Amount,@MobileNumber,@PanNuber,@Address,@CreatedDate,@EmailId, @OrderId, @PaymentStatus, @PaymentEnv)"
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+        Dim paymentEnv = If(ConfigurationManager.AppSettings("Environment") = "Prod", "Live", "Test")
         Try
             ' ✅ Generate UNIQUE Order ID for paytm payment...
             Dim orderId As String = DateTime.Now.Ticks.ToString() & "_" & GenerateSixDigitNumber()
@@ -39,6 +40,7 @@ Public Class Donation
                     cmd.Parameters.AddWithValue("@EmailId", email)
                     cmd.Parameters.AddWithValue("@OrderId", orderId)
                     cmd.Parameters.AddWithValue("@PaymentStatus", "Pending")
+                    cmd.Parameters.AddWithValue("@PaymentEnv", paymentEnv)
                     cmd.Connection = con
                     con.Open()
                     cmd.ExecuteNonQuery()

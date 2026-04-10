@@ -18,10 +18,11 @@
    <link href="../Css/css/bootstrap.min.css" rel="stylesheet" />   
     <link href="../Css/DAtetimePicker/bootstrap-datetimepicker.css" rel="stylesheet" />
   <link href="../Css/css/font-awesome.min.css" rel="stylesheet" />
-  <link href="../Css/css/main.css" rel="stylesheet" />
+  <link href="../Css/css/main.css?v=1" rel="stylesheet" />
     <link href="../Css/css/responsive.css" rel="stylesheet" />
     <script src="../Js/js/bootstrap.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script>$(function () {
     $('.navbar-toggle-sidebar').click(function () {
         $('.navbar-nav').toggleClass('slide-in');
@@ -122,7 +123,7 @@
     <div class="navbar-header">
         <button type="button" class="navbar-toggle navbar-toggle-sidebar collapsed"> MENU </button>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        <a class="navbar-brand" href="../Home"> <img src="../Images/images/logo_png.png"" alt="" class="imgDiv" /></a> </div>
+        <a class="navbar-brand" href="../Home" style="padding:1px 15px;"> <img src="../Images/images/logo_png.png" alt="" class="imgDiv" /></a> </div>
         
     <!-- Collect the nav links, forms, and other content for toggling -->
       

@@ -7,6 +7,7 @@ Public Class PaytmWebhook
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Response.ContentType = "text/plain"
         Try
             Logger.LogWebHookInfo("Webhook Pageload called. Res::: ", JsonConvert.SerializeObject(Request.Form.Keys))
 
@@ -60,9 +61,25 @@ Public Class PaytmWebhook
             Else
                 Logger.LogWebHookInfo("Checksum Mismatched in ProcessRequest, while request from paytm using Webhook.")
             End If
+            ' ✅ FINAL SUCCESS RESPONSE (CRITICAL)
+            WriteResponse("OK")
         Catch ex As Exception
             Logger.LogError($"Error in WebHook::ProcessRequest ::: Error ::: {ex.Message}", ex)
             Logger.LogWebHookInfo($"JSON Response from Paytm on error ::: {JsonConvert.SerializeObject(Request.Form.Keys)}")
+
+            WriteResponse("ERROR")
+        End Try
+    End Sub
+
+    ' ✅ Centralized response handler (VERY IMPORTANT)
+    Private Sub WriteResponse(message As String)
+        Try
+            Response.StatusCode = 200
+            Response.Write(message)
+            Response.Flush()
+            Response.End()
+        Catch
+            ' ignore response errors
         End Try
     End Sub
 

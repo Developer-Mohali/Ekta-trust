@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class ManageNews
 
     '''<summary>
-    '''lblMessage control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblMessage As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''AdminSideMenuControl control.
     '''</summary>
     '''<remarks>
@@ -32,13 +23,13 @@ Partial Public Class ManageNews
     Protected WithEvents AdminSideMenuControl As Global.EktaTrust.AdminSideMenuControl
 
     '''<summary>
-    '''lblNewsTitle control.
+    '''lblMessage control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblNewsTitle As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblMessage As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''txtNewsTitle control.
@@ -59,22 +50,13 @@ Partial Public Class ManageNews
     Protected WithEvents txtNews As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''rfvtxtNews control.
+    '''RequiredFieldValidator1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rfvtxtNews As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
-    '''lblactive control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblactive As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''chkactive control.
@@ -84,6 +66,15 @@ Partial Public Class ManageNews
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents chkactive As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''lblactive control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblactive As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''btnAdd control.

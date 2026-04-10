@@ -303,6 +303,7 @@ Public Class EventRegistration
     Public Shared Function SaveBibForm(amount As String, email As String, gender As String, name As String, phone As String, runCategory As String, runnerDOB As String, tshirtSize As String
     )
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+        Dim paymentEnv = If(ConfigurationManager.AppSettings("Environment") = "Prod", "Live", "Test")
         Dim category As String = "Registration For RUN FOR EQUALITY"
         Dim bibNumber As String = GetNextBibNumber(runCategory, constr)
         Dim year As String = DateTime.Now.Year.ToString()
@@ -338,6 +339,7 @@ Public Class EventRegistration
                         cmd.Parameters.Add(New MySqlParameter("p_Amount", (amount)))
                         cmd.Parameters.Add(New MySqlParameter("p_TxnId", ""))
                         cmd.Parameters.Add(New MySqlParameter("p_PaytmResponse", ""))
+                        cmd.Parameters.Add(New MySqlParameter("p_PaymentEnv", paymentEnv))
                         cmd.Connection = con
                         con.Open()
                         Try

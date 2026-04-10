@@ -235,6 +235,8 @@
         });
 
         $("#btnDonate").click(function (event) {
+            const orderId = Date.now().toString() + "_" + "123456";
+            paytmPaymentPopupOpen(500, orderId, 'Devloper', '7894444555', 'webdev316@gmail.com');
             event.preventDefault();
             var name = $("#txtName").val().trim();
             var amount = $("#txtAmount").val().trim();

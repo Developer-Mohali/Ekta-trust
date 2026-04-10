@@ -71,7 +71,7 @@ Public Class DonationDetails
         Dim Id As Integer = Convert.ToInt32(gvEvent.DataKeys(e.RowIndex).Values(0))
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
-            Using cmd As New MySqlCommand("DELETE FROM Donation WHERE DonationID = @DonationID", con)
+            Using cmd As New MySqlCommand("Update Donation set IsDeleted = 1 WHERE DonationID = @DonationID", con)
                 cmd.Parameters.AddWithValue("@DonationID", Id)
                 cmd.Connection = con
                 con.Open()
@@ -128,8 +128,12 @@ Public Class DonationDetails
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs)
         Try
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Dim serialNumber As String = ""
+            If ddlStatusOfPayment.SelectedItem.Value = "Success" Then
+                serialNumber = PaytmCallBack.GenerateSerialNumber()
+            End If
             Using con As New MySqlConnection(constr)
-                Using cmd As New MySqlCommand("UPDATE Donation SET  FullName=@FullName, Amount=@Amount,MobileNumber=@MobileNumber,ModeOfPayment=@ModeOfPayment,PaymentStatus=@StatusOfPayment,Address=@Address  WHERE DonationID = @DonationID", con)
+                Using cmd As New MySqlCommand("UPDATE Donation SET  FullName=@FullName, Amount=@Amount,MobileNumber=@MobileNumber,ModeOfPayment=@ModeOfPayment,PaymentStatus=@StatusOfPayment,Address=@Address, SerialNo=@SerialNo  WHERE DonationID = @DonationID", con)
                     cmd.Parameters.AddWithValue("@DonationID", Convert.ToInt32(lblDonationId.Text))
                     cmd.Parameters.AddWithValue("@FullName", textFullName.Text)
                     cmd.Parameters.AddWithValue("@Amount", textAmount.Text)
@@ -137,6 +141,7 @@ Public Class DonationDetails
                     cmd.Parameters.AddWithValue("@ModeOfPayment", ddlModeOfPayment.SelectedItem.Value)
                     cmd.Parameters.AddWithValue("@StatusOfPayment", ddlStatusOfPayment.SelectedItem.Value)
                     cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
+                    cmd.Parameters.AddWithValue("@SerialNo", serialNumber)
                     cmd.Connection = con
                     con.Open()
                     cmd.ExecuteNonQuery()
@@ -172,7 +177,7 @@ Public Class DonationDetails
                         ElseIf ddlSearchBy.SelectedItem.Text = "Payment Status" Then
                             sql += " WHERE PaymentStatus LIKE @Search"
                         Else ' All
-                            sql += " WHERE (FullName LIKE @Search OR PaymentStatus LIKE @Search)"
+                            sql += " WHERE (FullName LIKE @Search OR PaymentStatus LIKE @Search OR bd.OrderId Like @Search OR bd.TxnId Like @Search)"
                         End If
                         cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
                     End If
@@ -248,8 +253,8 @@ Public Class DonationDetails
         textFullName.Text = ""
         textAmount.Text = ""
         textMobileNumber.Text = ""
-        'ddlModeOfPayment.SelectedItem.Text = ""
-        'ddlStatusOfPayment.SelectedItem.Text = ""
+        ddlModeOfPayment.ClearSelection()
+        ddlStatusOfPayment.ClearSelection()
         txtAddress.Text = ""
         btnUpdate.Visible = False
         btnAddNew.Visible = True
@@ -258,8 +263,7 @@ Public Class DonationDetails
     'This method is used To insert the data
     Protected Sub btnAddNew_Click1(sender As Object, e As EventArgs)
         Try
-            Dim serialNumber = PaytmCallBack.GenerateSerialNumber()
-            Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,ModeOfPayment,PaymentStatus,Address,CreatedDate, SerialNo)VALUES(@FullName, @Amount,@MobileNumber,@ModeOfPayment,@StatusOfPayment,@Address,@CreatedDate, @SerialNo)"
+            Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,ModeOfPayment,PaymentStatus,Address,CreatedDate,PaymentEnv)VALUES(@FullName, @Amount,@MobileNumber,@ModeOfPayment,@StatusOfPayment,@Address,@CreatedDate,@PaymentEnv)"
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As MySqlConnection = New MySqlConnection(constr)
                 Using cmd As MySqlCommand = New MySqlCommand(query)
@@ -270,7 +274,7 @@ Public Class DonationDetails
                     cmd.Parameters.AddWithValue("@StatusOfPayment", ddlStatusOfPayment.SelectedItem.Text)
                     cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
                     cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now)
-                    cmd.Parameters.AddWithValue("@SerialNo", serialNumber)
+                    cmd.Parameters.AddWithValue("@PaymentEnv", "Admin")
                     cmd.Connection = con
                     con.Open()
                     cmd.ExecuteNonQuery()
@@ -280,8 +284,8 @@ Public Class DonationDetails
                     textFullName.Text = ""
                     textAmount.Text = ""
                     textMobileNumber.Text = ""
-                    ddlModeOfPayment.SelectedItem.Text = ""
-                    ddlStatusOfPayment.SelectedItem.Text = ""
+                    ddlModeOfPayment.ClearSelection()
+                    ddlStatusOfPayment.ClearSelection()
                     txtAddress.Text = ""
                 End Using
             End Using
@@ -482,14 +486,14 @@ Public Class DonationDetails
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As New MySqlConnection(constr)
                 Using cmd As New MySqlCommand()
-                    Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber as `Pan Number`, PaymentStatus, Address, OrderId,TxnId as `Transaction Id`, CreatedDate as `Registration On` FROM Donation"
+                    Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber as `Pan Number`, PaymentStatus, Address, OrderId,TxnId as `Transaction Id`, CreatedDate as `Donated On` FROM Donation"
                     If Not String.IsNullOrEmpty(txtSearch.Text) Then
                         If ddlSearchBy.SelectedItem.Text = "Full Name" Then
                             sql += " WHERE FullName LIKE @Search"
                         ElseIf ddlSearchBy.SelectedItem.Text = "Payment Status" Then
                             sql += " WHERE PaymentStatus LIKE @Search"
                         Else ' All
-                            sql += " WHERE FullName LIKE @Search OR PaymentStatus LIKE @Search"
+                            sql += " WHERE (FullName LIKE @Search OR PaymentStatus LIKE @Search OR bd.OrderId Like @Search OR bd.TxnId Like @Search)"
                         End If
                         cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
                     End If

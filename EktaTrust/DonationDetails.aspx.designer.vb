@@ -23,6 +23,15 @@ Partial Public Class DonationDetails
     Protected WithEvents AdminSideMenuControl As Global.EktaTrust.AdminSideMenuControl
 
     '''<summary>
+    '''btnAddBIB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAddBIB As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''MessageUpdated control.
     '''</summary>
     '''<remarks>
@@ -39,24 +48,6 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblmsg As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''btnAddBIB control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAddBIB As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''btnExport control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''ddlSearchBy control.
@@ -93,6 +84,15 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSearch As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnExport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''gvEvent control.
