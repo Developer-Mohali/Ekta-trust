@@ -224,11 +224,11 @@ function TotalRecord() {
          </asp:DropDownList>
          <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtRunCategory" InitialValue="" ErrorMessage="Run Category is Required" ForeColor="Red" Display="Dynamic" ValidationGroup="BibDataSave" />
     </div>
-<%--     <div class="form-group">
+     <div class="form-group">
         <label>BIB Number: <span style="color:red">*</span></label>
-        <asp:Textbox ID="txtBibNumber"  Enabled="false" runat="server" class="form-control" Width="95%" />
+        <asp:Textbox ID="txtBibNumber" runat="server" class="form-control" Width="95%" />
          <asp:RequiredFieldValidator ID="RequiredBiBNo" ControlToValidate="txtBibNumber" runat="server" ErrorMessage="BIB No. is Required" ValidationGroup="BibDataSave" ForeColor="Red" Display="Dynamic" />
-        </div>--%>
+        </div>
 <%--    <div class="form-group">
     <label>Category: </label>
         <asp:Textbox ID="txtCategory" runat="server" class="form-control" Width="95%" Text="Registration For RUN FOR EQUALITY" />

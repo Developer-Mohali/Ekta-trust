@@ -52,7 +52,7 @@
                          <b>Time-</b>&nbsp;&nbsp;21.09 KM &nbsp;- 4:15 AM <br />
                       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10 KM&nbsp;&nbsp;- 5:15 AM<br />
                            <%-- Run for Equality Schedule will be published shortly --%>
-                       &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5 KM&nbsp;&nbsp;- 5:45 AM  <br /><br />
+                       &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5 KM&nbsp;&nbsp;- 5:30 AM  <br /><br />
                             <b>Ceremony-</b> 7:00AM onwards<br />
                      <%--Run Route - JLN Marg, Jaipur<br />--%><br />
 

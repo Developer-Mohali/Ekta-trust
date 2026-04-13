@@ -17,7 +17,10 @@ Public Class BibData
         Dim mobile As String = txtMobileNo.Text
 
         'dateTable = LoadAndFilterExcel(path, mobile)
-        dateTable = GetBIBDataByNumber(mobile)
+        dateTable = Get2026BIBDataByNumber(mobile)
+        If dateTable.Rows.Count = 0 Then
+            dateTable = GetBIBDataByNumber(mobile)
+        End If
 
         If dateTable.Rows.Count > 0 Then
             hdnMsgBiBData.InnerText = "Congratulations Your details are as follows!"
@@ -123,6 +126,37 @@ Public Class BibData
 
                     cmd.Parameters.AddWithValue("@mobile", mobile)
                     cmd.Parameters.AddWithValue("@year", year)
+
+                    Using sda As New MySqlDataAdapter(cmd)
+                        con.Open()
+                        sda.Fill(dt)
+                    End Using
+                End Using
+            End Using
+
+        Catch ex As Exception
+            Throw   ' don't swallow errors
+        End Try
+
+        Return dt
+    End Function
+
+    Private Function Get2026BIBDataByNumber(mobile As String) As DataTable
+        Dim dt As New DataTable()
+
+        Try
+            year = Request.QueryString("year")?.ToString()
+            Dim query As String =
+                "SELECT DISTINCT CategoryName as category_name, RunnerName as participate_name, Gender as gender, BloodGroup as blood_group, TShirtSize as tshirt_size,
+                  RunCatagory as run_category, BIBNo as bib_no, CollectBIB as collect_bib FROM bibdata2026 WHERE MobileNumber = @mobile"
+
+            Dim constr As String =
+                ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand(query, con)
+
+                    cmd.Parameters.AddWithValue("@mobile", mobile)
 
                     Using sda As New MySqlDataAdapter(cmd)
                         con.Open()

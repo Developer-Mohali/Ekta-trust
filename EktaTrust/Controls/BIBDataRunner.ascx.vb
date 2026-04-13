@@ -1,12 +1,8 @@
-﻿Imports System.Data.SqlClient
-Imports System.Drawing
+﻿Imports System.Drawing
 Imports System.Globalization
 Imports System.IO
-Imports System.Net
 Imports iTextSharp.text.pdf
-Imports Microsoft.VisualBasic.ApplicationServices
 Imports MySql.Data.MySqlClient
-Imports Mysqlx.Crud
 
 Public Class BIBDataRunner
     Inherits System.Web.UI.UserControl
@@ -14,7 +10,7 @@ Public Class BIBDataRunner
     Dim connStr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
     Dim limitToAdd As Int32
     Dim loginId As Int32
-    Public Const MSG_BIBDataExists As String = "<b style='color: red;'>Failed to Add or BIB data already exists.</b>"
+    Public Const MSG_BIBDataExists As String = "<b style='color: red;'>Failed to Add/Update, BIB data already exists.</b>"
     Public Const MSG_AllowedCsvOnly As String = "<b style='color: red;'>Only .csv file is allowed.</b>"
     Public Const MSG_DataNotFoundInCsv As String = "<b style='color: red;'>BIB data not found in CSV. Please check CSV</b>"
     Public Const MSG_AddLimitExceed As String = "<b style='color: red;'>Adding Limit Exceed, Please contact to Administrator.</b>"
@@ -70,11 +66,35 @@ Public Class BIBDataRunner
 
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As New MySqlConnection(constr)
-                Dim query As String = "SELECT DISTINCT bd.ID, bd.BIBNo, bd.RunnerName, bd.RunCatagory, bd.TShirtSize, bd.Gender, bd.RunnerDOB, 
-                                        bd.MobileNumber, bd.EmergencyContactName, bd.EmergencyContactNumber, Amount, 
-                                        bd.BankReferenceNo, PaymentStatus, OrderId, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.CreatedAt FROM bibdata bd 
-                                        left join user u  on bd.UserId = u.ID
-                                        left join signup s on s.UserId = bd.UserId"
+                'Dim query As String = "SELECT DISTINCT bd.ID, bd.BIBNo, bd.RunnerName, bd.RunCatagory, bd.TShirtSize, bd.Gender, bd.RunnerDOB, 
+                '                        bd.MobileNumber, bd.EmergencyContactName, bd.EmergencyContactNumber, Amount, 
+                '                        bd.BankReferenceNo, PaymentStatus, OrderId, COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.CreatedAt FROM bibdata bd 
+                '                        left join user u  on bd.UserId = u.ID
+                '                        left join signup s on s.UserId = bd.UserId"
+                Dim query As String = "SELECT *
+                                        FROM (
+                                            SELECT 
+                                                bd.ID, bd.BIBNo, bd.RunnerName, bd.RunCatagory, bd.TShirtSize, bd.Gender, bd.RunnerDOB,
+                                                bd.MobileNumber, bd.EmergencyContactName, bd.EmergencyContactNumber, bd.Amount,
+                                                bd.BankReferenceNo, bd.PaymentStatus, bd.OrderId,
+                                                COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.TxnId,
+                                                bd.CreatedAt, bd.IsDeleted, bd.YEAR
+                                            FROM bibdata bd
+                                            LEFT JOIN user u ON bd.UserId = u.ID
+                                            LEFT JOIN signup s ON s.UserId = bd.UserId
+
+                                            UNION
+
+                                            SELECT 
+                                                bd.ID, bd.BIBNo, bd.RunnerName, bd.RunCatagory, bd.TShirtSize, bd.Gender, bd.RunnerDOB,
+                                                bd.MobileNumber, bd.EmergencyContactName, bd.EmergencyContactNumber, bd.Amount,
+                                                bd.BankReferenceNo, bd.PaymentStatus, bd.OrderId,
+                                                COALESCE(u.Name, CONCAT_WS(' ', s.FirstName, s.LastName)) AS CreatedBy, bd.TxnId,
+                                                bd.CreatedAt, 0 AS IsDeleted, bd.YEAR
+                                            FROM bibdata2026 bd
+                                            LEFT JOIN user u ON bd.UserId = u.ID
+                                            LEFT JOIN signup s ON s.UserId = bd.UserId
+                                        ) As bd"
                 Dim cmd As New MySqlCommand()
                 cmd.Connection = con
 
@@ -122,10 +142,10 @@ Public Class BIBDataRunner
                     query += " WHERE DATE(bd.CreatedAt) = @CreatedDate"
                     cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
                 ElseIf query.Contains("WHERE") Then
-                    query += " And IsDeleted = 0 AND YEAR = @YearBy"
+                    query += " And bd.IsDeleted = 0 AND bd.YEAR = @YearBy"
                     cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
                 Else
-                    query += " WHERE IsDeleted = 0 AND YEAR = @YearBy"
+                    query += " WHERE bd.IsDeleted = 0 AND bd.YEAR = @YearBy"
                     cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
                 End If
                 query += $" ORDER BY bd.ID DESC"
@@ -341,7 +361,7 @@ Public Class BIBDataRunner
                                     cmd.Parameters.Add(New MySqlParameter("p_Amount", ""))
                                     cmd.Parameters.Add(New MySqlParameter("p_TxnId", ""))
                                     cmd.Parameters.Add(New MySqlParameter("p_PaytmResponse", ""))
-                                    cmd.Parameters.Add(New MySqlParameter("p_PaymentEnv", "Admin"))
+                                    cmd.Parameters.Add(New MySqlParameter("p_PaymentEnv", "Offline"))
                                     cmd.Connection = con
                                     con.Open()
                                     Try
@@ -389,7 +409,7 @@ Public Class BIBDataRunner
     End Sub
     Shared csvSplit As Regex = New Regex("(?:^|,)(""(?:[^""]+|"""")*""|[^,]*)", RegexOptions.Compiled)
 
-    Public Shared Function SplitCSV(ByVal input As String) As String()
+    Public Shared Function SplitCSV1234(ByVal input As String) As String()
         Dim list As List(Of String) = New List(Of String)()
         Dim curr As String = Nothing
         If input <> Nothing Then
@@ -398,12 +418,31 @@ Public Class BIBDataRunner
 
                 If 0 = curr.Length Then
                     list.Add("")
+                Else
+                    list.Add(curr.TrimStart(","c))
                 End If
-
-                list.Add(curr.TrimStart(","c))
             Next
         Else
             list.Add("")
+        End If
+
+        Return list.ToArray()
+    End Function
+
+    Public Shared Function SplitCSV(ByVal input As String) As String()
+        Dim list As New List(Of String)
+
+        If input IsNot Nothing Then
+            For Each match As Match In csvSplit.Matches(input)
+                Dim value As String = match.Groups(1).Value
+
+                ' Remove quotes if present
+                If value.StartsWith("""") AndAlso value.EndsWith("""") Then
+                    value = value.Substring(1, value.Length - 2).Replace("""""", """")
+                End If
+
+                list.Add(value)
+            Next
         End If
 
         Return list.ToArray()
@@ -418,7 +457,7 @@ Public Class BIBDataRunner
         txtTshirtSize.Visible = True
         txtMobile.Visible = True
         txtRunCategory.Visible = True
-        'txtBibNumber.Visible = True
+        txtBibNumber.Visible = True
         ' txtYear.Visible = True
         'select the current year in dropdown...
         Dim currentYear As String = DateTime.Now.Year.ToString()
@@ -463,7 +502,7 @@ Public Class BIBDataRunner
                                     txtTshirtSize.Text = reader("TShirtSize").ToString()
                                     txtMobile.Text = reader("MobileNumber").ToString()
                                     txtRunCategory.SelectedValue = reader("RunCatagory").ToString().Replace(" ", "").ToUpper()
-                                    'txtBibNumber.Text = reader("BIBNo").ToString()
+                                    txtBibNumber.Text = reader("BIBNo").ToString()
                                     'txtYear.Text = reader("Year").ToString()
                                     'txtEmail.Text = reader("EmailID").ToString()
                                     txtEmgName.Text = reader("EmergencyContactName").ToString()
@@ -558,7 +597,7 @@ Public Class BIBDataRunner
                         cmd.Parameters.Add(New MySqlParameter("p_Amount", txtAmount.Text))
                         cmd.Parameters.Add(New MySqlParameter("p_TxnId", ""))
                         cmd.Parameters.Add(New MySqlParameter("p_PaytmResponse", ""))
-                        cmd.Parameters.Add(New MySqlParameter("p_PaymentEnv", "Admin"))
+                        cmd.Parameters.Add(New MySqlParameter("p_PaymentEnv", "Offline"))
                         cmd.Connection = con
                         con.Open()
                         Try
@@ -594,11 +633,12 @@ Public Class BIBDataRunner
 
     Protected Sub UpdateBibData(bibRecordId As Integer)
         Try
-            'If IsBIBDataInserted(bibRecordId) Then
-            'MessageUpdated.Text = MSG_BIBDataExists
-            'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "clickCancelButton", "$('#" & btnCancel.ClientID & "').click();", True)
-            'Return
-            ' End If
+            If IsBIBDataInserted(bibRecordId) Or Is2026BIBDataInserted(bibRecordId) Then
+                'MessageUpdated.Visible = True
+                MessageUpdated.Text = MSG_BIBDataExists
+                'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "clickCancelButton", "$('#" & btnCancel.ClientID & "').click();", True)
+                Return
+            End If
             'Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As New MySqlConnection(connStr)
                 Dim query As String
@@ -607,7 +647,7 @@ Public Class BIBDataRunner
                 'TShirtSize =@size, MobileNumber=@mobile, RunCatagory=@run, BIBNo=@bib, Year=@year, EmailID=@email, EmergencyContactName=@emergencyContactName,
                 'EmergencyContactNumber =@emergencyContactNumber, RunnerDOB=@runnerDOB WHERE ID=@id"
                 query = "UPDATE bibdata SET BankReferenceNo=@bankRef, RunnerName=@name, gender=@gender, 
-                        TShirtSize=@size, MobileNumber=@mobile, RunCatagory=@run, EmergencyContactName=@emergencyContactName,
+                        TShirtSize=@size, MobileNumber=@mobile, RunCatagory=@run,BIBNo=@bib, EmergencyContactName=@emergencyContactName,
                          EmergencyContactNumber=@emergencyContactNumber, RunnerDOB=@runnerDOB, PaymentStatus=@PaymentStatus, Amount=@Amount WHERE ID=@id"
 
                 Using cmd As New MySqlCommand(query, con)
@@ -619,7 +659,7 @@ Public Class BIBDataRunner
                     cmd.Parameters.AddWithValue("@size", txtTshirtSize.Text.Trim())
                     cmd.Parameters.AddWithValue("@mobile", txtMobile.Text.Trim())
                     cmd.Parameters.AddWithValue("@run", txtRunCategory.Text.Trim())
-                    'cmd.Parameters.AddWithValue("@bib", txtBibNumber.Text.Trim())
+                    cmd.Parameters.AddWithValue("@bib", txtBibNumber.Text.Trim())
                     'cmd.Parameters.AddWithValue("@year", txtYear.Text.Trim())
                     'cmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim())
                     cmd.Parameters.AddWithValue("@emergencyContactName", txtEmgName.Text.Trim())
@@ -629,14 +669,19 @@ Public Class BIBDataRunner
                     cmd.Parameters.AddWithValue("@PaymentStatus", ddlStatusOfPayment.SelectedItem.Text)
                     cmd.Parameters.AddWithValue("@Amount", txtAmount.Text)
                     con.Open()
-                    cmd.ExecuteNonQuery()
+                    Dim rowAffected = cmd.ExecuteNonQuery()
+                    If rowAffected > 0 Then
+                        MessageUpdated.Text = MSG_UpdateSuccess
+                    Else
+                        MessageUpdated.Text = "<b style='color: red;'>Failed to Add/Update.</b>"
+                    End If
                 End Using
             End Using
 
             ' Clear form and refresh
             hfEditID.Value = ""
             'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "clickCancelButton", "$('#" & btnCancel.ClientID & "').click();", True)
-            MessageUpdated.Text = MSG_UpdateSuccess
+            'MessageUpdated.Text = MSG_UpdateSuccess
             BindGridView()
         Catch ex As Exception
             MessageUpdated.Text = $"<b style='color: red;'>{ex.Message}</b>"
@@ -659,7 +704,41 @@ Public Class BIBDataRunner
             Using cmd As New MySqlCommand(query, conn)
                 ' Add parameters
                 cmd.Parameters.AddWithValue("@Year", DateTime.Now.Year.ToString())
-                'cmd.Parameters.AddWithValue("@BIBNo", txtBibNumber.Text.Trim())
+                cmd.Parameters.AddWithValue("@BIBNo", txtBibNumber.Text.Trim())
+                cmd.Parameters.AddWithValue("@MobileNumber", txtMobile.Text.Trim())
+                cmd.Parameters.AddWithValue("@Id", bibRecordId)
+
+                Try
+                    conn.Open()
+                    Dim result = cmd.ExecuteScalar()
+
+                    If result IsNot Nothing Then
+                        exists = True
+                    End If
+
+                Catch ex As Exception
+                    ' Handle exception as needed
+                    MessageUpdated.Text = $"{ex.Message}"
+                End Try
+            End Using
+        End Using
+
+        Return exists
+    End Function
+
+    Private Function Is2026BIBDataInserted(bibRecordId As Integer) As Boolean
+        Dim exists As Boolean = False
+
+        ' Update with your actual connection string
+        Dim connectionString As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+        Dim query As String = " SELECT 1  FROM bibdata2026 WHERE ((Year = @Year  AND BIBNo = @BIBNo AND MobileNumber = @MobileNumber) Or (BIBNo = @BIBNo)) and ID <> @Id"
+
+        Using conn As New MySqlConnection(connectionString)
+            Using cmd As New MySqlCommand(query, conn)
+                ' Add parameters
+                cmd.Parameters.AddWithValue("@Year", DateTime.Now.Year.ToString())
+                cmd.Parameters.AddWithValue("@BIBNo", txtBibNumber.Text.Trim())
                 cmd.Parameters.AddWithValue("@MobileNumber", txtMobile.Text.Trim())
                 cmd.Parameters.AddWithValue("@Id", bibRecordId)
 
@@ -1046,7 +1125,7 @@ Public Class BIBDataRunner
 
     Private Function Reset()
         txtBankRef.Text = String.Empty
-        'txtBibNumber.Text = String.Empty
+        txtBibNumber.Text = String.Empty
         ' txtCategory.Text = "Registration For RUN FOR EQUALITY"
         'txtEmail.Text = String.Empty
         txtMobile.Text = String.Empty
@@ -1281,5 +1360,18 @@ Public Class BIBDataRunner
 
     Protected Sub btnBindGrid_Click(sender As Object, e As EventArgs)
         BindGridView()
+    End Sub
+
+    Private Sub Update()
+        Using con As New MySqlConnection(connStr)
+            Using cmd As New MySqlCommand("update bibdata2026 set Year = '2026'")
+                Using sda As New MySqlDataAdapter()
+                    cmd.Connection = con
+                    con.Open()
+                    Dim row = cmd.ExecuteNonQuery()
+                    con.Clone()
+                End Using
+            End Using
+        End Using
     End Sub
 End Class

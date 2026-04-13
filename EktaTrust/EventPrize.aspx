@@ -24,7 +24,7 @@
             <div style="margin: 6px auto; padding-left: 15px; padding-right: 15px;">
                 <h2 class="wow fadeInDown" style="display: flow-root;">
                     <div class="col-sm-4">
-                         <button onclick="termsAndCondition(event)" style="float:left" id="EventRegistration" class="btn btn-success">Register Now</button>
+                         <button onclick="termsAndCondition(event)" style="float:left" id="EventRegistration" class="btn btn-danger">Registration Closed</button>
                     </div>
                      <div class="col-sm-4">
                             <center>
@@ -44,12 +44,9 @@
 
         <div class="col-sm-12">
 
-            <div class="col-sm-4">
+            <div class="col-sm-3">
 
                 <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey; width: 100%;">
-
-
-
                     <tr>
                         <td colspan="2">
                             <h4>7th Run for Equality-2026 Details</h4>
@@ -67,7 +64,6 @@
                     </tr>
                     <tr>
                         <td>
-                            <br />
                             <b>Event Date-</b> 14.04.2026<br />
                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Place-</b>  Albert Hall, JLN Marg, Jaipur (Rajasthan)<br />
                             <br />
@@ -90,7 +86,7 @@
                             <br />
                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10 KM&nbsp;&nbsp;- 5:15 AM<br />
 
-                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5 KM&nbsp;&nbsp;- 5:45 AM 
+                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5 KM&nbsp;&nbsp;- 5:30 AM 
                             <br />
                             <br />
                             <b>Ceremony-</b> 7:00AM onwards<br />
@@ -125,9 +121,9 @@
                            <b>  BIB EXPO Time </b>- 09AM To 6PM  <br />
                            <b> BIB EXPO Place </b>- Institute of Local self-Government, Tonk Road, Jaipur <br />--%>
 
-                            <b>BIB Expo will be held at the Institute of Local self-Government, Tonk Road, Jaipur </br> on 13th April from 9AM to 6PM.</b>
+                            <b>BIB Expo will be held at the Institute of Local self-Government, Tonk Road, Jaipur </br> on 13th April from 10AM to 7PM.</b>
                             <br />
-                            <b>BIB Expo Location : </b><a href="https://g.co/kgs/adLsfKf" target="_blank" style="text-decoration: underline; color: blue">https://g.co/kgs/adLsfKf </a>
+                            <b>BIB Expo Location : </b><a href="https://share.google/uDKLU8Psb4WBZZIME" target="_blank" style="text-decoration: underline; color: blue">https://share.google/uDKLU8Psb4WBZZIME </a>
                         </td>
                     </tr>
                     <tr>
@@ -148,12 +144,75 @@
 
                 </table>
 
+                   <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey;">
+       <tr>
+           <td colspan="2">
+               <h4>Prize money for winners</h4>
+           </td>
+       </tr>
+       <tr>
+           <td colspan="2">
+               <h6>21KM (First Three Runners)</h6>
+           </td>
+       </tr>
+       <tr>
+           <td>First</td>
+    <%--       <td>Rs. 11,000</td>--%>
+           <td>Rs. 9,100</td>
+       </tr>
+       <tr>
+           <td>Second</td>
+<%--           <td>Rs. 5,100</td>--%>
+           <td>Rs. 7,100</td>
+       </tr>
+       <tr>
+           <td>Third</td>
+           <%--<td>Rs. 3,100</td>--%>
+           <td>Rs. 5,100</td>
+       </tr>
 
+       <tr>
+           <td colspan="2">
+               <h6>10KM (First Three Runners)</h6>
+           </td>
+       </tr>
+       <tr>
+           <td>First</td>
+           <td>Rs. 5,100</td>
+       </tr>
+       <tr>
+           <td>Second</td>
+           <td>Rs. 3,100</td>
+       </tr>
+       <tr>
+           <td>Third</td>
+           <td>Rs. 2,100</td>
+       </tr>
+
+       <tr>
+           <td colspan="2">
+               <h6>5KM (First Three Runners)</h6>
+           </td>
+       </tr>
+       <tr>
+           <td>First</td>
+           <td>Rs. 3,100</td>
+       </tr>
+       <tr>
+           <td>Second</td>
+           <td>Rs. 2,100</td>
+       </tr>
+       <tr>
+           <td>Third</td>
+           <td>Rs. 1,100</td>
+       </tr>
+
+   </table>
             </div>
 
 
 
-            <div class="col-sm-4">
+            <div class="col-sm-6">
 
                 <%--   <img src="Gallery_2025/Route-Map-clear-2026.png"style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"/>--%>
                 <%--<img src="Images/ekta-combine-2025.jpg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"  />--%>
@@ -164,98 +223,14 @@
 
 
 
-                <%--  <img src="Images/Map-2023-04.jpeg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"  />--%>
+                  <img src="images/map2026.jpeg" style="box-shadow: 0px 1px 10px 2px lightgrey; width:100%;"  />
 
 
 
-                <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey;">
-                    <tr>
-                        <td colspan="2">
-                            <h4>Prize money for winners</h4>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <h6>21KM (First Three Runners)</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>First</td>
-                 <%--       <td>Rs. 11,000</td>--%>
-                        <td>Rs. 9,100</td>
-                    </tr>
-                    <tr>
-                        <td>Second</td>
-             <%--           <td>Rs. 5,100</td>--%>
-                        <td>Rs. 7,100</td>
-                    </tr>
-                    <tr>
-                        <td>Third</td>
-                        <%--<td>Rs. 3,100</td>--%>
-                        <td>Rs. 5,100</td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2">
-                            <h6>10KM (First Three Runners)</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>First</td>
-                        <td>Rs. 5,100</td>
-                    </tr>
-                    <tr>
-                        <td>Second</td>
-                        <td>Rs. 3,100</td>
-                    </tr>
-                    <tr>
-                        <td>Third</td>
-                        <td>Rs. 2,100</td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2">
-                            <h6>5KM (First Three Runners)</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>First</td>
-                        <td>Rs. 3,100</td>
-                    </tr>
-                    <tr>
-                        <td>Second</td>
-                        <td>Rs. 2,100</td>
-                    </tr>
-                    <tr>
-                        <td>Third</td>
-                        <td>Rs. 1,100</td>
-                    </tr>
-
-                </table>
-
-
-                <div class="row mt-5">
-
-
-                    <%--<centre > <label  style="margin-top: 15px;
-    margin-left: 10%;" >Minister Pratap Singh Khachariyawas inaugurated the poster of 5th Run for Equality to be held on 14.04.2023</label> </centre>
-                      
-    
-                   
-                    --%>
-                    <br />
-                    <center>
-<%--                        <input type="checkbox" id="cbTermsAndCondition" style="margin-left: 17px;" checked /><input type="button" id="btnTermsAndConditions" value="I Accept All Terms and Conditions" class="float-left" style="background-color: transparent; border: none; color: blue; text-decoration: underline;" text="I Accept Terms and Conditions" />--%>
-
-                      <%--  <button onclick="termsAndCondition(event)" style="font-size: larger; margin-top: 0px; font-size: larger;" id="EventRegistration" class="btn btn-success">Register Me<%--Registration Closed></button>--%>
-
-                    </center>
-
-
-                </div>
+               
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-sm-3">
 
 
                 <table class="table table-striped" style="box-shadow: 0px 1px 10px 2px lightgrey;">
@@ -341,9 +316,9 @@
             //var isChecked = $("#cbTermsAndCondition").is(":checked");
             //if (isChecked) {
 
-
-                window.location.href = '../EventRegistration.aspx';
-                //var win = window.open('../EventRegistration.aspx');
+               window.location.href = '../EventRegistsrationClosed.aspx';
+                //window.location.href = '../EventRegistration.aspx';
+                //var win = window.open('../EventRegistsrationClosed.aspx');
                  //win.focus();
                 //if (isInstagramInAppBrowser()) {
                 //    window.location.href = 'https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784';

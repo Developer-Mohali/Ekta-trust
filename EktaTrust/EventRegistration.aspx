@@ -522,6 +522,7 @@ body section {
                 }
             }*/
             $(document).ready(function () {
+                window.location.href = '../EventRegistsrationClosed.aspx';
                 $('#submitEventDetail').show();
                 //$('#NextSubmit').prop('disabled', true);
 
