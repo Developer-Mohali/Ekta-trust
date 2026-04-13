@@ -35,7 +35,7 @@ Public Class DonationDetails
         Using con As New MySqlConnection(constr)
             Using cmd As New MySqlCommand(query)
                 cmd.Connection = con
-                query += " WHERE YEAR(CreatedDate) = @YearBy"
+                query += " WHERE YEAR(CreatedDate) = @YearBy And IsDeleted = 0"
                 cmd.Parameters.AddWithValue("@YearBy", ddlYear.SelectedValue)
                 Using sda As New MySqlDataAdapter(cmd)
                     Dim dt As New DataTable()
@@ -182,9 +182,9 @@ Public Class DonationDetails
                         cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
                     End If
                     If sql.Contains(" WHERE") Then
-                        sql += " And YEAR(CreatedDate) = @YearBy"
+                        sql += " And YEAR(CreatedDate) = @YearBy And IsDeleted = 0"
                     Else
-                        sql += " WHERE YEAR(CreatedDate) = @YearBy"
+                        sql += " WHERE YEAR(CreatedDate) = @YearBy And IsDeleted = 0"
                     End If
                     cmd.Parameters.AddWithValue("@YearBy", ddlYear.SelectedValue)
                     ' order by desc
