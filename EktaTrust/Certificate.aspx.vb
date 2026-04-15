@@ -519,6 +519,150 @@ Public Class Certificate
         End Using
     End Sub
 
+
+    Protected Sub DownloadButtontest_Click(sender As Object, e As EventArgs)
+
+        Dim selectedYear As String = DdlYear.SelectedValue
+        Dim isNewFormat As Boolean = {"2025", "2026"}.Contains(selectedYear)
+
+        Dim btn As Button = CType(sender, Button)
+        Dim rowGridView As GridViewRow = CType(btn.NamingContainer, GridViewRow)
+        Dim hfID As HiddenField = CType(rowGridView.FindControl("hfID"), HiddenField)
+        Dim ID As String = hfID.Value
+
+        Dim dt As DataTable = CType(Session("participate_name"), DataTable)
+        Dim row As DataRow = dt.Select("ID = " & ID).FirstOrDefault()
+
+        If row Is Nothing Then Exit Sub
+
+        ' Extract Data
+        Dim candidateName As String = GetCandidateName(row)
+        Dim runCategory As String = GetRunCategory(row)
+        Dim year As Integer = If(IsDBNull(row("year")), 2023, Convert.ToInt32(row("year")))
+
+        Dim timeParts = GetTimeParts(row("Net_Time"))
+        Dim Hrs = timeParts.Item1
+        Dim Min = timeParts.Item2
+        Dim Sec = timeParts.Item3
+
+        ' PDF Setup
+        Dim templateFile As String = GetTemplatePath(selectedYear, isNewFormat)
+        Dim coords = GetCoordinates(isNewFormat)
+        Dim fontSize As Decimal = If(isNewFormat, 12.0F, 20.0F)
+
+        Using reader As New PdfReader(templateFile)
+            Using outputPdf As New MemoryStream()
+                Using stamper As New PdfStamper(reader, outputPdf)
+
+                    Dim bf As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, False)
+                    Dim content As PdfContentByte = stamper.GetOverContent(1)
+                    Dim pageSize As Rectangle = reader.GetPageSize(1)
+
+                    content.SaveState()
+
+                    ' Candidate Name
+                    WriteText(content, bf,
+                          If(isNewFormat, 14.0F, 24.0F),
+                          candidateName,
+                          PdfContentByte.ALIGN_CENTER,
+                          ((pageSize.Left + If(isNewFormat, 10, 25)) + pageSize.Right) / 2,
+                          pageSize.GetTop(If(isNewFormat,
+                              Utilities.MillimetersToPoints(74),
+                              Utilities.MillimetersToPoints(155)))
+                )
+
+                    ' Run Category + Time
+                    WriteText(content, bf, fontSize, runCategory, coords.CatX, coords.Y)
+                    WriteText(content, bf, fontSize, Hrs, coords.HrsX, coords.Y)
+                    WriteText(content, bf, fontSize, Min, coords.MinX, coords.Y)
+                    WriteText(content, bf, fontSize, Sec, coords.SecX, coords.Y)
+
+                    content.RestoreState()
+                End Using
+
+                SendPdfToResponse(outputPdf.ToArray(), candidateName)
+
+            End Using
+        End Using
+
+    End Sub
+    Private Function GetCandidateName(row As DataRow) As String
+        Return If(IsDBNull(row("participate_name")), "",
+              row("participate_name").ToString().ToUpper())
+    End Function
+    Private Function GetRunCategory(row As DataRow) As String
+        If IsDBNull(row("Event_Name")) Then Return ""
+
+        Dim eventName As String = row("Event_Name").ToString().ToUpper()
+
+        If eventName.Contains("5K") Then Return "05KM"
+        If eventName.Contains("10K") Then Return "10KM"
+        If eventName.Contains("21K") Then Return "21KM"
+
+        Return ""
+    End Function
+    Private Function GetTimeParts(netTimeObj As Object) As Tuple(Of String, String, String)
+
+        If IsDBNull(netTimeObj) OrElse String.IsNullOrWhiteSpace(netTimeObj.ToString()) Then
+            Return Tuple.Create("", "", "")
+        End If
+
+        Dim parts = netTimeObj.ToString().Split(":"c)
+
+        If parts.Length >= 3 Then
+            Return Tuple.Create(parts(0), parts(1), parts(2))
+        End If
+
+        Return Tuple.Create("", "", "")
+    End Function
+    Private Function GetTemplatePath(selectedYear As String, isNewFormat As Boolean) As String
+        Return If(isNewFormat,
+              Server.MapPath("~/doc/RunforEqually6thedition.pdf"),
+              Server.MapPath("~/doc/EktaCertificatedesign.pdf"))
+    End Function
+    Private Function GetCoordinates(isNewFormat As Boolean) As Object
+        If isNewFormat Then
+            Return New With {.CatX = 350, .HrsX = 455, .MinX = 505, .SecX = 555, .Y = 203}
+        Else
+            Return New With {.CatX = 560, .HrsX = 750, .MinX = 835, .SecX = 920, .Y = 234}
+        End If
+    End Function
+
+    Private Sub WriteText(content As PdfContentByte, bf As BaseFont, fontSize As Decimal,
+                      text As String, x As Single, y As Single)
+
+        content.BeginText()
+        content.SetFontAndSize(bf, fontSize)
+        content.SetTextMatrix(x, y)
+        content.ShowText(text)
+        content.EndText()
+
+    End Sub
+
+    Private Sub WriteText(content As PdfContentByte, bf As BaseFont, fontSize As Decimal,
+                      text As String, align As Integer, x As Single, y As Single)
+
+        content.BeginText()
+        content.SetFontAndSize(bf, fontSize)
+        content.ShowTextAligned(align, text, x, y, 0)
+        content.EndText()
+
+    End Sub
+    Private Sub SendPdfToResponse(pdf As Byte(), fileName As String)
+
+        Response.Cache.SetCacheability(HttpCacheability.NoCache)
+        Response.Buffer = False
+        Response.Clear()
+        Response.ContentType = "application/pdf"
+
+        Response.AddHeader("content-length", pdf.Length.ToString())
+        Response.AddHeader("Content-Disposition", $"attachment;filename={fileName}.pdf")
+
+        Response.BinaryWrite(pdf)
+        Response.End()
+
+    End Sub
+
     Protected Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
 
         Dim name, mobileNumber, comments As String
