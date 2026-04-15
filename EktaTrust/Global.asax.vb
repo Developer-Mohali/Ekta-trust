@@ -120,6 +120,7 @@ Public Class Global_asax
         routes.MapPageRoute("RunForEquality2025", "RunForEquality2025", "~/RunForEquality2025.aspx")
         routes.MapPageRoute("UPSC2025", "UPSC2025", "~/UpscMipGallery2025.aspx")
         routes.MapPageRoute("RPSC2025", "RPSC2025", "~/RpscMipGallery2025.aspx")
+        routes.MapPageRoute("RunForEquality2026", "RunForEquality2026", "~/RunForEquality2026.aspx")
 
     End Sub
     Sub Session_Start(ByVal sender As Object, ByVal e As EventArgs)

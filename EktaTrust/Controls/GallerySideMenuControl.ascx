@@ -43,6 +43,7 @@
                  </a>
              </div>
              <div id="collapseThree2" class="panel-collapse in" style="height: auto;">
+                 <a href="../RunForEquality2026" class="list-group-item">Run For Equality 2026</a>
                  <a href="../RunForEquality2025" class="list-group-item">Run For Equality 2025</a>
                  <a href="../RunForEquality2023" class="list-group-item">Run For Equality 2023</a>
                  <a href="../RunForEquality2022" class="list-group-item">Run For Equality 2022</a>

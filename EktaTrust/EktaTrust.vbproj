@@ -791,6 +791,7 @@
     <Content Include="RunForEquality2022.aspx" />
     <Content Include="RunForEquality2023.aspx" />
     <Content Include="RunForEquality2025.aspx" />
+    <Content Include="RunForEquality2026.aspx" />
     <Content Include="RunForEqualityGallery.aspx" />
     <Content Include="RunForEqualityGallery\1.jpeg" />
     <Content Include="RunForEqualityGallery\10.jpeg" />
@@ -1719,6 +1720,13 @@
     </Compile>
     <Compile Include="RunForEquality2025.aspx.vb">
       <DependentUpon>RunForEquality2025.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="RunForEquality2026.aspx.designer.vb">
+      <DependentUpon>RunForEquality2026.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RunForEquality2026.aspx.vb">
+      <DependentUpon>RunForEquality2026.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="RunForEqualityGallery.aspx.designer.vb">
