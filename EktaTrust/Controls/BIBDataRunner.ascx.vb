@@ -2,6 +2,7 @@
 Imports System.Globalization
 Imports System.IO
 Imports iTextSharp.text.pdf
+Imports Microsoft.VisualBasic.FileIO
 Imports MySql.Data.MySqlClient
 
 Public Class BIBDataRunner
@@ -17,6 +18,7 @@ Public Class BIBDataRunner
     Public Const MSG_AddSuccess As String = "<b>Added Successfully</b>"
     Public Const MSG_UpdateSuccess As String = "<b>Update Successfully</b>"
     Dim expectedHeaders As String() = {
+    "BIB No",
     "Payment Reference",
     "Contact Number",
     "Runner Name",
@@ -269,13 +271,21 @@ Public Class BIBDataRunner
                 End If
 
                 ' HEADER NAME CHECK
-                For num As Integer = 0 To expectedHeaders.Length - 1
-                    If Not csvHeaders(num).Equals(expectedHeaders(num), StringComparison.OrdinalIgnoreCase) Then
-                        MessageUpdated.Text = $"<b style='color:red;'>Invalid CSV header at position {num + 1}. " &
-                         $"Expected: '{expectedHeaders(num)}', Found: '{csvHeaders(num)}'</b>"
+                Dim headerPositionIndex As Integer = 0
+                For Each header In csvHeaders
+                    headerPositionIndex = headerPositionIndex + 1
+                    If Not expectedHeaders.Contains(header) Then
+                        MessageUpdated.Text = $"<b style='color:red;'>Invalid CSV header at position {headerPositionIndex + 1}. Please match with sample CSV file.</b>"
                         Return
                     End If
                 Next
+                'For num As Integer = 0 To expectedHeaders.Length - 1
+                '    If Not csvHeaders(num).Equals(expectedHeaders(num), StringComparison.OrdinalIgnoreCase) Then
+                '        MessageUpdated.Text = $"<b style='color:red;'>Invalid CSV header at position {num + 1}. " &
+                '         $"Expected: '{expectedHeaders(num)}', Found: '{csvHeaders(num)}'</b>"
+                '        Return
+                '    End If
+                'Next
                 'END OF HEADER VALIDATION
 
                 Dim strArray As String() = line.Split(",")
@@ -334,12 +344,12 @@ Public Class BIBDataRunner
                     Using con As New MySqlConnection(connStr)
                         For Each dtrow As DataRow In dt.Rows
                             proceedRecords = proceedRecords + 1
-                            Dim bibNo As String = GetNextBibNumber(dtrow.Item("Run Category"))
+                            'Dim bibNo As String = GetNextBibNumber(dtrow.Item("Run Category"))
                             Using cmd As New MySqlCommand("InsertBIBData")
                                 Using sda As New MySqlDataAdapter()
                                     cmd.CommandType = CommandType.StoredProcedure
                                     cmd.Parameters.Add(New MySqlParameter("p_BankReferenceNo", dtrow.Item("Payment Reference")))
-                                    cmd.Parameters.Add(New MySqlParameter("p_BIBNo", bibNo))
+                                    cmd.Parameters.Add(New MySqlParameter("p_BIBNo", dtrow.Item("BIB No")))
                                     cmd.Parameters.Add(New MySqlParameter("p_MobileNumber", dtrow.Item("Contact Number")))
                                     cmd.Parameters.Add(New MySqlParameter("p_RunnerName", dtrow.Item("Runner Name")))
                                     cmd.Parameters.Add(New MySqlParameter("p_RunCatagory", dtrow.Item("Run Category")))
@@ -430,22 +440,17 @@ Public Class BIBDataRunner
     End Function
 
     Public Shared Function SplitCSV(ByVal input As String) As String()
-        Dim list As New List(Of String)
+        If input Is Nothing Then Return New String() {""}
 
-        If input IsNot Nothing Then
-            For Each match As Match In csvSplit.Matches(input)
-                Dim value As String = match.Groups(1).Value
+        Using reader As New System.IO.StringReader(input)
+            Using parser As New TextFieldParser(reader)
+                parser.TextFieldType = FieldType.Delimited
+                parser.SetDelimiters(",")
+                parser.HasFieldsEnclosedInQuotes = True
 
-                ' Remove quotes if present
-                If value.StartsWith("""") AndAlso value.EndsWith("""") Then
-                    value = value.Substring(1, value.Length - 2).Replace("""""", """")
-                End If
-
-                list.Add(value)
-            Next
-        End If
-
-        Return list.ToArray()
+                Return parser.ReadFields()
+            End Using
+        End Using
     End Function
 
     Protected Sub AddBIB_Click(sender As Object, e As EventArgs)
@@ -545,7 +550,7 @@ Public Class BIBDataRunner
         Dim statusOfPayment As String = ""
 
         If ddlStatusOfPayment.SelectedItem IsNot Nothing Then
-            statusOfPayment = ddlStatusOfPayment.SelectedItem.Text
+            statusOfPayment = ddlStatusOfPayment.SelectedItem.Value
         End If
         Integer.TryParse(hfEditID.Value, idToUpdate)
         Dim rowAffected = 0
@@ -666,7 +671,7 @@ Public Class BIBDataRunner
                     cmd.Parameters.AddWithValue("@emergencyContactNumber", txtEmgMobile.Text.Trim())
                     cmd.Parameters.AddWithValue("@runnerDOB", txtDOB.Text.Trim())
                     cmd.Parameters.AddWithValue("@id", bibRecordId)
-                    cmd.Parameters.AddWithValue("@PaymentStatus", ddlStatusOfPayment.SelectedItem.Text)
+                    cmd.Parameters.AddWithValue("@PaymentStatus", ddlStatusOfPayment.SelectedItem.Value)
                     cmd.Parameters.AddWithValue("@Amount", txtAmount.Text)
                     con.Open()
                     Dim rowAffected = cmd.ExecuteNonQuery()
