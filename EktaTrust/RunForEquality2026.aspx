@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link href="CssGallery/src/jquery.littlelightbox.css" rel="stylesheet" />
-    <link href="Css/css/Gallery.css" rel="stylesheet" />
+    <link href="Css/css/Gallery.css?v=1" rel="stylesheet" />
 
     <section class="page">
         <!-- Page Content -->
@@ -64,10 +64,10 @@
         $('.lightbox').littleLightBox();
     </script>
     <style>
-        .span {
+       /* .span {
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             font-size: small;
-        }
+        }*/
 
         .hovereffect {
             width: 100%;
@@ -153,17 +153,17 @@
                 -webkit-transform: translate3d(0,0,0);
                 transform: translate3d(0,0,0);
             }
-
+/*
         .container {
             padding-left: 40px;
         }
 
         .p {
             padding-top: 9px;
-        }
+        }*/
     </style>
 
-    <link href="CssGallery/style.css" rel="stylesheet" />
-    <link href="CssGallery/figure.css" rel="stylesheet" />
+    <link href="CssGallery/style.css?v=1" rel="stylesheet" />
+    <link href="CssGallery/figure.css?v=1" rel="stylesheet" />
 
 </asp:Content>
