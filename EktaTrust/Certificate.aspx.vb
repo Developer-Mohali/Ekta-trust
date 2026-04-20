@@ -410,6 +410,12 @@ Public Class Certificate
         dateTable = Session("participate_name")
         Dim filteredRows() As DataRow = dateTable.Select("ID = " & ID)
 
+        ' download runner certificate for 2026
+        If selectedYear = "2026" Then
+            Download2026Certificate(filteredRows)
+            Return
+        End If
+
         For Each row As DataRow In filteredRows
             ' Time Parsing
             If IsDBNull(row("Net_Time")) OrElse String.IsNullOrWhiteSpace(row("Net_Time").ToString()) Then
@@ -771,4 +777,116 @@ Public Class Certificate
 
     End Function
 
+
+    Private Sub Download2026Certificate(filteredRows As DataRow())
+        Dim candidateName, Hrs, min, sec, runCategory As String
+        Dim categoryAndTimeFont As Decimal = 12.0F
+
+        For Each row As DataRow In filteredRows
+            ' Time Parsing
+            If IsDBNull(row("Net_Time")) OrElse String.IsNullOrWhiteSpace(row("Net_Time").ToString()) Then
+                Hrs = "" : min = "" : sec = ""
+
+            Else
+                Dim timeParts() As String = row.Item("Net_Time").ToString().Trim().Split(":"c)
+                If timeParts.Length >= 3 Then
+                    Hrs = timeParts(0)
+                    min = timeParts(1)
+                    sec = (Math.Truncate(timeParts(2) * 10) / 10).ToString("0.0")       'formating sec
+                End If
+            End If
+
+            ' Candidate Name
+            candidateName = If(IsDBNull(row("participate_name")), "", row("participate_name").ToString().ToUpper())
+
+            ' Run Category
+            If Not IsDBNull(row("Event_Name")) Then
+                Dim eventName As String = row("Event_Name").ToString().ToUpper().Trim()
+                If eventName.Contains("5K") Then
+                    runCategory = "05KM"
+                ElseIf eventName.Contains("10K") Then
+                    runCategory = "10KM"
+                ElseIf eventName.Contains("21K") Then
+                    runCategory = "21KM"
+                Else
+                    runCategory = ""
+                End If
+            End If
+        Next
+
+        ' PDF Template
+        Dim templateFile As String = Server.MapPath("~/doc/RunForEquality7Certificate.pdf")
+
+        ' If (selectedYear = "2026", Server.MapPath("~/doc/RunForEquality7Certificate.pdf"), Server.MapPath("~/doc/EktaCertificatedesign.pdf")) Then
+        Dim inputPdf As Stream = New FileStream(templateFile, FileMode.Open, FileAccess.Read, FileShare.Read)
+        Dim reader As New PdfReader(inputPdf)
+        Dim pageSize As Rectangle = reader.GetPageSize(1)
+
+        Using outputPdf As New MemoryStream()
+            Using stamper As New PdfStamper(reader, outputPdf)
+                Dim fontName As String = BaseFont.HELVETICA
+                Dim bf As BaseFont = BaseFont.CreateFont(fontName, BaseFont.CP1252, False)
+                Dim overContent As PdfContentByte = stamper.GetOverContent(1)
+
+                overContent.SaveState()
+
+                ' Candidate Name
+                overContent.BeginText()
+                overContent.SetFontAndSize(bf, 14.0F)
+                Dim pageSizeLeft As Integer = 10
+
+                Dim yName = Utilities.MillimetersToPoints(74)
+                overContent.ShowTextAligned(PdfContentByte.ALIGN_CENTER, candidateName, ((pageSize.Left + pageSizeLeft) + pageSize.Right) / 2, pageSize.GetTop(yName), 0)
+                overContent.EndText()
+
+                ' Coordinates
+                Dim coord = New With {.CatX = 350, .HrsX = 455, .MinX = 505, .SecX = 550, .Y = 203}
+
+                ' Run Category
+                overContent.BeginText()
+                overContent.SetFontAndSize(bf, categoryAndTimeFont)
+                overContent.SetTextMatrix(coord.CatX, coord.Y)
+                overContent.ShowText(runCategory)
+                overContent.EndText()
+
+                ' Hrs
+                overContent.BeginText()
+                overContent.SetFontAndSize(bf, categoryAndTimeFont)
+                overContent.SetTextMatrix(coord.HrsX, coord.Y)
+                overContent.ShowText(Hrs)
+                overContent.EndText()
+
+                ' Min
+                overContent.BeginText()
+                overContent.SetFontAndSize(bf, categoryAndTimeFont)
+                overContent.SetTextMatrix(coord.MinX, coord.Y)
+                overContent.ShowText(min)
+                overContent.EndText()
+
+                ' Sec
+                overContent.BeginText()
+                overContent.SetFontAndSize(bf, categoryAndTimeFont)
+                overContent.SetTextMatrix(coord.SecX, coord.Y)
+                overContent.ShowText(sec)
+                overContent.EndText()
+
+                overContent.RestoreState()
+                stamper.Close()
+            End Using
+
+            ' Output PDF
+            Dim pdf As Byte() = outputPdf.ToArray()
+            Response.Cache.SetCacheability(HttpCacheability.NoCache)
+            Response.Buffer = False
+            Response.Clear()
+            Response.ClearContent()
+            Response.ClearHeaders()
+            Response.Charset = String.Empty
+            Response.ContentType = "application/pdf"
+            Response.AddHeader("content-length", pdf.Length.ToString())
+            Response.AddHeader("Content-Disposition", $"attachment;filename={candidateName}.pdf;")
+            Response.BinaryWrite(pdf)
+            Response.Close()
+        End Using
+    End Sub
 End Class

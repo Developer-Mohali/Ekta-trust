@@ -27,6 +27,15 @@
 
                 <!--one row-->
                 <div class="row marginImage" style="margin-left: 15px">
+                      <div id="box" class="burst-side strawberry">
+                          <div class="caption"></div>
+                          <img class="thumbnail" id="dd" src="images/map2026.jpeg" alt="Route Map" />
+                          <div>
+                              <a class="lightbox" href="images/map2026.jpeg" data-littlelightbox-group="gallery">
+                                  <h1>View Image</h1>
+                              </a>
+                          </div>
+                      </div>
                        <div id="box" class="burst-side strawberry">
                         <div class="caption"></div>
                         <img class="thumbnail" id="dd" src="RunForEqualityGallery/RunForEquality2026_1.jpeg" alt="Run For Equality 2026" />

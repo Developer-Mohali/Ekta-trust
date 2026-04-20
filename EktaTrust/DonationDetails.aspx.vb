@@ -177,7 +177,7 @@ Public Class DonationDetails
                         ElseIf ddlSearchBy.SelectedItem.Text = "Payment Status" Then
                             sql += " WHERE PaymentStatus LIKE @Search"
                         Else ' All
-                            sql += " WHERE (FullName LIKE @Search OR PaymentStatus LIKE @Search OR bd.OrderId Like @Search OR bd.TxnId Like @Search)"
+                            sql += " WHERE (FullName LIKE @Search OR PaymentStatus LIKE @Search OR OrderId Like @Search)"
                         End If
                         cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
                     End If
@@ -493,7 +493,7 @@ Public Class DonationDetails
                         ElseIf ddlSearchBy.SelectedItem.Text = "Payment Status" Then
                             sql += " WHERE PaymentStatus LIKE @Search"
                         Else ' All
-                            sql += " WHERE (FullName LIKE @Search OR PaymentStatus LIKE @Search OR bd.OrderId Like @Search OR bd.TxnId Like @Search)"
+                            sql += " WHERE (FullName LIKE @Search OR PaymentStatus LIKE @Search OR OrderId Like @Search)"
                         End If
                         cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
                     End If

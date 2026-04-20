@@ -84,7 +84,7 @@
     </style>
     <div class="container">
 
-        <h2 class="wow fadeInDown crtificate">Timings & Certificate of Run for Equality  <span id="lblYear">2025</span></h2>
+        <h2 class="wow fadeInDown crtificate">Timings & Certificate of Run for Equality  <span id="lblYear">2026</span></h2>
         <button id="btnCertificateFeedback" type="button" class="CertificateFeedback">Feedback / Suggestions</button>
 
         <div class="row contact-wrap  wow fadeInDown">
@@ -98,7 +98,8 @@
                             <label>Enter Select Year:</label>
                             <asp:DropDownList ID="DdlYear" runat="server" class="form-control" ClientIDMode="Static" onchange="updateHeading();">
                                 <%--<asp:ListItem Text="2026" Value="2026" Selected="True"></asp:ListItem>--%>
-                                 <asp:ListItem Text="2025" Value="2025" Selected="True"></asp:ListItem>
+                                 <asp:ListItem Text="2026" Value="2026" Selected="True"></asp:ListItem>
+                                 <asp:ListItem Text="2025" Value="2025"></asp:ListItem>
                                  <asp:ListItem Text="2023" Value="2023"></asp:ListItem>
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="YearValidator" ControlToValidate="DdlYear"
@@ -150,7 +151,7 @@
 
         <asp:Button ID="btnDownloadCertificate" runat="server"
             Text="Download Certificate"
-            CssClass="btn btn-primary btn-lg"
+            CssClass="btn btn-primary btn-md"
             OnClick="DownloadButton_Click"
             Visible='<%# Not String.IsNullOrEmpty(Convert.ToString(Eval("Net_Time"))) %>' />
 
