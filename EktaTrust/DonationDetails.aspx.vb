@@ -30,12 +30,12 @@ Public Class DonationDetails
 
     'This method use To bind Gridview.
     Private Sub BindGridView()
-        Dim query As String = "select DonationID,FullName,Amount,MobileNumber,ModeOfPayment,PanNuber,PaymentStatus,Address, OrderId,TxnId, CreatedDate, PaymentType" + " from Donation order by DonationID desc"
+        Dim query As String = "select DonationID,FullName,Amount,MobileNumber,ModeOfPayment,PanNuber,PaymentStatus,Address, OrderId,TxnId, CreatedDate, PaymentType" + " from Donation
+                              WHERE YEAR(CreatedDate) = @YearBy And IFNULL(IsDeleted, 0) = 0 order by DonationID desc"
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
             Using cmd As New MySqlCommand(query)
                 cmd.Connection = con
-                query += " WHERE YEAR(CreatedDate) = @YearBy And IFNULL(IsDeleted, 0) = 0"
                 cmd.Parameters.AddWithValue("@YearBy", ddlYear.SelectedValue)
                 Using sda As New MySqlDataAdapter(cmd)
                     Dim dt As New DataTable()
@@ -81,7 +81,7 @@ Public Class DonationDetails
                 con.Dispose()
             End Using
         End Using
-        BindGridView()
+        Me.BindGridView()
     End Sub
     'This method is used To Edit the data
     Protected Sub imgbtn_Click(sender As Object, e As ImageClickEventArgs)
@@ -371,7 +371,7 @@ Public Class DonationDetails
             End If
 
             Dim donationNo As String = If(IsDBNull(row("DonationID")), "", row("DonationID").ToString())
-            Dim serialNo As Integer = If(IsDBNull(row("SerialNo")), 0, Convert.ToInt32(row("SerialNo")))
+            Dim serialNo As String = If(IsDBNull(row("SerialNo")), 0, Convert.ToInt32(row("SerialNo")))
 
             ' Generate serial number if not already and save in DB.
             If serialNo = 0 Then
