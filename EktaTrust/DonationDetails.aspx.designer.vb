@@ -212,6 +212,15 @@ Partial Public Class DonationDetails
     Protected WithEvents ddlStatusOfPayment As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''paymentType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents paymentType As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
     '''txtAddress control.
     '''</summary>
     '''<remarks>

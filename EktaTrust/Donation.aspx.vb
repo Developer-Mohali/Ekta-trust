@@ -33,7 +33,7 @@ Public Class Donation
                 Using cmd As MySqlCommand = New MySqlCommand(query)
                     cmd.Parameters.AddWithValue("@FullName", name)
                     cmd.Parameters.AddWithValue("@Amount", amount)
-                    cmd.Parameters.AddWithValue("@MobileNumber", mobile)
+                    cmd.Parameters.AddWithValue("@MobileNumber", mobile.Trim())
                     cmd.Parameters.AddWithValue("@PanNuber", pan.ToUpper())
                     cmd.Parameters.AddWithValue("@Address", address)
                     cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now)

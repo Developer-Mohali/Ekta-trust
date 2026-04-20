@@ -42,7 +42,7 @@ Public Class PaytmPaymentResponse
 
                 If status.ToLower() = "success" Then
                     lnkReceipt.CommandArgument = row("DonationID").ToString()
-                    lnkReceipt.Visible = True
+                    'lnkReceipt.Visible = True
                     'Send mail to donated person...
                     SendDonationMail(row("EmailId"), row("FullName"), row("Amount"), row("CreatedDate"), row("DonationID"))
                 End If

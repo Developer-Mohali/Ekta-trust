@@ -30,12 +30,12 @@ Public Class DonationDetails
 
     'This method use To bind Gridview.
     Private Sub BindGridView()
-        Dim query As String = "select DonationID,FullName,Amount,MobileNumber,ModeOfPayment,PanNuber,PaymentStatus,Address, OrderId,TxnId, CreatedDate" + " from Donation order by DonationID desc"
+        Dim query As String = "select DonationID,FullName,Amount,MobileNumber,ModeOfPayment,PanNuber,PaymentStatus,Address, OrderId,TxnId, CreatedDate, PaymentType" + " from Donation order by DonationID desc"
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
             Using cmd As New MySqlCommand(query)
                 cmd.Connection = con
-                query += " WHERE YEAR(CreatedDate) = @YearBy And IsDeleted = 0"
+                query += " WHERE YEAR(CreatedDate) = @YearBy And IFNULL(IsDeleted, 0) = 0"
                 cmd.Parameters.AddWithValue("@YearBy", ddlYear.SelectedValue)
                 Using sda As New MySqlDataAdapter(cmd)
                     Dim dt As New DataTable()
@@ -128,12 +128,9 @@ Public Class DonationDetails
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs)
         Try
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
-            Dim serialNumber As String = ""
-            If ddlStatusOfPayment.SelectedItem.Value = "Success" Then
-                serialNumber = PaytmCallBack.GenerateSerialNumber()
-            End If
+
             Using con As New MySqlConnection(constr)
-                Using cmd As New MySqlCommand("UPDATE Donation SET  FullName=@FullName, Amount=@Amount,MobileNumber=@MobileNumber,ModeOfPayment=@ModeOfPayment,PaymentStatus=@StatusOfPayment,Address=@Address, SerialNo=@SerialNo  WHERE DonationID = @DonationID", con)
+                Using cmd As New MySqlCommand("UPDATE Donation SET  FullName=@FullName, Amount=@Amount,MobileNumber=@MobileNumber,ModeOfPayment=@ModeOfPayment,PaymentStatus=@StatusOfPayment,Address=@Address, PaymentType=@PaymentType  WHERE DonationID = @DonationID", con)
                     cmd.Parameters.AddWithValue("@DonationID", Convert.ToInt32(lblDonationId.Text))
                     cmd.Parameters.AddWithValue("@FullName", textFullName.Text)
                     cmd.Parameters.AddWithValue("@Amount", textAmount.Text)
@@ -141,7 +138,7 @@ Public Class DonationDetails
                     cmd.Parameters.AddWithValue("@ModeOfPayment", ddlModeOfPayment.SelectedItem.Value)
                     cmd.Parameters.AddWithValue("@StatusOfPayment", ddlStatusOfPayment.SelectedItem.Value)
                     cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
-                    cmd.Parameters.AddWithValue("@SerialNo", serialNumber)
+                    cmd.Parameters.AddWithValue("@PaymentType", paymentType.SelectedItem.Text)
                     cmd.Connection = con
                     con.Open()
                     cmd.ExecuteNonQuery()
@@ -170,7 +167,7 @@ Public Class DonationDetails
         Try
             Using con As New MySqlConnection(constr)
                 Using cmd As New MySqlCommand()
-                    Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber, PaymentStatus, Address, OrderId,TxnId, CreatedDate FROM Donation"
+                    Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber, PaymentStatus, Address, OrderId,TxnId, CreatedDate, PaymentType FROM Donation"
                     If Not String.IsNullOrEmpty(txtSearch.Text) Then
                         If ddlSearchBy.SelectedItem.Text = "Full Name" Then
                             sql += " WHERE FullName LIKE @Search"
@@ -182,9 +179,9 @@ Public Class DonationDetails
                         cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
                     End If
                     If sql.Contains(" WHERE") Then
-                        sql += " And YEAR(CreatedDate) = @YearBy And IsDeleted = 0"
+                        sql += " And YEAR(CreatedDate) = @YearBy And IFNULL(IsDeleted, 0) = 0"
                     Else
-                        sql += " WHERE YEAR(CreatedDate) = @YearBy And IsDeleted = 0"
+                        sql += " WHERE YEAR(CreatedDate) = @YearBy And IFNULL(IsDeleted, 0) = 0"
                     End If
                     cmd.Parameters.AddWithValue("@YearBy", ddlYear.SelectedValue)
                     ' order by desc
@@ -263,7 +260,7 @@ Public Class DonationDetails
     'This method is used To insert the data
     Protected Sub btnAddNew_Click1(sender As Object, e As EventArgs)
         Try
-            Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,ModeOfPayment,PaymentStatus,Address,CreatedDate,PaymentEnv)VALUES(@FullName, @Amount,@MobileNumber,@ModeOfPayment,@StatusOfPayment,@Address,@CreatedDate,@PaymentEnv)"
+            Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,ModeOfPayment,PaymentStatus,Address,CreatedDate,PaymentEnv, PaymentType)VALUES(@FullName, @Amount,@MobileNumber,@ModeOfPayment,@StatusOfPayment,@Address,@CreatedDate,@PaymentEnv, @PaymentType)"
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As MySqlConnection = New MySqlConnection(constr)
                 Using cmd As MySqlCommand = New MySqlCommand(query)
@@ -274,7 +271,8 @@ Public Class DonationDetails
                     cmd.Parameters.AddWithValue("@StatusOfPayment", ddlStatusOfPayment.SelectedItem.Text)
                     cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
                     cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now)
-                    cmd.Parameters.AddWithValue("@PaymentEnv", "Admin")
+                    cmd.Parameters.AddWithValue("@PaymentEnv", "Offline")
+                    cmd.Parameters.AddWithValue("@PaymentType", paymentType.SelectedItem.Text)
                     cmd.Connection = con
                     con.Open()
                     cmd.ExecuteNonQuery()
@@ -337,7 +335,7 @@ Public Class DonationDetails
             Dim dt As New DataTable()
 
             Using con As New MySqlConnection(constr)
-                Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount, ModeOfPayment, FullName, EmailId, CreatedDate, DonationID, SerialNo FROM donation WHERE DonationID = @id", con)
+                Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount, ModeOfPayment, FullName, EmailId, CreatedDate, DonationID, SerialNo, PaymentType FROM donation WHERE DonationID = @id", con)
 
                     cmd.Parameters.AddWithValue("@id", id)
 
@@ -360,6 +358,13 @@ Public Class DonationDetails
             Dim amount As Decimal = If(IsDBNull(row("Amount")), 0, Convert.ToDecimal(row("Amount")))
             Dim paymentMode As String = If(IsDBNull(row("ModeOfPayment")), "", row("ModeOfPayment").ToString())
             Dim donationDate As String = ""
+            Dim paymentType As String = row("PaymentType").ToString()
+
+            If paymentType = "Registration" Then
+                MessageUpdated.Text = "Only Donation type payment generate Receipt"
+                MessageUpdated.ForeColor = Color.Red
+                Return
+            End If
 
             If Not IsDBNull(row("CreatedDate")) Then
                 donationDate = Convert.ToDateTime(row("CreatedDate")).ToString("dd/MM/yyyy")
@@ -367,6 +372,12 @@ Public Class DonationDetails
 
             Dim donationNo As String = If(IsDBNull(row("DonationID")), "", row("DonationID").ToString())
             Dim serialNo As Integer = If(IsDBNull(row("SerialNo")), 0, Convert.ToInt32(row("SerialNo")))
+
+            ' Generate serial number if not already and save in DB.
+            If serialNo = 0 Then
+                serialNo = PaytmCallBack.GenerateSerialNumber()
+                UpdateDonation(serialNo, id)
+            End If
 
             Dim transactionId As String = If(IsDBNull(row("TxnId")), "", row("TxnId").ToString())
 
@@ -591,4 +602,25 @@ Public Class DonationDetails
         End Try
     End Sub
 #End Region
+
+    Protected Sub UpdateDonation(serialNum As String, donationId As String)
+        Try
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand("UPDATE Donation SET  SerialNo=@SerialNo  WHERE DonationID = @DonationID", con)
+                    cmd.Parameters.AddWithValue("@DonationID", Convert.ToInt32(donationId))
+                    cmd.Parameters.AddWithValue("@SerialNo", serialNum)
+                    cmd.Connection = con
+                    con.Open()
+                    cmd.ExecuteNonQuery()
+                    con.Close()
+                    con.Dispose()
+                End Using
+            End Using
+
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
 End Class

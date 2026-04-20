@@ -122,6 +122,7 @@
                      <asp:BoundField HeaderText="OrderId" DataField="OrderId" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
                    <asp:BoundField HeaderText="Donated On" DataField="CreatedDate" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
                    <asp:BoundField HeaderText="TransId" DataField="TxnId" ItemStyle-HorizontalAlign="Left" Visible="false"></asp:BoundField> 
+                   <asp:BoundField HeaderText="Type" DataField="PaymentType" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
                   <asp:TemplateField HeaderText="Action" ItemStyle-Width="90" >
                       <ItemTemplate>
                           <asp:ImageButton ID="imgbtn" ImageUrl="../Images/edit.png" runat="server" Width="15" Height="15" OnClick="imgbtn_Click" />
@@ -186,6 +187,7 @@
                              <asp:ListItem value="Debit Card">Debit Card</asp:ListItem>
                              <asp:ListItem value="Net Banking">Net Banking</asp:ListItem>                      
                              <asp:ListItem value="UPI">UPI</asp:ListItem>                      
+                             <asp:ListItem value="Other">Other</asp:ListItem>                      
                            </asp:DropDownList>
                              <span id="modeOfPaymentError" class="help-block" style="color: red"></span>
                          </div>
@@ -198,6 +200,13 @@
                                 <asp:ListItem value="Success">Success</asp:ListItem>
                                 <asp:ListItem value="Cancelled">Cancelled</asp:ListItem>
                                    <asp:ListItem value="Failed">Failed</asp:ListItem>
+                              </asp:DropDownList>
+                            </div>
+                            <div class="form-group" style="width: 95%">
+                              <label>Payment Type: </label>
+                              <asp:DropDownList CssClass="form-control" ID="paymentType"  runat="server">
+                                <asp:ListItem value="Donation" Selected="True">Donation</asp:ListItem>
+                                <asp:ListItem value="Registration">Registration</asp:ListItem>
                               </asp:DropDownList>
                             </div>
 
