@@ -792,7 +792,7 @@ Public Class Certificate
                 If timeParts.Length >= 3 Then
                     Hrs = timeParts(0)
                     min = timeParts(1)
-                    sec = (Math.Truncate(timeParts(2) * 10) / 10).ToString("0.0")       'formating sec
+                    sec = (Math.Truncate(timeParts(2) * 10) / 10).ToString("0.00")       'formating sec
                 End If
             End If
 
@@ -817,7 +817,6 @@ Public Class Certificate
         ' PDF Template
         Dim templateFile As String = Server.MapPath("~/doc/RunForEquality7Certificate.pdf")
 
-        ' If (selectedYear = "2026", Server.MapPath("~/doc/RunForEquality7Certificate.pdf"), Server.MapPath("~/doc/EktaCertificatedesign.pdf")) Then
         Dim inputPdf As Stream = New FileStream(templateFile, FileMode.Open, FileAccess.Read, FileShare.Read)
         Dim reader As New PdfReader(inputPdf)
         Dim pageSize As Rectangle = reader.GetPageSize(1)
@@ -865,7 +864,7 @@ Public Class Certificate
 
                 ' Sec
                 overContent.BeginText()
-                overContent.SetFontAndSize(bf, categoryAndTimeFont)
+                overContent.SetFontAndSize(bf, 11.0F)
                 overContent.SetTextMatrix(coord.SecX, coord.Y)
                 overContent.ShowText(sec)
                 overContent.EndText()

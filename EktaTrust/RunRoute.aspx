@@ -27,7 +27,7 @@
         <div class="">
 
             <a href="images/map2026.jpeg" target="_blank">
-               <img src="images/map2026.jpeg" style="box-shadow: 0px 1px 10px 2px lightgrey;display: block; margin: 0 auto;width: 75%;" />
+               <img src="images/map2026.jpeg" style="box-shadow: 0px 1px 10px 2px lightgrey;display: block; margin: 0 auto;width: 97%;" />
             </a>
 
             <%--<img src="Gallery_2025/Route Map clear - 05.02.2025.jpg" style="box-shadow: 0px 1px 10px 2px lightgrey; width: 100%; margin-left: 54%;" />--%>
