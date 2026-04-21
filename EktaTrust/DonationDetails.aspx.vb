@@ -120,6 +120,12 @@ Public Class DonationDetails
         Else
             txtAddress.Text = gvrow.Cells(6).Text
         End If
+
+        If paymentType.Items.FindByValue(gvrow.Cells(10).Text) IsNot Nothing Then
+            paymentType.SelectedValue = gvrow.Cells(10).Text.Trim()
+        Else
+            paymentType.ClearSelection()
+        End If
         Me.ModalPopupExtender1.Show()
         ' BindGridView()
     End Sub
@@ -360,7 +366,7 @@ Public Class DonationDetails
             Dim donationDate As String = ""
             Dim paymentType As String = row("PaymentType").ToString()
 
-            If paymentType = "Registration" Then
+            If paymentType <> "Donation" Then
                 MessageUpdated.Text = "Only Donation type payment generate Receipt"
                 MessageUpdated.ForeColor = Color.Red
                 Return

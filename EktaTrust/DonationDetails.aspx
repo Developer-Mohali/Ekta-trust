@@ -129,7 +129,8 @@
                           <asp:ImageButton ID="ButtonDelete" runat="server" CommandName="Delete" Text="Delete" Width="15" Height="15" OnClientClick="return confirm('Are you sure you want to delete this event?');" CssClass="input" ImageUrl="Images/minimal-97-128.png" />
                    <i class="fa fa-refresh" style="cursor:pointer; font-size: medium;" onclick='showJson("<%# HttpUtility.JavaScriptStringEncode(Eval("OrderId").ToString()) %>", "<%# HttpUtility.JavaScriptStringEncode(Eval("PaymentStatus").ToString()) %>")' title="Refresh status from Paytm"></i>
                           <!-- Certificate -->
-                        <asp:LinkButton ID="btnCertificate" runat="server" ToolTip="Generate Certificate" OnClick="generate_Certificate" style="padding-left:0px !important;">
+                        <asp:LinkButton ID="btnCertificate" runat="server" ToolTip="Generate Certificate" OnClick="generate_Certificate" style="padding-left:0px !important;"
+                                    Visible='<%# (Not IsDBNull(Eval("PaymentType")) AndAlso Eval("PaymentType").ToString().ToLower() = "donation") AndAlso (Not IsDBNull(Eval("PaymentStatus")) AndAlso Eval("PaymentStatus").ToString().ToLower() = "success") %>'>
                             <i class="fa fa-download" style="cursor:pointer; font-size: medium;"></i>
                         </asp:LinkButton>
                       </ItemTemplate>
@@ -206,7 +207,8 @@
                               <label>Payment Type: </label>
                               <asp:DropDownList CssClass="form-control" ID="paymentType"  runat="server">
                                 <asp:ListItem value="Donation" Selected="True">Donation</asp:ListItem>
-                                <asp:ListItem value="Registration">Registration</asp:ListItem>
+                                <asp:ListItem value="BIB Registration">BIB Registration</asp:ListItem>
+                                <asp:ListItem value="Other">Other</asp:ListItem>          
                               </asp:DropDownList>
                             </div>
 
