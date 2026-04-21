@@ -380,7 +380,7 @@ Public Class DonationDetails
             End If
 
             Dim donationNo As String = If(IsDBNull(row("DonationID")), "", row("DonationID").ToString())
-            Dim serialNo As String = If(IsDBNull(row("SerialNo")), 0, Convert.ToInt32(row("SerialNo")))
+            Dim serialNo As Integer = If(IsDBNull(row("SerialNo")), 0, Convert.ToInt32(row("SerialNo")))
 
             ' Generate serial number if not already and save in DB.
             If serialNo = 0 Then
@@ -395,7 +395,8 @@ Public Class DonationDetails
             CreateDonationCertificate(donorName, amount, paymentMode, donationDate, serialNoPre, transactionId)
 
         Catch ex As Exception
-
+            MessageUpdated.Text = "Error while generating receipt."
+            MessageUpdated.ForeColor = Color.Red
         End Try
     End Sub
 
