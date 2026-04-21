@@ -306,10 +306,10 @@ Public Class EventRegistration
         Dim paymentEnv = If(ConfigurationManager.AppSettings("Environment") = "Prod", "Live", "Test")
         Dim category As String = "Registration For RUN FOR EQUALITY"
         Dim bibNumber As String = Donation.GenerateSixDigitNumber() 'GetNextBibNumber(runCategory, constr)
-        Dim year As String = DateTime.Now.Year.ToString()
+        Dim year As String = DateTime.UtcNow.Year.ToString()
 
         ' ✅ Generate UNIQUE Order ID
-        Dim orderId As String = DateTime.Now.Ticks.ToString() & "_" & bibNumber
+        Dim orderId As String = DateTime.UtcNow.Ticks.ToString() & "_" & bibNumber
         Dim insertQuery = "INSERT INTO bibdata (RunnerName, RunCatagory, TShirtSize, Gender, MobileNumber, CategoryName, RunnerDOB, Year, OrderId, PaymentStatus, Amount, PaymentEnv, CreatedAt)
                             Values(@RunnerName, @runCategory, @tshirtSize, @gender, @phone, @category, @runnerDOB, @year, @orderId, @PaymentStatus, @amount, @paymentEnv, @createdAt)"
         Try
@@ -331,7 +331,7 @@ Public Class EventRegistration
                         cmd.Parameters.AddWithValue("@PaymentStatus", "Pending")
                         cmd.Parameters.AddWithValue("@amount", amount)
                         cmd.Parameters.AddWithValue("@paymentEnv", paymentEnv)
-                        cmd.Parameters.AddWithValue("@createdAt", DateTime.Now)
+                        cmd.Parameters.AddWithValue("@createdAt", DateTime.UtcNow)
                         'cmd.CommandType = CommandType.StoredProcedure
                         'cmd.Parameters.Add(New MySqlParameter("p_BankReferenceNo", ""))
                         'cmd.Parameters.Add(New MySqlParameter("p_BIBNo", bibNumber))

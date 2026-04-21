@@ -47,6 +47,8 @@ Public Class BIBDataRunner
             gvEvent.PageSize = 15
             BindGridView()
             BindBiBUsersDropDown()
+        Else
+            MessageUpdated.Text = ""
         End If
     End Sub
     ''' <summary>

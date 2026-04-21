@@ -27,7 +27,7 @@ Public Class Donation
         Dim paymentEnv = If(ConfigurationManager.AppSettings("Environment") = "Prod", "Live", "Test")
         Try
             ' ✅ Generate UNIQUE Order ID for paytm payment...
-            Dim orderId As String = DateTime.Now.Ticks.ToString() & "_" & GenerateSixDigitNumber()
+            Dim orderId As String = DateTime.UtcNow.Ticks.ToString() & "_" & GenerateSixDigitNumber()
 
             Using con As MySqlConnection = New MySqlConnection(constr)
                 Using cmd As MySqlCommand = New MySqlCommand(query)
@@ -36,7 +36,7 @@ Public Class Donation
                     cmd.Parameters.AddWithValue("@MobileNumber", mobile.Trim())
                     cmd.Parameters.AddWithValue("@PanNuber", pan.ToUpper())
                     cmd.Parameters.AddWithValue("@Address", address)
-                    cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now)
+                    cmd.Parameters.AddWithValue("@CreatedDate", DateTime.UtcNow)
                     cmd.Parameters.AddWithValue("@EmailId", email)
                     cmd.Parameters.AddWithValue("@OrderId", orderId)
                     cmd.Parameters.AddWithValue("@PaymentStatus", "Pending")

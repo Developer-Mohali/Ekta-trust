@@ -25,6 +25,8 @@ Public Class DonationDetails
             gvEvent.PageSize = 15
             BindGridView()
             SearchCustomers()
+        Else
+            MessageUpdated.Text = ""        ' clear message to UI, if recall to server...
         End If
     End Sub
 
@@ -261,6 +263,7 @@ Public Class DonationDetails
         txtAddress.Text = ""
         btnUpdate.Visible = False
         btnAddNew.Visible = True
+        paymentType.ClearSelection()
     End Sub
 
     'This method is used To insert the data
@@ -276,7 +279,7 @@ Public Class DonationDetails
                     cmd.Parameters.AddWithValue("@ModeOfPayment", ddlModeOfPayment.SelectedItem.Text)
                     cmd.Parameters.AddWithValue("@StatusOfPayment", ddlStatusOfPayment.SelectedItem.Text)
                     cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
-                    cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now)
+                    cmd.Parameters.AddWithValue("@CreatedDate", DateTime.UtcNow)
                     cmd.Parameters.AddWithValue("@PaymentEnv", "Offline")
                     cmd.Parameters.AddWithValue("@PaymentType", paymentType.SelectedItem.Text)
                     cmd.Connection = con
