@@ -1228,6 +1228,13 @@ Public Class BIBDataRunner
                     cell.BackColor = System.Drawing.Color.White
             End Select
 
+            ' Converting reg date to current time from UTC
+            Dim createdDateCell As TableCell = e.Row.Cells(11)
+            If Not String.IsNullOrEmpty(createdDateCell.Text) Then
+                Dim istZone As TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time")
+                Dim istTime As DateTime = TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(createdDateCell.Text), istZone)
+                createdDateCell.Text = istTime.ToString("dd-MMM-yyyy hh:mm tt")
+            End If
         End If
     End Sub
 

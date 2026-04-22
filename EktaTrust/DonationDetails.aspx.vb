@@ -250,6 +250,15 @@ Public Class DonationDetails
                     cell.BackColor = System.Drawing.Color.White
             End Select
             ' End of Payment Status
+
+            ' Converting donated date to current time from UTC
+            Dim donatedCell As TableCell = e.Row.Cells(8)
+            If Not String.IsNullOrEmpty(donatedCell.Text) Then
+                Dim istZone As TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time")
+                Dim istTime As DateTime = TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(donatedCell.Text), istZone)
+                donatedCell.Text = istTime.ToString("dd-MMM-yyyy hh:mm tt")
+            End If
+
         End If
     End Sub
     Protected Sub btnAddNew_Click(sender As Object, e As EventArgs)
