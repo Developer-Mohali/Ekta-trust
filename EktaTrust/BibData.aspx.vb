@@ -1,19 +1,26 @@
 ﻿Imports System.Data.OleDb
+Imports MySql.Data.MySqlClient
 
 Public Class BibData
     Inherits System.Web.UI.Page
 
     Dim dateTable As New DataTable
+    Protected year As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         hdnMsgBiBData.Visible = False
+        year = Request.QueryString("year")?.ToString()
     End Sub
 
     Protected Sub SearchButton_Click(ByVal sender As Object, ByVal e As EventArgs)
         Dim path As String = Server.MapPath("~/Files/BibData/BibData.xlsx")
         Dim mobile As String = txtMobileNo.Text
 
-        dateTable = LoadAndFilterExcel(path, mobile)
+        'dateTable = LoadAndFilterExcel(path, mobile)
+        dateTable = Get2026BIBDataByNumber(mobile)
+        If dateTable.Rows.Count = 0 Then
+            dateTable = GetBIBDataByNumber(mobile)
+        End If
 
         If dateTable.Rows.Count > 0 Then
             hdnMsgBiBData.InnerText = "Congratulations Your details are as follows!"
@@ -39,10 +46,12 @@ Public Class BibData
         resultTable.Columns.Add("collect_bib")
 
         Try
+            'Dim connStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;" &
+            '                    "Data Source=" & filePath & ";" &
+            '                    "Extended Properties='Excel 12.0 Xml;HDR=YES;IMEX=1';"
             Dim connStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;" &
-                                "Data Source=" & filePath & ";" &
-                                "Extended Properties='Excel 12.0 Xml;HDR=YES;IMEX=1';"
-
+                        "Data Source=" & filePath & ";" &
+                        "Extended Properties=""Excel 12.0;HDR=YES;IMEX=1"";"
             Using conn As New OleDbConnection(connStr)
                 conn.Open()
                 Dim schemaTable As DataTable = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, Nothing)
@@ -100,5 +109,67 @@ Public Class BibData
         End Select
     End Function
 
+    Private Function GetBIBDataByNumber(mobile As String) As DataTable
+        Dim dt As New DataTable()
+
+        Try
+            year = Request.QueryString("year")?.ToString()
+            Dim query As String =
+                "SELECT DISTINCT CategoryName as category_name, RunnerName as participate_name, Gender as gender, BloodGroup as blood_group, TShirtSize as tshirt_size,
+                  RunCatagory as run_category, BIBNo as bib_no, CollectBIB as collect_bib FROM bibdata WHERE MobileNumber = @mobile AND Year = @year and (paymentstatus='success' or createdby <> 0)"
+
+            Dim constr As String =
+                ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand(query, con)
+
+                    cmd.Parameters.AddWithValue("@mobile", mobile)
+                    cmd.Parameters.AddWithValue("@year", year)
+
+                    Using sda As New MySqlDataAdapter(cmd)
+                        con.Open()
+                        sda.Fill(dt)
+                    End Using
+                End Using
+            End Using
+
+        Catch ex As Exception
+            Throw   ' don't swallow errors
+        End Try
+
+        Return dt
+    End Function
+
+    Private Function Get2026BIBDataByNumber(mobile As String) As DataTable
+        Dim dt As New DataTable()
+
+        Try
+            year = Request.QueryString("year")?.ToString()
+            Dim query As String =
+                "SELECT DISTINCT CategoryName as category_name, RunnerName as participate_name, Gender as gender, BloodGroup as blood_group, TShirtSize as tshirt_size,
+                  RunCatagory as run_category, BIBNo as bib_no, CollectBIB as collect_bib FROM bibdata2026 WHERE MobileNumber = @mobile"
+
+            Dim constr As String =
+                ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand(query, con)
+
+                    cmd.Parameters.AddWithValue("@mobile", mobile)
+
+                    Using sda As New MySqlDataAdapter(cmd)
+                        con.Open()
+                        sda.Fill(dt)
+                    End Using
+                End Using
+            End Using
+
+        Catch ex As Exception
+            Throw   ' don't swallow errors
+        End Try
+
+        Return dt
+    End Function
 
 End Class

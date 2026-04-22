@@ -209,7 +209,7 @@ cursor: pointer;
         <%-- <a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784" target="_blank">
             <button id="btnfeedback" type="button" class="feedback"></button>
         </a>--%>
-        <a href="../Donate" target="_blank">
+        <a href="../Donation">
             <button id="btnfeedback" type="button" class="feedback"></button>
         </a>
     </div>
@@ -288,7 +288,16 @@ cursor: pointer;
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
+                <img style="width: 100%;" src="Images/slider/runForEquality.jpg" alt="" />
+            </div>
+            <div class="item">
                 <img style="width: 100%;" src="Images/slider/new_img_1.jpg" alt="" />
+            </div>
+            <div class="item">
+                <img style="width: 100%;" src="Images/slider/buddha-banenr2.jpg" alt="" />
+            </div>
+            <div class="item">
+                <img style="width: 100%;" src="Images/slider/buddha-banenr5.jpg" alt="" />
             </div>
             <div class="item">
                 <img style="width: 100%;" src="Images/slider/new_img_8.jpg" alt="" />
@@ -299,9 +308,9 @@ cursor: pointer;
             <div class="item">
                 <img style="width: 100%;" src="Images/slider/new_img_4.jpg" alt="" />
             </div>
-            <div class="item">
+           <%-- <div class="item">
                 <img style="width: 100%;" src="Images/slider/new_img_5.jpg" alt="" />
-            </div>
+            </div>--%>
             <div class="item">
                 <img style="width: 100%;" src="Images/slider/new_img_7.jpg" alt="" />
             </div>
@@ -355,7 +364,7 @@ cursor: pointer;
                                 <br />
                                 <div class="media-body">
                                    <%-- <h3 class="media-heading">Bib-Expo Details</h3>--%>
-                                   <a href="../EventPrize" target="_self"> <h2 class="media-heading">Run for equality 14.04.2025 Registration</h2></a>
+                                   <a href="../EventPrize" target="_self"> <h2 class="media-heading">Run for equality 14.04.2026 Registration</h2></a>
                                     <%--<p>Registration for 14<span class="ordinal">th</span> April Event</p>--%>
                                    <%-- <p>BIB EXPO Details</p>--%>
                                     <a href="../EventPrize" target="_self" class="btn btn-default">Register Here</a>                                   
@@ -378,11 +387,23 @@ cursor: pointer;
                                 </div>
                             </div>
                         </div>
-                         <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                           <div class="media services-wrap wow fadeInDown" >
+                               <div class="pull-left">
+                                   <a href="../Literature" target="new">
+                                       <img src="images/books.jpg" class="img-responsive" style="height: 150px; width:115px;" /></a>
+                               </div>
+                               <div class="media-body">
+                              <a href="../Literature"><h3 class="media-heading padding-top" style="padding-top: 0px;">बाबासाहेब के अनमोल वचन।</h3></a>
+                                   <a href="../Literature" target="_self" class="btn btn-default">Click Here </a>
+                               </div>
+                           </div>
+                       </div>
+                         <%--<div class="col-sm-6 col-md-6 col-lg-6">
                             <div class="media services-wrap wow fadeInDown" >
                                 <div class="pull-left">
                                     <a href="../MatrimonialInformation" target="new">
-                                        <%-- <img src="images/SavitaBheem.jpg" class="img-responsive" alt="" /></a>--%>
+                                        <%-- <img src="images/SavitaBheem.jpg" class="img-responsive" alt="" /></a>--%
                                         <img src="RunForEquality2018/MarrigePic.jpg" class="img-responsive" style="height: 150px;" /></a>
                                 </div>
                                 <div class="media-body">
@@ -390,7 +411,7 @@ cursor: pointer;
                                     <a href="../MatrimonialInformation" target="_self" class="btn btn-default">Click Here </a>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                         <%--<div class="col-sm-6 col-md-6 col-lg-6">
                             <div class="media services-wrap wow fadeInDown">
                                 <div class="pull-left">
@@ -410,8 +431,8 @@ cursor: pointer;
                                        <img src="Gallery_2023/1.jpeg" class="img-fluid" alt="" style="height: 150px;"/></a>
                                 </div>
                                 <div class="media-body">
-                                    <a href="../EktaCreativeCompetition.aspx"> <h3 class="media-heading">Ekta Creative Competition</h3></a>
-                                    <a href="../EktaCreativeCompetition.aspx" target="_self" class="btn btn-default">Click Here </a>
+                                    <a href="../EktaCreativeCompetition2025.aspx"> <h3 class="media-heading">Ekta Creative Competition</h3></a>
+                                    <a href="../EktaCreativeCompetition2025.aspx" target="_self" class="btn btn-default">Click Here </a>
                                 </div>
                             </div>
                         </div>
@@ -530,7 +551,8 @@ cursor: pointer;
         <div class="get-started  wow fadeInDown" style="padding: 0px;">
             <div class="container">
                 <div class="contribute col-lg-6 col-sm-5 col-md-5 ">
-                    <a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784" target="_blank">
+                   <%-- <a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784" target="_blank">--%>
+                    <a href="Donation">
                         <img src="images/donate1.png" id="imgdonate" class="img-responsive" alt="" /></a>
                 </div>
                <%-- <div class="pull-right">
@@ -731,9 +753,12 @@ cursor: pointer;
                     <div class="col-md-5">
                         <address class="text-white">
                             <div class="pull-right"><a href="#"><i class="fa fa-telegram"></i></a><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a></div>
-                            <strong>Ekta Navnirman Trust,</strong><br />
+                           <%-- <strong>Ekta Navnirman Trust,</strong><br />
                            25, Bhagwati Nagar II, Kartarpura,<br />
-                            Jaipur,302006
+                            Jaipur,302006--%>
+                            <strong>Ekta Navnirman Trust,</strong><br />
+                             B-15, Pragati Path, Bajaj Nagar,<br />
+                            Jaipur, Rajasthan-302015
                             <br />
                             <br />
                             <img src="Images/logo-small.jpg" class="img-responsive pull-right" alt="" />

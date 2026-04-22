@@ -49,6 +49,12 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelDataReader, Version=3.7.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.7.0\lib\net462\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.7.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.7.0\lib\net462\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
     <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
     </Reference>
@@ -62,10 +68,39 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>C:\Users\Admin\Downloads\Json90r1\Bin\Net20\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Otp.NET, Version=1.4.1.0, Culture=neutral, PublicKeyToken=38a48df817e173a6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Otp.NET.1.4.1\lib\net461\Otp.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="PaytmChecksum, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\PaytmChecksum.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.7.0.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.7.0\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=9.0.0.4, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.9.0.4\lib\net462\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -95,6 +130,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -120,11 +156,16 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminBIBData.aspx" />
+    <Content Include="AdminUserBIBNO.aspx" />
     <Content Include="Alwar.aspx" />
     <Content Include="AmbedkarWSJ.aspx" />
+    <Content Include="BibData.aspx" />
     <Content Include="CelebritiesAppeal.aspx" />
     <Content Include="Certificate.aspx" />
     <Content Include="CertificationReport.aspx" />
+    <Content Include="Controls\AdminSideMenuControl.ascx" />
+    <Content Include="Controls\BIBDataRunner.ascx" />
     <Content Include="Controls\GallerySideMenuControl.ascx" />
     <Content Include="Covid19.aspx" />
     <Content Include="AddNewUser.aspx" />
@@ -180,12 +221,14 @@
     <Content Include="ContactDetails.aspx" />
     <Content Include="Contributors.aspx" />
     <Content Include="Cooking.aspx" />
+    <Content Include="CreativeCompetitionGallery2023\1-2025.jpeg" />
     <Content Include="CreativeCompetitionGallery2023\1.jpeg" />
     <Content Include="CreativeCompetitionGallery2023\2.jpeg" />
     <Content Include="CreativeCompetitionGallery2023\3.jpeg" />
     <Content Include="CreativeCompetitionGallery2023\4.jpeg" />
     <Content Include="CreativeCompetitionGallery2023\5.jpeg" />
     <Content Include="CreativeCompetitionGallery2023\6.jpeg" />
+    <Content Include="CreativeCompetitionRegistered.aspx" />
     <Content Include="CssGallery\additional-methods.js" />
     <Content Include="CssGallery\jquery.min.js" />
     <Content Include="CssGallery\jquery.validate.js" />
@@ -205,11 +248,14 @@
     <Content Include="Css\PaymentCSS\js\script.js" />
     <Content Include="Demo.html" />
     <Content Include="Dhodsar.aspx" />
+    <Content Include="doc\DonationTemplate.html" />
     <Content Include="Donate.aspx" />
     <Content Include="DonationDetails.aspx" />
     <Content Include="EktaCreativeCompetition.aspx" />
+    <Content Include="EktaCreativeCompetition2025.aspx" />
     <Content Include="EktaCreativeCompetitionGallery.aspx" />
     <Content Include="EktaCreativeCompetitionGallery2023.aspx" />
+    <Content Include="EktaCreativeCompetitionGallery2025.aspx" />
     <Content Include="EktaSapath.aspx" />
     <Content Include="EktaTrustImage\MIP Advertisement1.jpg" />
     <Content Include="EktaTrustImage\MIP-2019.jfif" />
@@ -421,6 +467,7 @@
     <Content Include="Gallery_2025\Img3.jpeg" />
     <Content Include="Gallery_2025\Route Map clear - 05.02.2025.jpg" />
     <Content Include="Gallery_2025\Video1.mp4" />
+    <Content Include="Gallery_2025\Video18.mp4" />
     <Content Include="Gallery_UPSC2018.aspx" />
     <Content Include="Images\1.jfif" />
     <Content Include="Images\1.jpg" />
@@ -452,6 +499,7 @@
     <Content Include="Images\Literature1.jpg" />
     <Content Include="Images\loader.gif" />
     <Content Include="Images\Map-2023-04.jpeg" />
+    <Content Include="Images\map2026.jpeg" />
     <Content Include="Images\Marathon_2023.jpeg" />
     <Content Include="Images\march1.jpg" />
     <Content Include="Images\march2.jpg" />
@@ -480,6 +528,7 @@
     <Content Include="LatestNewsDetails.aspx" />
     <Content Include="Library.aspx" />
     <Content Include="MachediManpura.aspx" />
+    <Content Include="ManageAuthenticator.aspx" />
     <Content Include="ManageNews.aspx" />
     <Content Include="Manoharpur.aspx" />
     <Content Include="MigrantsRegistration.aspx" />
@@ -522,6 +571,9 @@
     <Content Include="PaymentProcess.aspx" />
     <Content Include="PaymentRequest.aspx" />
     <Content Include="PaymentResponse.aspx" />
+    <Content Include="PaytmCallBack.aspx" />
+    <Content Include="PaytmPaymentResponse.aspx" />
+    <Content Include="RegistrationCreativeCompetition.aspx" />
     <Content Include="RPSC2020.aspx" />
     <Content Include="RpscMipGallery2025.aspx" />
     <Content Include="RunForEquality2018\collage.jpg" />
@@ -739,6 +791,7 @@
     <Content Include="RunForEquality2022.aspx" />
     <Content Include="RunForEquality2023.aspx" />
     <Content Include="RunForEquality2025.aspx" />
+    <Content Include="RunForEquality2026.aspx" />
     <Content Include="RunForEqualityGallery.aspx" />
     <Content Include="RunForEqualityGallery\1.jpeg" />
     <Content Include="RunForEqualityGallery\10.jpeg" />
@@ -781,6 +834,19 @@
     <Content Include="doc\Objective Doc1.docx" />
     <Content Include="doc\EktaCertificatedesign.pdf" />
     <Content Include="doc\ekta-certificate.pdf" />
+    <Content Include="doc\BookReviewCompetition2025.pdf" />
+    <Content Include="doc\CanvassPaintingCompetition2025.pdf" />
+    <Content Include="doc\DrawingSketchCompetitionChildren2025.pdf" />
+    <Content Include="doc\EktaNavNirmanTrustReelCompetition.pdf" />
+    <Content Include="doc\EktaSpeechcompetition.pdf" />
+    <Content Include="doc\EssayCompetitionforAdults2025.pdf" />
+    <Content Include="doc\EssayCompetitionforChildren2025.pdf" />
+    <Content Include="doc\SongsCompetition2025.pdf" />
+    <Content Include="doc\फेंसीड्रेसकॉम्पिटीशन2025एकतानवनिर्माणट्रस्ट.pdf" />
+    <Content Include="doc\Result-EKTA-CREATIVE-COMPETITION-2025.pdf" />
+    <Content Include="doc\donationTemplate.pdf" />
+    <Content Include="doc\runRegistration.pdf" />
+    <Content Include="PaytmWebhook.aspx" />
     <None Include="ScriptLibrary\jquery-1.4.1-vsdoc.js" />
     <Content Include="ScriptLibrary\jquery-1.4.1.js" />
     <Content Include="ScriptLibrary\jquery-1.4.1.min.js" />
@@ -1043,6 +1109,8 @@
     <Content Include="UnaGallery\Image-5.png" />
     <Content Include="UnaGallery\Image-6.png" />
     <Content Include="RunForEquality2019.aspx" />
+    <Content Include="UpdateUserCreativeCompetition.aspx" />
+    <Content Include="UploadCreativeCompetition.aspx" />
     <Content Include="UpscMipGallery.aspx" />
     <Content Include="UpscMipGallery2025.aspx" />
     <Content Include="UserChangePassword.aspx" />
@@ -1061,6 +1129,20 @@
     <Content Include="Yoga_Training.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminBIBData.aspx.designer.vb">
+      <DependentUpon>AdminBIBData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminBIBData.aspx.vb">
+      <DependentUpon>AdminBIBData.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="AdminUserBIBNO.aspx.designer.vb">
+      <DependentUpon>AdminUserBIBNO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminUserBIBNO.aspx.vb">
+      <DependentUpon>AdminUserBIBNO.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Alwar.aspx.designer.vb">
       <DependentUpon>Alwar.aspx</DependentUpon>
     </Compile>
@@ -1073,6 +1155,13 @@
     </Compile>
     <Compile Include="AmbedkarWSJ.aspx.vb">
       <DependentUpon>AmbedkarWSJ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BibData.aspx.designer.vb">
+      <DependentUpon>BibData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BibData.aspx.vb">
+      <DependentUpon>BibData.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CelebritiesAppeal.aspx.designer.vb">
@@ -1094,6 +1183,20 @@
     </Compile>
     <Compile Include="CertificationReport.aspx.vb">
       <DependentUpon>CertificationReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\AdminSideMenuControl.ascx.designer.vb">
+      <DependentUpon>AdminSideMenuControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AdminSideMenuControl.ascx.vb">
+      <DependentUpon>AdminSideMenuControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\BIBDataRunner.ascx.designer.vb">
+      <DependentUpon>BIBDataRunner.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BIBDataRunner.ascx.vb">
+      <DependentUpon>BIBDataRunner.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\GallerySideMenuControl.ascx.designer.vb">
@@ -1215,6 +1318,13 @@
       <DependentUpon>Cooking.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="CreativeCompetitionRegistered.aspx.designer.vb">
+      <DependentUpon>CreativeCompetitionRegistered.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreativeCompetitionRegistered.aspx.vb">
+      <DependentUpon>CreativeCompetitionRegistered.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Dhodsar.aspx.designer.vb">
       <DependentUpon>Dhodsar.aspx</DependentUpon>
     </Compile>
@@ -1243,6 +1353,13 @@
       <DependentUpon>EktaCreativeCompetition.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="EktaCreativeCompetition2025.aspx.designer.vb">
+      <DependentUpon>EktaCreativeCompetition2025.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EktaCreativeCompetition2025.aspx.vb">
+      <DependentUpon>EktaCreativeCompetition2025.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="EktaCreativeCompetitionGallery.aspx.designer.vb">
       <DependentUpon>EktaCreativeCompetitionGallery.aspx</DependentUpon>
     </Compile>
@@ -1256,6 +1373,13 @@
     <Compile Include="EktaCreativeCompetitionGallery2023.aspx.vb">
       <DependentUpon>EktaCreativeCompetitionGallery2023.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EktaCreativeCompetitionGallery2025.aspx.designer.vb">
+      <DependentUpon>EktaCreativeCompetitionGallery2025.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EktaCreativeCompetitionGallery2025.aspx.vb">
+      <DependentUpon>EktaCreativeCompetitionGallery2025.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="EktaSapath.aspx.designer.vb">
       <DependentUpon>EktaSapath.aspx</DependentUpon>
@@ -1383,12 +1507,20 @@
       <DependentUpon>Library.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Logger.vb" />
     <Compile Include="MachediManpura.aspx.designer.vb">
       <DependentUpon>MachediManpura.aspx</DependentUpon>
     </Compile>
     <Compile Include="MachediManpura.aspx.vb">
       <DependentUpon>MachediManpura.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageAuthenticator.aspx.designer.vb">
+      <DependentUpon>ManageAuthenticator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageAuthenticator.aspx.vb">
+      <DependentUpon>ManageAuthenticator.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ManageNews.aspx.designer.vb">
       <DependentUpon>ManageNews.aspx</DependentUpon>
@@ -1516,11 +1648,36 @@
       <DependentUpon>PaymentResponse.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PaytmCallBack.aspx.designer.vb">
+      <DependentUpon>PaytmCallBack.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaytmCallBack.aspx.vb">
+      <DependentUpon>PaytmCallBack.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PaytmPaymentResponse.aspx.designer.vb">
+      <DependentUpon>PaytmPaymentResponse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaytmPaymentResponse.aspx.vb">
+      <DependentUpon>PaytmPaymentResponse.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PaytmWebhook.aspx.vb">
+      <DependentUpon>PaytmWebhook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Profile.aspx.designer.vb">
       <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Profile.aspx.vb">
       <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistrationCreativeCompetition.aspx.designer.vb">
+      <DependentUpon>RegistrationCreativeCompetition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrationCreativeCompetition.aspx.vb">
+      <DependentUpon>RegistrationCreativeCompetition.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="RPSC2020.aspx.designer.vb">
@@ -1563,6 +1720,13 @@
     </Compile>
     <Compile Include="RunForEquality2025.aspx.vb">
       <DependentUpon>RunForEquality2025.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="RunForEquality2026.aspx.designer.vb">
+      <DependentUpon>RunForEquality2026.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RunForEquality2026.aspx.vb">
+      <DependentUpon>RunForEquality2026.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="RunForEqualityGallery.aspx.designer.vb">
@@ -2058,6 +2222,20 @@
     </Compile>
     <Compile Include="RunForEquality2019.aspx.vb">
       <DependentUpon>RunForEquality2019.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateUserCreativeCompetition.aspx.designer.vb">
+      <DependentUpon>UpdateUserCreativeCompetition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateUserCreativeCompetition.aspx.vb">
+      <DependentUpon>UpdateUserCreativeCompetition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UploadCreativeCompetition.aspx.designer.vb">
+      <DependentUpon>UploadCreativeCompetition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadCreativeCompetition.aspx.vb">
+      <DependentUpon>UploadCreativeCompetition.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UpscMipGallery.aspx.designer.vb">

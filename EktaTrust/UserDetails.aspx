@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage/Inner.Master" CodeBehind="UserDetails.aspx.vb" Inherits="EktaTrust.UserDetails" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
+<%@ Register Src="~/Controls/AdminSideMenuControl.ascx" TagPrefix="ucSM" TagName="AdminSideMenuControl" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
       <script type="text/javascript" src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
@@ -33,7 +34,7 @@
             }
         }
 </script>
-        <style type="text/css">
+ <style type="text/css">
 .modalBackground
 {
 background-color: Gray;
@@ -72,6 +73,29 @@ z-index: 10000;
         #id {
             display:none;
         }
+            input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0; 
+    }
+
+/*.gv-center-header th {
+    text-align: center !important;
+    vertical-align: middle;
+}*/
+        .btn{
+             height: fit-content;
+         }
+         div:has(> table.table.table-bordered.table-hover.table-striped) {
+          overflow: auto;
+        }
+         hr{
+            margin-top: 10px;
+            margin-bottom: 10px;
+         }
+ 
 </style>
 
     <div class="container-fluid main-container">
@@ -79,81 +103,47 @@ z-index: 10000;
     <div class="row"> 
         <!-- uncomment code for absolute positioning tweek see top comment in css -->
         <div class="absolute-wrapper"> </div>
-        <!-- Menu -->
-        <div class="side-menu">
-        <nav class="navbar navbar-default" role="navigation"> 
-           
-            <!-- Main Menu -->
-            <div class="side-menu-container">
-            <ul class="nav navbar-nav">
-                <li><a href="DashBoard.aspx"> Dashboard</a></li>
-                <li ><a href="TrainingActivity.aspx"> Training Activites</a></li>
-                <li><a href="Joining.aspx"> Joining</a></li>
-                <li><a href="ContactDetails.aspx"> Contact Detail</a></li>
-                <li><a href="#"> Donation</a></li>
-                 <li><a href="SUGGESTIONTRUSTACTIVITIES.aspx"> Trust Activities</a></li>
-                 <li><a href="EventDetails.aspx">Events</a></li>
-                <li><a href="MIPRegistrationDetails.aspx">MIP-Registration Details</a></li>
-                <li><a href="MIPFacultyRegistrationDetails.aspx">MIP Faculty Registration Details</a></li>
-                 <li><a href="SendNotificationMIP.aspx">Send Notification</a></li>
-                <li><a href="TemplateListing.aspx">Templates</a></li>
-                <li><a href="LogDetails.aspx" id="LogDetails">Log Details</a></li>
-                <li class="active"><a href="UserDetails.aspx">Users</a></li>
-                <li><a href="MatrimonialDetails.aspx">Matrimonial Details</a></li>
-                <li><a href="CareerCounsellingDetails.aspx">Career Counselling Details</a></li>
-                <li><a href="AtrocityReportingDetails.aspx">Atrocities Reporting Details</a></li>
-                <li><a href="AddNotification.aspx">Add New Notification</a></li>
-                <li><a href="DonationDetails.aspx">Donation Details</a></li>
-                <li><a href="CertificationReport.aspx">Certification</a></li>
-                <li><a href="FeedbackAndSuggestion.aspx">Feedback And Suggestion</a></li>
-              </ul>
-                
-          </div>
-            <!-- /.navbar-collapse --> 
-          </nav>
-      </div>
+      <ucSM:AdminSideMenuControl runat="server" id="AdminSideMenuControl" />
       </div>
   </div>
     <div class="col-md-10 ">
-   
+         <!-- Header -->
+        <div class="header-admin">
+            <div><h2 class="">User Details</h2></div>
+            <div>
+                 <asp:Button ID="Button2" runat="server" CssClass="btn btn-success" Text="Add New User" OnClick="Button2_Click" Style="float:right;" />
+            </div>
+        </div>
+<%--     <h2 class="admin-heading">User Details</h2>--%>
+           
+<div class="table-responsive">
+    <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green"></asp:Label>
+          <div class="card search-card">
 
+            <!-- 🔍 Search Row -->
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <label>Search:</label>
+                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Name / Email" autocomplete="off"></asp:TextBox>
+                </div>
+
+                <!-- Search Button -->
+                <div class="col-md-6 text-end cus-buttons">
+                    <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-primary w-100" OnClick="Button1_Click" />
+                </div>
+            </div>
+        </div>
 <br />
 
-        <h2 class="admin-heading">User Details</h2>
-           
-    <div class="table-responsive">
-       <asp:Label ID="MessageUpdated" runat="server" Text="" ForeColor="Green"></asp:Label>
-        <table class="table table-bordered table-hover table-striped">
-           
-        <tbody>
-           
-    <tr><td>Search By:
-        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True"
-            >
-        <asp:ListItem Text="All"></asp:ListItem>
-        <asp:ListItem Text="Name"></asp:ListItem>
-        <asp:ListItem Text="Email Address"></asp:ListItem>       
-        
-                 
-        </asp:DropDownList> 
-    </td><td> Search
-            <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
-        </td><td>
-            <asp:Button ID="Button1" runat="server" Text="Search" OnClick="Button1_Click"/>
-             <asp:Label ID="Label2" runat="server" Font-Bold="True" ForeColor="Red" Text=""></asp:Label>
-            
-        </td>
-        <td>
-             <asp:Button ID="Button2" runat="server" Text="Add New User" OnClick="Button2_Click" UseSubmitBehavior="False"/>
-        </td>
-    </tr>
-    
-
- <br/>
           
-            <asp:GridView ID="gvUser" runat="server" OnRowDeleting="gvUser_RowDeleting" class="table table-bordered table-hover table-striped" AutoGenerateColumns="false" DataKeyNames="id"  PageSize="25" 
-   EmptyDataText="No records has been added." OnRowDataBound="gvUser_RowDataBound" Style="font-weight: normal;" >
-<Columns> 
+<asp:GridView ID="gvUser" runat="server" OnRowDeleting="gvUser_RowDeleting" class="table table-bordered table-hover table-striped gv-center-header" AutoGenerateColumns="false" DataKeyNames="id"  PageSize="25" 
+   ShowHeaderWhenEmpty="true" EmptyDataText="No records found." OnRowDataBound="gvUser_RowDataBound" Style="font-weight: normal;" >
+    <EmptyDataTemplate>
+    <div style="text-align:center; font-weight:bold;">
+        No records found.
+    </div>
+    </EmptyDataTemplate>
+<Columns>
     
    <asp:BoundField HeaderText="Name" DataField="Name" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
     <asp:BoundField HeaderText="Email Address" DataField="EmailAddress" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
@@ -161,19 +151,19 @@ z-index: 10000;
     <asp:BoundField HeaderText="Address" DataField="Address" ItemStyle-HorizontalAlign="Left"></asp:BoundField>  
     <asp:BoundField HeaderText="Mobile Number" DataField="MobileNumber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
  <asp:BoundField HeaderText="Role Name" DataField="roleName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
-    <asp:TemplateField HeaderText="" ItemStyle-Width="72" >
+    <asp:TemplateField HeaderText="Action" ItemStyle-Width="100">
         <ItemTemplate>
-          <asp:ImageButton ID="imgbtn" ImageUrl="Images/UI_Icons-09-128.png" runat="server" Width="25" Height="25" OnClick="imgbtn_Click"/>
-            <asp:ImageButton ID="ButtonDelete" runat="server" CommandName="Delete" OnClientClick="return confirm('Are you sure you want to delete this event?');"  Text="Delete" Width="25" Height="25"  CssClass="input" ImageUrl="Images/minimal-97-128.png" />
+          <asp:ImageButton ID="imgbtn" ImageUrl="../Images/edit.png" runat="server" Width="15" Height="15" OnClick="imgbtn_Click"/>
+            <asp:ImageButton ID="ButtonDelete" runat="server" CommandName="Delete" OnClientClick="return confirm('Are you sure you want to delete this event?');"  Text="Delete" Width="15" Height="15"  CssClass="input" ImageUrl="Images/minimal-97-128.png" />
         </ItemTemplate>
        </asp:TemplateField>
     
 </Columns>
 </asp:GridView>
                  Total Items Count: <asp:Label ID="lblRecords" runat="server" Text="Label"></asp:Label> 
-            <table border="1"cellpadding="0"cellspacing="0" style="border-collapse: collapse">
+     <%--       <table border="1"cellpadding="0"cellspacing="0" style="border-collapse: collapse">
 
-    </table>
+    </table>--%>
             
   <br />
             
@@ -189,9 +179,9 @@ z-index: 10000;
 <td colspan="2" style=" height:10%; color:White; font-weight:bold;  font-size:larger" align="center "></td>
 <h4>User Event Details</h4>
  </div>    
- <div class="modal-body" >
-     <from id="form1">
-<div class="form-group">
+ <div class="modal-body"  style="max-height: 80vh; overflow-y: auto;">
+     <form id="form1">
+<div class="form-group" style="display:none">
 <asp:Label ID="lblId" runat="server" Text="ID:"></asp:Label>
    <asp:Label ID="id" runat="server"/>
 </div>
@@ -200,38 +190,42 @@ z-index: 10000;
     <asp:DropDownList ID="drpRole" runat="server" class="form-control" Width="95%"></asp:DropDownList>
 </div>
 <div class="form-group">
-<label>Name:  </label>
+<label>Name:  <span style='color:red'>*</span> </label>
 <asp:TextBox ID="txtName" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
 </div>
      <div class="form-group">
-<label>Email Address: </label>
+<label>Email Address:  <span style='color:red'>*</span></label>
 <asp:TextBox ID="txtEmail" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
 </div>
      <div class="form-group">
-<label>Mobile Number: </label>
+<label>Mobile Number:  <span style='color:red'>*</span></label>
 <asp:TextBox ID="txtMobile" cols="40" Rows="6" runat="server" TextMode="SingleLine" class="form-control" style="width:95%"/>
+</div>
+<div class="form-group">
+<label>BIB Add User Limit: </label>
+<asp:TextBox ID="txtBibUserLimit" cols="40" Rows="6" runat="server" TextMode="Number" class="form-control" style="width:95%"/>
 </div>
      <div class="form-group">
 <label>Address: </label>
-<asp:TextBox ID="txtAddress" cols="40" Rows="4" runat="server" TextMode="MultiLine" class="form-control" style="width:95%"/>
+<asp:TextBox ID="txtAddress" cols="40" Rows="1" runat="server" TextMode="MultiLine" class="form-control" style="width:95%"/>
 </div>
   <div class="form-group">
- <asp:Label ID="lblPassword" runat="server" Text="Password:"/>
+ <asp:Label ID="lblPassword" runat="server" Text="Password: <span style='color:red'>*</span>"/>
 <asp:TextBox ID="txtPassword" cols="40" Rows="6" runat="server" TextMode="Password" class="form-control" style="width:95%"/>
 </div>
        <div class="form-group">
            
- <asp:Label ID="lblConfirmPass" runat="server" Text="Confirm Password:"/>
+ <asp:Label ID="lblConfirmPass" runat="server" Text="Confirm Password:  <span style='color:red'>*</span>"/>
         
           <asp:CompareValidator ID="CompareValidator"  runat="server" ControlToValidate="txtConfirmPass" ControlToCompare="txtPassword" ErrorMessage="Password does not match!" ForeColor="Red"/>
 <asp:TextBox ID="txtConfirmPass" cols="40" Rows="6" runat="server" TextMode="Password" class="form-control" style="width:95%"/>
 </div>
 
 <div class="form-group">
-<asp:Button ID="btnUpdate" CommandName="Update" runat="server" class="btn btn-primary btn-lg"  Text="Update" OnClick="btnUpdate_Click"/>
+<asp:Button ID="btnUpdate" CommandName="Update" runat="server" class="btn btn-primary btn-lg" OnClientClick="return validateAndSubmit();" Text="Add" OnClick="btnUpdate_Click"/>
 <asp:Button ID="btnCancel" runat="server"  class="btn btn-primary btn-lg" Text="Cancel"  />
 </div>
-</from>
+</form>
  </div>       
 </div>
        
@@ -242,15 +236,28 @@ z-index: 10000;
   </div>
 </div>
 </div>
-
+<asp:HiddenField ID="hdnOriginalEmail" runat="server" />
 <style>
  label.error {             
             color: red;   
             display:inline-flex;                 
         }
 </style>
-     <script type ="text/javascript" >                
-         $(document).ready(function () {  
+
+    <% If Not IsPostBack Then %>
+<script type="text/javascript">
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            document.getElementById('<%= txtSearch.ClientID %>').value = '';
+        }, 300);
+    });
+</script>
+<% End If %>
+
+
+
+     <script type ="text/javascript" >
+         $(document).ready(function () {
              $("#form1").validate({  
                  rules: {  
                       
@@ -264,7 +271,9 @@ z-index: 10000;
                      }, 
                     
                       <%=txtMobile.UniqueID%>:{  
-                          required:true  
+                          required: true,
+                          minlength: 10,
+                          maxlength: 10
 
                       },
                        <%=txtPassword.UniqueID%>:{  
@@ -289,7 +298,9 @@ z-index: 10000;
                     }, 
                     
                      <%=txtMobile.UniqueID%>:{  
-                         required:"Mobile number is required." 
+                         required: "Mobile number is required.",
+                         minlength: "Mobile number must be 10 digits.",
+                         maxlength: "Mobile number must be 10 digits."
 
                       },
                      <%=txtPassword.UniqueID%>:{  
@@ -303,6 +314,16 @@ z-index: 10000;
                  
             });  
          });   
+         function validateAndSubmit() {
+             var jqueryValid = $("#form1").valid ? $("#form1").valid() : true;
+             var aspnetValid = (typeof (Page_ClientValidate) === 'function') ? Page_ClientValidate() : true;
+
+             if (jqueryValid && aspnetValid) {
+                 $('#loader').show();
+                 return true;
+             }
+             return false;
+         }
          function GetKeyCode(evt)
          {
              var pass= $("#<%=txtPassword.ClientID%>").val();
@@ -318,5 +339,14 @@ z-index: 10000;
              }
              
          }
-    </script>  
+         $(document).ready(function () {
+             var msg = $('#<%= MessageUpdated.ClientID %>');
+                      if (msg && msg.text().trim() !== "") {
+                          setTimeout(function () {
+                              msg.fadeOut();     // hides with animation
+                              msg.text('');      // clears the message content
+                          }, 5000); // 5000ms = 5 seconsds
+                      }
+                  });
+     </script>  
 </asp:Content>

@@ -12,7 +12,16 @@ Option Explicit On
 
 
 Partial Public Class EventDetails
-    
+
+    '''<summary>
+    '''AdminSideMenuControl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AdminSideMenuControl As Global.EktaTrust.AdminSideMenuControl
+
     '''<summary>
     '''MessageUpdated control.
     '''</summary>
@@ -21,7 +30,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MessageUpdated As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''ddlSearchBy control.
     '''</summary>
@@ -30,7 +39,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlSearchBy As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''txtSearch control.
     '''</summary>
@@ -39,7 +48,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''ddlYear control.
     '''</summary>
@@ -48,7 +57,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlYear As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''btnSearch control.
     '''</summary>
@@ -57,7 +66,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSearch As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''lblmsg control.
     '''</summary>
@@ -66,7 +75,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblmsg As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Button1 control.
     '''</summary>
@@ -75,7 +84,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Button1 As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''gvEvent control.
     '''</summary>
@@ -84,7 +93,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gvEvent As Global.System.Web.UI.WebControls.GridView
-    
+
     '''<summary>
     '''lblRecords control.
     '''</summary>
@@ -93,7 +102,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblRecords As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblresult control.
     '''</summary>
@@ -102,7 +111,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblresult As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''btnShowPopup control.
     '''</summary>
@@ -111,7 +120,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnShowPopup As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''ModalPopupExtender1 control.
     '''</summary>
@@ -120,7 +129,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ModalPopupExtender1 As Global.AjaxControlToolkit.ModalPopupExtender
-    
+
     '''<summary>
     '''pnlpopup control.
     '''</summary>
@@ -129,7 +138,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlpopup As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''lblContactId control.
     '''</summary>
@@ -138,7 +147,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblContactId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''textName control.
     '''</summary>
@@ -147,7 +156,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents textName As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''textEmail control.
     '''</summary>
@@ -156,7 +165,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents textEmail As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''textMobile control.
     '''</summary>
@@ -165,7 +174,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents textMobile As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''textEvent control.
     '''</summary>
@@ -174,7 +183,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents textEvent As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''textGender control.
     '''</summary>
@@ -183,7 +192,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents textGender As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''textDOB control.
     '''</summary>
@@ -192,7 +201,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents textDOB As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''textAddress control.
     '''</summary>
@@ -201,7 +210,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents textAddress As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnUpdate control.
     '''</summary>
@@ -210,7 +219,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''btnCancel control.
     '''</summary>
@@ -219,7 +228,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''txtName control.
     '''</summary>
@@ -228,7 +237,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtName As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtEmail control.
     '''</summary>
@@ -237,7 +246,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtEmail As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtMobile control.
     '''</summary>
@@ -246,7 +255,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtMobile As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''drpEvent control.
     '''</summary>
@@ -255,7 +264,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents drpEvent As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''FileUploadFile control.
     '''</summary>
@@ -264,7 +273,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FileUploadFile As Global.System.Web.UI.WebControls.FileUpload
-    
+
     '''<summary>
     '''ddlTShirt control.
     '''</summary>
@@ -273,7 +282,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlTShirt As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''drpGender control.
     '''</summary>
@@ -282,7 +291,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents drpGender As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''TextBox1 control.
     '''</summary>
@@ -291,7 +300,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtEName control.
     '''</summary>
@@ -300,7 +309,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtEName As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtEmobile control.
     '''</summary>
@@ -309,7 +318,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtEmobile As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtAddress control.
     '''</summary>
@@ -318,7 +327,7 @@ Partial Public Class EventDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtAddress As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnAddNew control.
     '''</summary>

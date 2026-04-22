@@ -194,11 +194,12 @@ h1.page-header {
 	width: 100%;
 	border-bottom: 1px solid #e7e7e7;
 }
-.side-menu .navbar-nav .active a {
-	background-color: transparent;
-	margin-right: -1px;
-	border-right: 5px solid #e7e7e7;
-}
+	.side-menu .navbar-nav .active a {
+		background-color: transparent;
+		margin-right: -1px;
+		/*	border-right: 5px solid #e7e7e7;*/
+		border-right: 5px solid #6a6a6a;
+	}
 .side-menu .navbar-nav li {
 	display: block;
 	width: 100%;
@@ -499,10 +500,10 @@ h1.page-header {
 }
 }
 .admin-heading {
-	padding: 0px 0px 10px 0px;
+	padding: 10px 0px 10px 0px;
 	border-bottom: 1px solid #e5e5e5;
 	margin: 0px 0px 0px 0px;
-	font-weight:normal;
+	font-weight:bold;
 }
 .admin-heading2 {
 	padding: 0px 0px 10px 0px;
@@ -599,4 +600,29 @@ table {
 
 .btn {
 height:45px;
+}
+
+.p-0{
+	padding:0px;
+}
+
+div:has(> table.table.table-bordered.table-hover.table-striped) {
+	overflow: auto;
+	border-radius:5px;
+}
+
+.header-admin {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.search-card {
+	margin: unset;
+	padding: 15px;
+	border-radius: 5px;
+}
+
+.cus-buttons {
+	margin-top: 25px;
 }
