@@ -84,7 +84,7 @@
     </style>
     <div class="container">
 
-        <h2 class="wow fadeInDown crtificate">Timings & Certificate of Run for Equality  <span id="lblYear">2025</span></h2>
+        <h2 class="wow fadeInDown crtificate">Timings & Certificate of Run for Equality  <span id="lblYear">2026</span></h2>
         <button id="btnCertificateFeedback" type="button" class="CertificateFeedback">Feedback / Suggestions</button>
 
         <div class="row contact-wrap  wow fadeInDown">
@@ -97,7 +97,9 @@
                         <div class="form-group">
                             <label>Enter Select Year:</label>
                             <asp:DropDownList ID="DdlYear" runat="server" class="form-control" ClientIDMode="Static" onchange="updateHeading();">
-                                 <asp:ListItem Text="2025" Value="2025" Selected="True"></asp:ListItem>
+                                <%--<asp:ListItem Text="2026" Value="2026" Selected="True"></asp:ListItem>--%>
+                                 <asp:ListItem Text="2026" Value="2026" Selected="True"></asp:ListItem>
+                                 <asp:ListItem Text="2025" Value="2025"></asp:ListItem>
                                  <asp:ListItem Text="2023" Value="2023"></asp:ListItem>
                             </asp:DropDownList>
                             <asp:RequiredFieldValidator ID="YearValidator" ControlToValidate="DdlYear"
@@ -136,24 +138,38 @@
                     <tbody>
                         <tr>
                             <asp:GridView ID="getRec" runat="server" AutoGenerateColumns="False" class="table table-bordered table-hover table-striped" Style="font-weight: normal;">
-                                <Columns>
-                                    <asp:BoundField HeaderText="BIB Number" DataField="bib_no"></asp:BoundField>
-                                    <asp:BoundField HeaderText="Name" DataField="participate_name"></asp:BoundField>
-                                    <asp:BoundField HeaderText="Gender" DataField="gender"></asp:BoundField>
-                                    <asp:BoundField HeaderText="Run Category" DataField="Event_Name"></asp:BoundField>
-                                    <asp:BoundField HeaderText="Completion Time" DataField="Net_Time"></asp:BoundField>
-                                    <asp:TemplateField HeaderText="" ItemStyle-Width="72">
-                                        <ItemTemplate>
-                                            <asp:Button runat="server" Text="Download Certificate" class="btn btn-primary btn-lg" OnClick="DownloadButton_Click" />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                     <asp:TemplateField HeaderText="" ItemStyle-Width="253"  ItemStyle-CssClass="edifysports">
-                                        <ItemTemplate>
-                                           <a href="https://www.edifysports.com/result/Event-Result.php" target="_blank" style="text-decoration:underline;">More info about your Run please click</a>                        
+                            <Columns>
+    <asp:BoundField HeaderText="BIB Number" DataField="bib_no"></asp:BoundField>
+    <asp:BoundField HeaderText="Name" DataField="participate_name"></asp:BoundField>
+    <asp:BoundField HeaderText="Gender" DataField="gender"></asp:BoundField>
+    <asp:BoundField HeaderText="Run Category" DataField="Event_Name"></asp:BoundField>
+    <asp:BoundField HeaderText="Completion Time" DataField="Net_Time"></asp:BoundField>
+    
+    <asp:TemplateField HeaderText="" ItemStyle-Width="160px" HeaderStyle-Width="160px">
+    <ItemTemplate>
+        <asp:HiddenField ID="hfID" runat="server" Value='<%# Eval("ID") %>' />
 
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                </Columns>
+        <asp:Button ID="btnDownloadCertificate" runat="server"
+            Text="Download Certificate"
+            CssClass="btn btn-primary btn-md"
+            OnClick="DownloadButton_Click"
+            Visible='<%# Not String.IsNullOrEmpty(Convert.ToString(Eval("Net_Time"))) %>' />
+
+        <asp:Label ID="lblNoCertificate" runat="server"
+            ForeColor="Red"
+            Text="Certificate not available"
+            Visible='<%# String.IsNullOrEmpty(Convert.ToString(Eval("Net_Time"))) %>' />
+    </ItemTemplate>
+</asp:TemplateField>
+    
+    <asp:TemplateField HeaderText="" ItemStyle-Width="253" ItemStyle-CssClass="edifysports">
+        <ItemTemplate>
+            <a href="https://web.edifysports.com/result/Event-Result.php" target="_blank" style="text-decoration:underline;">
+                More info about your Run, please click
+            </a> 
+        </ItemTemplate>
+    </asp:TemplateField>
+</Columns>
                             </asp:GridView>
                         </tr>
                     </tbody>

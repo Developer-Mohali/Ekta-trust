@@ -157,6 +157,55 @@
     </div>
 
     <!--/.container-->
+      <!-- Modal -->
+  <div class="modal fade" id="EventDetailsModalAdd" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" onclick="clearInformation();" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Donation Details</h4>
+        </div>
+        <div class="modal-body">
+
+                    <div class="form-group col-sm-12">
+                        <asp:TextBox ID="txtFullName" CssClass="form-control" MaxLength="20" runat="server" placeholder="Enter FullName" AutoComplete="off"></asp:TextBox>
+                            <span id="nameError" class="help-block" style="color: red"></span>
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <asp:TextBox ID="txtAmount" CssClass="form-control" MaxLength="20" runat="server" placeholder="Enter Amount" AutoComplete="off"></asp:TextBox>
+                            <span id="amountError" class="help-block" style="color: red"></span>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <asp:TextBox ID="txtMobileNumber" CssClass="form-control" MaxLength="10" runat="server" placeholder="Enter Mobile Number" AutoComplete="off"></asp:TextBox>
+                            <span id="mobileNumberError" class="help-block" style="color: red"></span>
+                    </div>
+               
+                   <div class="form-group col-sm-12">
+                           <asp:DropDownList CssClass="form-control" ID="ddlModeOfPayment1" runat="server">
+                             <asp:ListItem Value="Select">Select Payment Way</asp:ListItem>
+                               <asp:ListItem Value="Credit Card">Credit Card</asp:ListItem>
+                             <asp:ListItem Value="Debit Card">Debit Card</asp:ListItem>
+                             <asp:ListItem Value="Net Banking">Net Banking</asp:ListItem>                                       
+                          </asp:DropDownList>
+                         </div>
+
+                    <div class="form-group col-sm-12">
+                        <asp:TextBox ID="txtComments" CssClass="form-control" TextMode="MultiLine" MaxLength="700" runat="server" placeholder="Enter Comment" AutoComplete="off"></asp:TextBox>
+                         <span id="commentsError" class="help-block" style="color: red"></span>
+                    </div>
+            </div>
+        <div class="modal-footer" style="border-top:0px;border-bottom:1px solid #e5e5e5;">
+            <asp:Button ID="btnAddNew" class="btn btn-default" runat="server" Text="Add New" OnClick="btnAddNew_Click1" OnClientClick="return onNextButtonClient()" />
+          <button type="button" class="btn btn-default" onclick="clearInformation();" data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+      
+    </div>
+  </div>
 </asp:Content>
 
 

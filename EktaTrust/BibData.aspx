@@ -22,10 +22,47 @@
                 appearance: none;
                 margin: 0; 
             }
+        .card {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.card b {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.card a {
+  color: blue;
+  text-decoration: underline;
+}
     </style>
 
+    <style>
+    .custom-card {
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 20px;
+        margin-top: 20px;
+        background: #fff;
+    }
+    .custom-card h4 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    .divider {
+        border-left: 1px solid #eee;
+    }
+</style>
+
 <div class="container">
-        <h2 class="wow fadeInDown crtificate">BIB Data  <span id="lblYear">2025</span></h2>
+        <h2 class="wow fadeInDown crtificate">BIB Data  <span id="lblYear"><%= year %></span></h2>
         <div class="row contact-wrap  wow fadeInDown">
             <div class="status alert alert-success" style="display: none"></div>
             <span style="color: gray; font-weight: bold">
@@ -68,14 +105,73 @@
                                     <asp:BoundField HeaderText="Tshirt Size" DataField="tshirt_size"></asp:BoundField>
                                     <asp:BoundField HeaderText="Run Category" DataField="run_category"></asp:BoundField>
                                     <asp:BoundField HeaderText="BIB Number" DataField="bib_no"></asp:BoundField>
+
+                                    <asp:TemplateField HeaderText="BIB Expo Location">
+                                        <ItemTemplate>
+                                           <a href="https://share.google/uDKLU8Psb4WBZZIME" target="_blank" style="text-decoration:underline; color:blue">https://share.google/uDKLU8Psb4WBZZIME </a>
+                                      <%--     <a href="https://g.co/kgs/adLsfKf" target="_blank" style="text-decoration:underline; color:blue">https://g.co/kgs/adLsfKf </a>--%>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:BoundField HeaderText="Venue to Collect BIB" DataField="collect_bib"></asp:BoundField>
 
                                 </Columns>
                             </asp:GridView>
                         </tr>
+                        <%--<tr>
+                            <td>
+                                --%>
+                                <%--<div class="card">
+                                <b>BIB EXPO DETAIL</b><br />
+                                &nbsp; &nbsp;&nbsp; &nbsp;Details of BIB EXPO 2026<br />
+                                &nbsp; &nbsp;&nbsp; &nbsp;Timing - 10AM to 7PM<br />
+                                &nbsp; &nbsp;&nbsp; &nbsp;Date   -  13.04.2026<br />
+                                &nbsp; &nbsp;&nbsp; &nbsp;Venue - Rajasthan Local Self Governement Institute Jaipur, Tonk Road<br />
+                                &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<a href="https://share.google/uDKLU8Psb4WBZZIME" target="_blank" style="text-decoration:underline; color:blue">https://share.google/uDKLU8Psb4WBZZIME </a><br />
+                                <br />
+                                <b>Run Reporting Time on 14.04.2026 at South Gate, Albert Hall, Jaipur</b><br />
+                                &nbsp; &nbsp;&nbsp; &nbsp;4:15AM - Half Marathon<br />
+                                &nbsp; &nbsp;&nbsp; &nbsp;5:15AM - 10 KM<br />
+                                &nbsp; &nbsp;&nbsp; &nbsp;5:30AM - 5KM<br />
+                             </div>--%>
+
+                           <%-- </td>
+                        </tr>--%>
                     </tbody>
                 </table>
             </div>
+
+            <div class="row">
+    <div class="col-md-12">
+        <div class="custom-card">
+            
+            <div class="row">
+                
+                <!-- Left Column -->
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <h4>BIB EXPO DETAIL</h4>
+                    Details of BIB EXPO 2026<br>
+                    Timing - 10AM to 7PM<br>
+                    Date - 13.04.2026<br>
+                    Venue - Rajasthan Local Self Government Institute Jaipur, Tonk Road<br>
+                    <a href="https://share.google/uDKLU8Psb4WBZZIME" style="color:blue;" target="_blank">
+                        https://share.google/uDKLU8Psb4WBZZIME
+                    </a>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-6 col-sm-6 col-xs-12 divider">
+                    <h4>Run Reporting Time (14.04.2026)</h4>
+                    South Gate, Albert Hall, Jaipur<br>
+                    4:15 AM - Half Marathon<br>
+                    5:15 AM - 10 KM<br>
+                    5:30 AM - 5 KM
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
         </div>
     </div>
 

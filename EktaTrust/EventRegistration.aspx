@@ -10,6 +10,7 @@
     <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
     <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js"></script>
+     <asp:Literal ID="ltPaytmScript" runat="server"></asp:Literal>
     <style>
         /*custom font*/
 
@@ -26,8 +27,13 @@
     padding-left: 10px !important;
         }
         .clsBackImage {
-            height: 800px;
+       /*     height: 800px;*/
             background: linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2)), url('test.jpg');
+            min-height: 100vh;
+            background: linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2)), url('test.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         /*form styles*/
@@ -49,7 +55,7 @@
             margin: 0 10%;
             /*stacking fieldse
     ts above each other*/
-            position: absolute;
+          /*  position: absolute;*/
             opacity: 0.85;
         }
             /*Hide all except first fieldset*/
@@ -161,9 +167,9 @@
             margin-top: 1%;
         }
 
-        #TermCondition {
+/*        #TermCondition {
             width: 10% !important;
-        }
+        }*/
 
         #TermCondition-error {
             float: right;
@@ -173,7 +179,7 @@
 
         #msform fieldset {
             padding: 4px 30px;
-            margin: -25px 10%;
+           /* margin: -25px 10%;*/
         }
         #otp {
     width:100% !important;
@@ -205,25 +211,46 @@ body section {
     }
 
     /* Custom, iPhone Retina */
-        @media only screen and (max-width : 320px) {
+        @media only screen and (max-width : 380px) {
             body section {
                 margin-top: 151px;
                 padding: 20px 0;
             }
-                #otp {
+          /*      #otp {
     width:100% !important;
     height: 51px !important;
     margin-top: 1% !important;
-}
+}*/
             .fadeInDown {
                 margin-top: 55px;
             }
-             #msform fieldset {
+      /*       #msform fieldset {
             padding: 4px 30px;
             margin: -25px 10%;
-        }
+        }*/
+             .terms-font-size{
+                 font-size: 11px;
+             }
+             .d-flex{
+                 display:flex;
+             }
+             .clsBackImage {
+                 height:830px;
+             }
+           #msform fieldset{
+               margin:unset !important;
+           }
         }
 
+        section{
+            display:none;
+        }
+        /* iPad styles */
+        @media only screen and (min-width: 768px) and (max-width: 1024px) {
+            .clsBackImage{
+                min-height: 80vh!important;
+            }
+        }
     </style>
     <link href="Css/MediaQuery.css" rel="stylesheet" />
 </asp:Content>
@@ -233,24 +260,25 @@ body section {
 
         <!-- progressbar -->
         <div style="width: 83%; padding-left: 19%;">
-            <ul id="progressbar">
+           <%-- <ul id="progressbar">
                 <li class="active">Basic Information</li>
-            </ul>
+            </ul>--%>
         </div>
         <!--First fieldsets to colect basic information -->
-        <div>
-            <div class="col-sm-2">
-            </div>
-            <div id="PaymentTab" class="col-sm-8">
+        <div class="container">
+         <%--   <div class="col-sm-2">
+            </div>--%>
+            <div id="PaymentTab" class="col-sm-12">
                 <fieldset id="basic_information">
                     <%--<div style="height :540px;">--%>
 
 
-                    <h2 class="fs-title">Basic Information</h2>
-                    <h3 class="fs-subtitle">Please Provide your basic Information.   <span class="pull-right" style="color:red"><b> Event Date -</b> 14th April 2022<br /> <b>Venue -</b> JLN Marg, Jaipur*</span></h3>
-                  
+                 <%--   <h2 class="fs-title">Information</h2>--%>
+                    <h3 class="fs-subtitle" style="padding-top:10px;"><span style="font-size: medium;font-weight: bolder;">Run for Equality Registration. </span>   <span class="pull-right" style="color:red"><b> Event Date -</b> 14th April 2026<br /> <b>Venue -</b> JLN Marg, Jaipur*</span></h3>
+
                     <br />
                     <div class="form-group col-sm-12">
+                        <label style="margin-right:10px;">Full Name:</label>
                         <div>
                             <input type="text" maxlength="20" class="form-control" id="username" name="username" placeholder="Enter Name" />
                             <span id="nameError" class="help-block" style="color: red"></span>
@@ -258,6 +286,7 @@ body section {
                     </div>
 
                     <div class="form-group col-sm-12">
+                        <label style="margin-right:10px;">Email Address:</label>
                         <div>
                             <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email Id" />
                             <span id="emailError" class="help-block" style="color: red"></span>
@@ -265,28 +294,57 @@ body section {
                     </div>
 
                     <div class="form-group col-sm-12">
+                        <label style="margin-right:10px;">Mobile Number:</label>
                         <div>
-                            <input type="text" maxlength="10" class="form-control" id="phone" name="phone" placeholder="Enter Mobile Number" />
+                            <input type="text" maxlength="10" class="form-control" id="phone" name="phone" autocomplete="off" placeholder="Enter Mobile Number" />
                             <span id="phoneError" class="help-block" style="color: red"></span>
                         </div>
                     </div>
 
                     <div class="form-group col-sm-12">
+                        <label style="margin-right:10px;">Run Category:</label>
                         <asp:DropDownList runat="server" class="form-control" ID="drpEvent">
-                            <asp:ListItem Value="1" Selected="True">Ambedkar Run For Equality 21 KM</asp:ListItem>
-                            <asp:ListItem Value="2">Ambedkar Run For Equality 10 KM</asp:ListItem>
-                            <asp:ListItem Value="3">Ambedkar Run For Equality 5 KM</asp:ListItem>
+                            <asp:ListItem Value="21.09KM" Selected="True">Run For Equality 21 KM</asp:ListItem>
+                            <asp:ListItem Value="10KM">Run For Equality 10 KM</asp:ListItem>
+                            <asp:ListItem Value="5KM">Run For Equality 5 KM</asp:ListItem>
                         </asp:DropDownList>
+                        <span id="runCategoryError" class="help-block" style="color: red"></span>
                     </div>
+                      <div class="form-group col-sm-12">
+                          <label style="margin-right:10px;">Gender:</label>
+                           <select id="ddlGender" name="ddlGender" class="form-control">
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                          <span id="genderError" class="help-block" style="color: red"></span>
+                      </div>
+                  <div class="form-group col-sm-12">
+                        <label style="margin-right:10px;">Date of Birth:</label>
+                        <asp:TextBox ID="txtDOB" runat="server" TextMode="Date" CssClass="form-control" />
+                    </div>
+
                     <div class="form-group col-sm-12">
+                       <label style="margin-right:10px;">T-Shirt Size:</label>
+                        <asp:DropDownList ID="txtTshirtSize" runat="server" class="form-control">
+                        <asp:ListItem Text="Select T-Shirt Size" Value="" />
+                        <asp:ListItem Text="S" Value="S" />
+                        <asp:ListItem Text="M" Value="M" />
+                        <asp:ListItem Text="L" Value="L" />
+                        <asp:ListItem Text="XL" Value="XL" />
+                        <asp:ListItem Text="XXL" Value="XXL" />
+                    </asp:DropDownList>
+                    </div>
+
+                   <%-- <div class="form-group col-sm-12">
                         <div>
                             <input type="text" class="form-control" id="address" rows="3" columns="40" name="address" placeholder="Enter Address" />
                         </div>
-                    </div>
-                    <div class="form-group">
+                    </div>--%>
+                    <div class="form-group col-sm-12">
                         <input type="checkbox" name="TermCondition" checked="checked" class="styled" id="TermCondition" />                   
                         <a style="text-decoration: underline;" href="../TermsAndCondition" target="_blank">
-                            <label style="cursor: pointer">I Accept the Terms and Conditions</label>
+                            <label class="terms-font-size" style="cursor: pointer">I Accept the Terms and Conditions</label>
                         </a>
                     </div>
                     <input type="hidden" id="random" />
@@ -294,9 +352,10 @@ body section {
 
                     <div class="form-group col-sm-12">
 
-                        <div>
+                        <div class="d-flex">
                             <%--<input  type = "text" id="otp" Class="col-sm-4" name="otp" placeholder="Enter OTP Here" /><input type="button" id="otpgenerate" style="width: auto;" name="submit" onclick="OTPNumber()" Class="submit action-button" value="Generate OTP" /> --%>
-                          <input type="button" name="submitbtn" id="submitbtn" class="action-button next" value="Submit Data" />
+                          <input type="button" name="submitbtn" id="submitbtn" class="action-button" value="Submit" />
+                         <input type="button" class="action-button" value="Back"  onclick="window.location.href='../EventPrize.aspx';" style="background-color: #ef5430 ! IMPORTANT; border-color: #e13810 !important;" />
                             
                         </div>
 
@@ -336,7 +395,7 @@ body section {
 
                 <!--Second fieldset start-->
 
-                <fieldset id="shirt_information">
+<%--                <fieldset id="shirt_information">
                     <div>
                         <h2 class="fs-title">T-Shirt Details</h2>
                         <h3 class="fs-subtitle">Please chose your T-shirt size</h3>
@@ -358,10 +417,10 @@ body section {
                         <input type="button" name="previous" class="previous action-button" value="Previous" />
                         <input type="button" name="next" class="next action-button" value="Next" />
                     </div>
-                </fieldset>
+                </fieldset>--%>
 
                 <!-- End Second fieldset-->
-                <fieldset id="Emergency">
+          <%--      <fieldset id="Emergency">
                     <div>
                         <h2 class="fs-title">Emergency Contacts</h2>
                         <h3 class="fs-subtitle">Please provide emergency contact numbers.</h3>
@@ -381,15 +440,15 @@ body section {
                         <input type="button" name="previous" class="previous action-button" value="Previous" />
                         <input type="button" id="submitEventDetail" name="next" class="action-button" value="Next" />
                     </div>
-                </fieldset>
-                <fieldset id="Payment">
+                </fieldset>--%>
+          <%--      <fieldset id="Payment">
                     <h2 class="fs-title">Payment</h2>
                     <h3 class="fs-subtitle">Please provide payment information.</h3>
 
-                </fieldset>
+                </fieldset>--%>
             </div>
-            <div class="col-sm-2">
-            </div>
+          <%--  <div class="col-sm-2">
+            </div>--%>
         </div>
 
         <script>
@@ -463,6 +522,7 @@ body section {
                 }
             }*/
             $(document).ready(function () {
+                window.location.href = '../EventRegistsrationClosed.aspx';
                 $('#submitEventDetail').show();
                 //$('#NextSubmit').prop('disabled', true);
 
@@ -496,13 +556,18 @@ body section {
                    $("#nameError").hide();
                 });
                 $('#submitbtn').click(function () {
+                    const amount = getAmountByRunCategory($("#<%=drpEvent.ClientId %> option:selected").val());
+
                     //alert("call it");
                     var data = {
-                        "username": $("#username").val(),
                         "email": $("#email").val(),
+                        "name": $("#username").val(),
                         "phone": $("#phone").val(),
-                        "address": $("#address").val(),
-                        "drpEvent": $("#<%=drpEvent.ClientId %> option:selected").text(),
+                        "runCategory": $("#<%=drpEvent.ClientId %> option:selected").val(),
+                        "gender": $("#ddlGender option:selected").val(),
+                        "runnerDOB": $("#<%=txtDOB.ClientID %>").val(),
+                        "tshirtSize": $("#<%=txtTshirtSize.ClientID %>").val(),
+                        "amount": amount
                         <%--"drpEvent": $("#<%=drpEvent.ClientId %> option:selected").text(),--%>
                         <%--"shirt": $("#<%=ddlTShirt.ClientId %> option:selected").text(),
                         "ename": $("#txtEmergencyName").val(),--%>
@@ -511,50 +576,89 @@ body section {
                     };
                     $('#submitEventDetail').hide();
 
-                    if (data.username === "") {
-                        $('#nameError').html("Please Enter Your Name");
-                    } else if (data.email === "") {
-                        $('#emailError').html("Please Enter Your Email Address");
-                    } else if (data.phone === "") {
-                        $('#phoneError').html("Please Enter Your Mobile Number");
-                    } else if ($('#TermCondition').is(":checked") == false) {
-                        $('#errorTermCondition').css('display', 'block');
-                    } else {
-                        $.ajax({
-                            url: "/EventRegistration.aspx/Submitdata",
-                            data: JSON.stringify(data),
-                            type: "POST",
-                            dataType: "json",
-                            contentType: "application/json",
-
-                            success: function (msg) {
-                                //if (msg.d == 2) {
-                                //    alert("Please enter mobile number");
-                                //}
-                                if (msg.d === 1) {
-                                    //$('#submitEventDetail').show();
-                                    //console.log(msg)
-                                    alert("Phone number already Registered. Please try again with different number.");
-                                }
-                                else {
-                                    //window.location = "Payments.aspx";
-                                    alert('successfully data inserted !');
-                                    return;
-                                }
-                            },
-                            error: function () {
-                                alert("Please try again later.");
-                            }
-                        });
+                    validateForm();
+                    if (!$("#msform").valid()) {
+                        return;
                     }
+
+                    //if (data.ddlGender === "") {
+                    //    $('#genderError').html("Please Select Gender");
+                    //} else if (data.username === "") {
+                    //    $('#nameError').html("Please Enter Your Name");
+                    //}  else if (data.phone === "") {
+                    //    $('#phoneError').html("Please Enter Your Mobile Number");
+                    //} else if (data.drpEvent === "") {
+                    //    $('#runCategoryError').html("Please Select Run Category");
+                    //} else if ($('#TermCondition').is(":checked") == false) {
+                    //    $('#errorTermCondition').css('display', 'block');
+                    //} else {
+                        $('#loader').show();
+                        try {
+                            $.ajax({
+                                url: "/EventRegistration.aspx/SaveBibForm",
+                                data: JSON.stringify(data),
+                                type: "POST",
+                                dataType: "json",
+                                contentType: "application/json",
+
+                                success: function (res) {
+                                    const result = res.d;
+                                    if (result.success) {
+                                        paytmPaymentPopupOpen(amount, result.orderId, data.name, data.phone, data.email);
+                                    } else {
+                                        $('#loader').hide();
+                                        alert(result.message);
+                                    }
+                                    //if (msg.d == 2) {
+                                    //    alert("Please enter mobile number");
+                                    //}
+                                    //if (msg.d === 1) {
+                                    //    //$('#submitEventDetail').show();
+                                    //    //console.log(msg)
+                                    //    alert("Phone number already Registered. Please try again with different number.");
+                                    //}
+                                    //else {
+                                    //    //window.location = "Payments.aspx";
+                                    //    alert('successfully data inserted !');
+                                    //    return;
+                                    //}
+                                },
+                                error: function (err) {
+                                    console.error('error while saveBIB ==> ', err);
+                                    $('#loader').hide();
+                                    alert("Please try again later.");
+                                }
+                            });
+                        }
+                        catch (err){
+                            console.error('error ==> ', err);
+                            $('#loader').hide();
+                        }
+                    //}
                     
                 });
                 //jQuery time
                 var current_fs, next_fs, previous_fs; //fieldsets
                 var left, opacity, scale; //fieldset properties which we will animate
                 var animating;
-                $(".next").click(function () {
+                //$(".next").click(function () {
+                function validateForm() {
                     var form = $("#msform");
+                    $.validator.addMethod("validDOB", function (value, element) {
+                        if (value === "") return false;
+
+                        // Check proper date format (yyyy-mm-dd from TextMode=Date)
+                        var date = new Date(value);
+
+                        // Invalid date check
+                        if (isNaN(date.getTime())) return false;
+
+                        // Optional: future date restriction
+                        var today = new Date();
+                        if (date > today) return false;
+
+                        return true;
+                    }, "Please enter a valid Date of Birth");
                     form.validate({
                         feedbackIcons: {
                             valid: 'glyphicon glyphicon-ok',
@@ -577,11 +681,11 @@ body section {
 
                             username: {
                                 required: true,
-                                maxlength: 20
+                                maxlength: 50
                                 //minlength: 6,
                                 //regexp: /^[a-zA-Z0-9_\.]+$/,
                             },
-                            address: {
+                            ddlGender: {
                                 required: true
                             },
                             drpEvent: {
@@ -591,43 +695,48 @@ body section {
                                 required: true,
                                 minlength: 10
                             },
-                            otp: {
-                                required: true,
-                                equalTo: '#random'
+                            //otp: {
+                            //    required: true,
+                            //    equalTo: '#random'
+                            //},
+                            <%=txtDOB.UniqueID  %>: {
+                                validDOB: true
                             },
-
                             TermCondition: {
 
                                 required: true
 
                             },
 
-                            email: {
-                                required: true
+                            //email: {
+                            //    required: true
 
-                            }
+                            //}
 
                         },
                         messages: {
                             username: {
-                                required: "User Name Required"
+                                required: "Name is Required"
                             },
                             phone: {
-                                required: "Mobile Number Required"
+                                required: "Mobile Number is Required"
                             },
-                            otp: {
-                                required: "OTP Required",
-                                equalTo: "OTP doesn't match, please try again."
-                            },
+                            //otp: {
+                            //    required: "OTP Required",
+                            //    equalTo: "OTP doesn't match, please try again."
+                            //},
                             drpEvent: {
                                 required: "Please Select One"
                             },
-                            address: {
-                                required: "Address Required"
+                            ddlGender: {
+                                required: "Gender is Required"
                             },
-                            email: {
-                                required: "Email Required"
+                            <%=txtDOB.UniqueID  %>: {
+                                validDOB: "Enter a valid DOB"
                             },
+                            //email: {
+                            //    required: "Email Required"
+                            //},
                             TermCondition: {
                                 required: "Please Accept Terms & Conditions."
                             }
@@ -640,60 +749,60 @@ body section {
 
                     if (form.valid() === true) {
                         // alert("work done success");
-                        $('#NextSubmit').prop('disabled', false);
-                        if (animating) return false;
-                        animating = true;
+                        //$('#NextSubmit').prop('disabled', false);
+                        //if (animating) return false;
+                        //animating = true;
 
-                        current_fs = $(this).parent();
-                        next_fs = $(this).parent().next();
-
-
-
-                        //activate next step on progressbar using the index of next_fs
-                        $("#progressbar li").eq(count).addClass("active");
-                        count = count + 1;
-                        //show the next fieldset
-                        next_fs.show();
-                        //hide the current fieldset with style
-                        current_fs.animate({ opacity: 1 }, {
-                            step: function (now, mx) {
-                                //as the opacity of current_fs reduces to 0 - stored in "now"
-                                //1. scale current_fs down to 80%
-                                //scale = 1 - (1 - now) * 0.2;
-                                ////2. bring next_fs from the right(50%)
-                                //left = (now * 50) + "%";
-                                ////3. increase opacity of next_fs to 1 as it moves in
-                                //opacity = .85 - now;
-                                //current_fs.css({ 'transform': 'scale(' + scale + ')' });
-                                //next_fs.css({ 'left': left, 'opacity': opacity });
-                            },
-                            duration: 800,
-                            complete: function () {
-                                current_fs.hide();
-                                animating = false;
-                            },
-                            //this comes from the custom easing plugin
-                            easing: 'easeInOutBack'
-                        });
+                        //current_fs = $(this).parent();
+                        //next_fs = $(this).parent().next();
 
 
-                        if ($('#basic_information').is(":visible")) {
-                            current_fs = $('#basic_information');
-                            var win = window.open('https://www.onlinesbi.com/sbicollect/icollecthome.htm?corpID=922784', '_blank');
-                            win.focus();
-                            // next_fs = $('#shirt_information');
-                        }
-                        // else if ($('#shirt_information').is(":visible")) {
-                        //    current_fs = $('#shirt_information');
-                        //    next_fs = $('#Emergency');
-                        //} else if ($('#Emergency').is(":visible")) {
-                        //    current_fs = $('#Emergency');
-                        //    next_fs = $('#Payment');
+
+                        ////activate next step on progressbar using the index of next_fs
+                        //$("#progressbar li").eq(count).addClass("active");
+                        //count = count + 1;
+                        ////show the next fieldset
+                        //next_fs.show();
+                        ////hide the current fieldset with style
+                        //current_fs.animate({ opacity: 1 }, {
+                        //    step: function (now, mx) {
+                        //        //as the opacity of current_fs reduces to 0 - stored in "now"
+                        //        //1. scale current_fs down to 80%
+                        //        //scale = 1 - (1 - now) * 0.2;
+                        //        ////2. bring next_fs from the right(50%)
+                        //        //left = (now * 50) + "%";
+                        //        ////3. increase opacity of next_fs to 1 as it moves in
+                        //        //opacity = .85 - now;
+                        //        //current_fs.css({ 'transform': 'scale(' + scale + ')' });
+                        //        //next_fs.css({ 'left': left, 'opacity': opacity });
+                        //    },
+                        //    duration: 800,
+                        //    complete: function () {
+                        //        current_fs.hide();
+                        //        animating = false;
+                        //    },
+                        //    //this comes from the custom easing plugin
+                        //    easing: 'easeInOutBack'
+                        //});
+
+
+                        //if ($('#basic_information').is(":visible")) {
+                        //    current_fs = $('#basic_information');
+                        //    var win = window.open('https://www.onlinesbi.com/sbicollect/icollecthome.htm?corpID=922784', '_blank');
+                        //    win.focus();
+                        //    // next_fs = $('#shirt_information');
                         //}
-                        next_fs.show();
-                        current_fs.hide();
+                        //// else if ($('#shirt_information').is(":visible")) {
+                        ////    current_fs = $('#shirt_information');
+                        ////    next_fs = $('#Emergency');
+                        ////} else if ($('#Emergency').is(":visible")) {
+                        ////    current_fs = $('#Emergency');
+                        ////    next_fs = $('#Payment');
+                        ////}
+                        //next_fs.show();
+                        //current_fs.hide();
                     }
-                });
+                }
 
                 $('.previous').click(function () {
 
@@ -747,6 +856,119 @@ body section {
                 });
             });
 
+            function getAmountByRunCategory(runCategory) {
+                if (runCategory.includes('21.09KM')) {
+                    return '1100'
+                } else if (runCategory.includes('10KM')) {
+                    return '1100'
+                } else if (runCategory.includes('5KM')) {
+                    return '500'
+                }
+            }
+
+            function paytmPaymentPopupOpen(amount, orderId, name, phone, email) {
+                try {
+                    $.ajax({
+                        type: "POST",
+                        url: "/EventRegistration.aspx/InitiateTransaction",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({
+                            amount: amount,
+                            orderId: orderId,
+                            name: name,
+                            phone: phone,
+                            email: email,
+                            paymentfor:"registration"
+                        }),
+                        dataType: "json",
+                        success: function (res) {
+                            var data = res.d;
+                            //console.log('Response==>', res)
+                            setTimeout(() => {
+                                $('#loader').hide();
+                            }, 1000);
+                            if (data.success) {
+                                openPaytm(data);
+                            } else {
+                                alert(data.message);
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err);
+                            $('#loader').hide();
+                            alert("Server error");
+                        }
+                    });
+                } catch (err) {
+                    console.log('Error in paytmPaymentPopupOpen==> ',err);
+                    $('#loader').hide();
+                }
+            }
+
+            function openPaytm(resData) {
+                var config = {
+                    root: "",
+                    flow: "DEFAULT",
+                    data: {
+                        orderId: resData.orderId,
+                        token: resData.txnToken,
+                        tokenType: "TXN_TOKEN",
+                        amount: resData.amount
+                    },
+                    handler: {
+                        notifyMerchant: function (eventName, data) {
+
+                            console.log("Event:", eventName);
+                            console.log("notifyMerchant-data:", data);
+
+                            if (eventName === "PAYMENT_SUCCESS") {
+                                //alert("Payment Successful");
+                                location.reload();
+                            }
+
+                            if (eventName === "PAYMENT_FAILURE") {
+                                //alert("Payment Failed");
+                                updatePaymentStatus(resData.orderId, data, "Failed");
+                            }
+
+                            if (eventName === "APP_CLOSED") {
+                                //alert("Payment cancelled by user");
+                                updatePaymentStatus(resData.orderId, data, "Cancelled");
+                            }
+                            if (eventName === "SESSION_EXPIRED") {
+                                //alert("Session expired. Please try again.");
+                                updatePaymentStatus(resData.orderId, data, "Expired");
+                            }
+                        }
+                    }
+                };
+          
+
+                if (window.Paytm && window.Paytm.CheckoutJS) {
+                    window.Paytm.CheckoutJS.init(config).then(function () {
+                        window.Paytm.CheckoutJS.invoke();
+                    }).catch(function (err) {
+                        console.log(err);
+                    });
+                }
+            }
+
+            function updatePaymentStatus(orderId, paytmRes, status) {
+                $.ajax({
+                    type: "POST",
+                    url: "/PaytmCallBack.aspx/UpdatePaymentStatus",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        orderId: orderId,
+                        status: status,
+                        apiResponse: JSON.stringify(paytmRes),
+                        isDonation: false
+                    }),
+                    success: function () {
+                        console.log("Status updated:", status);
+                    }
+                });
+            }
         </script>
 
     </div>
