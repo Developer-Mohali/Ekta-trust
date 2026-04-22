@@ -76,7 +76,7 @@
             <section>
                 <div class="row  wow fadeInDown">
 
-                    <div class=" col-lg-3">
+                    <div class=" col-lg-4">
 
                         <p>If you cannot reach us by the office number, do not hesitate to contact us by the mobile number or by e-mail. We will get back to you as soon as possible.</p>
 
@@ -86,8 +86,8 @@
 
                         <address>
                             <strong>Ekta Navnirman Trust,</strong><br />
-                            25, Bhagwati Nagar II, Kartarpura,<br />
-                            Jaipur 302006
+                             B-15, Pragati Path, Bajaj Nagar,<br />
+                             Jaipur, Rajasthan-302015
                                     <br />
                             <%-- <br/>
                                     <strong>Email Us</strong>
@@ -154,7 +154,7 @@
 
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="panel">
 
                             <div class="wow fadeInDown">
@@ -215,7 +215,7 @@
                         </div>
 
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="panel">
                             <div class="wow fadeInDown">
                                 <div class="row">
@@ -252,7 +252,8 @@
                                         </tr>--%>
                                         <tr>
                                             <th>Address:</th>
-                                            <td>25, Bhagwati Nagar II, Kartarpura, Jaipur 302006</td>
+                                            <%--<td>25, Bhagwati Nagar II, Kartarpura, Jaipur 302006</td>--%>
+                                            <td>B-15, Pragati Path, Bajaj Nagar, Jaipur, Rajasthan-302015</td>
                                         </tr>
                                         <%--<tr>
                                             <th>Mobile:</th>
@@ -272,7 +273,7 @@
                         </div>
 
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3" style="display:none;">
                         <div class="panel">
                             <div class="wow fadeInDown">
                                 <div class="row">
@@ -351,19 +352,30 @@
                                         <%--<td><i class="glyphicon glyphicon-phone">900-171-6311</i></td>--%>
                                     </tr>
                                     <tr>
-                                        <td class="text-danger">Ms. Yashoda Salvi(Trustee)</td>
+                                        <td class="text-danger">Ms. Yashoda Salvi</td>
                                         <td><i class="glyphicon glyphicon-envelope"></i><a href="mailto:salvi.yashoda@gmail.com">salvi.yashoda@gmail.com</a></td>
                                         <%--<td><i class="glyphicon glyphicon-phone">900-171-6311</i></td>--%>
 
                                     </tr>
-                                    <%--    <tr>
+                                      <tr>
+                                        <td class="text-danger">Mr. R.N. Bairva </td>
+                                        <td><i class="glyphicon glyphicon-envelope"></i><a href="mailto:neotarng@gmail.com">neotarng@gmail.com</a></td>
+                                        <td><i></i></td>
+                                        <%--<td><i class="glyphicon glyphicon-phone">941-374-9082</i></td>--%>
+                                    </tr>
+                                     <tr>
                                                 <td class="text-danger">Ms. Alka Verma</td>
                                                 <td><i class="glyphicon glyphicon-envelope "></i><a href="mailto:alkaguru155@gmail.com">alkaguru155@gmail.com</a></td>
-                                                <td><i class="glyphicon glyphicon-phone">966-002-2000</i></td>
+                                                <%--<td><i class="glyphicon glyphicon-phone">966-002-2000</i></td>--%>
                  
                                              
-                                            </tr>--%>
-
+                                         </tr>
+                                    <tr>
+                                        <td class="text-danger">Mr. Alok Hingonia</td>
+                                        <td><i class="glyphicon glyphicon-envelope"></i><a href="mailto:alokhingonia@gmail.com">alokhingonia@gmail.com</a></td>
+                                        <td><i></i></td>
+                                        <%-- <td><i class="glyphicon glyphicon-phone">982-815-0030</i></td>--%>
+                                    </tr>
                                     <%--<tr>
                                             <td class="text-danger">Shri Brij Mohan Singh</td>
                                             <td><i class="glyphicon glyphicon-envelope"></i><a href="mailto:drbharatksingh@gmail.com">drbharatksingh@gmail.com</a></td>
@@ -403,24 +415,14 @@
                                         <td><i></i></td>
                                         <%--<td><i class="glyphicon glyphicon-phone">998-205-4079</i></td>--%>
                                     </tr>
-                                    <tr>
-                                        <td class="text-danger">Mr. R.N. Bairva </td>
-                                        <td><i class="glyphicon glyphicon-envelope"></i><a href="mailto:neotarng@gmail.com">neotarng@gmail.com</a></td>
-                                        <td><i></i></td>
-                                        <%--<td><i class="glyphicon glyphicon-phone">941-374-9082</i></td>--%>
-                                    </tr>
+
                                     <tr>
                                         <td class="text-danger">Mrs. Suman Kayal</td>
                                         <td><i class="glyphicon glyphicon-envelope"></i><a>bunkar.pawan@gmail.com</a></td>
                                         <td><i></i></td>
                                         <%--<td><i class="glyphicon glyphicon-phone">759-717-7732</i></td>--%>
                                     </tr>
-                                    <tr>
-                                        <td class="text-danger">Mr. Alok Hingonia</td>
-                                        <td><i class="glyphicon glyphicon-envelope"></i><a href="mailto:alokhingonia@gmail.com">alokhingonia@gmail.com</a></td>
-                                        <td><i></i></td>
-                                        <%-- <td><i class="glyphicon glyphicon-phone">982-815-0030</i></td>--%>
-                                    </tr>
+                                    
 
                                     <%--<tr>
                                             <td class="text-danger">Mr. Mahesh Tanwar</td>

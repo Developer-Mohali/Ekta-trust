@@ -23,7 +23,7 @@
                     <tr>
                         <td colspan="2" >
                             <%--<h6>5th Run for Equality-2023 Details</h6>--%>
-                            <h4>6th Run for Equality-2025 Details</h4>
+                            <h4>7th Run for Equality-2026 Details</h4>
                         </td>
                     </tr>
                      <tr style="box-shadow: 0px 1px 10px 2px lightgrey;" >
@@ -37,7 +37,7 @@
                      </tr>                     
                     <tr>
                         <td> <%--<video src="RunForEqualityGallery/RunForEqualityFMAds.mpeg" height="0" width="0" id="FMaudio" autoplay="autoplay"></video>--%><br />
-                            <b>Event Date-</b> 14.04.2025<br />
+                            <b>Event Date-</b> 14.04.2026<br />
                           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>Place-</b>  Albert Hall, JLN Marg, Jaipur (Rajasthan)<br /><br />
                             <%--Tentative Route - JLN Marg<br /><br />--%>
                            <div class="hidden">
@@ -48,25 +48,28 @@
                            </div>
                             <%--Reporting Time<br /><br />
                              14.04.2023<br />--%>
-                            <b>Reporting Time-</b>14.04.2025<br /><br />
-                         <b>Time-</b>&nbsp;&nbsp;21.09KM &nbsp;- 4:30AM <br />
-                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10KM&nbsp;&nbsp;- 6:00AM<br />
+                            <b>Reporting Time-</b>14.04.2026<br /><br />
+                         <b>Time-</b>&nbsp;&nbsp;21.09 KM &nbsp;- 4:15 AM <br />
+                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10 KM&nbsp;&nbsp;- 5:15 AM<br />
                            <%-- Run for Equality Schedule will be published shortly --%>
-                       &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5KM&nbsp;&nbsp;- 6:30AM  <br /><br />
+                       &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5 KM&nbsp;&nbsp;- 5:30 AM  <br /><br />
                             <b>Ceremony-</b> 7:00AM onwards<br />
                      <%--Run Route - JLN Marg, Jaipur<br />--%><br />
 
                    <%-- Registration before - 31.03.2023 Rs-500--%>
 
                            <b>Registration Fee-</b> <br />
-                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Fix Rs 500 in all categories(5k, 10k, 21.09k)<br /><br />
+        <%--                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Fix Rs 500 in all categories(5k, 10k, 21.09k)<br /><br />--%>
+                               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rs 1100 - 21KM<br />
+                              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rs 1100 - 10KM<br />
+                              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Rs 500 - 5KM<br /><br />
                       <%--&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2. 10k - Rs 700<br />
                            <%-- Run for Equality Schedule will be published shortly 
                        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. 21.09k - Rs 1000 <br /><br />--%>
 
 
                      <%--Registration after - 31.03.2023 Rs - 1000(Tshirt subject to availability)--%><b>On Spot registration in BIB EXPO</b><br />
-                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs 1000 in all categories(5k, 10k, 21.09k) <br />
+                            &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs 1500 in all categories(5k, 10k, 21.09k) <br />
                     </td>
                     </tr>
                 <tr class="hidden">
@@ -108,25 +111,28 @@
               </tr>
        <tr>
            <td colspan="2">
-               <h6>21K (First Three Runners)</h6>
+               <h6>21KM (First Three Runners)</h6>
            </td>
        </tr>
        <tr>
            <td>First</td>
-           <td>Rs. 11,000</td>
+         <%--  <td>Rs. 11,000</td>--%>
+           <td>Rs. 9,100</td>
        </tr>
        <tr>
            <td>Second</td>
-           <td>Rs. 5,100</td>
+        <%--   <td>Rs. 5,100</td>--%>
+           <td>Rs. 7,100</td>
        </tr>
        <tr>
            <td>Third</td>
-           <td>Rs. 3,100</td>
+       <%--    <td>Rs. 3,100</td>--%>
+           <td>Rs. 5,100</td>
        </tr>
 
        <tr>
            <td colspan="2">
-               <h6>10K (First Three Runners)</h6>
+               <h6>10KM (First Three Runners)</h6>
            </td>
        </tr>
        <tr>
@@ -144,7 +150,7 @@
 
        <tr>
            <td colspan="2">
-               <h6>5K (First Three Runners)</h6>
+               <h6>5KM (First Three Runners)</h6>
            </td>
        </tr>
        <tr>

@@ -32,6 +32,51 @@
                 Forgot the password?
             </a>--%>
     
+       <asp:Panel ID="pnlLogin" runat="server" Visible="false">
+          <div class="panel panel-default">
+                          <form id="form2" runat="server">
+                        <!-- Header -->
+                        <div class="panel-heading text-center">
+                            <h3>🔐 Enter Verification Code</h3>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="panel-body text-center">
+
+                            <p>
+                                Enter the 6-digit code from your authenticator app.
+                            </p>
+
+                            <!-- OTP Input -->
+                            <asp:TextBox ID="txtOtp" runat="server"
+                                CssClass="form-control text-center"
+                                MaxLength="6"
+                                Placeholder="123456"
+                                Style="font-size:20px; letter-spacing:5px;" />
+
+                            <br />
+
+                            <!-- Verify Button -->
+                            <asp:Button ID="btnVerify" runat="server"
+                                Text="Verify"
+                                CssClass="btn btn-success btn-block"
+                                OnClick="btnVerify_Click" />
+
+                            <br />
+
+                            <!-- Error Message -->
+                            <asp:Label ID="lblError" runat="server" ForeColor="Red" />
+
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="panel-footer text-center">
+                            <small>Code refreshes every 30 seconds</small>
+                        </div>
+</form>
+                    </div>
+             </asp:Panel>
+
        <%--<asp:linkbutton id="LinkButtonForgot" text="Forgot the password" runat="server" class="forgot-password"></asp:linkbutton>--%>
       </div><!-- /card-container -->
     </div><!-- /container -->

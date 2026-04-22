@@ -12,4 +12,58 @@ Option Explicit On
 
 
 Partial Public Class Donate
+
+    '''<summary>
+    '''txtFullName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtFullName As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtAmount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtAmount As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtMobileNumber control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtMobileNumber As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''ddlModeOfPayment1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlModeOfPayment1 As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''txtComments control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtComments As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''btnAddNew control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAddNew As Global.System.Web.UI.WebControls.Button
 End Class

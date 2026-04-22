@@ -1324,7 +1324,10 @@ COVERS<o:p></o:p></span></p>
 <section>
  <div class="get-started  wow fadeInDown">
     <div class="container">
-      <div class="contribute col-lg-6 col-sm-5 col-md-5 "><a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784" target="_blank"><img src="images/donate1.png" class="img-responsive" alt=""></a></div>
+      <div class="contribute col-lg-6 col-sm-5 col-md-5 ">
+<%--          <a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784" target="_blank">--%>
+          <a href="Donation">
+              <img src="images/donate1.png" class="img-responsive" alt=""></a></div>
       <div class="pull-right">
       <%--<div class="col-sm-8 col-md-8 col-lg-10 pull-right" style="margin-top:4px;"><a href="Trust%20Activities"><img src="images/activities_btn.png" class="img-responsive" alt=""></a></div></div>--%>
     </div>
@@ -1371,9 +1374,9 @@ COVERS<o:p></o:p></span></p>
         <div class="col-md-5">
             <address class="text-white">
                 <div class="pull-right"><a href="#"><i class="fa fa-telegram"></i></a><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a></div>
-                <strong>Ekta Navnirman Trust,</strong><br />
-                25, Bhagwati Nagar II, Kartarpura,<br />
-                Jaipur,302006
+               <strong>Ekta Navnirman Trust,</strong><br />
+                             B-15, Pragati Path, Bajaj Nagar,<br />
+                             Jaipur, Rajasthan-302015
                             <br />
                 <br />
                 <img src="Images/logo-small.jpg" class="img-responsive pull-right" alt="" />

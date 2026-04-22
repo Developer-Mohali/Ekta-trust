@@ -16,6 +16,40 @@
             <p>
 2. It is understood that you will comply with any recommendations or restrictions your physician may have made pertaining to your participation in physical activities.
             </p>
+<!-- Donation section -->
+<h2>Donation</h2>
+<h3>1. Introduction</h3>
+<p>By accessing and using this website to make donations or payments, you agree to the following Terms & Conditions. These terms govern your use of our online donation/payment services.</p>
+<h3>2. Legal Status</h3>
+ <ul><li>Ekta Navnirman Trust is a registered NGO under applicable laws of India.</li>
+       <li> Donations made to Ekta Navnirman Trust may be eligible for tax benefits under Section 80G of the Income Tax Act, 1961 (if applicable).</li>
+   </ul>
+<h3>3. Payment Terms</h3>
+ <ul><li>Donations and payments can be made via credit/debit cards, UPI, net banking, or other approved payment gateways.</li>
+	<li>All transactions will be processed in Indian Rupees (INR).</li>
+<li>Ekta Navnirman Trust is not responsible for any transaction failures due to technical issues at the bank, payment gateway, or donor’s end.</li></ul>
+<h3>4. Refund & Cancellation Policy</h3>
+<ul><li>Donations made are non-refundable.</li>
+	<li>In case of duplicate transactions or errors, please contact us within 7 working days at <span style="color:blue"> ektanavnirmantrust@gmail.com.</span>.</li>
+	<li>Refunds, if applicable, will be processed at the sole discretion of Ekta Navnirman Trust.</li></ul>
+<h3>5. Use of Funds</h3><ul>
+    <li>All donations received will be utilized for charitable purposes only.</li>
+ 	<li>Donors will be provided with receipts acknowledging their contributions.</li></ul>
+<h3>6. Privacy & Data Protection</h3><ul>
+    <li>Donor information (name, contact details, payment data) will be kept confidential and used only for record-keeping and statutory compliance.</li>
+    <li>We do not share donor information with third parties, except as required by law.</li>
+ 	<li>For more details, please refer to our Privacy Policy.</li></ul>
+<h3>7. Donor Rights</h3><ul>
+    <li>Donations are voluntary and do not entitle donors to any material, financial, or contractual benefits.</li>
+    <li>Donors may request information on how funds are being utilized by contacting <span style="color:blue"> ektanavnirmantrust@gmail.com.</span>.</li></ul>
+<h3>8. Limitation of Liability</h3><ul>
+<li>Ekta Navnirman Trust shall not be liable for any indirect, incidental, or consequential damages arising from the use of this website or payment services.</li>
+<li>Donors are responsible for ensuring the accuracy of the information provided during transactions.</li></ul>
+<h3>9. Changes to Terms</h3><ul>
+<li>Ekta Navnirman Trust reserves the right to update or modify these Terms & Conditions at any time without prior notice.</li>
+<li>Continued use of the website after changes implies acceptance of the revised terms.</li></ul>
+
+
 <h2>Short Message Service (SMS)</h2>
 <p>1. When you opt-in to the Short Message Service (SMS) using a short code by texting REG, we will send you an SMS text message to confirm your RIP 
     Faculty Registration. By sending a text message for participation in the text messaging program or by using our text program at any time, you are 
@@ -38,28 +72,28 @@ to 47734 for help. We will respond with several keywords supported by our servic
     libelous, invasive of another's privacy, or contains hate speech.</p>
 
 <h2>Rights</h2>
-<p>By sending text messages, you grant Factor Consulting the perpetual, irrevocable, and fully sub licensable to use, distribute, reproduce, modify, adapt, publish,
-     translate, publicly perform, and publicly display any and all text message content provided by you to Factor Consulting (in whole or in part) and to incorporate 
+<p>By sending text messages, you grant Ekta Navnirman Trust the perpetual, irrevocable, and fully sub licensable to use, distribute, reproduce, modify, adapt, publish,
+     translate, publicly perform, and publicly display any and all text message content provided by you to Ekta Navnirman Trust (in whole or in part) and to incorporate 
     such content into other works in any format now known or later developed.</p>
 
 <h3>I. DISCLAIMER OF WARRANTIES</h3>
 <p>you expressly understand and agree that your participation in the text program is at your sole risk. The text program is provided on an "as is" and "as available" 
-    basis. Factor consulting and its officers, agents, employees, partners, contractors, consultants, licensors, and suppliers expressly disclaim all warranties of any 
+    basis. Ekta Navnirman Trust and its officers, agents, employees, partners, contractors, consultants, licensors, and suppliers expressly disclaim all warranties of any 
     kind, whether express or implied, including, but not limited to the implied warranties of merchantability, fitness for a particular purpose and non- infringement.
-Factor consulting and its officers, agents, employees, partners, contractors, consultants, licensors, and suppliers make no warranty that (a) the text program will 
+Ekta Navnirman Trust and its officers, agents, employees, partners, contractors, consultants, licensors, and suppliers make no warranty that (a) the text program will 
     meet your requirements; (b) the text program will be uninterrrupted, timely, secure, or error-free; or (c) the results that may be obtained from the use of the 
     text program will be accurate or reliable.</p>
 
 <h3>II. LIMITATION ON LIABILITY</h3>
-<p>you expressly understand and agree that factor consulting and its officers, agents, employees, partners, contractors, consultants, licensors, and suppliers shall 
+<p>you expressly understand and agree that Ekta Navnirman Trust and its officers, agents, employees, partners, contractors, consultants, licensors, and suppliers shall 
     not be liable to you for any direct, indirect, incidental, special, consequential or exemplary damages, including, but not limited to, damages for loss of profits, 
     goodwill, use, data or other intangible losses or any other matter relating to the text program.</p>
  
 <h3>Termination</h3>
-<p>Factor Consulting reserves the right, in its sole discretion, to cancel or suspend any or all of its Text Program, in whole or in part, for any reason, with or 
+<p>Ekta Navnirman Trust reserves the right, in its sole discretion, to cancel or suspend any or all of its Text Program, in whole or in part, for any reason, with or 
     without notice to you.</p>
 <h2>Privacy Policy</h2>
-<p>At Factor Consulting we respect your privacy. You may visit <a href="Home.aspx" style="color:blue" target="_blank"> http://ektatrust.org.in</a> without providing any personal information to us. Unless you specifically request
+<p>At Ekta Navnirman Trust we respect your privacy. You may visit <a href="Home.aspx" style="color:blue" target="_blank"> http://ektatrust.org.in</a> without providing any personal information to us. Unless you specifically request
      that we do so, we will never release your personal information to third parties for marketing purposes. We will, however, disclose certain information when it is 
     required by law.</p>
 <h2>Web Site Administration</h2>

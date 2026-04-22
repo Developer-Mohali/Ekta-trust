@@ -12,7 +12,16 @@ Option Explicit On
 
 
 Partial Public Class TemplateListing
-    
+
+    '''<summary>
+    '''AdminSideMenuControl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AdminSideMenuControl As Global.EktaTrust.AdminSideMenuControl
+
     '''<summary>
     '''MessageUpdated control.
     '''</summary>
@@ -21,7 +30,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MessageUpdated As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''DropDownList1 control.
     '''</summary>
@@ -30,7 +39,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DropDownList1 As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''txtSearch control.
     '''</summary>
@@ -39,7 +48,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''Button1 control.
     '''</summary>
@@ -48,7 +57,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Button1 As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''Label2 control.
     '''</summary>
@@ -57,7 +66,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''gvTamplate control.
     '''</summary>
@@ -66,7 +75,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gvTamplate As Global.System.Web.UI.WebControls.GridView
-    
+
     '''<summary>
     '''lblRecords control.
     '''</summary>
@@ -75,7 +84,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblRecords As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''btnShowPopup control.
     '''</summary>
@@ -84,7 +93,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnShowPopup As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''ModalPopupExtender1 control.
     '''</summary>
@@ -93,7 +102,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ModalPopupExtender1 As Global.AjaxControlToolkit.ModalPopupExtender
-    
+
     '''<summary>
     '''pnlpopup control.
     '''</summary>
@@ -102,7 +111,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlpopup As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''id control.
     '''</summary>
@@ -111,7 +120,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents id As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblCategory control.
     '''</summary>
@@ -120,7 +129,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCategory As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''txtTitle control.
     '''</summary>
@@ -129,7 +138,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtTitle As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtMessage control.
     '''</summary>
@@ -138,7 +147,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtMessage As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnUpdate control.
     '''</summary>
@@ -147,7 +156,7 @@ Partial Public Class TemplateListing
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''btnCancel control.
     '''</summary>

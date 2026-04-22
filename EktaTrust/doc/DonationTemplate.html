@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Donation Receipt</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; background-color:#f5f5f5; margin:0; padding:0;">
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f5; padding:20px;">
+        <tr>
+            <td align="center">
+
+                <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; padding:20px; border-radius:6px;">
+
+                    <!-- Header -->
+                    <tr>
+                        <td align="center" style="font-size:20px; font-weight:bold; color:#5a2a82;">
+                            EKTA NAVNIRMAN TRUST
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" style="padding:10px; font-size:14px;">
+                            Donation Receipt for Tax Deduction (80G)
+                        </td>
+                    </tr>
+
+                    <!-- Divider -->
+                    <tr>
+                        <td style="border-top:1px solid #ddd; padding-top:15px;"></td>
+                    </tr>
+
+                    <!-- Content -->
+                    <tr>
+                        <td style="font-size:14px; color:#333;">
+                            Dear <b>{{DonorName}}</b>,<br /><br />
+
+                            Thank you for your generous contribution. We truly appreciate your support towards our initiatives.<br /><br />
+
+                            Please find attached your <b>Donation Receipt</b>, which can be used for claiming tax benefits under Section 80G of the Income Tax Act, 1961.
+                        </td>
+                    </tr>
+
+                    <!-- Donation Details -->
+                    <tr>
+                        <td style="padding-top:15px;">
+                            <a href="{{DownloadLink}}"
+                               style="background:#5a2a82; color:#fff; padding:10px 15px; text-decoration:none; border-radius:4px;">
+                                Download Receipt
+                            </a>
+                        </td>
+                    </tr>
+
+                    <!-- Footer Text -->
+                    <tr>
+                        <td style="padding-top:15px; font-size:13px; color:#555;">
+                            This donation is eligible for tax deduction under Section 80G.<br /><br />
+
+                            If you need any assistance, feel free to contact us.
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="padding-top:20px; font-size:13px;">
+                            Regards,<br />
+                            <b>Ekta Navnirman Trust</b><br />
+                            Email: ektanavnirmantrust@gmail.com<br />
+                            Phone: 7877664078
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

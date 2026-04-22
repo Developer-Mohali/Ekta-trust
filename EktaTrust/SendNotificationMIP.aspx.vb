@@ -691,16 +691,18 @@ Public Class SendNotificationMIP
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As New MySqlConnection(constr)
                 con.Open()
-                Dim cmd As New MySqlCommand("Select Category,id from Template where TemplateType='SMS'", con)
-                Dim da As New MySqlDataAdapter(cmd)
-                Dim ds As New DataSet()
-                da.Fill(ds)
-                drpMobileMessage.DataSource = ds
-                drpMobileMessage.DataTextField = "Category"
-                drpMobileMessage.DataValueField = "id"
-                drpMobileMessage.DataBind()
-                drpMobileMessage.Items.Insert(0, New ListItem("---Select Category Message---", "0"))
-                con.Close()
+                Using cmd As New MySqlCommand("Select Category,id from Template where TemplateType='SMS'", con)
+                    Using da As New MySqlDataAdapter(cmd)
+                        Dim ds As New DataSet()
+                        da.Fill(ds)
+                        drpMobileMessage.DataSource = ds
+                        drpMobileMessage.DataTextField = "Category"
+                        drpMobileMessage.DataValueField = "id"
+                        drpMobileMessage.DataBind()
+                        drpMobileMessage.Items.Insert(0, New ListItem("---Select Category Message---", "0"))
+                        con.Close()
+                    End Using
+                End Using
             End Using
         Catch ex As Exception
 
@@ -716,16 +718,18 @@ Public Class SendNotificationMIP
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As New MySqlConnection(constr)
                 con.Open()
-                Dim cmd As New MySqlCommand("Select Category,id from Template where TemplateType='EMAIL'", con)
-                Dim da As New MySqlDataAdapter(cmd)
-                Dim ds As New DataSet()
-                da.Fill(ds)
-                drpEmailMessage.DataSource = ds
-                drpEmailMessage.DataTextField = "Category"
-                drpEmailMessage.DataValueField = "id"
-                drpEmailMessage.DataBind()
-                drpEmailMessage.Items.Insert(0, New ListItem("---Select Category Message---", "0"))
-                con.Close()
+                Using cmd As New MySqlCommand("Select Category,id from Template where TemplateType='EMAIL'", con)
+                    Using da As New MySqlDataAdapter(cmd)
+                        Dim ds As New DataSet()
+                        da.Fill(ds)
+                        drpEmailMessage.DataSource = ds
+                        drpEmailMessage.DataTextField = "Category"
+                        drpEmailMessage.DataValueField = "id"
+                        drpEmailMessage.DataBind()
+                        drpEmailMessage.Items.Insert(0, New ListItem("---Select Category Message---", "0"))
+                        con.Close()
+                    End Using
+                End Using
             End Using
         Catch ex As Exception
 

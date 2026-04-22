@@ -26,14 +26,14 @@
              <b>5. हमारा एक ही हथियार है -'शिक्षा'।</b><br />
              <b>6. हमारी एक ही शक्ति है -'संगठन'।</b><br />
              <b>7. हमारी एक ही पूजा है -'संघर्ष'।।</b><br /><br />--%>
-                 बाबासाहेब हमारे आदर्श है।<br />
-             संविधान हमारा पूजनीय ग्रंथ है।</b><br />
-             <b>इंसानियत हमारा धर्म है।</b><br />
              <b>शिक्षा हमारा हथियार है।</b><br />
-
              <b>संगठन हमारी शक्ति है।</b><br />
              <b>संघर्ष हमारी पूजा है। </b><br />
-             <b>भाईचारा हमारा लक्ष्य है।</b><br /><br />
+             <b>भाईचारा हमारा लक्ष्य है।</b><br />
+             <b>इंसानियत हमारा धर्म है।</b><br />
+            <b> संविधान हमारा पूजनीय ग्रंथ है।</b><br />
+            <b> बाबासाहेब हमारे आदर्श है।</b><br />
+            <br />
              <b>जय भीम।</b>
         </p>
       </div>
@@ -43,7 +43,7 @@
   </div>
   <!--/.container--><!--/#main-slider-->
 
-<section>
+<section class="hide">
 <div class="get-started  wow fadeInDown">
      <div class="container">
                 <div class="contribute col-lg-6 col-sm-5 col-md-5 ">
@@ -79,9 +79,9 @@
      <div class="col-md-5">
                         <address class="text-white">
                             <div class="pull-right"><a href="#"><i class="fa fa-telegram"></i></a><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a></div>
-                            <strong>Ekta Navnirman Trust,</strong><br />
-                           25, Bhagwati Nagar II, Kartarpura,<br />
-                            Jaipur,302006
+                           <strong>Ekta Navnirman Trust,</strong><br />
+                             B-15, Pragati Path, Bajaj Nagar,<br />
+                             Jaipur, Rajasthan-302015
                             <br />
                             <br />
                             <img src="Images/logo-small.jpg" class="img-responsive pull-right" alt="" />

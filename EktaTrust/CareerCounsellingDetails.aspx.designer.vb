@@ -12,7 +12,16 @@ Option Explicit On
 
 
 Partial Public Class CareerCounsellingDetails
-    
+
+    '''<summary>
+    '''AdminSideMenuControl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AdminSideMenuControl As Global.EktaTrust.AdminSideMenuControl
+
     '''<summary>
     '''matrimonialPanel control.
     '''</summary>
@@ -21,7 +30,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents matrimonialPanel As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''MessageUpdated control.
     '''</summary>
@@ -30,7 +39,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MessageUpdated As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''ddlSearchBy control.
     '''</summary>
@@ -39,7 +48,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlSearchBy As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''txtSearch control.
     '''</summary>
@@ -48,7 +57,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnSearch control.
     '''</summary>
@@ -57,7 +66,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSearch As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''btnShowRequest control.
     '''</summary>
@@ -66,7 +75,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnShowRequest As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''gvEvent control.
     '''</summary>
@@ -75,7 +84,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gvEvent As Global.System.Web.UI.WebControls.GridView
-    
+
     '''<summary>
     '''lblRecords control.
     '''</summary>
@@ -84,7 +93,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblRecords As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblresult control.
     '''</summary>
@@ -93,7 +102,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblresult As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''requestpanel control.
     '''</summary>
@@ -102,7 +111,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents requestpanel As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''lblRequestMessage control.
     '''</summary>
@@ -111,7 +120,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblRequestMessage As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''DropDownList1 control.
     '''</summary>
@@ -120,7 +129,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DropDownList1 As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''txtSearchRequest control.
     '''</summary>
@@ -129,7 +138,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSearchRequest As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnSearchRequest control.
     '''</summary>
@@ -138,7 +147,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSearchRequest As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''btnMatrimonialAll control.
     '''</summary>
@@ -147,7 +156,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnMatrimonialAll As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''gridRequestDetails control.
     '''</summary>
@@ -156,7 +165,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridRequestDetails As Global.System.Web.UI.WebControls.GridView
-    
+
     '''<summary>
     '''lblRecordCount control.
     '''</summary>
@@ -165,7 +174,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblRecordCount As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''btnShowPopup control.
     '''</summary>
@@ -174,7 +183,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnShowPopup As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''ModalPopupExtender1 control.
     '''</summary>
@@ -183,7 +192,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ModalPopupExtender1 As Global.AjaxControlToolkit.ModalPopupExtender
-    
+
     '''<summary>
     '''pnlpopup control.
     '''</summary>
@@ -192,7 +201,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlpopup As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''labelDor control.
     '''</summary>
@@ -201,7 +210,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents labelDor As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''btnCancel control.
     '''</summary>
@@ -210,7 +219,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''lblName control.
     '''</summary>
@@ -219,7 +228,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblName As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblEducation control.
     '''</summary>
@@ -228,7 +237,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEducation As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblMobileNo control.
     '''</summary>
@@ -237,7 +246,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMobileNo As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblEmail control.
     '''</summary>
@@ -246,7 +255,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmail As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblAddress control.
     '''</summary>
@@ -255,7 +264,7 @@ Partial Public Class CareerCounsellingDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblAddress As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblAreaOfInterest control.
     '''</summary>

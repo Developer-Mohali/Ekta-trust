@@ -12,7 +12,16 @@ Option Explicit On
 
 
 Partial Public Class MatrimonialDetails
-    
+
+    '''<summary>
+    '''AdminSideMenuControl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AdminSideMenuControl As Global.EktaTrust.AdminSideMenuControl
+
     '''<summary>
     '''matrimonialPanel control.
     '''</summary>
@@ -21,7 +30,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents matrimonialPanel As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''MessageUpdated control.
     '''</summary>
@@ -30,7 +39,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MessageUpdated As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''ddlSearchBy control.
     '''</summary>
@@ -39,7 +48,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlSearchBy As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''txtSearch control.
     '''</summary>
@@ -48,7 +57,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnSearch control.
     '''</summary>
@@ -57,7 +66,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSearch As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''btnShowRequest control.
     '''</summary>
@@ -66,7 +75,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnShowRequest As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''gvEvent control.
     '''</summary>
@@ -75,7 +84,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gvEvent As Global.System.Web.UI.WebControls.GridView
-    
+
     '''<summary>
     '''lblRecords control.
     '''</summary>
@@ -84,7 +93,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblRecords As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblresult control.
     '''</summary>
@@ -93,7 +102,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblresult As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''requestpanel control.
     '''</summary>
@@ -102,7 +111,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents requestpanel As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''lblRequestMessage control.
     '''</summary>
@@ -111,7 +120,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblRequestMessage As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''DropDownList1 control.
     '''</summary>
@@ -120,7 +129,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DropDownList1 As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''txtSearchRequest control.
     '''</summary>
@@ -129,7 +138,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSearchRequest As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnSearchRequest control.
     '''</summary>
@@ -138,7 +147,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSearchRequest As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''btnMatrimonialAll control.
     '''</summary>
@@ -147,7 +156,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnMatrimonialAll As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''gridRequestDetails control.
     '''</summary>
@@ -156,7 +165,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridRequestDetails As Global.System.Web.UI.WebControls.GridView
-    
+
     '''<summary>
     '''lblRecordCount control.
     '''</summary>
@@ -165,7 +174,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblRecordCount As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''btnShowPopup control.
     '''</summary>
@@ -174,7 +183,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnShowPopup As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''ModalPopupExtender1 control.
     '''</summary>
@@ -183,7 +192,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ModalPopupExtender1 As Global.AjaxControlToolkit.ModalPopupExtender
-    
+
     '''<summary>
     '''pnlpopup control.
     '''</summary>
@@ -192,7 +201,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlpopup As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''divDownload control.
     '''</summary>
@@ -201,7 +210,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents divDownload As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''labelDor control.
     '''</summary>
@@ -210,7 +219,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents labelDor As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''btnCancel control.
     '''</summary>
@@ -219,7 +228,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''divRecord control.
     '''</summary>
@@ -228,7 +237,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents divRecord As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lblName control.
     '''</summary>
@@ -237,7 +246,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblName As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblLastName control.
     '''</summary>
@@ -246,7 +255,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblLastName As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblMobileNo control.
     '''</summary>
@@ -255,7 +264,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMobileNo As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblEmail control.
     '''</summary>
@@ -264,7 +273,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmail As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblAddress control.
     '''</summary>
@@ -273,7 +282,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblAddress As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblDateOfBirth control.
     '''</summary>
@@ -282,7 +291,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblDateOfBirth As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblGender control.
     '''</summary>
@@ -291,7 +300,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblGender As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblCategory control.
     '''</summary>
@@ -300,7 +309,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCategory As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblHeight control.
     '''</summary>
@@ -309,7 +318,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblHeight As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblWeight control.
     '''</summary>
@@ -318,7 +327,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblWeight As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblNativePlace control.
     '''</summary>
@@ -327,7 +336,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblNativePlace As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblMaritalStatus control.
     '''</summary>
@@ -336,7 +345,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMaritalStatus As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblPermanentAddress control.
     '''</summary>
@@ -345,7 +354,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblPermanentAddress As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblQualification control.
     '''</summary>
@@ -354,7 +363,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblQualification As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblEducation control.
     '''</summary>
@@ -363,7 +372,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEducation As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblOccupation control.
     '''</summary>
@@ -372,7 +381,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblOccupation As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblOccupationType control.
     '''</summary>
@@ -381,7 +390,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblOccupationType As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblPostingUpdate control.
     '''</summary>
@@ -390,7 +399,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblPostingUpdate As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblAnnualIncome control.
     '''</summary>
@@ -399,7 +408,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblAnnualIncome As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblJobDiscription control.
     '''</summary>
@@ -408,7 +417,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblJobDiscription As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblFatherName control.
     '''</summary>
@@ -417,7 +426,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblFatherName As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblFatherProfession control.
     '''</summary>
@@ -426,7 +435,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblFatherProfession As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblMotherName control.
     '''</summary>
@@ -435,7 +444,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMotherName As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblMotherProfession control.
     '''</summary>
@@ -444,7 +453,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMotherProfession As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblGrandFather control.
     '''</summary>
@@ -453,7 +462,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblGrandFather As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblGrandMother control.
     '''</summary>
@@ -462,7 +471,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblGrandMother As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblNoOfBrothers control.
     '''</summary>
@@ -471,7 +480,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblNoOfBrothers As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblMarriedBrothers control.
     '''</summary>
@@ -480,7 +489,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMarriedBrothers As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblNoOfSisters control.
     '''</summary>
@@ -489,7 +498,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblNoOfSisters As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblMarriedSisters control.
     '''</summary>
@@ -498,7 +507,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMarriedSisters As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblFamilyFoodType control.
     '''</summary>
@@ -507,7 +516,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblFamilyFoodType As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblfamilySocialWork control.
     '''</summary>
@@ -516,7 +525,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblfamilySocialWork As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblFamilyDisease control.
     '''</summary>
@@ -525,7 +534,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblFamilyDisease As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblFamilyAchievement control.
     '''</summary>
@@ -534,7 +543,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblFamilyAchievement As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblLanguage control.
     '''</summary>
@@ -543,7 +552,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblLanguage As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblFoodHabbit control.
     '''</summary>
@@ -552,7 +561,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblFoodHabbit As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblSmoke control.
     '''</summary>
@@ -561,7 +570,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblSmoke As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblDrink control.
     '''</summary>
@@ -570,7 +579,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblDrink As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblPartnerMaritalStatus control.
     '''</summary>
@@ -579,7 +588,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblPartnerMaritalStatus As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblPartnerQualification control.
     '''</summary>
@@ -588,7 +597,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblPartnerQualification As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblPartnerAgeRange control.
     '''</summary>
@@ -597,7 +606,7 @@ Partial Public Class MatrimonialDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblPartnerAgeRange As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblPartnerHeightRange control.
     '''</summary>

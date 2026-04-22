@@ -5,7 +5,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </asp:Content>
-
+<%@ Register Src="~/Controls/AdminSideMenuControl.ascx" TagPrefix="ucSM" TagName="AdminSideMenuControl" %> 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
   
     <style type="text/css">
@@ -43,38 +43,7 @@ z-index: 10000;
         <!-- uncomment code for absolute positioning tweek see top comment in css -->
         <div class="absolute-wrapper"> </div>
         <!-- Menu -->
-        <div class="side-menu">
-        <nav class="navbar navbar-default" role="navigation"> 
-           
-            <!-- Main Menu -->
-            <div class="side-menu-container">
-            <ul class="nav navbar-nav">
-                <li><a href="DashBoard.aspx"> Dashboard</a></li>
-                <li ><a href="TrainingActivity.aspx"> Training Activites</a></li>
-                <li><a href="Joining.aspx"> Joining</a></li>
-                <li><a href="ContactDetails.aspx"> Contact Detail</a></li>
-                <li><a href="#"> Donation</a></li>
-                <li><a href="SUGGESTIONTRUSTACTIVITIES.aspx"> Trust Activities</a></li>
-                <li class="active"><a href="EventDetails.aspx">Events</a></li>
-                <li><a href="MIPRegistrationDetails.aspx">MIP Registration Details</a></li>
-                <li><a href="MIPFacultyRegistrationDetails.aspx">MIP Faculty Registration Details</a></li>
-                <li><a href="SendNotificationMIP.aspx">Send Notification</a></li>
-                <li><a href="TemplateListing.aspx">Templates</a></li>
-                <li><a href="LogDetails.aspx" id="LogDetails">Log Details</a></li>
-                <li><a href="UserDetails.aspx">Users</a></li>
-                <li><a href="MatrimonialDetails.aspx">Matrimonial Details</a></li>
-                <li><a href="CareerCounsellingDetails.aspx">Career Counselling Details</a></li>
-                <li><a href="AtrocityReportingDetails.aspx">Atrocities Reporting Details</a></li>
-                <li><a href="AddNotification.aspx">Add New Notification</a></li>
-                <li><a href="DonationDetails.aspx">Donation Details</a></li>
-                 <li><a href="CertificationReport.aspx">Certification</a></li>
-                <li><a href="FeedbackAndSuggestion.aspx">Feedback And Suggestion</a></li>
-              </ul>
-                
-          </div>
-            <!-- /.navbar-collapse --> 
-          </nav>
-      </div>
+      <ucSM:AdminSideMenuControl runat="server" id="AdminSideMenuControl" />
       </div>
   </div>
     <div class="col-md-10 ">
