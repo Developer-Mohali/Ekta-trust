@@ -1293,4 +1293,6 @@ filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1);
 .fa-graduation-cap:before {
 	content: "\f19d "
 }
-
+.fa-file-excel-o:before {
+	content: "\f1c3";
+}

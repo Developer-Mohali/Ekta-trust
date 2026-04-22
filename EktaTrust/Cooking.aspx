@@ -44,8 +44,8 @@
         <address class="text-white">
         <div class="pull-right"><a href="#"><i class="fa fa-telegram"></i></a><a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a></div>
         <strong>Ekta Navnirman Trust,</strong><br />
-         B-15, Pragathi Path,Bajaj Nagar,<br> 
-        Jaipur <br>
+                             B-15, Pragati Path, Bajaj Nagar,<br />
+                             Jaipur, Rajasthan-302015 <br>
         <br><img src="images/logo-small.jpg" class="img-responsive pull-right"  alt="">
        
         <br>

@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class SUGGESTIONTRUSTACTIVITIES
 
     '''<summary>
+    '''AdminSideMenuControl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AdminSideMenuControl As Global.EktaTrust.AdminSideMenuControl
+
+    '''<summary>
     '''ddlSearchBy control.
     '''</summary>
     '''<remarks>

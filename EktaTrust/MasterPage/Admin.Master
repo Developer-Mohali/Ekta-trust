@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Home | Ekta Trust</title>
@@ -169,7 +169,21 @@ body section {
                  height: 300px;
              }
          }
+              #loader {
+        position: fixed;
+        z-index: 10005;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+    }
 
+    #loader img {
+        position: relative;
+        top: 40%;
+    }
     </style>
 
 
@@ -178,7 +192,9 @@ body section {
     </asp:ContentPlaceHolder>
 </head>
  <body class="homepage">
-
+             <div id="loader" style="display:none">
+                <img src="./CssGallery/resource/loading.gif" alt="Loading..." />
+            </div>
    
 
 <form id="msform" runat="server">
@@ -206,6 +222,7 @@ body section {
                             <div class="social col-sm-3 pull-right">
                                 <ul class="social-share ">
 
+                                    <li><a href="https://www.instagram.com/runforequality/ " target="_blank"><i class="fa fa-instagram"></i></a></li>
                                     <li><a href="https://t.me/EktaTrust" target="_blank"><i class="fa fa-telegram"></i></a></li>
                                     <li><a href="https://www.facebook.com/Ekta-Navnirman-Trust-Page-1688092001490316/" target="_blank"><i class="fa fa-facebook"></i></a></li>
                                     <li><a href="https://twitter.com/trust_ekta" target="_blank"><i class="fa fa-twitter"></i></a></li>
@@ -264,25 +281,26 @@ body section {
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Run for Equality <i class="fa fa-angle-down"></i></a>
         <ul class="dropdown-menu">
-            <li class="menu-item"><a href="../BibData.aspx">BIB Data 2025</a></li>
             <li class="menu-item"><a href="../Information.aspx">Run Information</a></li>
-            <li class="menu-item"><a href="../CelebritiesAppeal.aspx">Celebrities Appeal</a></li>
             <li class="menu-item"><a href="../EventPrize">Run Registration</a></li>
-            <li class="menu-item"><a href="../SOP.aspx">Run SOP</a></li>
-            <li class="menu-item"><a href="../RunRoute.aspx">Run Route</a></li>
-            <li class="menu-item"><a href="../ThemeSong.aspx">Theme Song</a></li>
+            <li class="menu-item"><a href="../BibData.aspx?year=2026">BIB Data-Registered</a></li>
             <li class="menu-item"><a href="../RunCertificate">Timing & Certificate</a></li>
+            <li class="menu-item"><a href="../RunRoute.aspx">Run Route</a></li>
+            <li class="menu-item"><a href="../SOP.aspx">Run SOP</a></li>
+            <li class="menu-item"><a href="../ThemeSong.aspx">Theme Song</a></li>
+            <li class="menu-item"><a href="../CelebritiesAppeal.aspx">Celebrities Appeal</a></li>
             <li class="menu-item"><a href="../Winners.aspx">Winners</a></li>
+            <li class="menu-item"><a href="../RunForEquality2026">Gallery</a></li>
+<%--            <li class="menu-item"><a href="../BibData.aspx?year=2025">BIB Data 2025</a></li>
             <li class="menu-item"><a href="../OurAssociates.aspx">Our Associates</a></li>
-            <li class="menu-item"><a href="../RunForEquality2025">Photo Download</a></li>
-            <li class="menu-item"><a href="../RunForEquality2025">Gallery</a></li>
+            <li class="menu-item"><a href="../RunForEquality2025">Photo Download</a></li>--%>
         </ul>
     </li>
 
-    <li class="dropdown">
+   <%-- <li class="dropdown">
         <a href="../Events" class="dropdown-toggle" data-toggle="dropdown">Registration <i class="fa fa-angle-down"></i></a>
         <ul class="dropdown-menu">
-            <li class="menu-item"><a href="../EventPrize">Run Registration</a></li>
+           <li class="menu-item"><a href="../EventPrize">Run Registration</a></li>
 
             <li class="dropdown dropdown-submenu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matrimonial</a>
@@ -297,7 +315,9 @@ body section {
             <li class="menu-item"><a href="../AtrocitiesReporting.aspx">Atrocities Reporting</a></li>
             <li class="menu-item"><a href="../MigrantsRegistration.aspx">Migrants Registration</a></li>
         </ul>
-    </li>
+    </li>--%>
+
+    <li class="menu-item"><a href="../EktaCreativeCompetition2025.aspx">Creative Competition</a></li>
 
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Programs <i class="fa fa-angle-down"></i></a>
@@ -347,12 +367,31 @@ body section {
                     <li class="menu-item"><a href="/IntercasteMarriageScheme.aspx">Intercaste Marriage Scheme</a></li>
                 </ul>
             </li>
+
+             <%--<li class="menu-item"><a href="../EventPrize">Run Registration</a></li>--%>
+
+<%--             <li class="dropdown dropdown-submenu">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matrimonial</a>
+                 <ul class="dropdown-menu">
+                     <li class="menu-item"><a href="../MatrimonialInformation.aspx">Matrimonial Registration</a></li>
+                     <li class="menu-item"><a href="../MatrimonialLogin">Matrimonial Login</a></li>
+                 </ul>
+             </li>--%>
+
+             <li class="menu-item"><a href="../Enroll.aspx">Students Registration</a></li>
+             <li class="menu-item"><a href="../CareerCounselling.aspx">Career Counselling</a></li>
+             <li class="menu-item"><a href="../AtrocitiesReporting.aspx">Atrocities Reporting</a></li>
+             <li class="menu-item"><a href="../MigrantsRegistration.aspx">Migrants Registration</a></li>
+
         </ul>
     </li>
 
     <li class="menu-item"><a href="../Literature">Literature</a></li>
-    <li class="menu-item"><a href="../RunForEquality2025">Gallery</a></li>
-    <li class="menu-item"><a href="../Donate">Donate Us</a></li>
+    <li class="menu-item"><a href="../RunForEquality2026">Gallery</a></li>
+    <li class="menu-item"><a href="../Donation">Donate Us</a></li>
+<%--    <li class="menu-item"><a href="../Donate">Donate Us</a></li>--%>
+    <li class="menu-item"><a href="../LogIn.aspx">Login </a></li>
+                   
 </ul>
             </div>
         </div>
@@ -365,7 +404,7 @@ body section {
          <%--<a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm?corpID=922784" target="_blank">
             <button id="btnfeedback" type="button" class="feedback"></button>
         </a>--%>
-        <a href="../Donate" target="_blank">
+        <a href="../Donation">
             <button id="btnfeedback" type="button" class="feedback"></button>
         </a>
    </div>
@@ -442,11 +481,29 @@ body section {
     </script>
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            $("#exampleModal").modal('show');
+        //$(document).ready(function () {
+        //    $("#exampleModal").modal('show');
               
-        });
+        //});
+        $(document).ready(function () {
+            var url = window.location.pathname.toLowerCase();
+            $('#mainMenu li').removeClass('active');
+            $('#mainMenu li a').each(function () {
+                var href = $(this).attr('href');
+                if (!href) return;
+                href = href.toLowerCase().replace('..', '');
+                // Match full path OR last segment
+                if (url === href || url.endsWith(href)) {
+                    $(this).parent().addClass('active');
 
+                    // Activate all parent <li> (for nested menus)
+                    $(this).parents('li').addClass('active');
+
+                    // Activate dropdowns if any
+                    $(this).parents('.dropdown').addClass('active');
+                }
+            });
+        });
         //   $("#btnfeedback").click(function () {         
         //        window.location.href = "https://www.onlinesbi.com/sbicollect/icollecthome.htm?corpID=922784";
         //});  
@@ -485,7 +542,9 @@ body section {
 
             // Close navbar when clicking outside in mobile view
             $(document).on("click", function (e) {
+              //  alert("Test1")
                 if (!$(e.target).closest('.navbar').length) {
+                  //  alert("Test");
                     $(".navbar-collapse").collapse('hide');
                 }
             });
@@ -524,6 +583,13 @@ body section {
     //        bestMatch.closest('li').addClass('active'); // add to closest li only
     //    }
     //});
+    function showLoader() {
+        document.getElementById("loader").style.display = "block";
+    }
+
+    function hideLoader() {
+        document.getElementById("loader").style.display = "none";
+    }
 </script>
 
 

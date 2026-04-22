@@ -12,7 +12,16 @@ Option Explicit On
 
 
 Partial Public Class MIPFacultyRegistrationDetails
-    
+
+    '''<summary>
+    '''AdminSideMenuControl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AdminSideMenuControl As Global.EktaTrust.AdminSideMenuControl
+
     '''<summary>
     '''MessageUpdated control.
     '''</summary>
@@ -21,7 +30,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MessageUpdated As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''ddlSearchBy control.
     '''</summary>
@@ -30,7 +39,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlSearchBy As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''DropDownList1 control.
     '''</summary>
@@ -39,7 +48,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DropDownList1 As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''txtSearch control.
     '''</summary>
@@ -48,7 +57,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnSearch control.
     '''</summary>
@@ -57,7 +66,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSearch As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''lblmsg control.
     '''</summary>
@@ -66,7 +75,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblmsg As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Button1 control.
     '''</summary>
@@ -75,7 +84,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Button1 As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''gvEvent control.
     '''</summary>
@@ -84,7 +93,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gvEvent As Global.System.Web.UI.WebControls.GridView
-    
+
     '''<summary>
     '''lblRecords control.
     '''</summary>
@@ -93,7 +102,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblRecords As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblresult control.
     '''</summary>
@@ -102,7 +111,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblresult As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''btnShowPopup control.
     '''</summary>
@@ -111,7 +120,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnShowPopup As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''ModalPopupExtender1 control.
     '''</summary>
@@ -120,7 +129,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ModalPopupExtender1 As Global.AjaxControlToolkit.ModalPopupExtender
-    
+
     '''<summary>
     '''pnlpopup control.
     '''</summary>
@@ -129,7 +138,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlpopup As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''lblContactId control.
     '''</summary>
@@ -138,7 +147,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblContactId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''textName control.
     '''</summary>
@@ -147,7 +156,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents textName As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''Email control.
     '''</summary>
@@ -156,7 +165,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Email As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''Mobile control.
     '''</summary>
@@ -165,7 +174,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Mobile As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtPosting control.
     '''</summary>
@@ -174,7 +183,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtPosting As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtOccupation control.
     '''</summary>
@@ -183,7 +192,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtOccupation As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtSpecalization control.
     '''</summary>
@@ -192,7 +201,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSpecalization As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtAvalability control.
     '''</summary>
@@ -201,7 +210,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtAvalability As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''Address control.
     '''</summary>
@@ -210,7 +219,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Address As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnUpdate control.
     '''</summary>
@@ -219,7 +228,7 @@ Partial Public Class MIPFacultyRegistrationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''btnCancel control.
     '''</summary>

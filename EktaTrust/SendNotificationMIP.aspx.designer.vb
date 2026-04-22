@@ -12,7 +12,16 @@ Option Explicit On
 
 
 Partial Public Class SendNotificationMIP
-    
+
+    '''<summary>
+    '''AdminSideMenuControl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AdminSideMenuControl As Global.EktaTrust.AdminSideMenuControl
+
     '''<summary>
     '''Panel1 control.
     '''</summary>
@@ -21,7 +30,7 @@ Partial Public Class SendNotificationMIP
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Panel1 As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''RequiredFieldValidator3 control.
     '''</summary>
@@ -30,7 +39,7 @@ Partial Public Class SendNotificationMIP
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator3 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''drpEvent control.
     '''</summary>
@@ -39,7 +48,7 @@ Partial Public Class SendNotificationMIP
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents drpEvent As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''Panel4 control.
     '''</summary>
@@ -48,7 +57,7 @@ Partial Public Class SendNotificationMIP
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Panel4 As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''txtMobileNumber control.
     '''</summary>
@@ -57,7 +66,7 @@ Partial Public Class SendNotificationMIP
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtMobileNumber As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtEamilAddress control.
     '''</summary>
@@ -66,7 +75,7 @@ Partial Public Class SendNotificationMIP
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtEamilAddress As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''drpMobileMessage control.
     '''</summary>
@@ -75,7 +84,7 @@ Partial Public Class SendNotificationMIP
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents drpMobileMessage As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''MobileAddress control.
     '''</summary>
@@ -84,7 +93,7 @@ Partial Public Class SendNotificationMIP
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MobileAddress As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''drpEmailMessage control.
     '''</summary>
@@ -93,7 +102,7 @@ Partial Public Class SendNotificationMIP
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents drpEmailMessage As Global.System.Web.UI.WebControls.DropDownList
-    
+
     '''<summary>
     '''Email control.
     '''</summary>
@@ -102,7 +111,7 @@ Partial Public Class SendNotificationMIP
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Email As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''Panel2 control.
     '''</summary>
@@ -111,7 +120,7 @@ Partial Public Class SendNotificationMIP
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Panel2 As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''Panel3 control.
     '''</summary>
