@@ -1146,6 +1146,7 @@ Public Class BIBDataRunner
         txtEmgName.Text = String.Empty
         txtDOB.Text = String.Empty
         txtAmount.Text = String.Empty
+        ddlStatusOfPayment.ClearSelection()
     End Function
 
     Protected Sub txtRunCategory_SelectedIndexChanged(

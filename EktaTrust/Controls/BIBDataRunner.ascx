@@ -303,7 +303,7 @@ function TotalRecord() {
       <div class="form-group" Width="95%">
      <label>Payment Status: </label>
      <asp:DropDownList CssClass="form-control" ID="ddlStatusOfPayment"  runat="server">
-       <asp:ListItem value="Select">Select Payment Status</asp:ListItem>
+       <asp:ListItem value="">Select Payment Status</asp:ListItem>
        <asp:ListItem value="Pending">Pending</asp:ListItem>
        <asp:ListItem value="Success">Success</asp:ListItem>
        <asp:ListItem value="Cancelled">Cancelled</asp:ListItem>   
