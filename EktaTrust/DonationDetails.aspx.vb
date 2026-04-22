@@ -32,19 +32,34 @@ Public Class DonationDetails
 
     'This method use To bind Gridview.
     Private Sub BindGridView()
-        Dim query As String = "select DonationID,FullName,Amount,MobileNumber,ModeOfPayment,PanNuber,PaymentStatus,Address, OrderId,TxnId, CreatedDate, PaymentType" + " from Donation
-                              WHERE YEAR(CreatedDate) = @YearBy And IFNULL(IsDeleted, 0) = 0 order by DonationID desc"
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
-            Using cmd As New MySqlCommand(query)
-                cmd.Connection = con
+            Using cmd As New MySqlCommand()
+                Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber, PaymentStatus, Address, OrderId,TxnId, CreatedDate, PaymentType FROM Donation"
+                If Not String.IsNullOrEmpty(txtSearch.Text) Then
+                    If ddlSearchBy.SelectedItem.Text = "Full Name" Then
+                        sql += " WHERE FullName LIKE @Search"
+                    ElseIf ddlSearchBy.SelectedItem.Text = "Payment Status" Then
+                        sql += " WHERE PaymentStatus LIKE @Search"
+                    Else ' All
+                        sql += " WHERE (FullName LIKE @Search OR PaymentStatus LIKE @Search OR OrderId Like @Search)"
+                    End If
+                    cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
+                End If
+                If sql.Contains(" WHERE") Then
+                    sql += " And YEAR(CreatedDate) = @YearBy And IFNULL(IsDeleted, 0) = 0"
+                Else
+                    sql += " WHERE YEAR(CreatedDate) = @YearBy And IFNULL(IsDeleted, 0) = 0"
+                End If
                 cmd.Parameters.AddWithValue("@YearBy", ddlYear.SelectedValue)
+                ' order by desc
+                sql += " order by DonationID desc"
+                cmd.CommandText = sql
+                cmd.Connection = con
                 Using sda As New MySqlDataAdapter(cmd)
                     Dim dt As New DataTable()
-                    con.Open()
                     sda.Fill(dt)
                     con.Close()
-
                     lblRecords.Text = dt.Rows.Count
                     lblTotalAmount.Text = 0
                     If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
@@ -57,8 +72,6 @@ Public Class DonationDetails
                     gvEvent.DataSource = dt
                     gvEvent.DataBind()
                 End Using
-                con.Close()
-                con.Dispose()
             End Using
         End Using
     End Sub
