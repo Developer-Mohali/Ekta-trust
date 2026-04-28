@@ -138,7 +138,7 @@ Public Class DonationDetails
         If gvrow.Cells(6).Text = "&nbsp;" Then
             txtAddress.Text = ""
         Else
-            txtAddress.Text = gvrow.Cells(6).Text
+            txtAddress.Text = gvEvent.DataKeys(gvrow.RowIndex).Values("Address").ToString()
         End If
 
         If paymentType.Items.FindByValue(gvrow.Cells(10).Text) IsNot Nothing Then
@@ -147,7 +147,12 @@ Public Class DonationDetails
             paymentType.ClearSelection()
         End If
 
-        txtPanNum.Text = gvrow.Cells(4).Text    ' pan number
+        ' pan number
+        If Not String.IsNullOrEmpty(gvrow.Cells(4).Text) AndAlso gvrow.Cells(4).Text <> "&nbsp;" Then
+            txtPanNum.Text = gvrow.Cells(4).Text
+        Else
+            txtPanNum.Text = String.Empty
+        End If
         txtEmail.Text = gvEvent.DataKeys(gvrow.RowIndex).Values("EmailId").ToString()    ' email
         If Not String.IsNullOrEmpty(gvrow.Cells(12).Text) AndAlso gvrow.Cells(12).Text <> "&nbsp;" Then
             txtReciept.Text = Convert.ToDateTime(gvrow.Cells(12).Text).ToString("yyyy-MM-dd")    ' reciept date
@@ -268,7 +273,7 @@ Public Class DonationDetails
             Dim cell As TableCell = e.Row.Cells(5)
             Dim status As String = cell.Text.Trim().ToLower()
             cell.ForeColor = Color.White
-            cell.VerticalAlign = VerticalAlign.Middle
+            cell.Style("vertical-align") = "middle"
             cell.HorizontalAlign = VerticalAlign.Middle
 
             Select Case status

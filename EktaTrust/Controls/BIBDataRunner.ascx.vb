@@ -1214,7 +1214,7 @@ Public Class BIBDataRunner
             Dim cell As TableCell = e.Row.Cells(8)
             Dim status As String = cell.Text.Trim().ToLower()
             cell.ForeColor = Color.White
-            cell.VerticalAlign = VerticalAlign.Middle
+            cell.Style("vertical-align") = "middle"
             cell.HorizontalAlign = VerticalAlign.Middle
             Select Case status
                 Case "success"

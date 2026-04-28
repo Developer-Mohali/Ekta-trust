@@ -120,7 +120,7 @@
                 </div>
  <br />
                                     
-                <asp:GridView ID="gvEvent" runat="server" class="table table-bordered table-hover table-striped" AutoGenerateColumns="false" DataKeyNames="DonationID, EmailId, BankNarration"  PageSize="25" 
+                <asp:GridView ID="gvEvent" runat="server" class="table table-bordered table-hover table-striped" AutoGenerateColumns="false" DataKeyNames="DonationID, Address, EmailId, BankNarration"  PageSize="25" 
                   onpageindexchanging="gvEvent_PageIndexChanging" OnRowDataBound="gvEvent_RowDataBound" OnRowDeleting="gvEvent_RowDeleting"  EmptyDataText="No records found." Style="font-weight: normal;" >
                 <Columns> 
                    <asp:BoundField HeaderText="Full Name" DataField="FullName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
