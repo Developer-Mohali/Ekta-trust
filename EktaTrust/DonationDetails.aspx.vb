@@ -566,7 +566,8 @@ Public Class DonationDetails
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As New MySqlConnection(constr)
                 Using cmd As New MySqlCommand()
-                    Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber as `Pan Number`, PaymentStatus, Address, OrderId,TxnId as `Transaction Id`, CreatedDate as `Donated On` FROM Donation"
+                    Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber as `Pan Number`, PaymentStatus, Address, OrderId,TxnId as `Transaction Id`, CreatedDate as `Donated On`,
+                                        EmailId, ReceiptDate, BankNarration FROM Donation"
                     If Not String.IsNullOrEmpty(txtSearch.Text) Then
                         If ddlSearchBy.SelectedItem.Text = "Full Name" Then
                             sql += " WHERE FullName LIKE @Search"
