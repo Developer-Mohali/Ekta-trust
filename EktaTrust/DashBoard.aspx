@@ -133,7 +133,7 @@
                     </div>
                     <!-- BIB User Card -->
                     <div class="kpi-card card-users">
-                        <h3>BIB Users</h3>
+                        <h3>BIB Data</h3>
                         <div class="value">
                             <asp:Label ID="lblTotalUsers" runat="server" Text="0" CssClass="card-click" onclick="redirectToPage('bib')"></asp:Label>
                         </div>
@@ -155,7 +155,7 @@
                     </div>
                    <!-- BIB reg users chart -->
                     <div class="chart-card">
-                        <h2>BIB Users</h2>      
+                        <h2>BIB Data</h2>      
                         <canvas id="regUserChart"></canvas>
                         <asp:Literal ID="regUserLiteral" runat="server"></asp:Literal>
                     </div>

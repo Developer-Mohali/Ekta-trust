@@ -198,7 +198,7 @@ Public Class DashBoard
                         legend: { position: 'bottom' },
                         title: {
                             display: true,
-                            text: 'Yearly BIB User Status Distribution (" & DateTime.Now.Year.ToString() & ")'
+                            text: 'Yearly BIB Data Status Distribution (" & DateTime.Now.Year.ToString() & ")'
                         }
                     }
                 }
