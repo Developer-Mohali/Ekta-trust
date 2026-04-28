@@ -631,3 +631,9 @@ div:has(> table.table.table-bordered.table-hover.table-striped) {
 	color: red;
 	font-weight: bold;
 }
+
+.main-card {
+	padding: 20px;
+	background-color: #F7F7F7;
+	border-radius: 7px;
+}

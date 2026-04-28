@@ -14,11 +14,56 @@ Option Explicit On
 Partial Public Class DashBoard
 
     '''<summary>
-    '''divShowHideMenu control.
+    '''AdminSideMenuControl control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents divShowHideMenu As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents AdminSideMenuControl As Global.EktaTrust.AdminSideMenuControl
+
+    '''<summary>
+    '''lblTotalVisitor control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTotalVisitor As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblTotalUsers control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTotalUsers As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblTotalDonations control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTotalDonations As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''ChartScriptLiteral control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ChartScriptLiteral As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''regUserLiteral control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents regUserLiteral As Global.System.Web.UI.WebControls.Literal
 End Class

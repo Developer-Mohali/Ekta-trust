@@ -94,7 +94,7 @@
         $('.navbar-nav li a').each(function () {
             var href = $(this).attr('href');
 
-            if (href && href.toLowerCase() === currentPage) {
+            if (href && href.toLowerCase().includes(currentPage)) {
                 $(this).parent('li').addClass('active');
 
                 // If submenu → open parent

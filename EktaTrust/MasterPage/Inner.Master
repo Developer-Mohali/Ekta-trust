@@ -18,7 +18,7 @@
    <link href="../Css/css/bootstrap.min.css" rel="stylesheet" />   
     <link href="../Css/DAtetimePicker/bootstrap-datetimepicker.css" rel="stylesheet" />
   <link href="../Css/css/font-awesome.min.css" rel="stylesheet" />
-  <link href="../Css/css/main.css?v=1" rel="stylesheet" />
+  <link href="../Css/css/main.css?v=1.1" rel="stylesheet" />
     <link href="../Css/css/responsive.css" rel="stylesheet" />
     <script src="../Js/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

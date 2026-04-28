@@ -23,7 +23,7 @@ Public Class Admin
             Dim rd As MySqlDataReader
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As New MySqlConnection(constr)
-                Dim cmd As New MySqlCommand("select count(VisiterId) + 50000 as visiter from visiterdetail ", con)
+                Dim cmd As New MySqlCommand("select count(VisiterId) as visiter from visiterdetail ", con)
                 cmd.Connection = con
                 con.Open()
                 cmd.ExecuteNonQuery()
