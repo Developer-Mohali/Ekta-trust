@@ -300,6 +300,9 @@ Public Class DonationDetails
             If Not String.IsNullOrEmpty(recieptCell.Text) AndAlso recieptCell.Text <> "&nbsp;" Then
                 recieptCell.Text = Convert.ToDateTime(recieptCell.Text).ToString("dd MMM yyyy")
             End If
+            ' address hover
+            Dim fullAddress As String = DataBinder.Eval(e.Row.DataItem, "Address").ToString()
+            e.Row.Cells(6).Attributes("title") = fullAddress
         End If
     End Sub
     Protected Sub btnAddNew_Click(sender As Object, e As EventArgs)

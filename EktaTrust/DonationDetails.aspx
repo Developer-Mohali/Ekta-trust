@@ -45,13 +45,18 @@
             margin-top: 10px;
             margin-bottom: 10px;
          }
-         .truncate-address {
-            display: inline-block;
-            max-width: 100px;   /* adjust as needed */
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            cursor: pointer;
+        .truncate-address {
+    display: inline-block;
+    max-width: 100px;   /* adjust as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+         .wrap-text {
+            word-break: break-all;      /* breaks long strings */
+            white-space: normal;        /* allow multiple lines */
+            max-width: 120px;           /* control column width */
         }
 </style>
     <div class="container-fluid main-container">
@@ -125,19 +130,18 @@
                    <asp:BoundField HeaderText="Pan Number" DataField="PanNuber" ItemStyle-HorizontalAlign="Left"></asp:BoundField>   
                    <asp:BoundField HeaderText="Payment Status" DataField="PaymentStatus" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
                  <%--  <asp:BoundField HeaderText="Comments" DataField="Comments" ItemStyle-HorizontalAlign="Left"></asp:BoundField>  --%>           
-                  <%-- <asp:BoundField HeaderText="Address" DataField="Address" ItemStyle-HorizontalAlign="Left"></asp:BoundField>  --%> 
+              <%--     <asp:BoundField HeaderText="Address" DataField="Address" ItemStyle-HorizontalAlign="Left"></asp:BoundField>   --%>
                     <asp:TemplateField HeaderText="Address">
-    <ItemTemplate>
-        <asp:Label 
-            ID="lblAddress" 
-            runat="server"
-            Text='<%# Eval("Address") %>'
-            ToolTip='<%# Eval("Address") %>'
-            CssClass="truncate-address">
-        </asp:Label>
-    </ItemTemplate>
-</asp:TemplateField>
-                     <asp:BoundField HeaderText="OrderId" DataField="OrderId" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+                        <ItemTemplate>
+                            <asp:Label ID="lblAddress" runat="server" Text='<%# Eval("Address") %>' ToolTip='<%# Eval("Address") %>' CssClass="truncate-address"> </asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="OrderId">
+                    <ItemTemplate>
+                        <asp:Label ID="lblOrderId" runat="server" Text='<%# Eval("OrderId") %>' CssClass="wrap-text"></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+             <%--        <asp:BoundField HeaderText="OrderId" DataField="OrderId" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
                    <asp:BoundField HeaderText="Donated On" DataField="CreatedDate" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
                    <asp:BoundField HeaderText="TransId" DataField="TxnId" ItemStyle-HorizontalAlign="Left" Visible="false"></asp:BoundField> 
                    <asp:BoundField HeaderText="Type" DataField="PaymentType" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 

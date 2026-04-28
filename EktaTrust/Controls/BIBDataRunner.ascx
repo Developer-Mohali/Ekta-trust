@@ -55,6 +55,11 @@ function TotalRecord() {
         td span{
              padding-left:10px !important;
         }
+           .wrap-text {
+            word-break: break-all;      /* breaks long strings */
+            white-space: normal;        /* allow multiple lines */
+            max-width: 120px;           /* control column width */
+        }
 </style>
 
     <div class="col-md-12">
@@ -169,7 +174,12 @@ function TotalRecord() {
     <asp:BoundField HeaderText="Amount" DataField="Amount" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
  <%--   <asp:BoundField HeaderText="Payment Reference" DataField="BankReferenceNo" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
      <asp:BoundField HeaderText="Payment Status" DataField="PaymentStatus" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
-     <asp:BoundField HeaderText="OrderId" DataField="OrderId" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
+<%--     <asp:BoundField HeaderText="OrderId" DataField="OrderId" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
+         <asp:TemplateField HeaderText="OrderId">
+     <ItemTemplate>
+         <asp:Label ID="lblOrderId" runat="server" Text='<%# Eval("OrderId") %>' CssClass="wrap-text"> </asp:Label>
+     </ItemTemplate>
+ </asp:TemplateField>
     <asp:BoundField HeaderText="Created By" DataField="CreatedBy" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
     <asp:BoundField HeaderText="Reg. On" DataField="CreatedAt" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
 <%--    <asp:BoundField HeaderText="Year" DataField="Year" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
