@@ -626,3 +626,8 @@ div:has(> table.table.table-bordered.table-hover.table-striped) {
 .cus-buttons {
 	margin-top: 25px;
 }
+
+.sup {
+	color: red;
+	font-weight: bold;
+}

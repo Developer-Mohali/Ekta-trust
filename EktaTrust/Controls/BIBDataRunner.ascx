@@ -52,6 +52,9 @@ function TotalRecord() {
             color: #337ab7;
            padding-left:10px !important;
        }
+        td span{
+             padding-left:10px !important;
+        }
 </style>
 
     <div class="col-md-12">

@@ -35,10 +35,9 @@
                     color: #337ab7;
             padding-left:10px !important;
         }
-       /*span 
-        {
-            padding-left:10px !important;
-        }*/
+         td span{
+             padding-left:10px !important;
+        }
         .btn{
              height: fit-content;
          }
@@ -108,7 +107,7 @@
                 </div>
  <br />
                                     
-                <asp:GridView ID="gvEvent" runat="server" class="table table-bordered table-hover table-striped" AutoGenerateColumns="false" DataKeyNames="DonationID"  PageSize="25" 
+                <asp:GridView ID="gvEvent" runat="server" class="table table-bordered table-hover table-striped" AutoGenerateColumns="false" DataKeyNames="DonationID, EmailId, BankNarration"  PageSize="25" 
                   onpageindexchanging="gvEvent_PageIndexChanging" OnRowDataBound="gvEvent_RowDataBound" OnRowDeleting="gvEvent_RowDeleting"  EmptyDataText="No records found." Style="font-weight: normal;" >
                 <Columns> 
                    <asp:BoundField HeaderText="Full Name" DataField="FullName" ItemStyle-HorizontalAlign="Left"></asp:BoundField>
@@ -123,6 +122,9 @@
                    <asp:BoundField HeaderText="Donated On" DataField="CreatedDate" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
                    <asp:BoundField HeaderText="TransId" DataField="TxnId" ItemStyle-HorizontalAlign="Left" Visible="false"></asp:BoundField> 
                    <asp:BoundField HeaderText="Type" DataField="PaymentType" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
+                   <asp:BoundField HeaderText="Email" DataField="EmailId" Visible="false" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
+                   <asp:BoundField HeaderText="Receipt Date" DataField="ReceiptDate" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
+                   <asp:BoundField HeaderText="Bank Narration" DataField="BankNarration" Visible="false" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
                   <asp:TemplateField HeaderText="Action" ItemStyle-Width="90" >
                       <ItemTemplate>
                           <asp:ImageButton ID="imgbtn" ImageUrl="../Images/edit.png" runat="server" Width="15" Height="15" OnClick="imgbtn_Click" />
@@ -157,61 +159,84 @@
                          <td colspan="2" style=" height:10%; color:White; font-weight:bold;  font-size:larger" align="center "  ></td>
                          <h4>Donation Details</h4>
                        </div>    
-                       <div class="modal-body" >
+                       <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
                           <div class="form-group">
                             <label>DonationID: </label>
                             <asp:Label ID="lblDonationId" runat="server" ></asp:Label>
                           </div>
                           <div class="form-group">
-                            <label>Full Name: </label>
+                            <label>Full Name: <sup class="sup">*</sup></label>
                             <asp:TextBox ID="textFullName" runat="server" class="form-control" style="width:95%"/>
                                <span id="nameError" class="help-block" style="color: red"></span>
                           </div>
 
                           <div class="form-group">
-                            <label>Amount: </label>
+                            <label>Amount: <sup class="sup">*</sup></label>
                             <asp:TextBox ID="textAmount" runat="server" class="form-control" style="width:95%"/>
                                 <span id="amountError" class="help-block" style="color: red"></span>
                           </div>
     
                           <div class="form-group">
-                            <label>Mobile Number: </label>
+                            <label>Mobile Number: <sup class="sup">*</sup></label>
                             <asp:TextBox ID="textMobileNumber" runat="server" class="form-control" style="width:95%"/>
                                <span id="mobileNumberError" class="help-block" style="color: red"></span>
                           </div>
+                             <!-- Email input -->
+                           <div class="form-group">
+                            <label>Email: </label>
+                            <asp:TextBox ID="txtEmail" runat="server" class="form-control" style="width:95%"/>
+                               <span id="emailError" class="help-block" style="color: red"></span>
+                          </div>
+                           <!-- Pan Card input -->
+                          <div class="form-group">
+                            <label>Pan Number: <sup class="sup">*</sup></label>
+                            <asp:TextBox ID="txtPanNum" runat="server" class="form-control" style="width:95%;text-transform:uppercase;"/>
+                               <span id="panNumError" class="help-block" style="color: red"></span>
+                          </div>
 
                          <div class="form-group" style="width: 95%">
-                           <label>Mode Of Payment: </label>
+                           <label>Mode Of Payment: <sup class="sup">*</sup></label>
                            <asp:DropDownList CssClass="form-control" ID="ddlModeOfPayment"  runat="server">
-                             <asp:ListItem value="Select">Select Payment Way</asp:ListItem>
+                             <asp:ListItem value="">Select Payment Way</asp:ListItem>
                              <asp:ListItem value="Credit Card">Credit Card</asp:ListItem>
                              <asp:ListItem value="Debit Card">Debit Card</asp:ListItem>
                              <asp:ListItem value="Net Banking">Net Banking</asp:ListItem>                      
                              <asp:ListItem value="UPI">UPI</asp:ListItem>                      
+                             <asp:ListItem value="Cheque">Cheque</asp:ListItem>                      
                              <asp:ListItem value="Other">Other</asp:ListItem>                      
                            </asp:DropDownList>
                              <span id="modeOfPaymentError" class="help-block" style="color: red"></span>
                          </div>
 
                            <div class="form-group" style="width: 95%">
-                              <label>Payment Status: </label>
+                              <label>Payment Status: <sup class="sup">*</sup></label>
                               <asp:DropDownList CssClass="form-control" ID="ddlStatusOfPayment"  runat="server">
-                                <asp:ListItem value="Select">Select Payment Status</asp:ListItem>
+                                <asp:ListItem value="">Select Payment Status</asp:ListItem>
                                 <asp:ListItem value="Pending">Pending</asp:ListItem>
                                 <asp:ListItem value="Success">Success</asp:ListItem>
                                 <asp:ListItem value="Cancelled">Cancelled</asp:ListItem>
                                    <asp:ListItem value="Failed">Failed</asp:ListItem>
                               </asp:DropDownList>
+                               <span id="paymentStatusError" class="help-block" style="color: red"></span>
                             </div>
                             <div class="form-group" style="width: 95%">
-                              <label>Payment Type: </label>
+                              <label>Payment Type: <sup class="sup">*</sup></label>
                               <asp:DropDownList CssClass="form-control" ID="paymentType"  runat="server">
                                 <asp:ListItem value="Donation" Selected="True">Donation</asp:ListItem>
                                 <asp:ListItem value="BIB Registration">BIB Registration</asp:ListItem>
                                 <asp:ListItem value="Other">Other</asp:ListItem>          
                               </asp:DropDownList>
                             </div>
-
+                           <!-- Date of receipt in account -->
+                            <div class="form-group">
+                                <label>Date Of receipt:</label>
+                                 <asp:TextBox ID="txtReciept" cols="40" Rows="6" runat="server" TextMode="Date" class="form-control" style="width:95%"/>
+                            </div>
+                           <!-- Narration in bank account -->
+                            <div class="form-group">
+                                <label>Narration in bank account:</label>
+                                  <asp:TextBox ID="txtNarration" runat="server" class="form-control" style="width:95%" />   
+                            </div>
                           <div class="form-group">
                             <label>Address </label>
                             <asp:TextBox ID="txtAddress" runat="server" class="form-control" style="width:95%"/>                          
@@ -381,6 +406,26 @@
         {
             $('#modeOfPaymentError').hide();
         }
+        if ($("#<%=txtPanNum.ClientID %>").val() == "")
+        {
+            $('#panNumError').show();
+            $('#panNumError').html("Please Enter Pan Number");
+            validation = 0;
+        }
+        else
+        {
+            $('#panNumError').hide();
+        }
+        if ($("#<%=ddlStatusOfPayment.ClientID %>").val() == "")
+        {
+            $('#paymentStatusError').show();
+            $('#paymentStatusError').html("Please select Payment status");
+            validation = 0;
+        }
+        else
+        {
+            $('#paymentStatusError').hide();
+        }
         if (validation == 0)
         {
             return false;
@@ -388,22 +433,47 @@
         else { $('#loader').show(); return true }
     }
 
-    // This function is used to hide error name
-<%--    $("#<%=txtFullName.ClientID %>").click(function () {
-        $('#nameError').hide();
+
+    // This function is used to hide error validations msg...
+    $(document).ready(function () {
+
+        $("#<%=textFullName.ClientID %>").on("input", function () {
+        if ($(this).val() !== "") {
+            $('#nameError').hide();
+        }
+        });
+
+        $("#<%=textAmount.ClientID %>").on("input", function () {
+            if ($(this).val() !== "") {
+                $('#amountError').hide();
+            }
+        });
+
+        $("#<%=textMobileNumber.ClientID %>").on("input", function () {
+            if ($(this).val() !== "") {
+                $('#mobileNumberError').hide();
+            }
+        });
+
+        $("#<%=ddlModeOfPayment.ClientID %>").on("change", function () {
+            if ($(this).val() !== "") {
+                $('#modeOfPaymentError').hide();
+            }
+        });
+
+        $("#<%=txtPanNum.ClientID %>").on("input", function () {
+            if ($(this).val() !== "") {
+                $('#panNumError').hide();
+            }
+        });
+
+        $("#<%=ddlStatusOfPayment.ClientID %>").on("change", function () {
+            if ($(this).val() !== "") {
+                $('#paymentStatusError').hide();
+            }
+        });
+
     });
-    $("#<%=txtAmount.ClientID %>").click(function () {
-        $('#amountError').hide();
-    });
-    $("#<%=txtMobileNumber.ClientID %>").click(function () {
-        $('#mobileNumberError').hide();
-    });
-    $("#<%=ddlModeOfPayment1.ClientID %>").click(function () {
-        $('#modeOfPaymentError').hide();
-    });
-    $("#<%=txtAddress.ClientID %>").click(function () {
-        $('#commentsError').hide();
-    });--%>
  
     function clearInformation()
     {

@@ -194,6 +194,24 @@ Partial Public Class DonationDetails
     Protected WithEvents textMobileNumber As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''txtEmail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtEmail As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtPanNum control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtPanNum As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''ddlModeOfPayment control.
     '''</summary>
     '''<remarks>
@@ -219,6 +237,24 @@ Partial Public Class DonationDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents paymentType As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''txtReciept control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtReciept As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtNarration control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtNarration As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''txtAddress control.

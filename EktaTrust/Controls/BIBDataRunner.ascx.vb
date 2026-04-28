@@ -1213,20 +1213,23 @@ Public Class BIBDataRunner
             ' Payment Status column index (zero-based)
             Dim cell As TableCell = e.Row.Cells(8)
             Dim status As String = cell.Text.Trim().ToLower()
-
+            cell.ForeColor = Color.White
+            cell.VerticalAlign = VerticalAlign.Middle
+            cell.HorizontalAlign = VerticalAlign.Middle
             Select Case status
                 Case "success"
-                    cell.BackColor = System.Drawing.Color.LightGreen
+                    cell.BackColor = System.Drawing.Color.FromArgb(92, 184, 92)
                 Case "pending"
-                    cell.BackColor = System.Drawing.Color.LightYellow
+                    cell.BackColor = System.Drawing.Color.FromArgb(229, 172, 1)
                 Case "failed"
-                    cell.BackColor = System.Drawing.Color.LightCoral
+                    cell.BackColor = System.Drawing.Color.FromArgb(235, 61, 61)
                 Case "cancelled"
-                    cell.BackColor = System.Drawing.Color.LightGray
+                    cell.BackColor = System.Drawing.Color.FromArgb(159, 159, 159)
                 Case "expired"
                     cell.BackColor = System.Drawing.Color.Orange
                 Case Else
                     cell.BackColor = System.Drawing.Color.White
+                    cell.ForeColor = Color.Black
             End Select
 
             ' Converting reg date to current time from UTC

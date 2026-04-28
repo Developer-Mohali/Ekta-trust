@@ -24,7 +24,7 @@ Public Class DonationDetails
             gvEvent.AllowPaging = True
             gvEvent.PageSize = 15
             BindGridView()
-            SearchCustomers()
+            'SearchCustomers()
         Else
             MessageUpdated.Text = ""        ' clear message to UI, if recall to server...
         End If
@@ -35,7 +35,8 @@ Public Class DonationDetails
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
             Using cmd As New MySqlCommand()
-                Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber, PaymentStatus, Address, OrderId,TxnId, CreatedDate, PaymentType FROM Donation"
+                Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber, PaymentStatus, Address, OrderId,TxnId, CreatedDate, PaymentType, EmailId, ReceiptDate, BankNarration 
+                                    FROM Donation"
                 If Not String.IsNullOrEmpty(txtSearch.Text) Then
                     If ddlSearchBy.SelectedItem.Text = "Full Name" Then
                         sql += " WHERE FullName LIKE @Search"
@@ -78,7 +79,7 @@ Public Class DonationDetails
     Protected Sub gvEvent_PageIndexChanging(sender As Object, e As GridViewPageEventArgs)
         gvEvent.PageIndex = e.NewPageIndex
         BindGridView()
-        Me.SearchCustomers()
+        'Me.SearchCustomers()
     End Sub
 
     'This method is used To Delete the data
@@ -117,7 +118,11 @@ Public Class DonationDetails
         End If
         textFullName.Text = gvrow.Cells(0).Text
         textAmount.Text = gvrow.Cells(1).Text
-        textMobileNumber.Text = gvrow.Cells(2).Text
+        If Not String.IsNullOrEmpty(gvrow.Cells(2).Text) AndAlso gvrow.Cells(2).Text <> "&nbsp;" Then
+            textMobileNumber.Text = gvrow.Cells(2).Text
+        Else
+            textMobileNumber.Text = String.Empty
+        End If
 
         If ddlModeOfPayment.Items.FindByValue(gvrow.Cells(3).Text) IsNot Nothing Then
             ddlModeOfPayment.SelectedValue = gvrow.Cells(3).Text.Trim()
@@ -141,6 +146,15 @@ Public Class DonationDetails
         Else
             paymentType.ClearSelection()
         End If
+
+        txtPanNum.Text = gvrow.Cells(4).Text    ' pan number
+        txtEmail.Text = gvEvent.DataKeys(gvrow.RowIndex).Values("EmailId").ToString()    ' email
+        If Not String.IsNullOrEmpty(gvrow.Cells(12).Text) AndAlso gvrow.Cells(12).Text <> "&nbsp;" Then
+            txtReciept.Text = Convert.ToDateTime(gvrow.Cells(12).Text).ToString("yyyy-MM-dd")    ' reciept date
+        Else
+            txtReciept.Text = String.Empty
+        End If
+        txtNarration.Text = gvEvent.DataKeys(gvrow.RowIndex).Values("BankNarration").ToString()     ' Bank Narration
         Me.ModalPopupExtender1.Show()
         ' BindGridView()
     End Sub
@@ -151,7 +165,8 @@ Public Class DonationDetails
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
 
             Using con As New MySqlConnection(constr)
-                Using cmd As New MySqlCommand("UPDATE Donation SET  FullName=@FullName, Amount=@Amount,MobileNumber=@MobileNumber,ModeOfPayment=@ModeOfPayment,PaymentStatus=@StatusOfPayment,Address=@Address, PaymentType=@PaymentType  WHERE DonationID = @DonationID", con)
+                Using cmd As New MySqlCommand("UPDATE Donation SET  FullName=@FullName, Amount=@Amount,MobileNumber=@MobileNumber,ModeOfPayment=@ModeOfPayment,PaymentStatus=@StatusOfPayment,Address=@Address, 
+                                               PanNuber=@Pan, PaymentType=@PaymentType, ReceiptDate=@ReceiptDate, BankNarration=@BankNarration, EmailId=@EmailId  WHERE DonationID = @DonationID", con)
                     cmd.Parameters.AddWithValue("@DonationID", Convert.ToInt32(lblDonationId.Text))
                     cmd.Parameters.AddWithValue("@FullName", textFullName.Text)
                     cmd.Parameters.AddWithValue("@Amount", textAmount.Text)
@@ -159,7 +174,11 @@ Public Class DonationDetails
                     cmd.Parameters.AddWithValue("@ModeOfPayment", ddlModeOfPayment.SelectedItem.Value)
                     cmd.Parameters.AddWithValue("@StatusOfPayment", ddlStatusOfPayment.SelectedItem.Value)
                     cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
+                    cmd.Parameters.AddWithValue("@Pan", txtPanNum.Text.ToUpper())
                     cmd.Parameters.AddWithValue("@PaymentType", paymentType.SelectedItem.Text)
+                    cmd.Parameters.AddWithValue("@ReceiptDate", If(String.IsNullOrEmpty(txtReciept.Text), DBNull.Value, txtReciept.Text))
+                    cmd.Parameters.AddWithValue("@BankNarration", txtNarration.Text)
+                    cmd.Parameters.AddWithValue("@EmailId", txtEmail.Text)
                     cmd.Connection = con
                     con.Open()
                     cmd.ExecuteNonQuery()
@@ -180,7 +199,8 @@ Public Class DonationDetails
     End Sub
     'This method is used for Search the data
     Protected Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
-        Me.SearchCustomers()
+        'Me.SearchCustomers()
+        BindGridView()
     End Sub
 
     Private Sub SearchCustomers()
@@ -247,20 +267,24 @@ Public Class DonationDetails
             ' Payment Status column index (zero-based)
             Dim cell As TableCell = e.Row.Cells(5)
             Dim status As String = cell.Text.Trim().ToLower()
+            cell.ForeColor = Color.White
+            cell.VerticalAlign = VerticalAlign.Middle
+            cell.HorizontalAlign = VerticalAlign.Middle
 
             Select Case status
                 Case "success"
-                    cell.BackColor = System.Drawing.Color.LightGreen
+                    cell.BackColor = System.Drawing.Color.FromArgb(92, 184, 92)
                 Case "pending"
-                    cell.BackColor = System.Drawing.Color.LightYellow
+                    cell.BackColor = System.Drawing.Color.FromArgb(229, 172, 1)
                 Case "failed"
-                    cell.BackColor = System.Drawing.Color.LightCoral
+                    cell.BackColor = System.Drawing.Color.FromArgb(235, 61, 61)
                 Case "cancelled"
-                    cell.BackColor = System.Drawing.Color.LightGray
+                    cell.BackColor = System.Drawing.Color.FromArgb(159, 159, 159)
                 Case "expired"
                     cell.BackColor = System.Drawing.Color.Orange
                 Case Else
                     cell.BackColor = System.Drawing.Color.White
+                    cell.ForeColor = Color.Black
             End Select
             ' End of Payment Status
 
@@ -271,7 +295,11 @@ Public Class DonationDetails
                 Dim istTime As DateTime = TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(donatedCell.Text), istZone)
                 donatedCell.Text = istTime.ToString("dd-MMM-yyyy hh:mm tt")
             End If
-
+            ' formating reciept date...
+            Dim recieptCell As TableCell = e.Row.Cells(12)
+            If Not String.IsNullOrEmpty(recieptCell.Text) AndAlso recieptCell.Text <> "&nbsp;" Then
+                recieptCell.Text = Convert.ToDateTime(recieptCell.Text).ToString("dd MMM yyyy")
+            End If
         End If
     End Sub
     Protected Sub btnAddNew_Click(sender As Object, e As EventArgs)
@@ -286,12 +314,17 @@ Public Class DonationDetails
         btnUpdate.Visible = False
         btnAddNew.Visible = True
         paymentType.ClearSelection()
+        txtPanNum.Text = String.Empty
+        txtEmail.Text = String.Empty
+        txtReciept.Text = String.Empty
+        txtNarration.Text = String.Empty
     End Sub
 
     'This method is used To insert the data
     Protected Sub btnAddNew_Click1(sender As Object, e As EventArgs)
         Try
-            Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,ModeOfPayment,PaymentStatus,Address,CreatedDate,PaymentEnv, PaymentType)VALUES(@FullName, @Amount,@MobileNumber,@ModeOfPayment,@StatusOfPayment,@Address,@CreatedDate,@PaymentEnv, @PaymentType)"
+            Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,ModeOfPayment,PaymentStatus,Address,CreatedDate,PaymentEnv, PaymentType, PanNuber, ReceiptDate, BankNarration, EmailId)
+                                    VALUES(@FullName, @Amount,@MobileNumber,@ModeOfPayment,@StatusOfPayment,@Address,@CreatedDate,@PaymentEnv, @PaymentType, @Pan, @ReceiptDate, @BankNarration, @EmailId)"
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As MySqlConnection = New MySqlConnection(constr)
                 Using cmd As MySqlCommand = New MySqlCommand(query)
@@ -304,6 +337,10 @@ Public Class DonationDetails
                     cmd.Parameters.AddWithValue("@CreatedDate", DateTime.UtcNow)
                     cmd.Parameters.AddWithValue("@PaymentEnv", "Offline")
                     cmd.Parameters.AddWithValue("@PaymentType", paymentType.SelectedItem.Text)
+                    cmd.Parameters.AddWithValue("@Pan", txtPanNum.Text.ToUpper())
+                    cmd.Parameters.AddWithValue("@ReceiptDate", If(String.IsNullOrEmpty(txtReciept.Text), DBNull.Value, txtReciept.Text))
+                    cmd.Parameters.AddWithValue("@BankNarration", txtNarration.Text)
+                    cmd.Parameters.AddWithValue("@EmailId", txtEmail.Text)
                     cmd.Connection = con
                     con.Open()
                     cmd.ExecuteNonQuery()
