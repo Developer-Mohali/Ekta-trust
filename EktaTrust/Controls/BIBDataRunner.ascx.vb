@@ -543,7 +543,7 @@ Public Class BIBDataRunner
         Dim tshirtSize As String = txtTshirtSize.Text
         Dim mobile As String = txtMobile.Text
         Dim runCategory As String = txtRunCategory.Text
-        Dim bibNumber As String = GetNextBibNumber(runCategory)
+        Dim bibNumber As String = txtBibNumber.Text 'GetNextBibNumber(runCategory)
         Dim year As String = DateTime.Now.Year.ToString() 'txtYear.Text
         Dim idToUpdate As Integer = 0
         Dim emergencyContactName As String = txtEmgName.Text
@@ -1234,7 +1234,7 @@ Public Class BIBDataRunner
 
             ' Converting reg date to current time from UTC
             Dim createdDateCell As TableCell = e.Row.Cells(11)
-            If Not String.IsNullOrEmpty(createdDateCell.Text) Then
+            If Not String.IsNullOrEmpty(createdDateCell.Text) AndAlso createdDateCell.Text <> "&nbsp;" Then
                 Dim istZone As TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time")
                 Dim istTime As DateTime = TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(createdDateCell.Text), istZone)
                 createdDateCell.Text = istTime.ToString("dd-MMM-yyyy hh:mm tt")

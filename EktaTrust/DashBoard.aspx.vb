@@ -163,47 +163,64 @@ Public Class DashBoard
             End Using
 
             ' Convert to strings for JavaScript injection
-            Dim labelsJS As String = String.Join(",", statusLabels)
-            Dim countsJS As String = String.Join(",", statusCounts)
+            Dim labelsJS As String = String.Join(",", statusLabels.OrderByDescending(Function(x) x).ToList())
+            Dim countsJS As String = String.Join(",", statusCounts.OrderByDescending(Function(x) x).ToList())
 
             RenderBIBUserChart(labelsJS, countsJS)
         Catch ex As Exception
             Throw
         End Try
     End Sub
+
     Private Sub RenderBIBUserChart(labels As String, data As String)
         ' This script targets a new canvas ID: myPieChart
         regUserLiteral.Text = "
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('regUserChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: [" & labels & "],
-                    datasets: [{
-                        data: [" & data & "],
-                        backgroundColor: [
-                            '#28a745', // Green for Success
-                            '#dc3545', // Red for Failed
-                            '#ffc107', // Yellow for Cancelled
-                            '#17a2b8'  // Blue for others
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { position: 'bottom' },
-                        title: {
-                            display: true,
-                            text: 'Yearly BIB Data Status Distribution (" & DateTime.Now.Year.ToString() & ")'
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+
+                const labels = [" & labels & "];
+                const dataValues = [" & data & "];
+
+                // Map each label to its correct color
+                const colorMap = {
+                    'Success': '#28a745',
+                    'Failed': '#dc3545',
+                    'Cancelled': '#ffc107',
+                    'Pending': '#17a2b8'
+                };
+
+                // Generate colors dynamically based on label
+                const colors = labels.map(function(l) {
+                    return colorMap[l] || '#6c757d'; // default gray if unknown
+                });
+
+                const ctx = document.getElementById('regUserChart').getContext('2d');
+
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: dataValues,
+                            backgroundColor: colors,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Yearly BIB Data Status Distribution (" & DateTime.Now.Year.ToString() & ")'
+                            }
                         }
                     }
-                }
+                });
+
             });
-        });
-    </script>"
+        </script>"
     End Sub
 End Class

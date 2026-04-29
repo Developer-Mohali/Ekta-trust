@@ -135,14 +135,14 @@
                     <div class="kpi-card card-users">
                         <h3>BIB Data</h3>
                         <div class="value">
-                            <asp:Label ID="lblTotalUsers" runat="server" Text="0" CssClass="card-click" onclick="redirectToPage('bib')"></asp:Label>
+                            <asp:Label ID="lblTotalUsers" runat="server" Text="0" ToolTip="Click to view BIB data" CssClass="card-click" onclick="redirectToPage('bib')"></asp:Label>
                         </div>
                     </div>
             <!-- Donation Card -->
                     <div class="kpi-card card-donations">
                         <h3>Total Donations</h3>
                         <div class="value">
-                            <asp:Label ID="lblTotalDonations" runat="server" Text="₹0" CssClass="card-click" onclick="redirectToPage('donation')"></asp:Label>
+                            <asp:Label ID="lblTotalDonations" runat="server" Text="₹0" ToolTip="Click to view donations" CssClass="card-click" onclick="redirectToPage('donation')"></asp:Label>
                         </div>
                     </div>
                 </div>
