@@ -145,26 +145,24 @@ Public Class DashBoard
             Dim statusCounts As New List(Of Integer)()
 
             Using conn As New MySqlConnection(constr)
-                ' Query to get total counts for the current year
-                Dim sql As String = "SELECT PaymentStatus, COUNT(*) as TotalCount FROM bibdata " &
-                            "WHERE YEAR = YEAR(CURDATE()) AND IFNULL(IsDeleted, 0) = 0 " &
-                            "GROUP BY PaymentStatus"
-
-                Using cmd As New MySqlCommand(sql, conn)
+                ' calling procedure to get total counts for the current year
+                Using cmd As New MySqlCommand("sp_GetBIBChartData", conn)
+                    cmd.CommandType = CommandType.StoredProcedure
+                    cmd.Parameters.Add(New MySqlParameter("inputYear", DateTime.Now.Year))
                     conn.Open()
-                    Dim reader As MySqlDataReader = cmd.ExecuteReader()
-
-                    While reader.Read()
-                        ' Wrap status in single quotes for JS
-                        statusLabels.Add("'" & reader("PaymentStatus").ToString() & "'")
-                        statusCounts.Add(Convert.ToInt32(reader("TotalCount")))
-                    End While
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        While reader.Read()
+                            ' Wrap status in single quotes for JS
+                            statusLabels.Add("'" & reader("PaymentStatus").ToString() & "'")
+                            statusCounts.Add(Convert.ToInt32(reader("TotalCount")))
+                        End While
+                    End Using
                 End Using
             End Using
 
             ' Convert to strings for JavaScript injection
-            Dim labelsJS As String = String.Join(",", statusLabels.OrderByDescending(Function(x) x).ToList())
-            Dim countsJS As String = String.Join(",", statusCounts.OrderByDescending(Function(x) x).ToList())
+            Dim labelsJS As String = String.Join(",", statusLabels)
+            Dim countsJS As String = String.Join(",", statusCounts)
 
             RenderBIBUserChart(labelsJS, countsJS)
         Catch ex As Exception
