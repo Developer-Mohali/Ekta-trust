@@ -292,9 +292,7 @@ Public Class DonationDetails
             ' Converting donated date to current time from UTC
             Dim donatedCell As TableCell = e.Row.Cells(8)
             If Not String.IsNullOrEmpty(donatedCell.Text) Then
-                Dim istZone As TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time")
-                Dim istTime As DateTime = TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(donatedCell.Text), istZone)
-                donatedCell.Text = istTime.ToString("dd-MMM-yyyy hh:mm tt")
+                donatedCell.Text = CommonFunction.ConvertUTCTimeToIndianTimezone(donatedCell.Text).ToString("dd-MMM-yyyy hh:mm tt")
             End If
             ' formating reciept date...
             Dim recieptCell As TableCell = e.Row.Cells(12)
@@ -441,10 +439,9 @@ Public Class DonationDetails
             End If
 
             If Not IsDBNull(row("CreatedDate")) Then
-                reciptDate = Convert.ToDateTime(row("CreatedDate")).ToString("dd/MM/yyyy")
+                reciptDate = CommonFunction.ConvertUTCTimeToIndianTimezone(row("CreatedDate")).ToString("dd/MM/yyyy")
             End If
             If Not IsDBNull(row("DonationDate")) Then
-                donationDate = Convert.ToDateTime(row("DonationDate"))
                 donationDate = Convert.ToDateTime(row("DonationDate")).ToString("dd/MM/yyyy")
             Else
                 donationDate = reciptDate
@@ -672,6 +669,8 @@ Public Class DonationDetails
                         hw.WriteLine("<td>" & paymentType & "</td>")
                     ElseIf i = 9 Then
                         hw.WriteLine("<td style='mso-number-format:\@'>" & cellValue & "</td>")
+                    ElseIf i = 10 Then
+                        hw.WriteLine("<td>" & CommonFunction.ConvertUTCTimeToIndianTimezone(cellValue) & "</td>")
                     Else
                         hw.WriteLine("<td>" & cellValue & "</td>")
                     End If

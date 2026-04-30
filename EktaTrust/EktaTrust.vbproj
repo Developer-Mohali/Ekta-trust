@@ -1185,6 +1185,7 @@
       <DependentUpon>CertificationReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="CommonFunction.vb" />
     <Compile Include="Controls\AdminSideMenuControl.ascx.designer.vb">
       <DependentUpon>AdminSideMenuControl.ascx</DependentUpon>
     </Compile>

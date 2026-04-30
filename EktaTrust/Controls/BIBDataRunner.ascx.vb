@@ -1085,6 +1085,8 @@ Public Class BIBDataRunner
                         hw.WriteLine("<td style='background-color:" & bgColor & "'>" & cellValue & "</td>")
                     ElseIf i = 13 AndAlso (String.IsNullOrEmpty(cellValue) Or cellValue = "&nbsp;") Then
                         hw.WriteLine("<td>Self</td>")
+                    ElseIf i = 14 Then
+                        hw.WriteLine("<td>" & CommonFunction.ConvertUTCTimeToIndianTimezone(cellValue) & "</td>")
                     ElseIf i = 15 Then
                         hw.WriteLine("<td style='mso-number-format:\@'>" & cellValue & "</td>")
                     Else
@@ -1296,7 +1298,7 @@ Public Class BIBDataRunner
             Dim transactionId As String = If(IsDBNull(row("TxnId")), "", row("TxnId").ToString())
             Dim bibNo As String = If(IsDBNull(row("BIBNo")), "", row("BIBNo").ToString())
             Dim runCategory As String = If(IsDBNull(row("RunCatagory")), "", row("RunCatagory").ToString())
-            Dim transDate As String = If(IsDBNull(row("createdAt")), "", Convert.ToDateTime(row("createdAt")).ToString("dd/MM/yyyy"))
+            Dim transDate As String = If(IsDBNull(row("createdAt")), "", CommonFunction.ConvertUTCTimeToIndianTimezone(row("createdAt")).ToString("dd/MM/yyyy"))
             Dim runCatagory As String = If(IsDBNull(row("RunCatagory")), "", row("RunCatagory").ToString())
             Dim tShirtSize As String = If(IsDBNull(row("TShirtSize")), "", row("TShirtSize").ToString())
 
