@@ -127,7 +127,7 @@ Public Class PaytmCallBack
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
 
             Using con As New MySqlConnection(constr)
-                Using cmd As New MySqlCommand("SELECT Max(SerialNo) FROM db_a460a8_ekta.donation WHERE PaymentStatus = 'Success'", con)
+                Using cmd As New MySqlCommand("SELECT MAX(CAST(SerialNo AS UNSIGNED)) FROM donation WHERE PaymentStatus = 'Success'", con)
 
                     con.Open()
                     Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())

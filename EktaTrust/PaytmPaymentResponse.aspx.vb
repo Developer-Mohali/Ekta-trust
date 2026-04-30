@@ -1,8 +1,9 @@
-﻿Imports System.Data.SqlClient
-Imports iTextSharp.text.pdf
+﻿Imports System
+Imports System.Data.SqlClient
 Imports System.IO
+Imports iTextSharp.text
+Imports iTextSharp.text.pdf
 Imports MySql.Data.MySqlClient
-Imports System
 
 Public Class PaytmPaymentResponse
     Inherits System.Web.UI.Page
@@ -336,6 +337,7 @@ Public Class PaytmPaymentResponse
                 Using stamper As New PdfStamper(reader, outputPdf)
 
                     Dim bf As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, False)
+                    Dim bfBold As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, False)
                     Dim cb As PdfContentByte = stamper.GetOverContent(1)
 
                     cb.BeginText()
@@ -375,6 +377,11 @@ Public Class PaytmPaymentResponse
                     ' 🔹 Amount Numeric (₹ box)
                     cb.SetFontAndSize(bf, 30)
                     cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, amount, 250, 150, 0)
+
+                    ' Financial Year bottom
+                    cb.SetColorFill(New BaseColor(59, 56, 49))
+                    cb.SetFontAndSize(bfBold, 27)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, GetFinancialYear(donationDate), 625, 50, 0)
 
                     cb.EndText()
 
@@ -510,5 +517,19 @@ Public Class PaytmPaymentResponse
 
     End Function
 
+    Public Function GetFinancialYear(inputDate As String) As String
+        Dim startYear As Integer
+        Dim endYear As Integer
+        Dim inputDateConversion As DateTime = DateTime.ParseExact(inputDate, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture)
 
+        If inputDateConversion.Month >= 4 Then
+            startYear = inputDateConversion.Year
+            endYear = inputDateConversion.Year + 1
+        Else
+            startYear = inputDateConversion.Year - 1
+            endYear = inputDateConversion.Year
+        End If
+
+        Return startYear.ToString() & "-" & endYear.ToString().Substring(2)
+    End Function
 End Class

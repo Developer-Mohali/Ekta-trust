@@ -1300,8 +1300,8 @@ Public Class BIBDataRunner
             Dim runCatagory As String = If(IsDBNull(row("RunCatagory")), "", row("RunCatagory").ToString())
             Dim tShirtSize As String = If(IsDBNull(row("TShirtSize")), "", row("TShirtSize").ToString())
 
-            Dim runDate As String = "14/04/2026"
-
+            Dim inputDateConversion As DateTime = DateTime.ParseExact(transDate, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture)
+            Dim runDate As String = "14/04/" & inputDateConversion.Year
 
             Dim templateFile As String = Server.MapPath("~/doc/runRegistration.pdf")
 
@@ -1313,6 +1313,7 @@ Public Class BIBDataRunner
                 Using stamper As New PdfStamper(reader, outputPdf)
 
                     Dim bf As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, False)
+                    Dim bfBold As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, False)
                     Dim cb As PdfContentByte = stamper.GetOverContent(1)
 
                     cb.BeginText()
@@ -1340,7 +1341,7 @@ Public Class BIBDataRunner
 
                     ' 🔹 Run Date
                     cb.SetFontAndSize(bf, 22)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, runDate, 250, 430, 0)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, runDate, 250, 425, 0)
 
                     ' 🔹 Amount in Words
                     cb.SetFontAndSize(bf, 22)
@@ -1352,7 +1353,12 @@ Public Class BIBDataRunner
 
                     ' 🔹 Amount Numeric (₹ box)
                     cb.SetFontAndSize(bf, 30)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, amount, 260, 130, 0)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, amount, 260, 120, 0)
+
+                    ' Financial Year bottom
+                    cb.SetColorFill(New iTextSharp.text.BaseColor(59, 56, 49))
+                    cb.SetFontAndSize(bfBold, 18)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, inputDateConversion.Year, 670, 39, 0)
 
                     cb.EndText()
 

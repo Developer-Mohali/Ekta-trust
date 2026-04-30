@@ -239,13 +239,13 @@ Partial Public Class DonationDetails
     Protected WithEvents paymentType As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''txtReciept control.
+    '''txtdonationDate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtReciept As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtdonationDate As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''txtNarration control.

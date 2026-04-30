@@ -142,17 +142,18 @@
                     </ItemTemplate>
                 </asp:TemplateField>
              <%--        <asp:BoundField HeaderText="OrderId" DataField="OrderId" ItemStyle-HorizontalAlign="Left"></asp:BoundField>--%>
-                   <asp:BoundField HeaderText="Donated On" DataField="CreatedDate" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
+                   <asp:BoundField HeaderText="Receipt Date" DataField="CreatedDate" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
                    <asp:BoundField HeaderText="TransId" DataField="TxnId" ItemStyle-HorizontalAlign="Left" Visible="false"></asp:BoundField> 
                    <asp:BoundField HeaderText="Type" DataField="PaymentType" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
                    <asp:BoundField HeaderText="Email" DataField="EmailId" Visible="false" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
-                   <asp:BoundField HeaderText="Receipt Date" DataField="ReceiptDate" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
+                   <asp:BoundField HeaderText="Donation Date" DataField="DonationDate" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
                    <asp:BoundField HeaderText="Bank Narration" DataField="BankNarration" Visible="false" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
                   <asp:TemplateField HeaderText="Action" ItemStyle-Width="90" >
                       <ItemTemplate>
                           <asp:ImageButton ID="imgbtn" ImageUrl="../Images/edit.png" runat="server" Width="15" Height="15" OnClick="imgbtn_Click" />
                           <asp:ImageButton ID="ButtonDelete" runat="server" CommandName="Delete" Text="Delete" Width="15" Height="15" OnClientClick="return confirm('Are you sure you want to delete this event?');" CssClass="input" ImageUrl="Images/minimal-97-128.png" />
-                   <i class="fa fa-refresh" style="cursor:pointer; font-size: medium;" onclick='showJson("<%# HttpUtility.JavaScriptStringEncode(Eval("OrderId").ToString()) %>", "<%# HttpUtility.JavaScriptStringEncode(Eval("PaymentStatus").ToString()) %>")' title="Refresh status from Paytm"></i>
+                   <i class="fa fa-refresh" style='<%# "cursor:pointer; font-size: medium;" + (If(String.IsNullOrEmpty(Eval("OrderId").ToString()), "display:none;", "")) %>'
+                            onclick='showJson("<%# HttpUtility.JavaScriptStringEncode(Eval("OrderId").ToString()) %>", "<%# HttpUtility.JavaScriptStringEncode(Eval("PaymentStatus").ToString()) %>")' title="Refresh status from Paytm"></i>
                           <!-- Certificate -->
                         <asp:LinkButton ID="btnCertificate" runat="server" ToolTip="Generate Certificate" OnClick="generate_Certificate" style="padding-left:0px !important;"
                                     Visible='<%# (Not IsDBNull(Eval("PaymentType")) AndAlso Eval("PaymentType").ToString().ToLower() = "donation") AndAlso (Not IsDBNull(Eval("PaymentStatus")) AndAlso Eval("PaymentStatus").ToString().ToLower() = "success") %>'>
@@ -177,6 +178,9 @@
                  <div class = "modal-dialog">
                    <div class = "modal-content">
                      <div class = "modal-header">
+                         <button type="button" class="close" aria-label="Close" onclick="closeDonationPopup();">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                        <div border-collapse: inherit; height:100%" cellpadding="0" cellspacing="0" Style="border-bottom: 1px solid #e5e5e5; width:100%">
                          <tr style="background-color:#D55500">
                          <td colspan="2" style=" height:10%; color:White; font-weight:bold;  font-size:larger" align="center "  ></td>
@@ -226,6 +230,9 @@
                              <asp:ListItem value="Net Banking">Net Banking</asp:ListItem>                      
                              <asp:ListItem value="UPI">UPI</asp:ListItem>                      
                              <asp:ListItem value="Cheque">Cheque</asp:ListItem>                      
+                             <asp:ListItem value="IMPS">IMPS</asp:ListItem>                      
+                             <asp:ListItem value="RTGS">RTGS</asp:ListItem>                      
+                             <asp:ListItem value="NEFT">NEFT</asp:ListItem>                      
                              <asp:ListItem value="Other">Other</asp:ListItem>                      
                            </asp:DropDownList>
                              <span id="modeOfPaymentError" class="help-block" style="color: red"></span>
@@ -250,10 +257,10 @@
                                 <asp:ListItem value="Other">Other</asp:ListItem>          
                               </asp:DropDownList>
                             </div>
-                           <!-- Date of receipt in account -->
+                           <!-- Donation Date in account -->
                             <div class="form-group">
-                                <label>Date Of receipt:</label>
-                                 <asp:TextBox ID="txtReciept" cols="40" Rows="6" runat="server" TextMode="Date" class="form-control" style="width:95%"/>
+                                <label>Donation Date:</label>
+                                 <asp:TextBox ID="txtdonationDate" cols="40" Rows="6" runat="server" TextMode="Date" class="form-control" style="width:95%"/>
                             </div>
                            <!-- Narration in bank account -->
                             <div class="form-group">
@@ -373,7 +380,9 @@
             }, 5000); // 5000ms = 5 seconsds
         }
     });
-
+    function closeDonationPopup() {
+        $('#ContentPlaceHolder1_btnCancel').click();
+    }
     $(document).ready(function () {
        
         TotalRecord();

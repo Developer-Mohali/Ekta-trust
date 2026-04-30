@@ -1,12 +1,8 @@
-﻿Imports MySql.Data.MySqlClient
-Imports System.Data.SqlClient
-Imports System.Configuration
-Imports System.Drawing
+﻿Imports System.Drawing
 Imports System.IO
-Imports Newtonsoft.Json
+Imports iTextSharp.text
 Imports iTextSharp.text.pdf
-Imports Mysqlx.Crud
-Imports System
+Imports MySql.Data.MySqlClient
 
 Public Class DonationDetails
     Inherits System.Web.UI.Page
@@ -35,7 +31,7 @@ Public Class DonationDetails
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
             Using cmd As New MySqlCommand()
-                Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber, PaymentStatus, Address, OrderId,TxnId, CreatedDate, PaymentType, EmailId, ReceiptDate, BankNarration 
+                Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber, PaymentStatus, Address, OrderId,TxnId, CreatedDate, PaymentType, EmailId, DonationDate, BankNarration 
                                     FROM Donation"
                 If Not String.IsNullOrEmpty(txtSearch.Text) Then
                     If ddlSearchBy.SelectedItem.Text = "Full Name" Then
@@ -155,9 +151,9 @@ Public Class DonationDetails
         End If
         txtEmail.Text = gvEvent.DataKeys(gvrow.RowIndex).Values("EmailId").ToString()    ' email
         If Not String.IsNullOrEmpty(gvrow.Cells(12).Text) AndAlso gvrow.Cells(12).Text <> "&nbsp;" Then
-            txtReciept.Text = Convert.ToDateTime(gvrow.Cells(12).Text).ToString("yyyy-MM-dd")    ' reciept date
+            txtdonationDate.Text = Convert.ToDateTime(gvrow.Cells(12).Text).ToString("yyyy-MM-dd")    ' reciept date
         Else
-            txtReciept.Text = String.Empty
+            txtdonationDate.Text = String.Empty
         End If
         txtNarration.Text = gvEvent.DataKeys(gvrow.RowIndex).Values("BankNarration").ToString()     ' Bank Narration
         Me.ModalPopupExtender1.Show()
@@ -171,7 +167,7 @@ Public Class DonationDetails
 
             Using con As New MySqlConnection(constr)
                 Using cmd As New MySqlCommand("UPDATE Donation SET  FullName=@FullName, Amount=@Amount,MobileNumber=@MobileNumber,ModeOfPayment=@ModeOfPayment,PaymentStatus=@StatusOfPayment,Address=@Address, 
-                                               PanNuber=@Pan, PaymentType=@PaymentType, ReceiptDate=@ReceiptDate, BankNarration=@BankNarration, EmailId=@EmailId  WHERE DonationID = @DonationID", con)
+                                               PanNuber=@Pan, PaymentType=@PaymentType, DonationDate=@DonationDate, BankNarration=@BankNarration, EmailId=@EmailId  WHERE DonationID = @DonationID", con)
                     cmd.Parameters.AddWithValue("@DonationID", Convert.ToInt32(lblDonationId.Text))
                     cmd.Parameters.AddWithValue("@FullName", textFullName.Text)
                     cmd.Parameters.AddWithValue("@Amount", textAmount.Text)
@@ -181,7 +177,7 @@ Public Class DonationDetails
                     cmd.Parameters.AddWithValue("@Address", txtAddress.Text)
                     cmd.Parameters.AddWithValue("@Pan", txtPanNum.Text.ToUpper())
                     cmd.Parameters.AddWithValue("@PaymentType", paymentType.SelectedItem.Text)
-                    cmd.Parameters.AddWithValue("@ReceiptDate", If(String.IsNullOrEmpty(txtReciept.Text), DBNull.Value, txtReciept.Text))
+                    cmd.Parameters.AddWithValue("@DonationDate", If(String.IsNullOrEmpty(txtdonationDate.Text), DBNull.Value, txtdonationDate.Text))
                     cmd.Parameters.AddWithValue("@BankNarration", txtNarration.Text)
                     cmd.Parameters.AddWithValue("@EmailId", txtEmail.Text)
                     cmd.Connection = con
@@ -324,15 +320,15 @@ Public Class DonationDetails
         paymentType.ClearSelection()
         txtPanNum.Text = String.Empty
         txtEmail.Text = String.Empty
-        txtReciept.Text = String.Empty
+        txtdonationDate.Text = String.Empty
         txtNarration.Text = String.Empty
     End Sub
 
     'This method is used To insert the data
     Protected Sub btnAddNew_Click1(sender As Object, e As EventArgs)
         Try
-            Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,ModeOfPayment,PaymentStatus,Address,CreatedDate,PaymentEnv, PaymentType, PanNuber, ReceiptDate, BankNarration, EmailId)
-                                    VALUES(@FullName, @Amount,@MobileNumber,@ModeOfPayment,@StatusOfPayment,@Address,@CreatedDate,@PaymentEnv, @PaymentType, @Pan, @ReceiptDate, @BankNarration, @EmailId)"
+            Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,ModeOfPayment,PaymentStatus,Address,CreatedDate,PaymentEnv, PaymentType, PanNuber, DonationDate, BankNarration, EmailId)
+                                    VALUES(@FullName, @Amount,@MobileNumber,@ModeOfPayment,@StatusOfPayment,@Address,@CreatedDate,@PaymentEnv, @PaymentType, @Pan, @DonationDate, @BankNarration, @EmailId)"
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As MySqlConnection = New MySqlConnection(constr)
                 Using cmd As MySqlCommand = New MySqlCommand(query)
@@ -346,7 +342,7 @@ Public Class DonationDetails
                     cmd.Parameters.AddWithValue("@PaymentEnv", "Offline")
                     cmd.Parameters.AddWithValue("@PaymentType", paymentType.SelectedItem.Text)
                     cmd.Parameters.AddWithValue("@Pan", txtPanNum.Text.ToUpper())
-                    cmd.Parameters.AddWithValue("@ReceiptDate", If(String.IsNullOrEmpty(txtReciept.Text), DBNull.Value, txtReciept.Text))
+                    cmd.Parameters.AddWithValue("@DonationDate", If(String.IsNullOrEmpty(txtdonationDate.Text), DBNull.Value, txtdonationDate.Text))
                     cmd.Parameters.AddWithValue("@BankNarration", txtNarration.Text)
                     cmd.Parameters.AddWithValue("@EmailId", txtEmail.Text)
                     cmd.Connection = con
@@ -411,7 +407,7 @@ Public Class DonationDetails
             Dim dt As New DataTable()
 
             Using con As New MySqlConnection(constr)
-                Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount, ModeOfPayment, FullName, EmailId, CreatedDate, DonationID, SerialNo, PaymentType FROM donation WHERE DonationID = @id", con)
+                Using cmd As New MySqlCommand("SELECT PaymentStatus, TxnId, Amount, ModeOfPayment, FullName, EmailId, CreatedDate, DonationID, SerialNo, PaymentType, BankNarration, DonationDate FROM donation WHERE DonationID = @id", con)
 
                     cmd.Parameters.AddWithValue("@id", id)
 
@@ -434,7 +430,9 @@ Public Class DonationDetails
             Dim amount As Decimal = If(IsDBNull(row("Amount")), 0, Convert.ToDecimal(row("Amount")))
             Dim paymentMode As String = If(IsDBNull(row("ModeOfPayment")), "", row("ModeOfPayment").ToString())
             Dim donationDate As String = ""
+            Dim reciptDate As String = ""
             Dim paymentType As String = row("PaymentType").ToString()
+            Dim financialYear = ""
 
             If paymentType <> "Donation" Then
                 MessageUpdated.Text = "Only Donation type payment generate Receipt"
@@ -443,7 +441,13 @@ Public Class DonationDetails
             End If
 
             If Not IsDBNull(row("CreatedDate")) Then
-                donationDate = Convert.ToDateTime(row("CreatedDate")).ToString("dd/MM/yyyy")
+                reciptDate = Convert.ToDateTime(row("CreatedDate")).ToString("dd/MM/yyyy")
+            End If
+            If Not IsDBNull(row("DonationDate")) Then
+                donationDate = Convert.ToDateTime(row("DonationDate"))
+                donationDate = Convert.ToDateTime(row("DonationDate")).ToString("dd/MM/yyyy")
+            Else
+                donationDate = reciptDate
             End If
 
             Dim donationNo As String = If(IsDBNull(row("DonationID")), "", row("DonationID").ToString())
@@ -452,14 +456,16 @@ Public Class DonationDetails
             ' Generate serial number if not already and save in DB.
             If serialNo = 0 Then
                 serialNo = PaytmCallBack.GenerateSerialNumber()
-                UpdateDonation(serialNo, id)
+                UpdateDonation(serialNo.ToString("D6"), id)
             End If
 
             Dim transactionId As String = If(IsDBNull(row("TxnId")), "", row("TxnId").ToString())
+            Dim bankTransaction As String = If(IsDBNull(row("BankNarration")), "", row("BankNarration").ToString())
 
             Dim serialNoPre As String = serialNo.ToString("D6")
 
-            CreateDonationCertificate(donorName, amount, paymentMode, donationDate, serialNoPre, transactionId)
+            financialYear = GetFinancialYear(donationDate)
+            CreateDonationCertificate(donorName, amount, paymentMode, donationDate, serialNoPre, If(String.IsNullOrEmpty(transactionId), bankTransaction, transactionId), reciptDate, financialYear)
 
         Catch ex As Exception
             MessageUpdated.Text = "Error while generating receipt."
@@ -467,7 +473,7 @@ Public Class DonationDetails
         End Try
     End Sub
 
-    Public Function CreateDonationCertificate(name As String, amount As Decimal, paymentMode As String, donationDate As String, serialNo As String, transactionId As String) As String
+    Public Function CreateDonationCertificate(name As String, amount As Decimal, paymentMode As String, donationDate As String, serialNo As String, transactionId As String, reciptDate As String, financialYear As String) As String
 
         Try
             Dim templateFile As String = Server.MapPath("~/doc/donationTemplate.pdf")
@@ -480,6 +486,7 @@ Public Class DonationDetails
                 Using stamper As New PdfStamper(reader, outputPdf)
 
                     Dim bf As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, False)
+                    Dim bfBold As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, False)
                     Dim cb As PdfContentByte = stamper.GetOverContent(1)
 
                     cb.BeginText()
@@ -491,7 +498,7 @@ Public Class DonationDetails
 
                     ' 🔹 Date
                     cb.SetTextMatrix(1300, 660)
-                    cb.ShowText(donationDate)
+                    cb.ShowText(reciptDate)
 
                     ' 🔹 Donor Name
                     cb.SetFontAndSize(bf, 25)
@@ -517,6 +524,11 @@ Public Class DonationDetails
                     ' 🔹 Amount Numeric (₹ box)
                     cb.SetFontAndSize(bf, 30)
                     cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, amount, 250, 150, 0)
+
+                    ' Financial Year bottom
+                    cb.SetColorFill(New BaseColor(59, 56, 49))
+                    cb.SetFontAndSize(bfBold, 27)
+                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, financialYear, 625, 50, 0)
 
                     cb.EndText()
 
@@ -574,8 +586,8 @@ Public Class DonationDetails
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As New MySqlConnection(constr)
                 Using cmd As New MySqlCommand()
-                    Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber as `Pan Number`, PaymentStatus, Address, OrderId,TxnId as `Transaction Id`, CreatedDate as `Donated On`,
-                                        EmailId, ReceiptDate, BankNarration FROM Donation"
+                    Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber as `Pan Number`, PaymentStatus, Address, OrderId,TxnId as `Transaction Id`, CreatedDate as `Receipt Date`,
+                                        EmailId, DonationDate as `Donated On`, BankNarration FROM Donation"
                     If Not String.IsNullOrEmpty(txtSearch.Text) Then
                         If ddlSearchBy.SelectedItem.Text = "Full Name" Then
                             sql += " WHERE FullName LIKE @Search"
@@ -701,4 +713,20 @@ Public Class DonationDetails
             Throw
         End Try
     End Sub
+
+    Public Function GetFinancialYear(inputDate As String) As String
+        Dim startYear As Integer
+        Dim endYear As Integer
+        Dim inputDateConversion As DateTime = DateTime.ParseExact(inputDate, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture)
+
+        If inputDateConversion.Month >= 4 Then
+            startYear = inputDateConversion.Year
+            endYear = inputDateConversion.Year + 1
+        Else
+            startYear = inputDateConversion.Year - 1
+            endYear = inputDateConversion.Year
+        End If
+
+        Return startYear.ToString() & "-" & endYear.ToString().Substring(2)
+    End Function
 End Class

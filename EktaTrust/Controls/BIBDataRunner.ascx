@@ -207,7 +207,7 @@ function TotalRecord() {
     <div class = "modal-dialog">
     <div class = "modal-content">
       <div class = "modal-header">
-          <button type="button" class="close" aria-label="Close" onclick="closeBibPopup();" />
+          <button type="button" class="close" aria-label="Close" onclick="closeBibPopup();">
         <span aria-hidden="true">&times;</span>
     </button>
 <div width="100%"  width:100%; border-collapse: inherit; height:100%" cellpadding="0" cellspacing="0" Style="border-bottom: 1px solid #e5e5e5;">
