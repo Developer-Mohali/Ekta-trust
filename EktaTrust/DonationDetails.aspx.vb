@@ -536,7 +536,7 @@ Public Class DonationDetails
 
                 Response.Clear()
                 Response.ContentType = "application/pdf"
-                Response.AddHeader("Content-Disposition", "attachment; filename=Donation_" & serialNo & ".pdf")
+                Response.AddHeader("Content-Disposition", "attachment; filename=" & serialNo & "-" & name.Replace(" ", "") & "-FY" & financialYear & ".pdf")
                 Response.BinaryWrite(pdfBytes)
                 Response.Flush()
 
