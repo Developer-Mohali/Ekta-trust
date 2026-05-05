@@ -18,7 +18,7 @@ Public Class Logger
             Dim sb As New StringBuilder()
 
             sb.AppendLine("--------------------------------------------------")
-            sb.AppendLine("Date: " & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+            sb.AppendLine("Date: " & CommonFunction.ConvertUTCTimeToIndianTimezone(DateTime.UtcNow).ToString("yyyy-MM-dd HH:mm:ss"))
             sb.AppendLine("Message: " & message)
 
             If ex IsNot Nothing Then
@@ -55,7 +55,7 @@ Public Class Logger
             Dim sb As New StringBuilder()
 
             sb.AppendLine("--------------------------------------------------")
-            sb.AppendLine("Date: " & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+            sb.AppendLine("Date: " & CommonFunction.ConvertUTCTimeToIndianTimezone(DateTime.UtcNow).ToString("yyyy-MM-dd HH:mm:ss"))
             sb.AppendLine("Message: " & message)
 
             sb.AppendLine("--------------------------------------------------")
@@ -84,7 +84,7 @@ Public Class Logger
             Dim sb As New StringBuilder()
 
             sb.AppendLine("--------------------------------------------------")
-            sb.AppendLine("Date: " & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+            sb.AppendLine("Date: " & CommonFunction.ConvertUTCTimeToIndianTimezone(DateTime.UtcNow).ToString("yyyy-MM-dd HH:mm:ss"))
             sb.AppendLine("Message: " & message)
 
             If obj IsNot Nothing Then
