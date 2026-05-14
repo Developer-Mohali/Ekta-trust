@@ -1,22 +1,44 @@
 ﻿Imports System.Drawing
 Imports System.IO
+Imports System.Net
+Imports System.Net.Mail
 Imports iTextSharp.text
 Imports iTextSharp.text.pdf
 Imports MySql.Data.MySqlClient
+Imports Mysqlx.XDevAPI.Common
 
 Public Class DonationDetails
     Inherits System.Web.UI.Page
     Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim donationId As String = Request.QueryString("id")
-        If Not String.IsNullOrEmpty(donationId) Then
-            GenerateDonationReceipt(donationId)
+
+        If Session("EmailStatus") IsNot Nothing AndAlso Session("EmailStatus").ToString() = "SUCCESS" Then
+
+            MessageUpdated.Text = "Email sent successfully."
+            MessageUpdated.ForeColor = Color.Green
+
+            Session("EmailStatus") = Nothing
+        End If
+
+        If Request.QueryString("downloadReceipt") IsNot Nothing Then
+
+            GenerateDonationReceipt(Request.QueryString("downloadReceipt"))
+
+            HttpContext.Current.ApplicationInstance.CompleteRequest()
+            Return
+
         End If
 
         If con.State = ConnectionState.Closed Then
             con.Open()
         End If
         If Not IsPostBack Then
+            'ScriptManager.RegisterStartupScript(
+            'Me,
+            'Me.GetType(),
+            '"clearReloadFlag",
+            '"sessionStorage.removeItem('certificateReload');",
+            'True)
             gvEvent.AllowPaging = True
             gvEvent.PageSize = 15
             BindGridView()
@@ -31,7 +53,7 @@ Public Class DonationDetails
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
             Using cmd As New MySqlCommand()
-                Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber, PaymentStatus, Address, OrderId,TxnId, CreatedDate, PaymentType, EmailId, DonationDate, BankNarration 
+                Dim sql As String = "SELECT DonationID, FullName, Amount, MobileNumber, ModeOfPayment, PanNuber, PaymentStatus, Address, OrderId,TxnId, CreatedDate, PaymentType, EmailId, DonationDate, BankNarration, CertificateGenerated
                                     FROM Donation"
                 If Not String.IsNullOrEmpty(txtSearch.Text) Then
                     If ddlSearchBy.SelectedItem.Text = "Full Name" Then
@@ -302,6 +324,16 @@ Public Class DonationDetails
             ' address hover
             Dim fullAddress As String = DataBinder.Eval(e.Row.DataItem, "Address").ToString()
             e.Row.Cells(6).Attributes("title") = fullAddress
+
+            ' --- logic for Email button visibility ---
+            Dim btnEmail As LinkButton = TryCast(e.Row.FindControl("btnEmail"), LinkButton)
+
+            If btnEmail IsNot Nothing Then
+                Dim certificateGeneratedObj = DataBinder.Eval(e.Row.DataItem, "CertificateGenerated")
+                Dim certificateGenerated As Integer = If(certificateGeneratedObj IsNot DBNull.Value, Convert.ToInt32(certificateGeneratedObj), 0)
+
+                btnEmail.Visible = (certificateGenerated = 1)
+            End If
         End If
     End Sub
     Protected Sub btnAddNew_Click(sender As Object, e As EventArgs)
@@ -325,8 +357,8 @@ Public Class DonationDetails
     'This method is used To insert the data
     Protected Sub btnAddNew_Click1(sender As Object, e As EventArgs)
         Try
-            Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,ModeOfPayment,PaymentStatus,Address,CreatedDate,PaymentEnv, PaymentType, PanNuber, DonationDate, BankNarration, EmailId)
-                                    VALUES(@FullName, @Amount,@MobileNumber,@ModeOfPayment,@StatusOfPayment,@Address,@CreatedDate,@PaymentEnv, @PaymentType, @Pan, @DonationDate, @BankNarration, @EmailId)"
+            Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,ModeOfPayment,PaymentStatus,Address,CreatedDate,PaymentEnv, PaymentType, PanNuber, DonationDate, BankNarration, EmailId, CertificateGenerated)
+                                    VALUES(@FullName, @Amount,@MobileNumber,@ModeOfPayment,@StatusOfPayment,@Address,@CreatedDate,@PaymentEnv, @PaymentType, @Pan, @DonationDate, @BankNarration, @EmailId,0)"
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As MySqlConnection = New MySqlConnection(constr)
                 Using cmd As MySqlCommand = New MySqlCommand(query)
@@ -374,25 +406,33 @@ Public Class DonationDetails
             Dim btn As LinkButton = CType(sender, LinkButton)
             Dim row As GridViewRow = CType(btn.NamingContainer, GridViewRow)
 
-            ' ✅ Correct way to get ID
-            Dim donationId As String = gvEvent.DataKeys(row.RowIndex).Value.ToString()
+            Dim donationId As String =
+        gvEvent.DataKeys(row.RowIndex).Value.ToString()
 
-            Dim paymentStatus As String = row.Cells(5).Text.Trim().ToLower()
+            Dim paymentStatus As String =
+        row.Cells(5).Text.Trim().ToLower()
 
-            If paymentStatus = "success" Then
-                Dim donorName As String = row.Cells(0).Text
-                Dim amount As Decimal = Convert.ToDecimal(row.Cells(1).Text)
-                Dim paymentMode As String = row.Cells(3).Text
-                Dim donationDate As String = Convert.ToDateTime(row.Cells(8).Text).ToString("dd/MM/yyyy")
-                Dim transactionId As String = row.Cells(9).Text
+            If paymentStatus <> "success" Then
 
-                ' 👉 Call your PDF function
-                'CreateDonationCertificate(donorName, amount, paymentMode, donationDate, donationId, transactionId)
-                GenerateDonationReceipt(donationId)
-            Else
-                MessageUpdated.Text = "Only Success payment generate Receipt"
+                MessageUpdated.Text =
+            "Only Success payment generate Receipt"
+
                 MessageUpdated.ForeColor = Color.Red
+
+                Return
+
             End If
+
+            ' trigger javascript download
+            ScriptManager.RegisterStartupScript(
+        Me,
+        Me.GetType(),
+        "downloadReceipt",
+        "downloadReceipt('" & donationId & "');",
+        True)
+
+            ' only update UI
+            BindGridView()
         Catch ex As Exception
             MessageUpdated.Text = ex.Message
             MessageUpdated.ForeColor = Color.Red
@@ -452,7 +492,7 @@ Public Class DonationDetails
 
             ' Generate serial number if not already and save in DB.
             If serialNo = 0 Then
-                serialNo = PaytmCallBack.GenerateSerialNumber()
+                serialNo = PaytmCallBack.GenerateSerialNumber(donationDate)
                 UpdateDonation(serialNo.ToString("D6"), id)
             End If
 
@@ -462,7 +502,7 @@ Public Class DonationDetails
             Dim serialNoPre As String = serialNo.ToString("D6")
 
             financialYear = GetFinancialYear(donationDate)
-            CreateDonationCertificate(donorName, amount, paymentMode, donationDate, serialNoPre, If(String.IsNullOrEmpty(transactionId), bankTransaction, transactionId), reciptDate, financialYear)
+            CreateDonationCertificate(id, donorName, amount, paymentMode, donationDate, serialNoPre, If(String.IsNullOrEmpty(transactionId), bankTransaction, transactionId), reciptDate, financialYear)
 
         Catch ex As Exception
             MessageUpdated.Text = "Error while generating receipt."
@@ -470,7 +510,7 @@ Public Class DonationDetails
         End Try
     End Sub
 
-    Public Function CreateDonationCertificate(name As String, amount As Decimal, paymentMode As String, donationDate As String, serialNo As String, transactionId As String, reciptDate As String, financialYear As String) As String
+    Public Function CreateDonationCertificate(id As String, name As String, amount As Decimal, paymentMode As String, donationDate As String, serialNo As String, transactionId As String, reciptDate As String, financialYear As String) As String
 
         Try
             Dim templateFile As String = Server.MapPath("~/doc/donationTemplate.pdf")
@@ -534,14 +574,43 @@ Public Class DonationDetails
 
                 Dim pdfBytes As Byte() = outputPdf.ToArray()
 
+                Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+                Using con As New MySqlConnection(constr)
+                    Using cmd As New MySqlCommand("UPDATE donation SET CertificateGenerated = 1 WHERE DonationID = @id", con)
+
+                        cmd.Parameters.AddWithValue("@id", id) ' pass id into function
+
+                        con.Open()
+                        cmd.ExecuteNonQuery()
+                    End Using
+                End Using
+
+                Dim fileName As String =
+                  serialNo & "-" &
+                  name.Replace(" ", "") &
+                  "-FY" & financialYear & ".pdf"
+
                 Response.Clear()
+                Response.ClearContent()
+                Response.ClearHeaders()
+
+                Response.Buffer = True
                 Response.ContentType = "application/pdf"
-                Response.AddHeader("Content-Disposition", "attachment; filename=" & serialNo & "-" & name.Replace(" ", "") & "-FY" & financialYear & ".pdf")
+
+                Response.AddHeader(
+                    "Content-Disposition",
+                    "attachment; filename=" & fileName
+                )
+
                 Response.BinaryWrite(pdfBytes)
                 Response.Flush()
 
+                Response.SuppressContent = True
+
                 HttpContext.Current.ApplicationInstance.CompleteRequest()
 
+                Return Nothing
             End Using
         Catch ex As Exception
             Console.WriteLine(ex)
@@ -728,4 +797,169 @@ Public Class DonationDetails
 
         Return startYear.ToString() & "-" & endYear.ToString().Substring(2)
     End Function
+
+    Protected Sub btnOpenEmailPopup_Click(sender As Object, e As EventArgs)
+
+        Try
+
+            Dim btn As LinkButton = CType(sender, LinkButton)
+            Dim row As GridViewRow = CType(btn.NamingContainer, GridViewRow)
+
+            Dim donationId As String =
+            gvEvent.DataKeys(row.RowIndex).Value.ToString()
+
+            Dim email As String =
+            gvEvent.DataKeys(row.RowIndex).Values("EmailId").ToString()
+
+            hfDonationId.Value = donationId
+
+            txtSendEmail.Text = email
+
+            EmailPopupExtender.Show()
+
+        Catch ex As Exception
+
+            MessageUpdated.Text = ex.Message
+            MessageUpdated.ForeColor = Drawing.Color.Red
+
+        End Try
+
+    End Sub
+    Protected Sub btnSendCertificateEmail_Click(sender As Object, e As EventArgs)
+
+        Try
+
+            Dim donationId As String = hfDonationId.Value
+            Dim emailId As String = txtSendEmail.Text.Trim()
+
+            If String.IsNullOrEmpty(emailId) Then
+
+                MessageUpdated.Text = "Please enter email address."
+                MessageUpdated.ForeColor = Drawing.Color.Red
+
+                EmailPopupExtender.Show()
+                Return
+
+            End If
+
+            ' =========================
+            ' Load Donation Details
+            ' =========================
+
+            Dim fullName As String = ""
+            Dim amount As String = ""
+            Dim donatedDate As String = ""
+
+            Dim constr As String =
+            ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+            Using con As New MySqlConnection(constr)
+
+                Using cmd As New MySqlCommand("
+                SELECT FullName, Amount, DonationDate
+                FROM Donation
+                WHERE DonationID=@DonationID", con)
+
+                    cmd.Parameters.AddWithValue("@DonationID", donationId)
+
+                    con.Open()
+
+                    Dim reader = cmd.ExecuteReader()
+
+                    If reader.Read() Then
+
+                        fullName = reader("FullName").ToString()
+                        amount = reader("Amount").ToString()
+
+                        donatedDate =
+                        Convert.ToDateTime(reader("DonationDate")).
+                        ToString("dd MMM yyyy")
+
+                    End If
+
+                End Using
+
+            End Using
+
+            ' =========================
+            ' Email Template
+            ' =========================
+
+            Dim htmlTemplate As String =
+            File.ReadAllText(Server.MapPath("~/doc/DonationTemplate.html"))
+
+            htmlTemplate =
+            htmlTemplate.Replace("{{DonorName}}", fullName)
+
+            htmlTemplate =
+            htmlTemplate.Replace("{{Amount}}", amount)
+
+            htmlTemplate =
+            htmlTemplate.Replace("{{Date}}", donatedDate)
+
+            htmlTemplate =
+            htmlTemplate.Replace("{{AuthorityName}}",
+            "Ekta Navnirman Trust")
+
+            Dim baseUrl As String =
+            Request.Url.Scheme & "://" & Request.Url.Authority
+
+            'Dim downloadUrl As String =
+            'baseUrl & "/DonationDetails.aspx?id=" & donationId
+
+            Dim downloadUrl As String =
+            baseUrl & "/DonationDetails.aspx?downloadReceipt=" & donationId
+            htmlTemplate =
+            htmlTemplate.Replace("{{DownloadLink}}", downloadUrl)
+
+            Dim subject As String =
+            "Donation Receipt for Tax Deduction (80G)"
+
+            ' =========================
+            ' SEND EMAIL
+            ' =========================
+            Dim result As String = SendEmail.SendMailWithAttachment(
+                emailId,
+                fullName,
+                subject,
+                htmlTemplate,
+                downloadUrl
+            )
+
+            If result.Contains("Error") Then
+
+                MessageUpdated.Text = "Email failed to send. Please check SMTP settings."
+                MessageUpdated.ForeColor = Drawing.Color.Red
+                EmailPopupExtender.Show()
+
+                Return
+
+            Else
+
+                ' ✔ set success flags
+                Session("EmailStatus") = "SUCCESS"
+                Session("EmailDonationId") = donationId
+
+                ' optional UI message (will show after redirect)
+                MessageUpdated.Text = "Email sent successfully."
+                MessageUpdated.ForeColor = Drawing.Color.Green
+
+                ' ✔ IMPORTANT: redirect to break POST request
+                Response.Redirect(Request.RawUrl, False)
+                Context.ApplicationInstance.CompleteRequest()
+                Return
+
+            End If
+
+        Catch ex As Exception
+
+            MessageUpdated.Text = ex.Message
+            MessageUpdated.ForeColor = Drawing.Color.Red
+
+            EmailPopupExtender.Show()
+
+        End Try
+
+    End Sub
+
 End Class

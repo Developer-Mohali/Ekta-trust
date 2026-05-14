@@ -293,6 +293,69 @@ Partial Public Class DonationDetails
     Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''btnShowEmailPopup control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnShowEmailPopup As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''EmailPopupExtender control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents EmailPopupExtender As Global.AjaxControlToolkit.ModalPopupExtender
+
+    '''<summary>
+    '''pnlEmailPopup control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlEmailPopup As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''hfDonationId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfDonationId As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''txtSendEmail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtSendEmail As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''btnSendCertificateEmail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSendCertificateEmail As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnCancelEmail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCancelEmail As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''btnBindGrid control.
     '''</summary>
     '''<remarks>

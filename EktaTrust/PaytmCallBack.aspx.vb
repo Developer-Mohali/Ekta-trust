@@ -120,23 +120,43 @@ Public Class PaytmCallBack
         End Try
     End Sub
 
-    Public Shared Function GenerateSerialNumber() As String
+    Public Shared Function GenerateSerialNumber(donationDateStr As String) As String
+
         Dim serialNumber As String = "000001"
 
         Try
-            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Dim inputDate As DateTime = DateTime.ParseExact(
+            donationDateStr,
+            "dd/MM/yyyy",
+            Globalization.CultureInfo.InvariantCulture)
+
+            ' Calendar year range (Jan–Dec)
+            Dim startDate As DateTime = New DateTime(inputDate.Year, 1, 1)
+            Dim endDate As DateTime = New DateTime(inputDate.Year, 12, 31)
+
+            Dim constr As String =
+            ConfigurationManager.ConnectionStrings("constr").ConnectionString
 
             Using con As New MySqlConnection(constr)
-                Using cmd As New MySqlCommand("SELECT MAX(CAST(SerialNo AS UNSIGNED)) FROM donation WHERE PaymentStatus = 'Success'", con)
+
+                Using cmd As New MySqlCommand("
+                SELECT IFNULL(MAX(CAST(SerialNo AS UNSIGNED)), 0)
+                FROM donation
+                WHERE PaymentStatus = 'Success'
+                AND DonationDate BETWEEN @startDate AND @endDate", con)
+
+                    cmd.Parameters.AddWithValue("@startDate", startDate)
+                    cmd.Parameters.AddWithValue("@endDate", endDate)
 
                     con.Open()
-                    Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
 
-                    ' Increment for next serial
+                    Dim count As Integer =
+                    Convert.ToInt32(cmd.ExecuteScalar())
+
                     count += 1
 
-                    ' Format to 6 digits
                     serialNumber = count.ToString("D6")
+
                 End Using
             End Using
 

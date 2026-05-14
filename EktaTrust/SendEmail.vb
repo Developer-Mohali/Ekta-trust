@@ -422,7 +422,7 @@ Public Class SendEmail
         Return RetValue
     End Function
 
-    Public Shared Function SendMailWithAttachment(toEmail As String, Messageto As String, subject As String, body As String) As String
+    Public Shared Function SendMailWithAttachment(toEmail As String, Messageto As String, subject As String, body As String, Optional attachmentPath As String = "") As String
         Dim RetValue As String = ""
         Try
 
@@ -438,8 +438,13 @@ Public Class SendEmail
             'mail.To.Add(New MailAddress(toEmail.Trim(), Messageto))
             mail.To.Add(toEmail)
             mail.Subject = subject
-            mail.Body = body
+
             mail.IsBodyHtml = True
+            ' Include download link in body
+            If Not String.IsNullOrEmpty(attachmentPath) Then
+                body &= "<br/><br/>Download your receipt: <a href='" & attachmentPath & "' target='_blank'>Click here</a>"
+            End If
+            mail.Body = body
             Dim smtp As SmtpClient = New SmtpClient("mail.ektatrust.org.in", 8889)
             Dim Credentials As NetworkCredential = New NetworkCredential(fromMail, Password)
             smtp.Credentials = Credentials

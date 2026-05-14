@@ -58,6 +58,15 @@
             white-space: normal;        /* allow multiple lines */
             max-width: 120px;           /* control column width */
         }
+         .icon-generated i {
+            color: #007bff; /* certificate generated */
+            cursor: pointer;
+            }
+
+    	   .icon-pending i {
+            color: #6c757d; /* not yet generated */
+            cursor: not-allowed; /* optional */
+               }
 </style>
     <div class="container-fluid main-container">
          <div class="col-md-2 sidebar">
@@ -150,15 +159,41 @@
                    <asp:BoundField HeaderText="Bank Narration" DataField="BankNarration" Visible="false" ItemStyle-HorizontalAlign="Left"></asp:BoundField> 
                   <asp:TemplateField HeaderText="Action" ItemStyle-Width="90" >
                       <ItemTemplate>
+                         <div style="white-space:nowrap; display:flex; gap:6px; align-items:center;">
                           <asp:ImageButton ID="imgbtn" ImageUrl="../Images/edit.png" runat="server" Width="15" Height="15" OnClick="imgbtn_Click" />
                           <asp:ImageButton ID="ButtonDelete" runat="server" CommandName="Delete" Text="Delete" Width="15" Height="15" OnClientClick="return confirm('Are you sure you want to delete this event?');" CssClass="input" ImageUrl="Images/minimal-97-128.png" />
                    <i class="fa fa-refresh" style='<%# "cursor:pointer; font-size: medium;" + (If(String.IsNullOrEmpty(Eval("OrderId").ToString()), "display:none;", "")) %>'
                             onclick='showJson("<%# HttpUtility.JavaScriptStringEncode(Eval("OrderId").ToString()) %>", "<%# HttpUtility.JavaScriptStringEncode(Eval("PaymentStatus").ToString()) %>")' title="Refresh status from Paytm"></i>
                           <!-- Certificate -->
-                        <asp:LinkButton ID="btnCertificate" runat="server" ToolTip="Generate Certificate" OnClick="generate_Certificate" style="padding-left:0px !important;"
-                                    Visible='<%# (Not IsDBNull(Eval("PaymentType")) AndAlso Eval("PaymentType").ToString().ToLower() = "donation") AndAlso (Not IsDBNull(Eval("PaymentStatus")) AndAlso Eval("PaymentStatus").ToString().ToLower() = "success") %>'>
-                            <i class="fa fa-download" style="cursor:pointer; font-size: medium;"></i>
+                             <asp:LinkButton ID="btnCertificate" 
+                                runat="server"
+                                ToolTip="Generate Certificate"
+                                Width="15"
+                                Height="15"
+                                style="padding-left:0px !important;"
+                                OnClientClick='<%# "downloadReceipt(""" & Eval("DonationID") & """); return false;" %>'
+                                CssClass='<%# If(Not IsDBNull(Eval("CertificateGenerated")) AndAlso Convert.ToBoolean(Eval("CertificateGenerated")), "icon-generated", "icon-pending") %>'
+                                Visible='<%# (Not IsDBNull(Eval("PaymentType")) AndAlso Eval("PaymentType").ToString().ToLower() = "donation") AndAlso (Not IsDBNull(Eval("PaymentStatus")) AndAlso Eval("PaymentStatus").ToString().ToLower() = "success") %>'>
+
+                                <i class="fa fa-download"
+                                   style="cursor:pointer; font-size: medium;"></i>
+
+                            </asp:LinkButton>
+                          <%--SendCertificateEmail--%>
+                          <asp:LinkButton ID="btnEmail" runat="server"
+                            ToolTip="Send Certificate Email"
+                            Style="text-decoration:none; margin-left: -10px; outline:none; border:none; background:none;"
+                            Visible="False"
+                            OnClientClick='<%# "openEmailPopup(""" & Eval("DonationID") & """,""" & Eval("EmailId") & """); return false;" %>'>
+
+                            <i class="fa fa-envelope"
+                               style="cursor:pointer; font-size:medium; color:green;"></i>
+
                         </asp:LinkButton>
+                             <asp:HiddenField ID="hfEmail"
+                            runat="server"
+                            Value='<%# Eval("EmailId") %>' />
+                      </div>
                       </ItemTemplate>
                   </asp:TemplateField>
                 </Columns>
@@ -275,14 +310,81 @@
                           <div class="form-group">
                            <asp:Button ID="btnUpdate" CommandName="Update" runat="server" class="btn btn-primary btn-lg"  OnClientClick="return onNextButtonClient();"  Text="Update" OnClick="btnUpdate_Click"/>
                               <asp:Button ID="btnAddNew" class="btn btn-primary btn-lg" runat="server" Text="Add New" OnClick="btnAddNew_Click1" OnClientClick="return onNextButtonClient();" />
-                           <asp:Button ID="btnCancel" runat="server"  class="btn btn-primary btn-lg" Text="Cancel" OnClientClick="clearInformation()" />
+                           <asp:Button ID="btnCancel" runat="server"  class="btn btn-primary btn-lg" Text="Cancel" OnClientClick="return clearInformation()" />
                           </div>
                            
                        </div>       
                      </div>
                   </div>
                 </div>
-            </asp:Panel>                    
+            </asp:Panel>
+                 <asp:Button ID="btnShowEmailPopup" runat="server" Style="display:none;" />
+
+        <ajaxToolkit:ModalPopupExtender
+            ID="EmailPopupExtender"
+            runat="server"
+            TargetControlID="btnShowEmailPopup"
+            PopupControlID="pnlEmailPopup"
+            CancelControlID="btnCancelEmail"
+            BackgroundCssClass="modalBackground">
+        </ajaxToolkit:ModalPopupExtender>
+
+        <asp:Panel ID="pnlEmailPopup" runat="server" Style="display:none;">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close"
+                            onclick="closeEmailPopup();">
+                            <span>&times;</span>
+                        </button>
+
+                        <h4>Send Certificate Email</h4>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <asp:HiddenField ID="hfDonationId" runat="server" />
+
+                        <div class="form-group">
+                            <label>Email Address</label>
+
+                            <asp:TextBox
+                                ID="txtSendEmail"
+                                runat="server"
+                                CssClass="form-control"
+                                placeholder="Enter email address"
+                                onkeyup="validateEmailField();">
+                            </asp:TextBox>
+                              <span id="emailValidationMsg"
+                                  style="color:red; display:none;">
+                                  Please enter valid email address
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <asp:Button ID="btnSendCertificateEmail"
+                            runat="server"
+                            Text="Send Email"
+                            CssClass="btn btn-success"
+                            OnClick="btnSendCertificateEmail_Click" />
+
+                        <asp:Button ID="btnCancelEmail"
+                            runat="server"
+                            ClientIDMode="Static"
+                            Text="Cancel"
+                            CssClass="btn btn-danger" />
+
+                    </div>
+
+                </div>
+            </div>
+
+        </asp:Panel>
      <%--  </tbody>
       </table>--%>
              </div>
@@ -516,6 +618,12 @@
         $("#<%=ddlStatusOfPayment.ClientID %>").val('');
         $("#<%=txtAddress.ClientID %>").val('');
         $('#nameError').hide();
+        $find('<%= ModalPopupExtender1.ClientID %>').hide();
+        // remove modal leftovers
+        $('.modal-backdrop').remove();
+        $('body').removeClass('modal-open');
+
+        return false;
     }
 
     function showJson(id, status) {
@@ -576,6 +684,87 @@
             console.error('Error in Donation updatePaytmenStatus', e);
             hideLoader();
             }
+    }
+    function openEmailPopup(donationId, email) {
+
+        $("#<%= hfDonationId.ClientID %>").val(donationId);
+        $("#<%= txtSendEmail.ClientID %>").val(email);
+
+        validateEmailField();
+
+        $find('<%= EmailPopupExtender.ClientID %>').show();
+
+        return false;
+    }
+    function closeEmailPopup() {
+        $find('<%= EmailPopupExtender.ClientID %>').hide();
+    }
+    function validateEmailField() {
+
+        var email = $("#<%= txtSendEmail.ClientID %>").val().trim();
+
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (email === "") {
+
+            $("#<%= btnSendCertificateEmail.ClientID %>").prop("disabled", true);
+
+            $("#emailValidationMsg")
+                .text("No email found")
+                .show();        ;
+
+        return;
+    }
+
+    if (emailRegex.test(email)) {
+
+        $("#<%= btnSendCertificateEmail.ClientID %>").prop("disabled", false);
+
+        $("#emailValidationMsg").hide();
+
+    }
+    else {
+
+            $("#<%= btnSendCertificateEmail.ClientID %>").prop("disabled", true);
+
+        $("#emailValidationMsg").text("No valid email found")
+            .show();;
         }
+    }
+
+    function downloadReceipt(id) {
+
+        // prevent cache issue
+        var url = "DonationDetails.aspx?downloadReceipt="
+            + id
+            + "&t="
+            + new Date().getTime();
+
+        var iframe = document.createElement("iframe");
+
+        iframe.style.display = "none";
+
+        iframe.src = url;
+
+        document.body.appendChild(iframe);
+
+        setTimeout(function () {
+
+            document.body.removeChild(iframe);
+
+            // ensure popup closed
+            $find('<%= ModalPopupExtender1.ClientID %>').hide();
+
+        $('.modal-backdrop').remove();
+        $('body').removeClass('modal-open');
+
+        // refresh grid only
+           __doPostBack('<%= btnBindGrid.UniqueID %>', '');
+
+       }, 300);
+        return false;
+    }
+
+
 </script>
 </asp:Content>
