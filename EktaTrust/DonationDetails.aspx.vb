@@ -515,101 +515,99 @@ Public Class DonationDetails
         Try
             Dim templateFile As String = Server.MapPath("~/doc/donationTemplate.pdf")
 
-            Dim reader As New iTextSharp.text.pdf.PdfReader(templateFile)
-            Dim pageSize As iTextSharp.text.Rectangle = reader.GetPageSize(1)
+            Using reader As New iTextSharp.text.pdf.PdfReader(templateFile)
+                Dim pageSize As iTextSharp.text.Rectangle = reader.GetPageSize(1)
 
-            Using outputPdf As New MemoryStream()
+                Using outputPdf As New MemoryStream()
 
-                Using stamper As New PdfStamper(reader, outputPdf)
+                    Using stamper As New PdfStamper(reader, outputPdf)
 
-                    Dim bf As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, False)
-                    Dim bfBold As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, False)
-                    Dim cb As PdfContentByte = stamper.GetOverContent(1)
+                        Dim bf As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, False)
+                        Dim bfBold As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1252, False)
+                        Dim cb As PdfContentByte = stamper.GetOverContent(1)
 
-                    cb.BeginText()
+                        cb.BeginText()
 
-                    ' 🔹 Receipt No
-                    cb.SetFontAndSize(bf, 22)
-                    cb.SetTextMatrix(135, 660)
-                    cb.ShowText(serialNo)
+                        ' 🔹 Receipt No
+                        cb.SetFontAndSize(bf, 22)
+                        cb.SetTextMatrix(135, 660)
+                        cb.ShowText(serialNo)
 
-                    ' 🔹 Date
-                    cb.SetTextMatrix(1300, 660)
-                    cb.ShowText(reciptDate)
+                        ' 🔹 Date
+                        cb.SetTextMatrix(1300, 660)
+                        cb.ShowText(reciptDate)
 
-                    ' 🔹 Donor Name
-                    cb.SetFontAndSize(bf, 25)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, name.ToUpper(), 420, 590, 0)
+                        ' 🔹 Donor Name
+                        cb.SetFontAndSize(bf, 25)
+                        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, name.ToUpper(), 420, 590, 0)
 
-                    ' 🔹 Amount in Words
-                    cb.SetFontAndSize(bf, 22)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, PaytmPaymentResponse.NumberToWords(amount), 350, 470, 0)
+                        ' 🔹 Amount in Words
+                        cb.SetFontAndSize(bf, 22)
+                        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, PaytmPaymentResponse.NumberToWords(amount), 350, 470, 0)
 
-                    ' 🔹 Payment Mode
-                    cb.SetFontAndSize(bf, 22)
-                    cb.SetTextMatrix(580, 345)
-                    cb.ShowText(PaytmPaymentResponse.GetPaymentModeName(paymentMode))
+                        ' 🔹 Payment Mode
+                        cb.SetFontAndSize(bf, 22)
+                        cb.SetTextMatrix(580, 345)
+                        cb.ShowText(PaytmPaymentResponse.GetPaymentModeName(paymentMode))
 
-                    ' 🔹 Transaction Id
-                    cb.SetFontAndSize(bf, 20)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, transactionId, 310, 280, 0)
+                        ' 🔹 Transaction Id
+                        cb.SetFontAndSize(bf, 20)
+                        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, transactionId, 310, 280, 0)
 
-                    ' 🔹 Form Date
-                    cb.SetFontAndSize(bf, 22)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, donationDate, 1100, 280, 0)
+                        ' 🔹 Form Date
+                        cb.SetFontAndSize(bf, 22)
+                        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, donationDate, 1100, 280, 0)
 
-                    ' 🔹 Amount Numeric (₹ box)
-                    cb.SetFontAndSize(bf, 30)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, amount, 250, 150, 0)
+                        ' 🔹 Amount Numeric (₹ box)
+                        cb.SetFontAndSize(bf, 30)
+                        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, amount, 250, 150, 0)
 
-                    ' Financial Year bottom
-                    cb.SetColorFill(New BaseColor(59, 56, 49))
-                    cb.SetFontAndSize(bfBold, 27)
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, financialYear, 625, 50, 0)
+                        ' Financial Year bottom
+                        cb.SetColorFill(New BaseColor(59, 56, 49))
+                        cb.SetFontAndSize(bfBold, 27)
+                        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, financialYear, 625, 50, 0)
 
-                    cb.EndText()
+                        cb.EndText()
 
-                    stamper.Close()
-                End Using
-
-                Dim pdfBytes As Byte() = outputPdf.ToArray()
-
-                Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
-
-                Using con As New MySqlConnection(constr)
-                    Using cmd As New MySqlCommand("UPDATE donation SET CertificateGenerated = 1 WHERE DonationID = @id", con)
-
-                        cmd.Parameters.AddWithValue("@id", id) ' pass id into function
-
-                        con.Open()
-                        cmd.ExecuteNonQuery()
+                        stamper.Close()
                     End Using
+
+                    Dim pdfBytes As Byte() = outputPdf.ToArray()
+
+                    Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+                    Using con As New MySqlConnection(constr)
+                        Using cmd As New MySqlCommand("UPDATE donation SET CertificateGenerated = 1 WHERE DonationID = @id", con)
+
+                            cmd.Parameters.AddWithValue("@id", id) ' pass id into function
+
+                            con.Open()
+                            cmd.ExecuteNonQuery()
+                        End Using
+                    End Using
+
+                    Dim fileName As String =
+                      serialNo & "-" &
+                      name.Replace(" ", "") &
+                      "-FY" & financialYear & ".pdf"
+
+                    Response.Clear()
+                    Response.ClearContent()
+                    Response.ClearHeaders()
+
+                    Response.Buffer = True
+                    Response.ContentType = "application/pdf"
+
+                    Response.AddHeader(
+                        "Content-Disposition",
+                        "attachment; filename=" & fileName
+                    )
+
+                    Response.BinaryWrite(pdfBytes)
+                    Response.Flush()
+
+                    HttpContext.Current.Response.End()
                 End Using
-
-                Dim fileName As String =
-                  serialNo & "-" &
-                  name.Replace(" ", "") &
-                  "-FY" & financialYear & ".pdf"
-
-                Response.Clear()
-                Response.ClearContent()
-                Response.ClearHeaders()
-
-                Response.Buffer = True
-                Response.ContentType = "application/pdf"
-
-                Response.AddHeader(
-                    "Content-Disposition",
-                    "attachment; filename=" & fileName
-                )
-
-                Response.BinaryWrite(pdfBytes)
-                Response.Flush()
-
-                Response.SuppressContent = True
-
-                HttpContext.Current.ApplicationInstance.CompleteRequest()
-
                 Return Nothing
             End Using
         Catch ex As Exception

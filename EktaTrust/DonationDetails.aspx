@@ -761,7 +761,7 @@
         // refresh grid only
            __doPostBack('<%= btnBindGrid.UniqueID %>', '');
 
-       }, 300);
+        }, 5000); // IMPORTANT: increased from 300ms to 5000ms
         return false;
     }
 
