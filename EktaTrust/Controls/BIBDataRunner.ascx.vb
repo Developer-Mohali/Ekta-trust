@@ -1298,11 +1298,19 @@ Public Class BIBDataRunner
             Dim transactionId As String = If(IsDBNull(row("TxnId")), "", row("TxnId").ToString())
             Dim bibNo As String = If(IsDBNull(row("BIBNo")), "", row("BIBNo").ToString())
             Dim runCategory As String = If(IsDBNull(row("RunCatagory")), "", row("RunCatagory").ToString())
-            Dim transDate As String = If(IsDBNull(row("createdAt")), "", CommonFunction.ConvertUTCTimeToIndianTimezone(row("createdAt")).ToString("dd/MM/yyyy"))
             Dim runCatagory As String = If(IsDBNull(row("RunCatagory")), "", row("RunCatagory").ToString())
             Dim tShirtSize As String = If(IsDBNull(row("TShirtSize")), "", row("TShirtSize").ToString())
 
-            Dim inputDateConversion As DateTime = DateTime.ParseExact(transDate, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture)
+            Dim inputDateConversion As DateTime = DateTime.MinValue
+            Dim transDate As String = ""
+
+            If Not IsDBNull(row("createdAt")) Then
+
+                inputDateConversion = CommonFunction.ConvertUTCTimeToIndianTimezone(row("createdAt"))
+
+                transDate = inputDateConversion.ToString("dd/MM/yyyy")
+
+            End If
             Dim runDate As String = "14/04/" & inputDateConversion.Year
 
             Dim templateFile As String = Server.MapPath("~/doc/runRegistration.pdf")
