@@ -575,7 +575,11 @@ Public Class DonationDetails
                         stamper.Close()
                     End Using
 
-                    Dim pdfBytes As Byte() = outputPdf.ToArray()
+                    ' =========================
+                    ' Get PDF Bytes
+                    ' =========================
+                    Dim pdfBytes As Byte() =
+                    outputPdf.ToArray()
 
                     Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
 
@@ -589,11 +593,22 @@ Public Class DonationDetails
                         End Using
                     End Using
 
-                    Dim fileName As String =
-                      serialNo & "-" &
-                      name.Replace(" ", "") &
-                      "-FY" & financialYear & ".pdf"
+                    ' =========================
+                    ' Safe File Name
+                    ' =========================
+                    Dim safeName As String =
+                    String.Concat(
+                        name.Split(Path.GetInvalidFileNameChars())
+                    ).Replace(" ", "")
 
+                    Dim fileName As String =
+                    serialNo & "-" &
+                    safeName &
+                    "-FY" & financialYear & ".pdf"
+
+                    ' =========================
+                    ' Download PDF
+                    ' =========================
                     Response.Clear()
                     Response.ClearContent()
                     Response.ClearHeaders()
@@ -602,17 +617,21 @@ Public Class DonationDetails
                     Response.ContentType = "application/pdf"
 
                     Response.AddHeader(
-                        "Content-Disposition",
-                        "attachment; filename=" & fileName
-                    )
+                    "Content-Disposition",
+                    "attachment; filename=""" & fileName & """"
+                )
+
+                    Response.Cache.SetCacheability(HttpCacheability.NoCache)
 
                     Response.BinaryWrite(pdfBytes)
-                    Response.Flush()
 
-                    HttpContext.Current.ApplicationInstance.CompleteRequest()
+                    Response.Flush()
+                    Response.End()
+
                 End Using
-                Return Nothing
             End Using
+
+            Return Nothing
         Catch ex As Exception
             Console.WriteLine(ex)
         End Try
