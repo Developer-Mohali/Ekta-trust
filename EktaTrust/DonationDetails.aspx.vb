@@ -903,14 +903,22 @@ Public Class DonationDetails
                     Dim reader = cmd.ExecuteReader()
 
                     If reader.Read() Then
-
-                        fullName = reader("FullName").ToString()
-                        amount = reader("Amount").ToString()
-
-                        donatedDate =
-                        Convert.ToDateTime(reader("DonationDate")).
-                        ToString("dd MMM yyyy")
-
+                        ' Full Name
+                        If reader("FullName") IsNot DBNull.Value Then
+                            fullName = reader("FullName").ToString()
+                        End If
+                        ' Amount
+                        If reader("Amount") IsNot DBNull.Value Then
+                            amount = reader("Amount").ToString()
+                        End If
+                        ' Donation Date
+                        If reader("DonationDate") IsNot DBNull.Value Then
+                            donatedDate =
+                            Convert.ToDateTime(reader("DonationDate")).
+                            ToString("dd MMM yyyy")
+                        Else
+                            donatedDate = ""
+                        End If
                     End If
 
                 End Using
