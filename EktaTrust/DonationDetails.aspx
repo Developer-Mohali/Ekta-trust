@@ -733,32 +733,42 @@
     }
 
     function downloadReceipt(id) {
-      try {
-        // prevent cache issue
-        var url = "DonationDetails.aspx?downloadReceipt="
-            + encodeURIComponent(id)
-            + "&t="
-            + new Date().getTime();
-            window.open(url, '_blank');
 
-        setTimeout(function () {
+        try {
 
-            // ensure popup closed
-            $find('<%= ModalPopupExtender1.ClientID %>').hide();
+            // Create download URL
+            var url = "DonationDetails.aspx?downloadReceipt="
+                + encodeURIComponent(id)
+                + "&t=" + new Date().getTime();
 
-        $('.modal-backdrop').remove();
-        $('body').removeClass('modal-open');
+            // Download PDF in same page
+            window.location.href = url;
 
-        // refresh grid only
-            __doPostBack('<%= btnBindGrid.UniqueID %>', '');
+            // Refresh grid after certificate generated
+            setTimeout(function () {
 
-        }, 3000);
-       }
-       catch (e) {
+                // Close popup if open
+                var modal = $find('<%= ModalPopupExtender1.ClientID %>');
 
-        console.error("downloadReceipt error", e);
+                if (modal) {
+                    modal.hide();
+                }
 
-       }
+                $('.modal-backdrop').remove();
+                $('body').removeClass('modal-open');
+
+                // Refresh GridView
+                __doPostBack('<%= btnBindGrid.UniqueID %>', '');
+
+            }, 3000);
+
+        }
+        catch (e) {
+
+            console.error("downloadReceipt error", e);
+
+        }
+
         return false;
     }
 

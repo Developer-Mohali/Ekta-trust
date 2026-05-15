@@ -786,17 +786,33 @@ Public Class DonationDetails
     Public Function GetFinancialYear(inputDate As String) As String
         Dim startYear As Integer
         Dim endYear As Integer
-        Dim inputDateConversion As DateTime = DateTime.ParseExact(inputDate, "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture)
+        Dim inputDateConversion As DateTime
 
-        If inputDateConversion.Month >= 4 Then
-            startYear = inputDateConversion.Year
-            endYear = inputDateConversion.Year + 1
+        ' Use TryParseExact to prevent crashes if the format is slightly off
+        ' We also use .Trim() to remove any accidental spaces
+        If DateTime.TryParseExact(inputDate.Trim(), "dd/MM/yyyy", Globalization.CultureInfo.InvariantCulture, Globalization.DateTimeStyles.None, inputDateConversion) Then
+
+            If inputDateConversion.Month >= 4 Then
+                startYear = inputDateConversion.Year
+                endYear = inputDateConversion.Year + 1
+            Else
+                startYear = inputDateConversion.Year - 1
+                endYear = inputDateConversion.Year
+            End If
+
+            Return startYear.ToString() & "-" & endYear.ToString().Substring(2)
         Else
-            startYear = inputDateConversion.Year - 1
-            endYear = inputDateConversion.Year
-        End If
+            ' Fallback logic: If parsing fails, try a standard Parse as a last resort
+            Try
+                inputDateConversion = Convert.ToDateTime(inputDate)
+                ' (Repeat the logic)
+                startYear = If(inputDateConversion.Month >= 4, inputDateConversion.Year, inputDateConversion.Year - 1)
+                endYear = startYear + 1
+                Return startYear.ToString() & "-" & endYear.ToString().Substring(2)
+            Catch
 
-        Return startYear.ToString() & "-" & endYear.ToString().Substring(2)
+            End Try
+        End If
     End Function
 
     Protected Sub btnOpenEmailPopup_Click(sender As Object, e As EventArgs)
