@@ -1249,7 +1249,10 @@ Public Class BIBDataRunner
             Dim btn As LinkButton = CType(sender, LinkButton)
             Dim row As GridViewRow = CType(btn.NamingContainer, GridViewRow)
 
-            Dim orderId As String = row.Cells(9).Text.Trim().ToLower()
+            Dim lblOrderId As Label = CType(row.FindControl("lblOrderId"), Label)
+
+            Dim orderId As String = lblOrderId.Text.Trim().ToLower()
+
 
             Dim paymentStatus As String = row.Cells(8).Text.Trim().ToLower()
             If paymentStatus = "success" Then
