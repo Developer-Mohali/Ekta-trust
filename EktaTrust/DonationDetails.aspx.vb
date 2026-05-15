@@ -514,6 +514,9 @@ Public Class DonationDetails
 
         Try
             Dim templateFile As String = Server.MapPath("~/doc/donationTemplate.pdf")
+            If Not File.Exists(templateFile) Then
+                Throw New Exception("Template file not found: " & templateFile)
+            End If
 
             Using reader As New iTextSharp.text.pdf.PdfReader(templateFile)
                 Dim pageSize As iTextSharp.text.Rectangle = reader.GetPageSize(1)
@@ -606,7 +609,7 @@ Public Class DonationDetails
                     Response.BinaryWrite(pdfBytes)
                     Response.Flush()
 
-                    HttpContext.Current.Response.End()
+                    HttpContext.Current.ApplicationInstance.CompleteRequest()
                 End Using
                 Return Nothing
             End Using

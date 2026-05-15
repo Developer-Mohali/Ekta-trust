@@ -733,24 +733,15 @@
     }
 
     function downloadReceipt(id) {
-
+      try {
         // prevent cache issue
         var url = "DonationDetails.aspx?downloadReceipt="
-            + id
+            + encodeURIComponent(id)
             + "&t="
             + new Date().getTime();
-
-        var iframe = document.createElement("iframe");
-
-        iframe.style.display = "none";
-
-        iframe.src = url;
-
-        document.body.appendChild(iframe);
+            window.open(url, '_blank');
 
         setTimeout(function () {
-
-            document.body.removeChild(iframe);
 
             // ensure popup closed
             $find('<%= ModalPopupExtender1.ClientID %>').hide();
@@ -759,9 +750,15 @@
         $('body').removeClass('modal-open');
 
         // refresh grid only
-           __doPostBack('<%= btnBindGrid.UniqueID %>', '');
+            __doPostBack('<%= btnBindGrid.UniqueID %>', '');
 
-        }, 5000); // IMPORTANT: increased from 300ms to 5000ms
+        }, 3000);
+       }
+       catch (e) {
+
+        console.error("downloadReceipt error", e);
+
+       }
         return false;
     }
 
