@@ -6,13 +6,13 @@ Imports System.IO
 Imports System.Drawing
 Public Class AtrocityReportingDetails
     Inherits System.Web.UI.Page
-    Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
+    'Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         'this is use to load 15 recordes at a time in gridview
-        If con.State = ConnectionState.Closed Then
-            con.Open()
-        End If
+        'If con.State = ConnectionState.Closed Then
+        '    con.Open()
+        'End If
         If Not IsPostBack Then
             gvEvent.AllowPaging = True
             gvEvent.PageSize = 15
@@ -151,26 +151,27 @@ Public Class AtrocityReportingDetails
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
 
-            Dim objDataReader As MySqlDataReader
             Try
-                'HiddenViewUserId.Value = Session("ID").ToString()
-                Using objSqlCmd As New MySqlCommand("SELECT Id,ReporterName,ReporterEmail,ReporterPhone,Details,VictimsName,VictimsMobile,Place,DATE_FORMAT(CreatedDate,'%d/%m/%Y') as DOR FROM ektatrust.AtrocitiesReporting where Id = @id")
+                Using objSqlCmd As New MySqlCommand("SELECT Id,ReporterName,ReporterEmail,ReporterPhone,Details,VictimsName,VictimsMobile,Place,DATE_FORMAT(CreatedDate,'%d/%m/%Y') AS DOR FROM ektatrust.AtrocitiesReporting WHERE Id=@Id", con)
+
                     objSqlCmd.Parameters.AddWithValue("@Id", id)
-                    objSqlCmd.Connection = con
+
                     con.Open()
-                    objDataReader = objSqlCmd.ExecuteReader()
-                    If objDataReader.Read() Then
-                        'Imageurl = objDataReader(35).ToString()
-                        'extension = System.IO.Path.GetExtension(Imageurl)
-                        reporterName.Text = objDataReader(1).ToString()
-                        reporterEmail.Text = objDataReader(2).ToString()
-                        reporterPhone.Text = objDataReader(3).ToString()
-                        details.Text = objDataReader(4).ToString()
-                        victimsName.Text = objDataReader(5).ToString()
-                        victimsMobile.Text = objDataReader(6).ToString()
-                        place.Text = objDataReader(7).ToString()
-                        labelDor.Text = objDataReader(8).ToString()
-                    End If
+
+                    Using objDataReader As MySqlDataReader = objSqlCmd.ExecuteReader()
+
+                        If objDataReader.Read() Then
+                            reporterName.Text = objDataReader(1).ToString()
+                            reporterEmail.Text = objDataReader(2).ToString()
+                            reporterPhone.Text = objDataReader(3).ToString()
+                            details.Text = objDataReader(4).ToString()
+                            victimsName.Text = objDataReader(5).ToString()
+                            victimsMobile.Text = objDataReader(6).ToString()
+                            place.Text = objDataReader(7).ToString()
+                            labelDor.Text = objDataReader(8).ToString()
+                        End If
+
+                    End Using
                 End Using
             Catch ex As Exception
                 Response.Redirect("CareerCounsellingDetails.aspx")

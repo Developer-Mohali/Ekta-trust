@@ -17,18 +17,28 @@ Public Class ManageNews
     End Sub
 
     Protected Sub btnAdd_Click(sender As Object, e As EventArgs)
-        Dim cmd As MySqlCommand = New MySqlCommand("insert into TblNewsDetails(NewsTitle,NewsDescription,CreatedDate,IsActive,IsDeleted) values(@NewsTitle,@NewsDescp,@CreatedDate,@IsActive,@IsDeleted)", con)
-        con.Open()
-        cmd.Parameters.AddWithValue("@NewsTitle", txtNewsTitle.Text)
-        cmd.Parameters.AddWithValue("@NewsDescp", txtNews.Text)
-        cmd.Parameters.AddWithValue("@CreatedDate", DateAndTime.Now)
-        cmd.Parameters.AddWithValue("@IsActive", True)
-        cmd.Parameters.AddWithValue("@IsDeleted", False)
-        cmd.ExecuteNonQuery()
-        con.Close()
+
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+        Using con As New MySqlConnection(constr)
+            Using cmd As New MySqlCommand("insert into TblNewsDetails(NewsTitle,NewsDescription,CreatedDate,IsActive,IsDeleted) values(@NewsTitle,@NewsDescp,@CreatedDate,@IsActive,@IsDeleted)", con)
+
+                cmd.Parameters.AddWithValue("@NewsTitle", txtNewsTitle.Text)
+                cmd.Parameters.AddWithValue("@NewsDescp", txtNews.Text)
+                cmd.Parameters.AddWithValue("@CreatedDate", DateAndTime.Now)
+                cmd.Parameters.AddWithValue("@IsActive", True)
+                cmd.Parameters.AddWithValue("@IsDeleted", False)
+
+                con.Open()
+                cmd.ExecuteNonQuery()
+
+            End Using
+        End Using
+
         BindGridView()
         lblMessage.Text = "Inserted Sucessfully"
         lblMessage.ForeColor = System.Drawing.Color.Green
+
     End Sub
 
     Protected Sub imgbtn_Click(sender As Object, e As ImageClickEventArgs)
@@ -45,15 +55,24 @@ Public Class ManageNews
     End Sub
 
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs)
-        Dim cmd As MySqlCommand = New MySqlCommand("update TblNewsDetails set NewsTitle=@NewsTitle, NewsDescription=@NewsDescp,ModifiedDate=@ModifiedDate, IsActive=@Isactive  WHERE ID = @Id", con)
-        con.Open()
-        cmd.Parameters.AddWithValue("@Id", hdnid.Value)
-        cmd.Parameters.AddWithValue("@NewsTitle", txtNewsTitle.Text)
-        cmd.Parameters.AddWithValue("@NewsDescp", txtNews.Text)
-        cmd.Parameters.AddWithValue("@ModifiedDate", DateAndTime.Now)
-        cmd.Parameters.AddWithValue("Isactive", chkactive.Checked).ToString()
-        cmd.ExecuteNonQuery()
-        con.Close()
+
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+        Using con As New MySqlConnection(constr)
+            Using cmd As New MySqlCommand("update TblNewsDetails set NewsTitle=@NewsTitle, NewsDescription=@NewsDescp,ModifiedDate=@ModifiedDate, IsActive=@Isactive  WHERE ID = @Id", con)
+
+                cmd.Parameters.AddWithValue("@Id", hdnid.Value)
+                cmd.Parameters.AddWithValue("@NewsTitle", txtNewsTitle.Text)
+                cmd.Parameters.AddWithValue("@NewsDescp", txtNews.Text)
+                cmd.Parameters.AddWithValue("@ModifiedDate", DateAndTime.Now)
+                cmd.Parameters.AddWithValue("@Isactive", chkactive.Checked)
+
+                con.Open()
+                cmd.ExecuteNonQuery()
+
+            End Using
+        End Using
+
         BindGridView()
         btnUpdate.Visible = True
         btnCancel.Visible = True
@@ -63,18 +82,27 @@ Public Class ManageNews
     End Sub
 
     Protected Sub gvNews_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)
+
         Dim Id As Integer = Convert.ToInt32(gvNews.DataKeys(e.RowIndex).Values(0))
-        Dim cmd As New MySqlCommand("update TblNewsDetails set IsDeleted=@IsDeleted WHERE ID = @Id", con)
-        cmd.Parameters.AddWithValue("@Id", Id)
-            cmd.Parameters.AddWithValue("@IsDeleted", True)
-            cmd.Connection = con
-            con.Open()
-            cmd.ExecuteNonQuery()
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+        Using con As New MySqlConnection(constr)
+            Using cmd As New MySqlCommand("update TblNewsDetails set IsDeleted=@IsDeleted WHERE ID = @Id", con)
+
+                cmd.Parameters.AddWithValue("@Id", Id)
+                cmd.Parameters.AddWithValue("@IsDeleted", True)
+
+                con.Open()
+                cmd.ExecuteNonQuery()
+
+            End Using
+        End Using
+
         lblMessage.Text = "<b>Deleted Successfully.</b>"
         lblMessage.ForeColor = System.Drawing.Color.Green
-        con.Close()
-        con.Dispose()
+
         BindGridView()
+
     End Sub
 
     Protected Sub gvNews_PageIndexChanging(sender As Object, e As GridViewPageEventArgs)
@@ -82,19 +110,26 @@ Public Class ManageNews
         Me.BindGridView()
     End Sub
     Private Sub BindGridView()
-        Dim cmd As New MySqlCommand("Select * from TblNewsDetails WHERE IsDeleted=0  order by ID desc")
-        Using sda As New MySqlDataAdapter(cmd)
-            cmd.Connection = con
-            con.Open()
-            Dim ds As New DataSet()
-            sda.Fill(ds)
-            If ds.Tables(0).Rows.Count > 0 Then
-                gvNews.DataSource = ds
-                gvNews.DataBind()
-            End If
-            con.Close()
 
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+
+        Using con As New MySqlConnection(constr)
+            Using cmd As New MySqlCommand("Select * from TblNewsDetails WHERE IsDeleted=0 order by ID desc", con)
+
+                Using sda As New MySqlDataAdapter(cmd)
+                    Dim ds As New DataSet()
+                    sda.Fill(ds)
+
+                    If ds.Tables(0).Rows.Count > 0 Then
+                        gvNews.DataSource = ds
+                        gvNews.DataBind()
+                    End If
+
+                End Using
+
+            End Using
         End Using
+
     End Sub
     Public Sub Clear()
         txtNews.Text = ""

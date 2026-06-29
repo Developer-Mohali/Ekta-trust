@@ -1,15 +1,16 @@
-﻿Imports System.Web.UI.WebControls
+﻿Imports System.Configuration
 Imports System.Data
 Imports System.Data.SqlClient
-Imports System.Configuration
+Imports System.Drawing
+Imports System.Web.UI.WebControls
 Imports MySql.Data.MySqlClient
 Public Class SUGGESTIONTRUSTACTIVITIES
     Inherits System.Web.UI.Page
-    Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
+    'Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If con.State = ConnectionState.Closed Then
-            con.Open()
-        End If
+        'If con.State = ConnectionState.Closed Then
+        '    con.Open()
+        'End If
         If Not IsPostBack Then
             gvPerson.AllowPaging = True
             gvPerson.PageSize = 15
@@ -46,12 +47,11 @@ Public Class SUGGESTIONTRUSTACTIVITIES
             dt.Clear()
             dt.Dispose()
             cmd.Dispose()
-            con.Close()
             'BindEmpGrid()
         End Try
     End Sub
     Private Sub BindGridView()
-         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+        Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
             Using cmd As New MySqlCommand("select_SUGGESTION")
 
@@ -85,15 +85,21 @@ Public Class SUGGESTIONTRUSTACTIVITIES
     End Sub
     Private Sub getEmpRecords(searchBy As String, searchVal As String)
         Dim dt As New DataTable()
-        Dim cmd As New MySqlCommand()
-        Dim adp As New MySqlDataAdapter()
         Try
-            cmd = New MySqlCommand("Select_TrustSearch", con)
-            cmd.CommandType = CommandType.StoredProcedure
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand("Select_TrustSearch", con)
+                    cmd.CommandType = CommandType.StoredProcedure
             cmd.Parameters.AddWithValue("@SearchBy", searchBy)
             cmd.Parameters.AddWithValue("@SearchValue", searchVal)
-            adp.SelectCommand = cmd
-            adp.Fill(dt)
+                    Using adp As New MySqlDataAdapter(cmd)
+                        adp.Fill(dt)
+                    End Using
+
+                End Using
+
+            End Using
+
             If dt.Rows.Count > 0 Then
                 gvPerson.DataSource = dt
                 gvPerson.DataBind()
@@ -106,8 +112,6 @@ Public Class SUGGESTIONTRUSTACTIVITIES
         Finally
             dt.Clear()
             dt.Dispose()
-            cmd.Dispose()
-            con.Close()
         End Try
     End Sub
    

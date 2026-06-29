@@ -8,15 +8,15 @@ Imports System.Drawing
 Public Class MatrimonialDetails
 
     Inherits System.Web.UI.Page
-    Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
+    'Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
     Private ctrl As Object
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         'this is use to load 15 recordes at a time in gridview
-        If con.State = ConnectionState.Closed Then
-            con.Open()
-        End If
+        'If con.State = ConnectionState.Closed Then
+        '    con.Open()
+        'End If
         If Not IsPostBack Then
             gvEvent.AllowPaging = True
             gvEvent.PageSize = 15

@@ -9,7 +9,7 @@ Imports Mysqlx.XDevAPI.Common
 
 Public Class DonationDetails
     Inherits System.Web.UI.Page
-    Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
+    'Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Session("EmailStatus") IsNot Nothing AndAlso Session("EmailStatus").ToString() = "SUCCESS" Then
@@ -29,9 +29,9 @@ Public Class DonationDetails
 
         End If
 
-        If con.State = ConnectionState.Closed Then
-            con.Open()
-        End If
+        'If con.State = ConnectionState.Closed Then
+        '    con.Open()
+        'End If
         If Not IsPostBack Then
             'ScriptManager.RegisterStartupScript(
             'Me,

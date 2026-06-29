@@ -8,11 +8,11 @@ Imports System.Drawing
 
 Public Class Joining
     Inherits System.Web.UI.Page
-    Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
+    'Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If con.State = ConnectionState.Closed Then
-            con.Open()
-        End If
+        'If con.State = ConnectionState.Closed Then
+        '    con.Open()
+        'End If
         If Not IsPostBack Then
             gvPerson.AllowPaging = True
             gvPerson.PageSize = 15
@@ -48,7 +48,6 @@ Public Class Joining
             dt.Clear()
             dt.Dispose()
             cmd.Dispose()
-            con.Close()
             'BindEmpGrid()
         End Try
     End Sub
@@ -89,15 +88,18 @@ Public Class Joining
     End Sub
     Private Sub getEmpRecords(searchBy As String, searchVal As String)
         Dim dt As New DataTable()
-        Dim cmd As New MySqlCommand()
-        Dim adp As New MySqlDataAdapter()
         Try
-            cmd = New MySqlCommand("Select_Search", con)
-            cmd.CommandType = CommandType.StoredProcedure
-            cmd.Parameters.AddWithValue("@SearchBy", searchBy)
-            cmd.Parameters.AddWithValue("@SearchValue", searchVal)
-            adp.SelectCommand = cmd
-            adp.Fill(dt)
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
+            Using con As New MySqlConnection(constr)
+                Using cmd As New MySqlCommand("Select_Search", con)
+                    cmd.CommandType = CommandType.StoredProcedure
+                    cmd.Parameters.AddWithValue("@SearchBy", searchBy)
+                    cmd.Parameters.AddWithValue("@SearchValue", searchVal)
+                    Using adp As New MySqlDataAdapter(cmd)
+                        adp.Fill(dt)
+                    End Using
+                End Using
+            End Using
             If dt.Rows.Count > 0 Then
                 gvPerson.DataSource = dt
                 gvPerson.DataBind()
@@ -110,8 +112,6 @@ Public Class Joining
         Finally
             dt.Clear()
             dt.Dispose()
-            cmd.Dispose()
-            con.Close()
         End Try
     End Sub
     Protected Sub OnRowDataBound(sender As Object, e As GridViewRowEventArgs)

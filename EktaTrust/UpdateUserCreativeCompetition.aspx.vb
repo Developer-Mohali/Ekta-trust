@@ -7,7 +7,7 @@ Imports MySql.Data.MySqlClient
 
 Public Class UpdateUserCreativeCompetition
     Inherits System.Web.UI.Page
-    Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
+    'Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         If Session("RoleId") Is Nothing Then
@@ -16,9 +16,9 @@ Public Class UpdateUserCreativeCompetition
         End If
 
         ' Your existing Page_Load logic
-        If con.State = ConnectionState.Closed Then
-            con.Open()
-        End If
+        'If con.State = ConnectionState.Closed Then
+        '    con.Open()
+        'End If
 
         If Not IsPostBack Then
             Dim userId As String = Request.QueryString("UserId")

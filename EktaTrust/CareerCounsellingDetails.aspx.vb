@@ -7,13 +7,9 @@ Imports System.Drawing
 
 Public Class CareerCounsellingDetails
     Inherits System.Web.UI.Page
-    Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         'this is use to load 15 recordes at a time in gridview
-        If con.State = ConnectionState.Closed Then
-            con.Open()
-        End If
         If Not IsPostBack Then
             gvEvent.AllowPaging = True
             gvEvent.PageSize = 15
@@ -98,14 +94,15 @@ Public Class CareerCounsellingDetails
                     objcmd.ExecuteNonQuery()
                     con.Close()
                     con.Dispose()
-                    Dim da As New MySqlDataAdapter(objcmd)
-                    Dim dt As New DataTable()
-                    da.Fill(ds)
+                    Using da As New MySqlDataAdapter(objcmd)
+                        Dim dt As New DataTable()
+                        da.Fill(ds)
+                    End Using
                     'messageBody = "<p>Dear " & Convert.ToString(ds.Tables(0).Rows(0)("Name")) & ",</p><p>Your account has been deleted </p><p>From Ekta Navnirman Trust.</p><p>Regards,</p><br/>Administrator<br/>Ekta Navnirman Trust</p>"
                     'email = Convert.ToString(ds.Tables(0).Rows(0)("EmailId"))
                     'SendEmail.EventsendMailUser(email, "Notification for account delete", messageBody)
                 End Using
-            End Using
+                End Using
             BindGridView()
         Catch ex As Exception
         End Try
@@ -164,25 +161,26 @@ Public Class CareerCounsellingDetails
 
             'Dim extension As String
             'Dim Imageurl As String
-            Dim objDataReader As MySqlDataReader
             Try
                 'HiddenViewUserId.Value = Session("ID").ToString()
                 Using objSqlCmd As New MySqlCommand("SELECT Id,Name,Email,Phone,Message,Address,Education,DATE_FORMAT(CreatedDate,'%d/%m/%Y') as DOR FROM ektatrust.CareerCounselling where Id = @id")
                     objSqlCmd.Parameters.AddWithValue("@Id", id)
                     objSqlCmd.Connection = con
                     con.Open()
-                    objDataReader = objSqlCmd.ExecuteReader()
-                    If objDataReader.Read() Then
-                        'Imageurl = objDataReader(35).ToString()
-                        'extension = System.IO.Path.GetExtension(Imageurl)
-                        lblName.Text = objDataReader(1).ToString()
-                        lblEmail.Text = objDataReader(2).ToString()
-                        lblMobileNo.Text = objDataReader(3).ToString()
-                        lblAreaOfInterest.Text = objDataReader(4).ToString()
-                        lblAddress.Text = objDataReader(5).ToString()
-                        lblEducation.Text = objDataReader(6).ToString()
-                        labelDor.Text = objDataReader(7).ToString()
-                    End If
+
+                    Using objDataReader As MySqlDataReader = objSqlCmd.ExecuteReader()
+                        If objDataReader.Read() Then
+                            'Imageurl = objDataReader(35).ToString()
+                            'extension = System.IO.Path.GetExtension(Imageurl)
+                            lblName.Text = objDataReader(1).ToString()
+                            lblEmail.Text = objDataReader(2).ToString()
+                            lblMobileNo.Text = objDataReader(3).ToString()
+                            lblAreaOfInterest.Text = objDataReader(4).ToString()
+                            lblAddress.Text = objDataReader(5).ToString()
+                            lblEducation.Text = objDataReader(6).ToString()
+                            labelDor.Text = objDataReader(7).ToString()
+                        End If
+                    End Using
                 End Using
             Catch ex As Exception
                 Response.Redirect("CareerCounsellingDetails.aspx")
