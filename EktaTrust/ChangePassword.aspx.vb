@@ -34,20 +34,20 @@ Public Class ChangePassword
                 con.Open()
 
                 ' Check and Update new password
-                Dim cmd As New MySqlCommand("UPDATE signup SET Password=@NewPassword WHERE UserId=@UserId AND Password=@Password", con)
-                cmd.Parameters.AddWithValue("@NewPassword", newPassword)
-                cmd.Parameters.AddWithValue("@UserId", userId)
-                cmd.Parameters.AddWithValue("@Password", oldPassword)
+                Using cmd As New MySqlCommand("UPDATE signup SET Password=@NewPassword WHERE UserId=@UserId AND Password=@Password", con)
+                    cmd.Parameters.AddWithValue("@NewPassword", newPassword)
+                    cmd.Parameters.AddWithValue("@UserId", userId)
+                    cmd.Parameters.AddWithValue("@Password", oldPassword)
 
-                Dim rows As Integer = cmd.ExecuteNonQuery()
+                    Dim rows As Integer = cmd.ExecuteNonQuery()
 
-                If rows > 0 Then
-                    lblErrorMsg.ForeColor = Drawing.Color.Green
-                    lblErrorMsg.Text = "Password changed successfully!"
-                Else
-                    lblErrorMsg.Text = "Old password is incorrect."
-                End If
-
+                    If rows > 0 Then
+                        lblErrorMsg.ForeColor = Drawing.Color.Green
+                        lblErrorMsg.Text = "Password changed successfully!"
+                    Else
+                        lblErrorMsg.Text = "Old password is incorrect."
+                    End If
+                End Using
             End Using
 
         Catch ex As Exception
@@ -70,13 +70,14 @@ Public Class ChangePassword
                     con.Open()
                     cmd.ExecuteNonQuery()
                     'userId = Convert.ToInt32(cmd.ExecuteScalar())
-                    Dim da As New MySqlDataAdapter(cmd)
-                    Dim dt As New DataTable()
-                    da.Fill(dt)
+                    Using da As New MySqlDataAdapter(cmd)
+                        Dim dt As New DataTable()
+                        da.Fill(dt)
+                    End Using
                     con.Close()
-                    'lblErrorMsg.Text = "Successfully Change Password"
+                        'lblErrorMsg.Text = "Successfully Change Password"
+                    End Using
                 End Using
-            End Using
 
         End Using
     End Sub

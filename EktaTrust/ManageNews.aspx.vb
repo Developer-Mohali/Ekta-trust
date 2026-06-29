@@ -4,7 +4,7 @@ Public Class ManageNews
 
     Inherits System.Web.UI.Page
     Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
-    Dim con As New MySqlConnection(constr)
+    'Dim con As New MySqlConnection(constr)
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             BindGridView()

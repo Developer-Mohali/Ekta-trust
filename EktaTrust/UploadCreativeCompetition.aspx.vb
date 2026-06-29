@@ -16,22 +16,23 @@ Public Class UploadCreativeCompetition
         Try
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As New MySqlConnection(constr)
-                Dim cmd As New MySqlCommand("SELECT Id, Name, EmailID, MobileNumber, Contest, Address FROM RegistrationCreativeCompetition WHERE MobileNumber = @MobileNumber LIMIT 1", con)
-                cmd.Parameters.AddWithValue("@MobileNumber", mobile)
-                con.Open()
-                Using dr As MySqlDataReader = cmd.ExecuteReader()
-                    If dr.Read() Then
-                        result("success") = True
-                        result("Name") = dr("Name").ToString()
-                        result("Email") = dr("EmailID").ToString()
-                        result("Mobile") = dr("MobileNumber").ToString()
-                        result("Contest") = dr("Contest").ToString()
-                        result("Address") = dr("Address").ToString()
-                        result("ID") = dr("Id").ToString()
-                    Else
-                        result("success") = False
-                        result("message") = "Mobile number not found."
-                    End If
+                Using cmd As New MySqlCommand("SELECT Id, Name, EmailID, MobileNumber, Contest, Address FROM RegistrationCreativeCompetition WHERE MobileNumber = @MobileNumber LIMIT 1", con)
+                    cmd.Parameters.AddWithValue("@MobileNumber", mobile)
+                    con.Open()
+                    Using dr As MySqlDataReader = cmd.ExecuteReader()
+                        If dr.Read() Then
+                            result("success") = True
+                            result("Name") = dr("Name").ToString()
+                            result("Email") = dr("EmailID").ToString()
+                            result("Mobile") = dr("MobileNumber").ToString()
+                            result("Contest") = dr("Contest").ToString()
+                            result("Address") = dr("Address").ToString()
+                            result("ID") = dr("Id").ToString()
+                        Else
+                            result("success") = False
+                            result("message") = "Mobile number not found."
+                        End If
+                    End Using
                 End Using
             End Using
         Catch ex As Exception

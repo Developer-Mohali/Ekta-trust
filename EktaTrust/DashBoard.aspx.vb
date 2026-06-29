@@ -25,21 +25,22 @@ Public Class DashBoard
                 Using cmd As New MySqlCommand("sp_GetDashboardSummary", con)
                     cmd.CommandType = CommandType.StoredProcedure
                     con.Open()
-                    Dim reader As MySqlDataReader = cmd.ExecuteReader()
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
 
-                    If reader.Read() Then
-                        ' Retrieve values using the aliases we set in the stored procedure
-                        Dim totalUsers As Integer = Convert.ToInt32(reader("TotalUsers"))
-                        Dim totalVisitor As Integer = Convert.ToInt32(reader("TotalVisitor"))
-                        Dim totalDonations As Decimal = If(IsDBNull(reader("TotalDonations")), 0, Convert.ToDecimal(reader("TotalDonations")))
+                        If reader.Read() Then
+                            ' Retrieve values using the aliases we set in the stored procedure
+                            Dim totalUsers As Integer = Convert.ToInt32(reader("TotalUsers"))
+                            Dim totalVisitor As Integer = Convert.ToInt32(reader("TotalVisitor"))
+                            Dim totalDonations As Decimal = If(IsDBNull(reader("TotalDonations")), 0, Convert.ToDecimal(reader("TotalDonations")))
 
-                        ' Bind the data to the labels and format them beautifully
-                        ' "N0" adds thousand separators (e.g., 1,245)
-                        ' "C0" formats as currency with no decimals (e.g., $45,250)
-                        lblTotalUsers.Text = totalUsers.ToString("N0")
-                        lblTotalVisitor.Text = totalVisitor.ToString("N0")
-                        lblTotalDonations.Text = totalDonations.ToString("C0", CultureInfo.CreateSpecificCulture("hi-IN"))
-                    End If
+                            ' Bind the data to the labels and format them beautifully
+                            ' "N0" adds thousand separators (e.g., 1,245)
+                            ' "C0" formats as currency with no decimals (e.g., $45,250)
+                            lblTotalUsers.Text = totalUsers.ToString("N0")
+                            lblTotalVisitor.Text = totalVisitor.ToString("N0")
+                            lblTotalDonations.Text = totalDonations.ToString("C0", CultureInfo.CreateSpecificCulture("hi-IN"))
+                        End If
+                    End Using
                 End Using
             End Using
         Catch ex As Exception
@@ -68,17 +69,18 @@ Public Class DashBoard
                 Using cmd As New MySqlCommand("sp_GetMonthlyDonationTrend", conn)
                     cmd.CommandType = CommandType.StoredProcedure
                     conn.Open()
-                    Dim reader As MySqlDataReader = cmd.ExecuteReader()
-                    While reader.Read()
-                        Dim mName As String = reader("MonthName").ToString()
-                        If successData.ContainsKey(mName) Then
-                            successData(mName) = Convert.ToDecimal(reader("SuccessTotal"))
-                            failedData(mName) = Convert.ToDecimal(reader("FailedTotal"))
-                            cancelledData(mName) = Convert.ToDecimal(reader("CancelledTotal"))
-                        End If
-                    End While
+                    Using reader As MySqlDataReader = cmd.ExecuteReader()
+                        While reader.Read()
+                            Dim mName As String = reader("MonthName").ToString()
+                            If successData.ContainsKey(mName) Then
+                                successData(mName) = Convert.ToDecimal(reader("SuccessTotal"))
+                                failedData(mName) = Convert.ToDecimal(reader("FailedTotal"))
+                                cancelledData(mName) = Convert.ToDecimal(reader("CancelledTotal"))
+                            End If
+                        End While
+                    End Using
                 End Using
-            End Using
+                End Using
 
             ' Join the dictionary values into comma-separated strings
             Dim labelsArr As String = String.Join(",", monthLabels)

@@ -59,20 +59,20 @@ Public Class Certificate
             Using cmd As New MySqlCommand(GetYears, con)
                 con.Open()
 
-                Dim reader As MySqlDataReader = cmd.ExecuteReader()
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
 
-                ' Clear existing items before binding
-                DdlYear.Items.Clear()
+                    ' Clear existing items before binding
+                    DdlYear.Items.Clear()
 
-                ' Add years from the database
-                While reader.Read()
-                    Dim year As Integer = reader.GetInt32("year")
-                    DdlYear.Items.Add(year.ToString())
-                End While
-
+                    ' Add years from the database
+                    While reader.Read()
+                        Dim year As Integer = reader.GetInt32("year")
+                        DdlYear.Items.Add(year.ToString())
+                    End While
+                End Using
                 con.Close()
+                End Using
             End Using
-        End Using
     End Sub
 
     Protected Sub DownloadButton1_Click(sender As Object, e As EventArgs)

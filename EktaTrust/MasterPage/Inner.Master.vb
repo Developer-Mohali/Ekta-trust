@@ -48,14 +48,14 @@ Public Class Inner
 
             con.Open()
             Str = (Convert.ToString("select EmailAddress from signup where EmailAddress='") & EmailAddress) + "'"
-            sqlda = New MySqlDataAdapter(Str, con)
             dt = New DataTable()
-            sqlda.Fill(dt)
-            sqlda.Dispose()
+            Using sqlda As New MySqlDataAdapter(Str, con)
+                sqlda.Fill(dt)
+            End Using
             GridView1.DataSource = dt
-            GridView1.DataBind()
-            con.Close()
-        End Using
+                GridView1.DataBind()
+                con.Close()
+            End Using
     End Sub
 
     Protected Sub ButtonLogout_Click(ByVal sender As Object, ByVal e As EventArgs)

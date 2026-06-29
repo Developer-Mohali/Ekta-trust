@@ -87,16 +87,17 @@ Public Class CareerCounsellingDetails
                     con.Close()
                     con.Dispose()
 
-                    Dim objcmd As New MySqlCommand("select Id,Name,Email from ektatrust.CareerCounselling where Id =@Id", con)
-                    objcmd.Parameters.AddWithValue("@Id", Id)
-                    objcmd.Connection = con
-                    con.Open()
-                    objcmd.ExecuteNonQuery()
-                    con.Close()
-                    con.Dispose()
-                    Using da As New MySqlDataAdapter(objcmd)
-                        Dim dt As New DataTable()
-                        da.Fill(ds)
+                    Using objcmd As New MySqlCommand("select Id,Name,Email from ektatrust.CareerCounselling where Id =@Id", con)
+                        objcmd.Parameters.AddWithValue("@Id", Id)
+                        objcmd.Connection = con
+                        con.Open()
+                        objcmd.ExecuteNonQuery()
+                        con.Close()
+                        con.Dispose()
+                        Using da As New MySqlDataAdapter(objcmd)
+                            Dim dt As New DataTable()
+                            da.Fill(ds)
+                        End Using
                     End Using
                     'messageBody = "<p>Dear " & Convert.ToString(ds.Tables(0).Rows(0)("Name")) & ",</p><p>Your account has been deleted </p><p>From Ekta Navnirman Trust.</p><p>Regards,</p><br/>Administrator<br/>Ekta Navnirman Trust</p>"
                     'email = Convert.ToString(ds.Tables(0).Rows(0)("EmailId"))
@@ -272,22 +273,24 @@ Public Class CareerCounsellingDetails
                     con.Close()
                     con.Dispose()
 
-                    Dim objcmd As New MySqlCommand("select Name, EmailId from matrimonialDetails where ID =@id", con)
-                    objcmd.Parameters.AddWithValue("@id", Id)
-                    objcmd.Connection = con
-                    con.Open()
-                    objcmd.ExecuteNonQuery()
-                    con.Close()
-                    con.Dispose()
-                    'userId = Convert.ToInt32(cmd.ExecuteScalar())
-                    Dim da As New MySqlDataAdapter(objcmd)
-                    Dim dt As New DataTable()
-                    da.Fill(ds)
-                    messageBody = "<p>Dear " & Convert.ToString(ds.Tables(0).Rows(0)("Name")) & ",</p><p>Your account has been deleted </p><p>From Ekta Navnirman Trust.</p><p>Regards,</p><br/>Administrator<br/>Ekta Navnirman Trust</p>"
-                    email = Convert.ToString(ds.Tables(0).Rows(0)("EmailId"))
-                    SendEmail.EventsendMailUser(email, "Notification for account delete", messageBody)
+                    Using objcmd As New MySqlCommand("select Name, EmailId from matrimonialDetails where ID =@id", con)
+                        objcmd.Parameters.AddWithValue("@id", Id)
+                        objcmd.Connection = con
+                        con.Open()
+                        objcmd.ExecuteNonQuery()
+                        con.Close()
+                        con.Dispose()
+                        'userId = Convert.ToInt32(cmd.ExecuteScalar())
+                        Using da As New MySqlDataAdapter(objcmd)
+                            Dim dt As New DataTable()
+                            da.Fill(ds)
+                            messageBody = "<p>Dear " & Convert.ToString(ds.Tables(0).Rows(0)("Name")) & ",</p><p>Your account has been deleted </p><p>From Ekta Navnirman Trust.</p><p>Regards,</p><br/>Administrator<br/>Ekta Navnirman Trust</p>"
+                            email = Convert.ToString(ds.Tables(0).Rows(0)("EmailId"))
+                            SendEmail.EventsendMailUser(email, "Notification for account delete", messageBody)
+                        End Using
+                    End Using
                 End Using
-            End Using
+                End Using
             RequestGridBind()
         Catch ex As Exception
         End Try

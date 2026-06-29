@@ -18,17 +18,19 @@ Public Class ForgetUserPassword
             Dim ds As New DataSet()
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As New MySqlConnection(constr)
-                Dim cmd As New MySqlCommand("select Name, EmailId, Password from matrimonialDetails where PhoneNo =@Phone", con)
-                cmd.Parameters.AddWithValue("@Phone", txtPhoneNo.Text)
-                cmd.Connection = con
-                con.Open()
-                cmd.ExecuteNonQuery()
-                'userId = Convert.ToInt32(cmd.ExecuteScalar())
-                Dim da As New MySqlDataAdapter(cmd)
-                Dim dt As New DataTable()
-                da.Fill(ds)
-            End Using
-            If ds.Tables(0).Rows.Count > 0 Then
+                Using cmd As New MySqlCommand("select Name, EmailId, Password from matrimonialDetails where PhoneNo =@Phone", con)
+                    cmd.Parameters.AddWithValue("@Phone", txtPhoneNo.Text)
+                    cmd.Connection = con
+                    con.Open()
+                    cmd.ExecuteNonQuery()
+                    'userId = Convert.ToInt32(cmd.ExecuteScalar())
+                    Using da As New MySqlDataAdapter(cmd)
+                        Dim dt As New DataTable()
+                        da.Fill(ds)
+                    End Using
+                End Using
+                End Using
+                If ds.Tables(0).Rows.Count > 0 Then
 
                 messageBody = "Hi " & Convert.ToString(ds.Tables(0).Rows(0)("Name")) & ", Please check your login details. User name: " + txtPhoneNo.Text & " Password: " & Convert.ToString(ds.Tables(0).Rows(0)("Password")) & " https://ektatrust.org.in/MatrimonialLogin Click here to login Regards, Administrator Ekta Trust ektatrust.org.in"
                 'messageBody = "Dear " + Convert.ToString(ds.Tables(0).Rows(0)("Name")) + ", Your Password is " + Convert.ToString(ds.Tables(0).Rows(0)("Password")) + " for Matrimonial on Ekta Navnirman Trust.Regards, Administrator Ekta Navnirman Trust www.ektatrust.org.in"

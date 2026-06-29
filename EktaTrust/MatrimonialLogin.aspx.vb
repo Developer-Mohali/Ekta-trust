@@ -36,62 +36,62 @@ Public Class MatrimonialLogin
         'Dim RememberMe As String = If(chkRememberMe.Checked, "Y", "N")
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Using con As New MySqlConnection(constr)
-            Dim cmd As New MySqlCommand("select  Name, ID , Password from matrimonialDetails where PhoneNo =@Phone and Password=@Password and IsDeleted=false ", con)
-            cmd.Parameters.AddWithValue("@Phone", txtPhoneNo.Text)
-            cmd.Parameters.AddWithValue("@Password", TextPassword.Text)
-            'cmd.Parameters.AddWithValue("@RememberMe", RememberMe)
-            cmd.Connection = con
-            con.Open()
-            cmd.ExecuteNonQuery()
-            'userId = Convert.ToInt32(cmd.ExecuteScalar())
-            Dim da As New MySqlDataAdapter(cmd)
-            Dim dt As New DataTable()
-            da.Fill(dt)
-
-            If dt.Rows.Count > 0 Then
-                rd = cmd.ExecuteReader()
-                While rd.Read()
-                    'gridview has 2 columns only(name, type)
-                    Session("Name") = rd(0).ToString()
-                    Session("ID") = rd(1).ToString()
-                    Dim ss = Session("ID").ToString()
-                End While
-                Response.Redirect("Profile.aspx")
-
-            ElseIf dt.Rows.Count = 0 Then
-                Dim cmds As New MySqlCommand("select Name,ID,Password from matrimonialDetails where PhoneNo=@Phone and Password=@Password and IsDeleted=false", con)
-                cmds.Parameters.AddWithValue("@Phone", txtPhoneNo.Text)
-                cmds.Parameters.AddWithValue("@Password", TextPassword.Text)
-                'cmds.Parameters.AddWithValue("@RememberMe", RememberMe)
-                cmds.Connection = con
-
-                cmds.ExecuteNonQuery()
+            Using cmd As New MySqlCommand("select  Name, ID , Password from matrimonialDetails where PhoneNo =@Phone and Password=@Password and IsDeleted=false ", con)
+                cmd.Parameters.AddWithValue("@Phone", txtPhoneNo.Text)
+                cmd.Parameters.AddWithValue("@Password", TextPassword.Text)
+                'cmd.Parameters.AddWithValue("@RememberMe", RememberMe)
+                cmd.Connection = con
+                con.Open()
+                cmd.ExecuteNonQuery()
                 'userId = Convert.ToInt32(cmd.ExecuteScalar())
-                Dim dataAdapter As New MySqlDataAdapter(cmds)
-                Dim DataTable As New DataTable()
-                dataAdapter.Fill(DataTable)
-
-                If DataTable.Rows.Count > 0 Then
-                    rd = cmds.ExecuteReader()
+                Dim dt As New DataTable()
+                Using da As New MySqlDataAdapter(cmd)
+                    da.Fill(dt)
+                End Using
+                If dt.Rows.Count > 0 Then
+                    rd = cmd.ExecuteReader()
                     While rd.Read()
                         'gridview has 2 columns only(name, type)
                         Session("Name") = rd(0).ToString()
                         Session("ID") = rd(1).ToString()
-
+                        Dim ss = Session("ID").ToString()
                     End While
                     Response.Redirect("Profile.aspx")
 
-                Else
-                    ClientScript.RegisterStartupScript(Page.[GetType](), "validation", "<script language='javascript'>alert('Invalid PhoneNo and Password')</script>")
+                ElseIf dt.Rows.Count = 0 Then
+                    Using cmds As New MySqlCommand("select Name,ID,Password from matrimonialDetails where PhoneNo=@Phone and Password=@Password and IsDeleted=false", con)
+                        cmds.Parameters.AddWithValue("@Phone", txtPhoneNo.Text)
+                        cmds.Parameters.AddWithValue("@Password", TextPassword.Text)
+                        'cmds.Parameters.AddWithValue("@RememberMe", RememberMe)
+                        cmds.Connection = con
 
+                        cmds.ExecuteNonQuery()
+                        'userId = Convert.ToInt32(cmd.ExecuteScalar())
+                        Dim DataTable As New DataTable()
+                        Using dataAdapter As New MySqlDataAdapter(cmds)
+                            dataAdapter.Fill(DataTable)
+                        End Using
+                        If DataTable.Rows.Count > 0 Then
+                            rd = cmds.ExecuteReader()
+                            While rd.Read()
+                                'gridview has 2 columns only(name, type)
+                                Session("Name") = rd(0).ToString()
+                                Session("ID") = rd(1).ToString()
+
+                            End While
+                            Response.Redirect("Profile.aspx")
+
+                        Else
+                            ClientScript.RegisterStartupScript(Page.[GetType](), "validation", "<script language='javascript'>alert('Invalid PhoneNo and Password')</script>")
+
+                        End If
+
+                        ClientScript.RegisterStartupScript(Page.[GetType](), "validation", "<script language='javascript'>alert('Invalid PhoneNo and Password')</script>")
+                    End Using
                 End If
-
-                ClientScript.RegisterStartupScript(Page.[GetType](), "validation", "<script language='javascript'>alert('Invalid PhoneNo and Password')</script>")
-
-            End If
-            con.Close()
-            con.Dispose()
-
+                con.Close()
+                con.Dispose()
+            End Using
         End Using
     End Sub
 

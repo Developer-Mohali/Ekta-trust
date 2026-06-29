@@ -2,7 +2,7 @@
 
 Public Class TemplateListing
     Inherits System.Web.UI.Page
-    Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
+    'Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Session("RoleId") Is Nothing Then
@@ -78,39 +78,41 @@ Public Class TemplateListing
             lblCategory.Text = gvrow.Cells(0).Text
             Dim roleId = Session("RoleId").ToString()
             Dim smsType = gvrow.Cells(3).Text
-         
-            If roleId = "2" Then
-                Using cmd As New MySqlCommand("Select * from Template WHERE id=" + id.Text + "")
-                    Dim GetData As New List(Of SendEmail)()
-                    cmd.Connection = con
-                    con.Open()
-                    Using sdr As MySqlDataReader = cmd.ExecuteReader()
-                        While (sdr.Read())
-                            txtMessage.Text = sdr("Message").ToString()
-                            txtTitle.Text = sdr("Title").ToString()
-                            txtMessage.ReadOnly = True
-                            txtTitle.ReadOnly = True
-                            btnUpdate.Visible = False
-                          
-                        End While
-                    End Using
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
 
-                End Using
-            Else
-                Using cmd As New MySqlCommand("Select * from Template WHERE id=" + id.Text + "")
-                    Dim GetData As New List(Of SendEmail)()
-                    cmd.Connection = con
-                    con.Open()
-                    Using sdr As MySqlDataReader = cmd.ExecuteReader()
-                        While (sdr.Read())
-                            txtMessage.Text = sdr("Message").ToString()
-                            txtTitle.Text = sdr("Title").ToString()
-                        End While
-                    End Using
+            Using con As New MySqlConnection(constr)
+                If roleId = "2" Then
+                    Using cmd As New MySqlCommand("Select * from Template WHERE id=" + id.Text + "")
+                        Dim GetData As New List(Of SendEmail)()
+                        cmd.Connection = con
+                        con.Open()
+                        Using sdr As MySqlDataReader = cmd.ExecuteReader()
+                            While (sdr.Read())
+                                txtMessage.Text = sdr("Message").ToString()
+                                txtTitle.Text = sdr("Title").ToString()
+                                txtMessage.ReadOnly = True
+                                txtTitle.ReadOnly = True
+                                btnUpdate.Visible = False
 
-                End Using
-            End If
-           
+                            End While
+                        End Using
+
+                    End Using
+                Else
+                    Using cmd As New MySqlCommand("Select * from Template WHERE id=" + id.Text + "")
+                        Dim GetData As New List(Of SendEmail)()
+                        cmd.Connection = con
+                        con.Open()
+                        Using sdr As MySqlDataReader = cmd.ExecuteReader()
+                            While (sdr.Read())
+                                txtMessage.Text = sdr("Message").ToString()
+                                txtTitle.Text = sdr("Title").ToString()
+                            End While
+                        End Using
+
+                    End Using
+                End If
+            End Using
 
             'txtMessage.Visible = True
             'pnlpopup.Visible = True

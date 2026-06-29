@@ -99,79 +99,80 @@ Public Class BIBDataRunner
                                             LEFT JOIN user u ON bd.UserId = u.ID
                                             LEFT JOIN signup s ON s.UserId = bd.UserId
                                         ) As bd"
-                Dim cmd As New MySqlCommand()
-                cmd.Connection = con
+                Using cmd As New MySqlCommand()
+                    cmd.Connection = con
 
-                If roleId = 1 Then
-                    ' Admin: See all data
-                    If String.IsNullOrWhiteSpace(txtSearch.Text) Then
-                        If String.IsNullOrEmpty(selectedUser) = False Then
-                            query += $" WHERE bd.UserId = @UserId"
-                            cmd.Parameters.AddWithValue("@UserId", selectedUser)
-                        End If
-                    Else
-                        If String.IsNullOrEmpty(selectedUser) Then
-                            query += " WHERE (bd.BIBNo LIKE @Search OR bd.PaymentStatus LIKE @Search OR bd.OrderId Like @Search OR bd.TxnId Like @Search)"
-                            cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
+                    If roleId = 1 Then
+                        ' Admin: See all data
+                        If String.IsNullOrWhiteSpace(txtSearch.Text) Then
+                            If String.IsNullOrEmpty(selectedUser) = False Then
+                                query += $" WHERE bd.UserId = @UserId"
+                                cmd.Parameters.AddWithValue("@UserId", selectedUser)
+                            End If
                         Else
-                            query += $" WHERE bd.UserId = @UserId And (bd.BIBNo LIKE @Search OR bd.PaymentStatus LIKE @Search OR bd.OrderId Like @Search OR bd.TxnId Like @Search)"
-                            cmd.Parameters.AddWithValue("@UserId", selectedUser)
-                            cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
+                            If String.IsNullOrEmpty(selectedUser) Then
+                                query += " WHERE (bd.BIBNo LIKE @Search OR bd.PaymentStatus LIKE @Search OR bd.OrderId Like @Search OR bd.TxnId Like @Search)"
+                                cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
+                            Else
+                                query += $" WHERE bd.UserId = @UserId And (bd.BIBNo LIKE @Search OR bd.PaymentStatus LIKE @Search OR bd.OrderId Like @Search OR bd.TxnId Like @Search)"
+                                cmd.Parameters.AddWithValue("@UserId", selectedUser)
+                                cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
+                            End If
                         End If
-                    End If
-                Else
-                    divCreatedByView.Visible = False
-                    btnExport.Visible = False
-                    divUploadUserDDL.Visible = False
-                    divtxtDateSearch.Visible = False
-                    ' Non-admin: Filter by userId
-                    Dim userInfo As Dictionary(Of String, String) = GetUserDetails(userId)
-                    Dim bibUserCount As Integer = GetBIBCountByUserId(userId)
-                    limitToAdd = (Convert.ToInt32(userInfo("BIBUserLimit")) - bibUserCount)   ' getting add count that user can add BIB data...
-                    AddCount.Text = $"<br><b>Available Add BIB Count : {If(limitToAdd < 0, 0, limitToAdd)}<b>"
-                    If String.IsNullOrWhiteSpace(txtSearch.Text) Then
-                        query += " WHERE bd.UserId = @UserId "
                     Else
-                        query += " WHERE bd.UserId = @UserId AND bd.BIBNo LIKE @BIBNo "
-                        cmd.Parameters.AddWithValue("@BIBNo", "%" & txtSearch.Text.Trim() & "%")
+                        divCreatedByView.Visible = False
+                        btnExport.Visible = False
+                        divUploadUserDDL.Visible = False
+                        divtxtDateSearch.Visible = False
+                        ' Non-admin: Filter by userId
+                        Dim userInfo As Dictionary(Of String, String) = GetUserDetails(userId)
+                        Dim bibUserCount As Integer = GetBIBCountByUserId(userId)
+                        limitToAdd = (Convert.ToInt32(userInfo("BIBUserLimit")) - bibUserCount)   ' getting add count that user can add BIB data...
+                        AddCount.Text = $"<br><b>Available Add BIB Count : {If(limitToAdd < 0, 0, limitToAdd)}<b>"
+                        If String.IsNullOrWhiteSpace(txtSearch.Text) Then
+                            query += " WHERE bd.UserId = @UserId "
+                        Else
+                            query += " WHERE bd.UserId = @UserId AND bd.BIBNo LIKE @BIBNo "
+                            cmd.Parameters.AddWithValue("@BIBNo", "%" & txtSearch.Text.Trim() & "%")
+                        End If
+                        cmd.Parameters.AddWithValue("@UserId", userId)
                     End If
-                    cmd.Parameters.AddWithValue("@UserId", userId)
-                End If
 
-                ' Additional filtration and make order desc...
-                If String.IsNullOrEmpty(txtDateSearch.Text) = False And query.Contains("WHERE") Then
-                    query += " And DATE(bd.CreatedAt) = @CreatedDate"
-                    cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
-                ElseIf String.IsNullOrEmpty(txtDateSearch.Text) = False Then
-                    query += " WHERE DATE(bd.CreatedAt) = @CreatedDate"
-                    cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
-                ElseIf query.Contains("WHERE") Then
-                    query += " And bd.IsDeleted = 0 AND bd.YEAR = @YearBy"
-                    cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
-                Else
-                    query += " WHERE bd.IsDeleted = 0 AND bd.YEAR = @YearBy"
-                    cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
-                End If
-                query += $" ORDER BY bd.ID DESC"
-
-                cmd.CommandText = query
-                Using sda As New MySqlDataAdapter(cmd)
-                    Dim dt As New DataTable()
-                    con.Open()
-                    sda.Fill(dt)
-                    con.Close()
-
-                    lblRecords.Text = dt.Rows.Count
-                    lblTotalAmount.Text = 0
-                    If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
-                        Try
-                            Dim total = dt.AsEnumerable().Where(Function(row) Not String.IsNullOrEmpty(row("Amount").ToString())).Sum(Function(row) Convert.ToDecimal(row("Amount")))
-                            lblTotalAmount.Text = total.ToString()
-                        Catch ex As Exception
-                        End Try
+                    ' Additional filtration and make order desc...
+                    If String.IsNullOrEmpty(txtDateSearch.Text) = False And query.Contains("WHERE") Then
+                        query += " And DATE(bd.CreatedAt) = @CreatedDate"
+                        cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
+                    ElseIf String.IsNullOrEmpty(txtDateSearch.Text) = False Then
+                        query += " WHERE DATE(bd.CreatedAt) = @CreatedDate"
+                        cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
+                    ElseIf query.Contains("WHERE") Then
+                        query += " And bd.IsDeleted = 0 AND bd.YEAR = @YearBy"
+                        cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
+                    Else
+                        query += " WHERE bd.IsDeleted = 0 AND bd.YEAR = @YearBy"
+                        cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
                     End If
-                    gvEvent.DataSource = dt
-                    gvEvent.DataBind()
+                    query += $" ORDER BY bd.ID DESC"
+
+                    cmd.CommandText = query
+                    Using sda As New MySqlDataAdapter(cmd)
+                        Dim dt As New DataTable()
+                        con.Open()
+                        sda.Fill(dt)
+                        con.Close()
+
+                        lblRecords.Text = dt.Rows.Count
+                        lblTotalAmount.Text = 0
+                        If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                            Try
+                                Dim total = dt.AsEnumerable().Where(Function(row) Not String.IsNullOrEmpty(row("Amount").ToString())).Sum(Function(row) Convert.ToDecimal(row("Amount")))
+                                lblTotalAmount.Text = total.ToString()
+                            Catch ex As Exception
+                            End Try
+                        End If
+                        gvEvent.DataSource = dt
+                        gvEvent.DataBind()
+                    End Using
                 End Using
             End Using
         Catch ex As Exception
@@ -950,51 +951,52 @@ Public Class BIBDataRunner
                                         bd.TxnId as `Transaction Id`, bd.Amount FROM bibdata bd 
                                         left join user u  on bd.UserId = u.ID
                                         left join signup s on s.UserId = bd.UserId"
-                Dim cmd As New MySqlCommand()
-                cmd.Connection = con
+                Using cmd As New MySqlCommand()
+                    cmd.Connection = con
 
-                ' Admin: See all data
-                If String.IsNullOrWhiteSpace(txtSearch.Text) Then
-                    If String.IsNullOrEmpty(selectedUser) = False Then
-                        query += $" WHERE bd.UserId = @UserId"
-                        cmd.Parameters.AddWithValue("@UserId", selectedUser)
-                    End If
-                Else
-                    If String.IsNullOrEmpty(selectedUser) Then
-                        query += " WHERE (bd.BIBNo LIKE @Search OR bd.PaymentStatus LIKE @Search OR bd.OrderId Like @Search OR bd.TxnId Like @Search)"
-                        cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
+                    ' Admin: See all data
+                    If String.IsNullOrWhiteSpace(txtSearch.Text) Then
+                        If String.IsNullOrEmpty(selectedUser) = False Then
+                            query += $" WHERE bd.UserId = @UserId"
+                            cmd.Parameters.AddWithValue("@UserId", selectedUser)
+                        End If
                     Else
-                        query += $" WHERE bd.UserId = @UserId And (bd.BIBNo LIKE @Search OR bd.PaymentStatus LIKE @Search OR bd.OrderId Like @Search OR bd.TxnId Like @Search)"
-                        cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
-                        cmd.Parameters.AddWithValue("@UserId", selectedUser)
+                        If String.IsNullOrEmpty(selectedUser) Then
+                            query += " WHERE (bd.BIBNo LIKE @Search OR bd.PaymentStatus LIKE @Search OR bd.OrderId Like @Search OR bd.TxnId Like @Search)"
+                            cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
+                        Else
+                            query += $" WHERE bd.UserId = @UserId And (bd.BIBNo LIKE @Search OR bd.PaymentStatus LIKE @Search OR bd.OrderId Like @Search OR bd.TxnId Like @Search)"
+                            cmd.Parameters.AddWithValue("@Search", "%" & txtSearch.Text.Trim() & "%")
+                            cmd.Parameters.AddWithValue("@UserId", selectedUser)
+                        End If
                     End If
-                End If
 
-                ' Additional filtration by created date...
-                If String.IsNullOrEmpty(txtDateSearch.Text) = False And query.Contains("WHERE") Then
-                    query += " And DATE(bd.CreatedAt) = @CreatedDate"
-                    cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
-                ElseIf String.IsNullOrEmpty(txtDateSearch.Text) = False Then
-                    query += " WHERE DATE(bd.CreatedAt) = @CreatedDate"
-                    cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
-                ElseIf query.Contains("WHERE") Then
-                    query += " And YEAR(bd.CreatedAt) = @YearBy"
-                    cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
-                Else
-                    query += " WHERE YEAR(bd.CreatedAt) = @YearBy"
-                    cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
-                End If
+                    ' Additional filtration by created date...
+                    If String.IsNullOrEmpty(txtDateSearch.Text) = False And query.Contains("WHERE") Then
+                        query += " And DATE(bd.CreatedAt) = @CreatedDate"
+                        cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
+                    ElseIf String.IsNullOrEmpty(txtDateSearch.Text) = False Then
+                        query += " WHERE DATE(bd.CreatedAt) = @CreatedDate"
+                        cmd.Parameters.AddWithValue("@CreatedDate", txtDateSearch.Text)
+                    ElseIf query.Contains("WHERE") Then
+                        query += " And YEAR(bd.CreatedAt) = @YearBy"
+                        cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
+                    Else
+                        query += " WHERE YEAR(bd.CreatedAt) = @YearBy"
+                        cmd.Parameters.AddWithValue("@YearBy", ddlYearBy.SelectedValue)
+                    End If
 
-                ' Order by id, so latest data comes first...
-                query += " ORDER BY bd.ID DESC"
+                    ' Order by id, so latest data comes first...
+                    query += " ORDER BY bd.ID DESC"
 
-                cmd.CommandText = query
-                Using sda As New MySqlDataAdapter(cmd)
-                    con.Open()
-                    sda.Fill(dt)
-                    con.Close()
+                    cmd.CommandText = query
+                    Using sda As New MySqlDataAdapter(cmd)
+                        con.Open()
+                        sda.Fill(dt)
+                        con.Close()
+                    End Using
                 End Using
-            End Using
+                End Using
         Catch ex As Exception
             Throw
         End Try

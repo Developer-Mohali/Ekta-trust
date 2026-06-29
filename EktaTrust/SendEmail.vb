@@ -254,11 +254,12 @@ Public Class SendEmail
                 cmd.Parameters.AddWithValue("@TemplateType", templatetype)
                 cmd.Connection = con
                 con.Open()
-                Dim adapter As MySqlDataAdapter = New MySqlDataAdapter(cmd)
+                Using adapter As MySqlDataAdapter = New MySqlDataAdapter(cmd)
 
-                adapter.Fill(templates, "templates")
+                    adapter.Fill(templates, "templates")
+                End Using
             End Using
-        End Using
+            End Using
         Return templates
 
     End Function

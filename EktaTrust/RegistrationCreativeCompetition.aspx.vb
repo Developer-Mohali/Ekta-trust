@@ -134,81 +134,82 @@ Public Class RegistrationCreativeCompetition
                             cmd.ExecuteNonQuery()
 
                             ' Get Registration ID
-                            Dim regIdCmd As New MySqlCommand("SELECT LAST_INSERT_ID();", con)
-                            Dim registrationId As Integer = Convert.ToInt32(regIdCmd.ExecuteScalar())
+                            Using regIdCmd As New MySqlCommand("SELECT LAST_INSERT_ID();", con)
+                                Dim registrationId As Integer = Convert.ToInt32(regIdCmd.ExecuteScalar())
 
-                            ' Send Emails
-                            Dim Name As String = textName.Text
-                            Dim emailId As String = textEmail.Text
-                            Dim subject As String = "New Contest Request - " + Name
-                            Dim body As String = $"Hello Admin,<br/><br/>There is one new Contest Registration Request:<br/><b>Name:</b> {Name}<br/><b>Email:</b> {emailId}<br/><b>Mobile:</b> {textMobile.Text}<br/><b>Contest:</b> {drpContest.SelectedItem.Text}<br/><b>Address:</b> {TextAddress.Text}<br/><br/>Please <a href='http://ektatrust.org.in/Login'>Sign In</a><br/><br/><b>Thanks</b>,<br/>Ekta Navnirman Trust"
+                                ' Send Emails
+                                Dim Name As String = textName.Text
+                                Dim emailId As String = textEmail.Text
+                                Dim subject As String = "New Contest Request - " + Name
+                                Dim body As String = $"Hello Admin,<br/><br/>There is one new Contest Registration Request:<br/><b>Name:</b> {Name}<br/><b>Email:</b> {emailId}<br/><b>Mobile:</b> {textMobile.Text}<br/><b>Contest:</b> {drpContest.SelectedItem.Text}<br/><b>Address:</b> {TextAddress.Text}<br/><br/>Please <a href='http://ektatrust.org.in/Login'>Sign In</a><br/><br/><b>Thanks</b>,<br/>Ekta Navnirman Trust"
 
-                            Dim objSendEmail As New SendEmail()
-                            objSendEmail.sendMail("", subject, body)
+                                Dim objSendEmail As New SendEmail()
+                                objSendEmail.sendMail("", subject, body)
 
-                            Dim bodyUser As String = $"Hello {Name},<br/><br/>Thanks for your Contest Registration with Ekta Navnirman Trust. We will contact you soon.<br/><br/><b>Thanks</b>,<br/>Ekta Navnirman Trust"
-                            objSendEmail.sendMailUser(emailId, subject, bodyUser)
+                                Dim bodyUser As String = $"Hello {Name},<br/><br/>Thanks for your Contest Registration with Ekta Navnirman Trust. We will contact you soon.<br/><br/><b>Thanks</b>,<br/>Ekta Navnirman Trust"
+                                objSendEmail.sendMailUser(emailId, subject, bodyUser)
 
-                            ' ✅ File Upload Section
-                            If FileUpload.HasFiles Then
-                                For Each file As HttpPostedFile In FileUpload.PostedFiles
-                                    If file IsNot Nothing AndAlso file.ContentLength > 0 Then
-                                        Dim safeFileName = GetSafeFileName(file.FileName)
-                                        Dim ext = Path.GetExtension(safeFileName).ToLower()
-                                        Dim nameOnly = Path.GetFileNameWithoutExtension(safeFileName)
-                                        Dim fileTypeLabel As String = ""
+                                ' ✅ File Upload Section
+                                If FileUpload.HasFiles Then
+                                    For Each file As HttpPostedFile In FileUpload.PostedFiles
+                                        If file IsNot Nothing AndAlso file.ContentLength > 0 Then
+                                            Dim safeFileName = GetSafeFileName(file.FileName)
+                                            Dim ext = Path.GetExtension(safeFileName).ToLower()
+                                            Dim nameOnly = Path.GetFileNameWithoutExtension(safeFileName)
+                                            Dim fileTypeLabel As String = ""
 
-                                        Dim imageExt = {".jpg", ".jpeg", ".png", ".gif", ".bmp"}
-                                        Dim videoExt = {".mp4", ".mov", ".avi", ".mkv"}
-                                        Dim docExt = {".pdf", ".doc", ".docx", ".txt", ".xls", ".xlsx", ".ppt", ".pptx"}
+                                            Dim imageExt = {".jpg", ".jpeg", ".png", ".gif", ".bmp"}
+                                            Dim videoExt = {".mp4", ".mov", ".avi", ".mkv"}
+                                            Dim docExt = {".pdf", ".doc", ".docx", ".txt", ".xls", ".xlsx", ".ppt", ".pptx"}
 
-                                        If imageExt.Contains(ext) Then
-                                            fileTypeLabel = "Image"
-                                        ElseIf videoExt.Contains(ext) Then
-                                            fileTypeLabel = "Video"
-                                        ElseIf docExt.Contains(ext) Then
-                                            fileTypeLabel = "Document"
-                                        Else
-                                            fileTypeLabel = "Other"
+                                            If imageExt.Contains(ext) Then
+                                                fileTypeLabel = "Image"
+                                            ElseIf videoExt.Contains(ext) Then
+                                                fileTypeLabel = "Video"
+                                            ElseIf docExt.Contains(ext) Then
+                                                fileTypeLabel = "Document"
+                                            Else
+                                                fileTypeLabel = "Other"
+                                            End If
+
+                                            If file.ContentLength > 1024L * 1024L * 1024L Then
+                                                lblErrorMsgMobile.Visible = True
+                                                lblErrorMsgMobile.Text &= "File '" & file.FileName & "' not uploaded. Exceeds 1 GB.<br/>"
+                                                Continue For
+                                            End If
+
+                                            ' Save file
+                                            Dim uploadFolder = Server.MapPath("~/Uploads/CreativeCompetition/")
+                                            If Not Directory.Exists(uploadFolder) Then Directory.CreateDirectory(uploadFolder)
+
+                                            Dim fileName = $"{textMobile.Text}_{nameOnly}{ext}"
+                                            Dim filePath = Path.Combine(uploadFolder, fileName)
+                                            file.SaveAs(filePath)
+
+                                            ' Insert into database
+                                            Using uploadCmd As New MySqlCommand("INSERT INTO CreativeCompetitionUploads (RegistrationId, FileName, FileType, CreatedDate) VALUES (@RegId, @FileName, @FileType, NOW())", con)
+                                                uploadCmd.Parameters.AddWithValue("@RegId", registrationId)
+                                                uploadCmd.Parameters.AddWithValue("@FileName", fileName)
+                                                uploadCmd.Parameters.AddWithValue("@FileType", fileTypeLabel)
+                                                uploadCmd.ExecuteNonQuery()
+                                            End Using
                                         End If
+                                    Next
+                                End If
 
-                                        If file.ContentLength > 1024L * 1024L * 1024L Then
-                                            lblErrorMsgMobile.Visible = True
-                                            lblErrorMsgMobile.Text &= "File '" & file.FileName & "' not uploaded. Exceeds 1 GB.<br/>"
-                                            Continue For
-                                        End If
+                                ' Clear Form
+                                textName.Text = ""
+                                textEmail.Text = ""
+                                textMobile.Text = ""
+                                drpContest.SelectedIndex = 1
+                                TextAddress.Text = ""
+                                chbCondition.Checked = False
 
-                                        ' Save file
-                                        Dim uploadFolder = Server.MapPath("~/Uploads/CreativeCompetition/")
-                                        If Not Directory.Exists(uploadFolder) Then Directory.CreateDirectory(uploadFolder)
-
-                                        Dim fileName = $"{textMobile.Text}_{nameOnly}{ext}"
-                                        Dim filePath = Path.Combine(uploadFolder, fileName)
-                                        file.SaveAs(filePath)
-
-                                        ' Insert into database
-                                        Using uploadCmd As New MySqlCommand("INSERT INTO CreativeCompetitionUploads (RegistrationId, FileName, FileType, CreatedDate) VALUES (@RegId, @FileName, @FileType, NOW())", con)
-                                            uploadCmd.Parameters.AddWithValue("@RegId", registrationId)
-                                            uploadCmd.Parameters.AddWithValue("@FileName", fileName)
-                                            uploadCmd.Parameters.AddWithValue("@FileType", fileTypeLabel)
-                                            uploadCmd.ExecuteNonQuery()
-                                        End Using
-                                    End If
-                                Next
-                            End If
-
-                            ' Clear Form
-                            textName.Text = ""
-                            textEmail.Text = ""
-                            textMobile.Text = ""
-                            drpContest.SelectedIndex = 1
-                            TextAddress.Text = ""
-                            chbCondition.Checked = False
-
-                            lblConditionMessage.Visible = False
-                            lblErrorMsg.Visible = True
-                            lblErrorMsgMobile.Visible = False
-                            lblErrorMsg.Text = "Submitted successfully. Our Team will contact you shortly. Thanks!"
+                                lblConditionMessage.Visible = False
+                                lblErrorMsg.Visible = True
+                                lblErrorMsgMobile.Visible = False
+                                lblErrorMsg.Text = "Submitted successfully. Our Team will contact you shortly. Thanks!"
+                            End Using
                         End Using
                     Else
                         lblErrorMsg.Visible = False

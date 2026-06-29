@@ -2,7 +2,7 @@
 
 Public Class UserDetails
     Inherits System.Web.UI.Page
-    Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
+    'Dim con As New MySqlConnection(ConfigurationManager.ConnectionStrings("constr").ConnectionString)
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim roleId = ""
         If Session("RoleId") IsNot Nothing Then
@@ -106,24 +106,25 @@ Public Class UserDetails
             Using con As New MySqlConnection(constr)
                 Dim roleId = Session("RoleId").ToString()
                 con.Open()
-                Dim cmd As New MySqlCommand("Select RoleName,RoleId from role where RoleId <> 1", con)
-                Dim da As New MySqlDataAdapter(cmd)
-                Dim ds As New DataSet()
-                da.Fill(ds)
-                con.Close()
+                Using cmd As New MySqlCommand("Select RoleName,RoleId from role where RoleId <> 1", con)
+                    Dim ds As New DataSet()
+                    Using da As New MySqlDataAdapter(cmd)
+                        da.Fill(ds)
+                    End Using
+                    con.Close()
 
-                drpRole.DataSource = ds
-                drpRole.DataTextField = "RoleName"
-                drpRole.DataValueField = "RoleId"
-                drpRole.DataBind()
+                    drpRole.DataSource = ds
+                    drpRole.DataTextField = "RoleName"
+                    drpRole.DataValueField = "RoleId"
+                    drpRole.DataBind()
 
-                'Select "BIB User" by text
-                Dim item = drpRole.Items.FindByText("BIB User")
-                If item IsNot Nothing Then
-                    drpRole.ClearSelection()
-                    item.Selected = True
-                End If
-
+                    'Select "BIB User" by text
+                    Dim item = drpRole.Items.FindByText("BIB User")
+                    If item IsNot Nothing Then
+                        drpRole.ClearSelection()
+                        item.Selected = True
+                    End If
+                End Using
             End Using
         Catch ex As Exception
 
@@ -143,29 +144,33 @@ Public Class UserDetails
             '    txtMessage.Visible = False
             '    pnlpopup.Visible = False
             'ElseIf smsType = "EMAIL" Then
+            Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
 
-            Using cmd As New MySqlCommand("Select * from User WHERE ID=" + id.Text + "")
-                Dim GetData As New List(Of SendEmail)()
-                cmd.Connection = con
-                con.Open()
-                Using sdr As MySqlDataReader = cmd.ExecuteReader()
-                    While (sdr.Read())
-                        Dim roleId = Session("RoleId").ToString()
-                        btnUpdate.Text = "Update"
-                        lblId.Visible = True
-                        txtName.Text = sdr("Name").ToString()
-                        txtEmail.Text = sdr("EmailAddress").ToString()
-                        hdnOriginalEmail.Value = sdr("EmailAddress").ToString()
-                        txtMobile.Text = sdr("MobileNumber").ToString()
-                        txtAddress.Text = sdr("Address").ToString()
-                        txtPassword.Attributes("value") = sdr("Password").ToString()
-                        txtConfirmPass.Attributes("value") = sdr("Password").ToString()
-                        txtBibUserLimit.Text = sdr("BIBUserLimit").ToString()
-                        drpRole.SelectedValue = sdr("RoleId").ToString()
+            Using con As New MySqlConnection(constr)
 
-                    End While
+                Using cmd As New MySqlCommand("Select * from User WHERE ID=" + id.Text + "")
+                    Dim GetData As New List(Of SendEmail)()
+                    cmd.Connection = con
+                    con.Open()
+                    Using sdr As MySqlDataReader = cmd.ExecuteReader()
+                        While (sdr.Read())
+                            Dim roleId = Session("RoleId").ToString()
+                            btnUpdate.Text = "Update"
+                            lblId.Visible = True
+                            txtName.Text = sdr("Name").ToString()
+                            txtEmail.Text = sdr("EmailAddress").ToString()
+                            hdnOriginalEmail.Value = sdr("EmailAddress").ToString()
+                            txtMobile.Text = sdr("MobileNumber").ToString()
+                            txtAddress.Text = sdr("Address").ToString()
+                            txtPassword.Attributes("value") = sdr("Password").ToString()
+                            txtConfirmPass.Attributes("value") = sdr("Password").ToString()
+                            txtBibUserLimit.Text = sdr("BIBUserLimit").ToString()
+                            drpRole.SelectedValue = sdr("RoleId").ToString()
+
+                        End While
+                    End Using
+
                 End Using
-
             End Using
 
             'txtMessage.Visible = True

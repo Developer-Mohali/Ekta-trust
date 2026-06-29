@@ -21,28 +21,30 @@ Public Class TrainingActivity
     End Sub
     Protected Sub btnSearch_Click(sender As Object, e As EventArgs)
         Dim dt As New DataTable()
-        Dim cmd As New MySqlCommand()
-        Dim adp As New MySqlDataAdapter()
-        Try
-            If ddlSearchBy.SelectedItem.Text = "Name" Then
-                getEmpRecords(ddlSearchBy.SelectedItem.Text, txtSearch.Text.Trim())
-            ElseIf ddlSearchBy.SelectedItem.Text = "Email" Then
-                getEmpRecords(ddlSearchBy.SelectedItem.Text, txtSearch.Text.Trim())
-            ElseIf ddlSearchBy.SelectedItem.Text = "Training" Then
-                getEmpRecords(ddlSearchBy.SelectedItem.Text, txtSearch.Text.Trim())
-            ElseIf ddlSearchBy.SelectedItem.Text = "Mobile" Then
-                getEmpRecords(ddlSearchBy.SelectedItem.Text, txtSearch.Text.Trim())
-            Else
-                getEmpRecords(ddlSearchBy.SelectedItem.Text, txtSearch.Text.Trim())
-            End If
-        Catch ex As Exception
-            ScriptManager.RegisterStartupScript(Me, Me.[GetType](), "Message", "alert('Error occured : " & ex.Message.ToString() & "');", True)
-        Finally
-            dt.Clear()
-            dt.Dispose()
-            cmd.Dispose()
-            'BindEmpGrid()
-        End Try
+        Using cmd As New MySqlCommand()
+            Using adp As New MySqlDataAdapter()
+                Try
+                    If ddlSearchBy.SelectedItem.Text = "Name" Then
+                        getEmpRecords(ddlSearchBy.SelectedItem.Text, txtSearch.Text.Trim())
+                    ElseIf ddlSearchBy.SelectedItem.Text = "Email" Then
+                        getEmpRecords(ddlSearchBy.SelectedItem.Text, txtSearch.Text.Trim())
+                    ElseIf ddlSearchBy.SelectedItem.Text = "Training" Then
+                        getEmpRecords(ddlSearchBy.SelectedItem.Text, txtSearch.Text.Trim())
+                    ElseIf ddlSearchBy.SelectedItem.Text = "Mobile" Then
+                        getEmpRecords(ddlSearchBy.SelectedItem.Text, txtSearch.Text.Trim())
+                    Else
+                        getEmpRecords(ddlSearchBy.SelectedItem.Text, txtSearch.Text.Trim())
+                    End If
+                Catch ex As Exception
+                    ScriptManager.RegisterStartupScript(Me, Me.[GetType](), "Message", "alert('Error occured : " & ex.Message.ToString() & "');", True)
+                Finally
+                    dt.Clear()
+                    dt.Dispose()
+                    cmd.Dispose()
+                    'BindEmpGrid()
+                End Try
+            End Using
+        End Using
     End Sub
     Private Sub BindGridView()
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString

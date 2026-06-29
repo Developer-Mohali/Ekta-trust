@@ -23,26 +23,27 @@ Public Class Admin
             Dim rd As MySqlDataReader
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As New MySqlConnection(constr)
-                Dim cmd As New MySqlCommand("select count(VisiterId) as visiter from visiterdetail ", con)
-                cmd.Connection = con
-                con.Open()
-                cmd.ExecuteNonQuery()
-                'userId = Convert.ToInt32(cmd.ExecuteScalar())
-                Dim da As New MySqlDataAdapter(cmd)
-                Dim dt As New DataTable()
-                da.Fill(dt)
-                If dt.Rows.Count > 0 Then
-                    rd = cmd.ExecuteReader()
-                    While rd.Read()
-                        'gridview has 2 columns only(name, type)
-                        lblCount.Text = rd(0).ToString()
-                    End While
+                Using cmd As New MySqlCommand("select count(VisiterId) as visiter from visiterdetail ", con)
+                    cmd.Connection = con
+                    con.Open()
+                    cmd.ExecuteNonQuery()
+                    'userId = Convert.ToInt32(cmd.ExecuteScalar())
+                    Dim dt As New DataTable()
+                    Using da As New MySqlDataAdapter(cmd)
+                        da.Fill(dt)
+                    End Using
+                    If dt.Rows.Count > 0 Then
+                            rd = cmd.ExecuteReader()
+                            While rd.Read()
+                                'gridview has 2 columns only(name, type)
+                                lblCount.Text = rd(0).ToString()
+                            End While
 
-                End If
-                con.Close()
+                        End If
+                        con.Close()
+                    End Using
 
-
-            End Using
+                End Using
         Catch e As Exception
 
         End Try

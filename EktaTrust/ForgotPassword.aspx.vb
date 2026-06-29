@@ -22,17 +22,19 @@ Public Class ForgotPassword
             Dim ds As New DataSet()
             Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
             Using con As New MySqlConnection(constr)
-                Dim cmd As New MySqlCommand("select FirstName, EmailAddress, Password from signup where EmailAddress =@EmailAddress", con)
-                cmd.Parameters.AddWithValue("@EmailAddress", textEmailAdd.Text)
-                cmd.Connection = con
-                con.Open()
-                cmd.ExecuteNonQuery()
-                'userId = Convert.ToInt32(cmd.ExecuteScalar())
-                Dim da As New MySqlDataAdapter(cmd)
-                Dim dt As New DataTable()
-                da.Fill(ds)
-            End Using
-            If ds.Tables(0).Rows.Count > 0 Then
+                Using cmd As New MySqlCommand("select FirstName, EmailAddress, Password from signup where EmailAddress =@EmailAddress", con)
+                    cmd.Parameters.AddWithValue("@EmailAddress", textEmailAdd.Text)
+                    cmd.Connection = con
+                    con.Open()
+                    cmd.ExecuteNonQuery()
+                    'userId = Convert.ToInt32(cmd.ExecuteScalar())
+                    Using da As New MySqlDataAdapter(cmd)
+                        Dim dt As New DataTable()
+                        da.Fill(ds)
+                    End Using
+                End Using
+                End Using
+                If ds.Tables(0).Rows.Count > 0 Then
                 Dim mail As MailMessage = New MailMessage()
                 mail.From = New MailAddress(fromMail)
                 mail.[To].Add(textEmailAdd.Text)

@@ -900,30 +900,30 @@ Public Class DonationDetails
 
                     con.Open()
 
-                    Dim reader = cmd.ExecuteReader()
+                    Using reader = cmd.ExecuteReader()
 
-                    If reader.Read() Then
-                        ' Full Name
-                        If reader("FullName") IsNot DBNull.Value Then
-                            fullName = reader("FullName").ToString()
-                        End If
-                        ' Amount
-                        If reader("Amount") IsNot DBNull.Value Then
-                            amount = reader("Amount").ToString()
-                        End If
-                        ' Donation Date
-                        If reader("DonationDate") IsNot DBNull.Value Then
-                            donatedDate =
+                        If reader.Read() Then
+                            ' Full Name
+                            If reader("FullName") IsNot DBNull.Value Then
+                                fullName = reader("FullName").ToString()
+                            End If
+                            ' Amount
+                            If reader("Amount") IsNot DBNull.Value Then
+                                amount = reader("Amount").ToString()
+                            End If
+                            ' Donation Date
+                            If reader("DonationDate") IsNot DBNull.Value Then
+                                donatedDate =
                             Convert.ToDateTime(reader("DonationDate")).
                             ToString("dd MMM yyyy")
-                        Else
-                            donatedDate = ""
+                            Else
+                                donatedDate = ""
+                            End If
                         End If
-                    End If
-
+                    End Using
                 End Using
 
-            End Using
+                End Using
 
             ' =========================
             ' Email Template
