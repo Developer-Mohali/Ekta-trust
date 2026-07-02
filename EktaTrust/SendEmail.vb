@@ -10,14 +10,24 @@ Public Class SendEmail
         Dim RetValue As String = ""
         'Dim fromEmailAddress As String = "mails@rezinfo.co.in"
         Try
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
             Dim fromMail As String = System.Configuration.ConfigurationManager.AppSettings("From")
             Dim Password As String = System.Configuration.ConfigurationManager.AppSettings("Password")
+            Dim toEmail As String = System.Configuration.ConfigurationManager.AppSettings("ToAdmin")
+            Dim SMTPClient As String = System.Configuration.ConfigurationManager.AppSettings("SMTP")
+            Dim Port As Integer = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings("PORT"))
+            Dim UseDefaultCredentials As Boolean = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings("UseDefaultCredentials"))
+            Dim EnableSsl As Boolean = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings("EnableSsl"))
+
             Dim mail As MailMessage = New MailMessage()
             mail.From = New MailAddress(fromMail)
             mail.[To].Add(fromMail)
             mail.Subject = subject
             mail.Body = body
-            Dim smtp As SmtpClient = New SmtpClient("mail.ektatrust.org.in", 8889)
+            Dim smtp As SmtpClient = New SmtpClient(SMTPClient, Port)
+            smtp.EnableSsl = EnableSsl
+            smtp.UseDefaultCredentials = UseDefaultCredentials
             Dim Credentials As NetworkCredential = New NetworkCredential(fromMail, Password)
             smtp.Credentials = Credentials
             smtp.Send(mail)
@@ -48,15 +58,25 @@ Public Class SendEmail
         Dim RetValue As String = ""
         'Dim fromEmailAddress As String = "mails@rezinfo.co.in"
         Try
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
             Dim fromMail As String = System.Configuration.ConfigurationManager.AppSettings("From")
             Dim Password As String = System.Configuration.ConfigurationManager.AppSettings("Password")
             Dim toEmail As String = System.Configuration.ConfigurationManager.AppSettings("ToAdmin")
+            Dim SMTPClient As String = System.Configuration.ConfigurationManager.AppSettings("SMTP")
+            Dim Port As Integer = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings("PORT"))
+            Dim UseDefaultCredentials As Boolean = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings("UseDefaultCredentials"))
+            Dim EnableSsl As Boolean = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings("EnableSsl"))
+
             Dim mail As MailMessage = New MailMessage()
             mail.From = New MailAddress(fromMail)
             mail.[To].Add(toEmail)
             mail.Subject = subject
             mail.Body = body
-            Dim smtp As SmtpClient = New SmtpClient("mail.ektatrust.org.in", 8889)
+            Dim smtp As SmtpClient = New SmtpClient(SMTPClient, Port)
+            smtp.EnableSsl = EnableSsl
+            smtp.UseDefaultCredentials = UseDefaultCredentials
             Dim Credentials As NetworkCredential = New NetworkCredential(fromMail, Password)
             smtp.Credentials = Credentials
             smtp.Send(mail)
@@ -89,15 +109,28 @@ Public Class SendEmail
         Dim RetValue As String = ""
         Try
 
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
             Dim fromMail As String = System.Configuration.ConfigurationManager.AppSettings("From")
             Dim Password As String = System.Configuration.ConfigurationManager.AppSettings("Password")
             Dim toEmail As String = System.Configuration.ConfigurationManager.AppSettings("ToAdmin")
+            Dim FromMaill As String = System.Configuration.ConfigurationManager.AppSettings("ToEmailID")
+            Dim SMTPClient As String = System.Configuration.ConfigurationManager.AppSettings("SMTP")
+            Dim Port As Integer = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings("PORT"))
+            Dim UseDefaultCredentials As Boolean = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings("UseDefaultCredentials"))
+            Dim EnableSsl As Boolean = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings("EnableSsl"))
+            Dim FromDisplayName As String = System.Configuration.ConfigurationManager.AppSettings("FromDisplayName")
+
+
+
             Dim mail As MailMessage = New MailMessage()
             mail.From = New MailAddress(toEmail)
             mail.[To].Add(Messageto)
             mail.Subject = subject
             mail.Body = body
-            Dim smtp As SmtpClient = New SmtpClient("mail.ektatrust.org.in", 8889)
+            Dim smtp As SmtpClient = New SmtpClient(SMTPClient, Port)
+            smtp.EnableSsl = EnableSsl
+            smtp.UseDefaultCredentials = UseDefaultCredentials
             Dim Credentials As NetworkCredential = New NetworkCredential(fromMail, Password)
             smtp.Credentials = Credentials
             smtp.Send(mail)
@@ -344,16 +377,26 @@ Public Class SendEmail
         Dim RetValue As String = ""
         'Dim fromEmailAddress As String = "mails@rezinfo.co.in"
         Try
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
             Dim fromMail As String = System.Configuration.ConfigurationManager.AppSettings("From")
             Dim Password As String = System.Configuration.ConfigurationManager.AppSettings("Password")
             Dim FromMaill As String = System.Configuration.ConfigurationManager.AppSettings("ToEmailID")
+            Dim SMTPClient As String = System.Configuration.ConfigurationManager.AppSettings("SMTP")
+            Dim Port As Integer = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings("PORT"))
+            Dim UseDefaultCredentials As Boolean = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings("UseDefaultCredentials"))
+            Dim EnableSsl As Boolean = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings("EnableSsl"))
+            Dim FromDisplayName As String = System.Configuration.ConfigurationManager.AppSettings("FromDisplayName")
+
             Dim mail As MailMessage = New MailMessage()
             mail.From = New MailAddress(FromMaill)
             mail.[To].Add(Messageto)
             mail.Bcc.Add(Messageto)
             mail.Subject = subject
             mail.Body = body
-            Dim smtp As SmtpClient = New SmtpClient("mail.ektatrust.org.in", 8889)
+            Dim smtp As SmtpClient = New SmtpClient(SMTPClient, Port)
+            smtp.EnableSsl = EnableSsl
+            smtp.UseDefaultCredentials = UseDefaultCredentials
             Dim Credentials As NetworkCredential = New NetworkCredential(fromMail, Password)
             smtp.Credentials = Credentials
             smtp.Send(mail)
@@ -384,16 +427,28 @@ Public Class SendEmail
 
         Dim RetValue As String = ""
         Try
-            Dim BCCMessageList As String = "cde5@pqr3.com,cdew@pqrw.com,cde@pqr.com,cde1@pqr1.com"
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
             Dim fromMail As String = System.Configuration.ConfigurationManager.AppSettings("From")
             Dim Password As String = System.Configuration.ConfigurationManager.AppSettings("Password")
             Dim FromMaill As String = System.Configuration.ConfigurationManager.AppSettings("ToEmailID")
+            Dim SMTPClient As String = System.Configuration.ConfigurationManager.AppSettings("SMTP")
+            Dim Port As Integer = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings("PORT"))
+            Dim UseDefaultCredentials As Boolean = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings("UseDefaultCredentials"))
+            Dim EnableSsl As Boolean = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings("EnableSsl"))
+            Dim FromDisplayName As String = System.Configuration.ConfigurationManager.AppSettings("FromDisplayName")
+
+            Dim BCCMessageList As String = "cde5@pqr3.com,cdew@pqrw.com,cde@pqr.com,cde1@pqr1.com"
+
             Dim mail As MailMessage = New MailMessage()
             mail.From = New MailAddress(FromMaill)
             mail.Bcc.Add(Messageto)
             mail.Subject = subject
             mail.Body = body
-            Dim smtp As SmtpClient = New SmtpClient("mail.ektatrust.org.in", 8889)
+            Dim smtp As SmtpClient = New SmtpClient(SMTPClient, Port)
+            smtp.EnableSsl = EnableSsl
+            smtp.UseDefaultCredentials = UseDefaultCredentials
             Dim Credentials As NetworkCredential = New NetworkCredential(fromMail, Password)
             smtp.Credentials = Credentials
             smtp.Send(mail)
@@ -427,14 +482,20 @@ Public Class SendEmail
         Dim RetValue As String = ""
         Try
 
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
             Dim fromMail As String = System.Configuration.ConfigurationManager.AppSettings("From")
             Dim Password As String = System.Configuration.ConfigurationManager.AppSettings("Password")
             Dim FromMaill As String = System.Configuration.ConfigurationManager.AppSettings("ToEmailID")
+            Dim SMTPClient As String = System.Configuration.ConfigurationManager.AppSettings("SMTP")
+            Dim Port As Integer = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings("PORT"))
+            Dim UseDefaultCredentials As Boolean = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings("UseDefaultCredentials"))
+            Dim EnableSsl As Boolean = Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings("EnableSsl"))
+            Dim FromDisplayName As String = System.Configuration.ConfigurationManager.AppSettings("FromDisplayName")
 
             Dim mail As MailMessage = New MailMessage()
             ' ✅ Correct FROM (your system email)
-            mail.From = New MailAddress(fromMail, "Ekta Navnirman Trust")
-
+            mail.From = New MailAddress(fromMail, FromDisplayName)
             ' ✅ Correct TO (email + name)
             'mail.To.Add(New MailAddress(toEmail.Trim(), Messageto))
             mail.To.Add(toEmail)
@@ -446,13 +507,15 @@ Public Class SendEmail
                 body &= "<br/><br/>Download your receipt: <a href='" & attachmentPath & "' target='_blank'>Click here</a>"
             End If
             mail.Body = body
-            Dim smtp As SmtpClient = New SmtpClient("mail.ektatrust.org.in", 8889)
+            Dim smtp As SmtpClient = New SmtpClient(SMTPClient, Port)
+            smtp.EnableSsl = EnableSsl
+            smtp.UseDefaultCredentials = UseDefaultCredentials
             Dim Credentials As NetworkCredential = New NetworkCredential(fromMail, Password)
             smtp.Credentials = Credentials
             smtp.Send(mail)
 
         Catch ex As Exception
-            log("ErrorStep1", ex.Message, "SendMailWithAttachment", "", "", "", "", "")
+            log("ErrorStep1", ex.ToString(), "SendMailWithAttachment", "", "", "", "", "")
             RetValue = "<font color='red'>Error while sending Email.</font>"
         End Try
         Return RetValue
