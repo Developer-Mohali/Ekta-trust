@@ -21,8 +21,8 @@ Public Class Donation
     'This method is used To insert the donation information into table...
     <System.Web.Services.WebMethod()>
     Public Shared Function AddDonation(name As String, amount As String, mobile As String, pan As String, address As String, email As String) As Object
-        Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,PanNuber,Address,CreatedDate, EmailId, OrderId, PaymentStatus, PaymentEnv, PaymentType)
-                                VALUES(@FullName, @Amount,@MobileNumber,@PanNuber,@Address,@CreatedDate,@EmailId, @OrderId, @PaymentStatus, @PaymentEnv, @PaymentType)"
+        Dim query As String = "INSERT INTO Donation (FullName,Amount,MobileNumber,PanNuber,Address,CreatedDate, EmailId, OrderId,DonationDate, PaymentStatus, PaymentEnv, PaymentType)
+                                VALUES(@FullName, @Amount,@MobileNumber,@PanNuber,@Address,@CreatedDate,@EmailId, @OrderId, @CreatedDate, @PaymentStatus, @PaymentEnv, @PaymentType)"
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Dim paymentEnv = If(ConfigurationManager.AppSettings("Environment") = "Prod", "Live", "Test")
         Try
