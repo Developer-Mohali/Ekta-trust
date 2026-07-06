@@ -542,7 +542,7 @@ Public Class DonationDetails
 
                         ' 🔹 Donor Name
                         cb.SetFontAndSize(bf, 25)
-                        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, name.ToUpper(), 420, 590, 0)
+                        cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, "Mr./Mrs./Ms. " + name.ToUpper(), 420, 590, 0)
 
                         ' 🔹 Amount in Words
                         cb.SetFontAndSize(bf, 22)

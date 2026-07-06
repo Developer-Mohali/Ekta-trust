@@ -639,12 +639,55 @@
                     paymentFor: 'Donation'
                 }),
                 success: function (response) {
-                    var data = response.d;
                     hideLoader();
-                    // Pretty format JSON
-                    var formatted = JSON.stringify(JSON.parse(data), null, 4);
+                   
+                    var jsonString = response.d;
+                    // parse full response
+                    var json = (typeof jsonString === "string")
+                        ? JSON.parse(jsonString)
+                        : jsonString;
 
-                    $("#jsonContent").text(formatted);
+                    // ONLY BODY
+                    var data = json.body;
+
+                    console.log(data)
+
+                    let html = `
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr>
+                                        <th style="width:35%">Transaction ID</th>
+                                        <td>${data.txnId}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <td>${data.orderId}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Bank Transaction ID</th>
+                                        <td>${data.bankTxnId}</td>
+                                    </tr>
+                                     <tr>
+                                         <th>Transaction Date</th>
+                                         <td>${data.txnDate}</td>
+                                     </tr>
+                                    <tr>
+                                        <th>Status</th>
+                                        <td>${data.resultInfo.resultStatus}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Amount</th>
+                                        <td>₹ ${data.txnAmount}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Payment Mode</th>
+                                        <td>${data.paymentMode}</td>
+                                    </tr>
+                                   
+                                </tbody>
+                            </table>`;
+
+                    $("#jsonContent").html(html);
                     $("#jsonModal").show();
                 },
                 error: function () {

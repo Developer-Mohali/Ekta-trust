@@ -13,6 +13,7 @@ Public Class SendEmail
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
 
             Dim fromMail As String = System.Configuration.ConfigurationManager.AppSettings("From")
+            Dim ccEmail As String = System.Configuration.ConfigurationManager.AppSettings("CCEmail")
             Dim Password As String = System.Configuration.ConfigurationManager.AppSettings("Password")
             Dim toEmail As String = System.Configuration.ConfigurationManager.AppSettings("ToAdmin")
             Dim SMTPClient As String = System.Configuration.ConfigurationManager.AppSettings("SMTP")
@@ -23,6 +24,7 @@ Public Class SendEmail
             Dim mail As MailMessage = New MailMessage()
             mail.From = New MailAddress(fromMail)
             mail.[To].Add(fromMail)
+            mail.CC.Add(ccEmail)
             mail.Subject = subject
             mail.Body = body
             Dim smtp As SmtpClient = New SmtpClient(SMTPClient, Port)
@@ -62,6 +64,7 @@ Public Class SendEmail
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
 
             Dim fromMail As String = System.Configuration.ConfigurationManager.AppSettings("From")
+            Dim ccEmail As String = System.Configuration.ConfigurationManager.AppSettings("CCEmail")
             Dim Password As String = System.Configuration.ConfigurationManager.AppSettings("Password")
             Dim toEmail As String = System.Configuration.ConfigurationManager.AppSettings("ToAdmin")
             Dim SMTPClient As String = System.Configuration.ConfigurationManager.AppSettings("SMTP")
@@ -72,6 +75,7 @@ Public Class SendEmail
             Dim mail As MailMessage = New MailMessage()
             mail.From = New MailAddress(fromMail)
             mail.[To].Add(toEmail)
+            mail.CC.Add(ccEmail)
             mail.Subject = subject
             mail.Body = body
             Dim smtp As SmtpClient = New SmtpClient(SMTPClient, Port)
@@ -112,6 +116,7 @@ Public Class SendEmail
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
 
             Dim fromMail As String = System.Configuration.ConfigurationManager.AppSettings("From")
+            Dim ccEmail As String = System.Configuration.ConfigurationManager.AppSettings("CCEmail")
             Dim Password As String = System.Configuration.ConfigurationManager.AppSettings("Password")
             Dim toEmail As String = System.Configuration.ConfigurationManager.AppSettings("ToAdmin")
             Dim FromMaill As String = System.Configuration.ConfigurationManager.AppSettings("ToEmailID")
@@ -126,6 +131,7 @@ Public Class SendEmail
             Dim mail As MailMessage = New MailMessage()
             mail.From = New MailAddress(toEmail)
             mail.[To].Add(Messageto)
+            mail.CC.Add(ccEmail)
             mail.Subject = subject
             mail.Body = body
             Dim smtp As SmtpClient = New SmtpClient(SMTPClient, Port)
@@ -380,6 +386,7 @@ Public Class SendEmail
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
 
             Dim fromMail As String = System.Configuration.ConfigurationManager.AppSettings("From")
+            Dim ccEmail As String = System.Configuration.ConfigurationManager.AppSettings("CCEmail")
             Dim Password As String = System.Configuration.ConfigurationManager.AppSettings("Password")
             Dim FromMaill As String = System.Configuration.ConfigurationManager.AppSettings("ToEmailID")
             Dim SMTPClient As String = System.Configuration.ConfigurationManager.AppSettings("SMTP")
@@ -391,6 +398,7 @@ Public Class SendEmail
             Dim mail As MailMessage = New MailMessage()
             mail.From = New MailAddress(FromMaill)
             mail.[To].Add(Messageto)
+            mail.CC.Add(ccEmail)
             mail.Bcc.Add(Messageto)
             mail.Subject = subject
             mail.Body = body
@@ -431,6 +439,7 @@ Public Class SendEmail
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
 
             Dim fromMail As String = System.Configuration.ConfigurationManager.AppSettings("From")
+            Dim ccEmail As String = System.Configuration.ConfigurationManager.AppSettings("CCEmail")
             Dim Password As String = System.Configuration.ConfigurationManager.AppSettings("Password")
             Dim FromMaill As String = System.Configuration.ConfigurationManager.AppSettings("ToEmailID")
             Dim SMTPClient As String = System.Configuration.ConfigurationManager.AppSettings("SMTP")
@@ -485,6 +494,7 @@ Public Class SendEmail
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
 
             Dim fromMail As String = System.Configuration.ConfigurationManager.AppSettings("From")
+            Dim ccEmail As String = System.Configuration.ConfigurationManager.AppSettings("CCEmail")
             Dim Password As String = System.Configuration.ConfigurationManager.AppSettings("Password")
             Dim FromMaill As String = System.Configuration.ConfigurationManager.AppSettings("ToEmailID")
             Dim SMTPClient As String = System.Configuration.ConfigurationManager.AppSettings("SMTP")
@@ -499,6 +509,7 @@ Public Class SendEmail
             ' ✅ Correct TO (email + name)
             'mail.To.Add(New MailAddress(toEmail.Trim(), Messageto))
             mail.To.Add(toEmail)
+            mail.CC.Add(New MailAddress(ccEmail.Trim()))
             mail.Subject = subject
 
             mail.IsBodyHtml = True
