@@ -16,19 +16,20 @@ Public Class AdminBIBData
         If Not String.IsNullOrEmpty(response) Then
             ' update payment status in DB, if its success in current response
             Try
-                If Not (currentStatus.ToUpper().Contains("SUCCESS") Or currentStatus.ToUpper().Contains("FAILED") Or currentStatus.ToUpper().Contains("CANCELLED")) Then
+                If Not (currentStatus.ToUpper().Contains("FAILED") Or currentStatus.ToUpper().Contains("CANCELLED")) Then
                     Dim json = Newtonsoft.Json.Linq.JObject.Parse(response)
                     Dim status = json("body")("resultInfo")("resultStatus").ToString()
+                    Dim paymentMode = json("body")("paymentMode")?.ToString()
                     Dim taxId = If(json("body")?("txnId")?.ToString(), Nothing)
                     If status = "TXN_SUCCESS" Then
                         If paymentFor.ToLower().Equals("donation") Then
-                            PaytmCallBack.UpdateOderInDonation(id, "Success", taxId, response)
+                            PaytmCallBack.UpdateOderInDonation(id, "Success", taxId, response, paymentMode)
                         Else
                             PaytmCallBack.UpdateOrderInBIB(id, "Success", taxId, response)
                         End If
                     ElseIf status = "TXN_FAILURE" Then
                         If paymentFor.ToLower().Equals("donation") Then
-                            PaytmCallBack.UpdateOderInDonation(id, "Failed", taxId, response)
+                            PaytmCallBack.UpdateOderInDonation(id, "Failed", taxId, response, paymentMode)
                         Else
                             PaytmCallBack.UpdateOrderInBIB(id, "Failed", taxId, response)
                         End If
