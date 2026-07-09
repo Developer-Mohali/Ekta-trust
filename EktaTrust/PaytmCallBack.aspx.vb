@@ -180,7 +180,7 @@ Public Class PaytmCallBack
 
         Try
             Using con As New MySqlConnection(constr)
-                Dim Query As String = "UPDATE donation SET PaymentStatus=@paymentStatus, PaytmResponse= @paytmResponse, TxnId = @txnId, ModeOfPayment = @ModeOfPayment, SerialNo=@SerialNo
+                Dim Query As String = "UPDATE donation SET PaymentStatus=@paymentStatus, PaytmResponse= @paytmResponse, TxnId = @txnId, ModeOfPayment = @ModeOfPayment
                                     WHERE OrderId=@orderId"
 
                 Using cmd As New MySqlCommand(Query, con)
@@ -189,7 +189,6 @@ Public Class PaytmCallBack
                     cmd.Parameters.AddWithValue("@txnId", txnId)
                     cmd.Parameters.AddWithValue("@orderId", orderId)
                     cmd.Parameters.AddWithValue("@ModeOfPayment", paymentMode)
-                    cmd.Parameters.AddWithValue("@SerialNo", serialNumber)
 
                     con.Open()
                     Dim RowAffected = cmd.ExecuteNonQuery()
