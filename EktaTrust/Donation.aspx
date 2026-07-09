@@ -61,13 +61,13 @@
           </div>
 
           <div class="form-group">
-            <label>Mobile Number</label>
-            <input type="tel" id="txtMobile" class="form-control" autocomplete="off" placeholder="Enter mobile number" />
+            <label>Mobile Number *</label>
+            <input type="tel" id="txtMobile" name="txtMobile" class="form-control" autocomplete="off" placeholder="Enter mobile number" />
           </div>
 
           <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" id="txtEmail" class="form-control" placeholder="Enter email address" />
+            <label>Email Address *</label>
+            <input type="email" id="txtEmail" name="txtEmail" class="form-control" placeholder="Enter email address" />
           </div>
 
           <div class="form-group">
@@ -180,6 +180,13 @@
 <!--/#bottom-->
     <script>
         $(document).ready(function () {
+
+
+            $.validator.addMethod("customEmail", function (value, element) {
+                return this.optional(element) ||
+                    /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value);
+            }, "Please enter a valid email address");
+
             $("#msform").validate({
                 feedbackIcons: {
                     valid: 'glyphicon glyphicon-ok',
@@ -212,7 +219,18 @@
                         required: true,
                         minlength: 10,
                         maxlength: 10
+                    },
+                    txtEmail: {
+                        required: true,
+                        customEmail: true
+                    },
+                    txtMobile: {
+                        required: true,
+                        digits: true,
+                        minlength: 10,
+                        maxlength: 10
                     }
+
                 },
 
                 messages: {
@@ -229,8 +247,22 @@
                         required: "Pan Number is Required",
                         minlength: "PAN must be 10 characters",
                         maxlength: "PAN must be 10 characters"
+                    },
+                    txtEmail: {
+                        required: "Email address is required",
+                        customEmail: "Enter a valid email address"
+                    },
+                    txtMobile: {
+                        required: "Mobile number is required",
+                        digits: "Only digits are allowed",
+                        minlength: "Mobile number must be 10 digits",
+                        maxlength: "Mobile number must be 10 digits"
                     }
                 }
+            });
+
+            $("#txtEmail").on("input", function () {
+                this.value = this.value.toLowerCase().trim();
             });
         });
 
